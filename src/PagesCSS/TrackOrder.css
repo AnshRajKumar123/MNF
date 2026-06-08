@@ -1,0 +1,122 @@
+.track-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 25px;
+    background: #fff;
+    min-height: 100vh;
+    font-family: var(--Font3);
+}
+
+.track-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.track-order-id {
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+/* Steps UI */
+.steps-container {
+    position: relative;
+    padding-left: 10px;
+    border-left: 3px solid #eee;
+    margin-bottom: 30px;
+}
+
+.step {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.step-circle {
+    width: 25px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    font-weight: 700;
+    font-size: 14px;
+    position: absolute;
+    left: -13px;
+    top: 0;
+    color: white;
+}
+
+.step-circle.active {
+    background: #4caf50;
+}
+
+.step-label {
+    margin-left: 25px;
+    font-size: 17px;
+    margin-top: 2px;
+    color: #666;
+}
+
+.step-label.active {
+    color: #000;
+    font-weight: 600;
+}
+
+.step-line {
+    width: 2px;
+    height: 30px;
+    background: #ccc;
+    position: absolute;
+    left: -2px;
+    top: 25px;
+}
+
+.step-line.active {
+    background: #4caf50;
+}
+
+/* Rider Box */
+.rider-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f6f6f6;
+    margin-bottom: 20px;
+}
+
+.rider-img {
+    width: 50px;
+    height: 50px;
+}
+
+.rider-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.rider-vehicle {
+    color: #555;
+}
+
+/* ETA Text */
+.eta-text {
+    text-align: center;
+    font-size: 17px;
+    padding: 12px;
+    color: #e53935;
+    font-weight: 600;
+}
+
+/* Delivered */
+.delivered-box {
+    text-align: center;
+    padding: 18px;
+    background: #e8ffe6;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2e7d32;
+}

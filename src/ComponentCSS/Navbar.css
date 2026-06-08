@@ -1,0 +1,166 @@
+nav {
+    width: calc(100vw - 100px);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background-color: #ffffff28;
+    backdrop-filter: blur(10px);
+}
+
+.WebNavLogo h1 {
+    font-weight: 500;
+    font-family: var(--Font2);
+    color: rgb(81, 174, 95);
+}
+
+.NaviSearch {
+    background-color: #0000000f;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.NaviSearch input {
+    height: 50px;
+    width: 500px;
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.NaviSearch .SearchIcon {
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+}
+
+.NaviSearch button {
+    border: none;
+    display: flex;
+    gap: 1px;
+    align-items: center;
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+    margin-right: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.NaviLastOpt {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.NaviAdd {
+    border-radius: 50%;
+    border: none;
+    background-color: #0000000f;
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    position: relative;
+}
+
+.NaviAccount {
+    background-color: rgb(81, 174, 95);
+    color: #fff;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.NaviAdd:active {
+    scale: 0.89;
+}
+
+.IconHeCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    width: 48px;
+    background-color: #0000000f;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.HoverEffectDrop {
+    display: inline-block;
+    position: relative;
+}
+
+.InsideMenuBar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 200px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.InsideMenuBar button {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.InsideMenuBar button:hover {
+    background-color: #00000036;
+    color: #000;
+}
+
+.NaviNotifi:hover,
+.IconHeCenter:hover {
+    background-color: #00000025;
+}
+
+.HoverEffectDrop:hover .BezPadding {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.NavProfileImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.NavProfileLetter {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #51AE5E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 28px;
+    font-family: var(--Font3);
+}

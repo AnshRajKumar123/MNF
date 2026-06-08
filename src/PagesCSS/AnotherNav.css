@@ -1,0 +1,139 @@
+.AnotherNav {
+    width: 100%;
+    height: 100px;
+    padding: 0 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background-color: #ffffff28;
+    backdrop-filter: blur(10px);
+}
+
+.AnotherNav .WebNavLogo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.AnotherNav .WebNavLogo img {
+    width: 73px;
+}
+
+.AnotherNavLinks {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.AnotherNavLinks .OnlyAccOpt {
+    font-size: 1.5rem;
+    color: #000;
+    padding: 11px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: var(--Font3);
+    letter-spacing: -1px;
+    position: relative;
+    transition: 0.3s ease-in-out;
+}
+
+.AnotherNavLinks .OnlyAccOpt::before {
+    position: absolute;
+    content: '';
+    width: 0%;
+    height: 3px;
+    border-radius: 50px;
+    background-color: #51AE5E;
+    top: 80%;
+    left: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.AnotherNavLinks .OnlyAccOpt:hover::before {
+    width: 90%;
+}
+
+.AnotherNavLinks .OnlyAccOpt:hover {
+    color: #51AE5E;
+}
+
+.AnotherNavDrop {
+    position: relative;
+    display: inline-block;
+}
+
+.CircleBoxBtn {
+    border-radius: 10px;
+    display: flex;
+    padding: 9px 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #51AE5E;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.CircleBoxBtn span {
+    font-family: var(--Font3);
+    font-size: 23.5px;
+}
+
+.CircleBoxBtn i {
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+.CircleBoxBtn:hover,
+.NaviAccount:hover {
+    background-color: #3E8A4A;
+}
+
+.BezPadding {
+    padding-top: 10px;
+    position: absolute;
+    top: 100%;
+    opacity: 0;
+    pointer-events: none;
+    right: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.InsideBoxDrop {
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.InsideBoxDrop button {
+    border: none;
+    padding: 11px 0;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.AnotherNavDrop:hover .BezPadding {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.InsideBoxDrop button:hover {
+    background-color: #00000026;
+    color: #000;
+}

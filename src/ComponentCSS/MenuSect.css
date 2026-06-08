@@ -1,0 +1,91 @@
+.MenuSection {
+    width: calc(100vw - 100px);
+    display: flex;
+    position: relative;
+}
+
+.MenuSection.Shrink .TwoCateProductIn {
+    width: 70%;
+}
+
+.MenuProductsGrid {
+    padding: 25px;
+}
+
+.TwoCateProductIn {
+    width: 100%;
+    transition: 0.3s ease-in-out;
+}
+
+.MenuSection.Shrink .MenuProductsGrid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.MenuSection.Shrink .TwoCateProductIn {
+    width: 70%;
+}
+
+.MenuProductsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 boxes in a row */
+    gap: 25px;
+    margin-top: 1.5rem;
+}
+
+.ProductDetail {
+    width: 30%;
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 100px);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+.ProductInfoBox img {
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.quantity-selector button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    background: #eee;
+    font-size: 18px;
+}
+
+.AddToCartBtn {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 50px;
+    background: #51AE5E;
+    border: none;
+    color: white;
+    font-size: 18px;
+    margin-top: 1rem;
+}
+
+.CustomToast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    z-index: 9999;
+}

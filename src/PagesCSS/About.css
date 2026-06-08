@@ -1,0 +1,550 @@
+/* -----------------------------------
+   GLOBAL
+------------------------------------*/
+* {
+    transition: 0.25s ease;
+}
+
+/* -----------------------------------
+   ABOUT SECTION
+------------------------------------*/
+.AboutSection {
+    padding: 3rem 5rem;
+}
+
+/* -----------------------------------
+   PARALLAX / BANNER
+------------------------------------*/
+.BannerSectionAbout {
+    height: 550px;
+    width: 100%;
+    background-image: url(/public/VegetablesAbout.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.BannerSectionAbout::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: inherit;
+}
+
+.BannerSectionAbout h1,
+.BannerSectionAbout p {
+    position: relative;
+    z-index: 2;
+}
+
+.BannerSectionAbout h1 {
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+    font-family: var(--Font2);
+    letter-spacing: 2px;
+}
+
+.BannerSectionAbout p {
+    font-size: 1.3rem;
+    color: #fff;
+    font-family: var(--Font3);
+    letter-spacing: -0.5px;
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* -----------------------------------
+   OUR JOURNEY SECTION
+------------------------------------*/
+.OurJourneyAbout {
+    margin-top: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+}
+
+.InfoOurJourney h1 {
+    color: #51AE5E;
+    font-family: var(--Font3);
+    font-size: 3rem;
+    letter-spacing: -1.5px;
+}
+
+.InfoOurJourney p {
+    margin-top: 1.2rem;
+    font-weight: 400;
+    width: 70%;
+    line-height: 1.6rem;
+    letter-spacing: 0.3px;
+    color: #333;
+}
+
+.ImageOurJourney img {
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 6px 6px 22px rgba(0, 0, 0, 0.18);
+    object-fit: cover;
+}
+
+/* -----------------------------------
+   TIMELINE SECTION
+------------------------------------*/
+.TimelineSection {
+    margin-top: 6rem;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.TimelineSection h1 {
+    font-size: 3rem;
+    font-family: var(--Font3);
+    color: #222;
+}
+
+.TimelineContainer {
+    margin-top: 3rem;
+    width: 70%;
+    margin-inline: auto;
+    position: relative;
+    padding-left: 60px;
+}
+
+/* Center vertical line */
+.TimelineContainer::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #51AE5E;
+    border-radius: 10px;
+}
+
+.TimelineItem {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.Dot {
+    position: absolute;
+    left: 18px;
+    top: 8px;
+    height: 18px;
+    width: 18px;
+    background: #51AE5E;
+    border-radius: 50%;
+}
+
+.TimelineItem h2 {
+    font-size: 1.7rem;
+    font-family: var(--Font3);
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.TimelineItem p {
+    font-size: 1rem;
+    width: 70%;
+    line-height: 1.5rem;
+    color: #444;
+}
+
+/* -----------------------------------
+   MISSION SECTION
+------------------------------------*/
+.OurMissionAbout {
+    width: 100%;
+    background-color: #76d68341;
+    margin-top: 8rem;
+    padding: 5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.OurMissionAbout p {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--Font3);
+    font-size: 1rem;
+    letter-spacing: -0.6px;
+}
+
+.OurMissionAbout h1 {
+    font-size: 2.6rem;
+    margin-top: 1.3rem;
+    font-family: var(--Font3);
+    letter-spacing: -1.3px;
+}
+
+.OurMissionAbout span {
+    font-weight: 500;
+    color: #00000092;
+    margin-top: 1rem;
+    line-height: 1.6rem;
+    width: 85%;
+}
+
+/* CARDS */
+.ThreeCardsOfInd {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.CardsThree {
+    padding: 40px 35px;
+    border-radius: 18px;
+    background-color: #fff;
+    box-shadow: 5px 5px 22px rgba(0, 0, 0, 0.12);
+    width: 360px;
+    text-align: center;
+}
+
+.CardsThree:hover {
+    transform: translateY(-10px);
+    box-shadow: 5px 5px 26px rgba(0, 0, 0, 0.18);
+}
+
+.CardsThree img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.CardsThree h1 {
+    font-family: var(--Font3);
+    letter-spacing: -1px;
+    font-size: 1.8rem;
+}
+
+.CardsThree p {
+    font-size: 0.8rem;
+    letter-spacing: 0.4px;
+    font-family: var(--Font1);
+    color: #000000b1;
+    margin-top: 0.7rem;
+    line-height: 1.2rem;
+}
+
+/* -----------------------------------
+   TEAM SECTION
+------------------------------------*/
+.OurTeamAbout {
+    background-color: #fff;
+    padding: 5rem 1rem;
+    text-align: center;
+}
+
+.OurTeamAbout h1 {
+    font-size: 2.8rem;
+    font-family: var(--Font3);
+    letter-spacing: -1.6px;
+}
+
+.OurTeamAbout p {
+    font-weight: 500;
+    color: #00000092;
+}
+
+.OurTeamPhoto {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.MembersPhoto {
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.MembersPhoto:hover {
+    transform: translateY(-10px);
+}
+
+.MemberNameMain {
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.MemberNameMain::after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    border: 4px solid #51ae5db4;
+    border-radius: 50%;
+    inset: 0;
+}
+
+.MemberNameMain img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.MembersPhoto h2 {
+    font-family: var(--Font3);
+    margin-top: 1rem;
+}
+
+.MembersPhoto p {
+    margin-top: 0.1rem !important;
+}
+
+/* -----------------------------------
+   MAGIC SECTION (CTA)
+------------------------------------*/
+.TasteMagicAbout {
+    height: 60vh;
+    padding: 3rem 5rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.BoxSectionMagic {
+    width: 88%;
+    background-color: #51AE5E;
+    height: 100%;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.BoxSectionMagic h1 {
+    font-family: var(--Font3);
+    font-size: 3rem;
+    color: #fff;
+    letter-spacing: -1.5px;
+}
+
+.BoxSectionMagic p {
+    font-weight: 600;
+    margin-top: 0.6rem;
+    color: #ffffffc8;
+}
+
+.BoxSectionMagic button {
+    font-weight: 600;
+    background-color: red;
+    color: #fff;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-size: 1rem;
+    border: none;
+    margin-top: 1.2rem;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.BoxSectionMagic button:hover {
+    transform: scale(0.95);
+}
+
+.BoxSectionMagic .Burger,
+.BoxSectionMagic .Pizaa {
+    position: absolute;
+}
+
+.BoxSectionMagic .Burger {
+    top: 20px;
+    left: 40px;
+}
+
+.BoxSectionMagic .Pizaa {
+    top: 280px;
+    right: -800px;
+}
+
+.BoxSectionMagic img {
+    width: 140px;
+}
+
+/* -----------------------------------
+   RESPONSIVE
+------------------------------------*/
+@media (max-width: 992px) {
+    .OurJourneyAbout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .InfoOurJourney p {
+        width: 100%;
+    }
+
+    .TimelineContainer {
+        width: 90%;
+    }
+
+    .OurTeamPhoto {
+        gap: 3rem;
+    }
+
+    .TasteMagicAbout {
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .BannerSectionAbout h1 {
+        font-size: 2.6rem;
+    }
+
+    .BannerSectionAbout p {
+        font-size: 1.1rem;
+    }
+
+    .CardsThree {
+        width: 90%;
+    }
+
+    .MemberNameMain {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+/* ---------------------------
+   TEAM POPUP MODAL
+----------------------------*/
+
+.TeamModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.TeamModal {
+    background: white;
+    width: 450px;
+    padding: 2rem;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    animation: scaleIn 0.25s ease;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.CloseModal {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f1f1f1;
+    border: none;
+    font-size: 1.4rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ModalImg {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 1rem;
+    border: 5px solid #51AE5E;
+}
+
+.ModalRole {
+    font-weight: 600;
+    color: #51AE5E;
+    margin-bottom: 10px;
+}
+
+.ModalBio {
+    font-size: 0.95rem;
+    color: #444;
+    margin-top: 0.6rem;
+    line-height: 1.3rem;
+}
+
+.ModalSkills {
+    margin-top: 1.3rem;
+}
+
+.ModalSkills span {
+    background: #51AE5E;
+    color: white;
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.8rem;
+}
+
+.SocialLinks {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.SocialLinks i {
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: #333;
+    transition: 0.3s;
+}
+
+.SocialLinks i:hover {
+    color: #51AE5E;
+    transform: scale(1.2);
+}
+
+.TeamModal h2 {
+    font-family: var(--Font3);
+    font-size: 1.6rem;
+    letter-spacing: -0.8px;
+}

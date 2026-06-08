@@ -1,0 +1,117 @@
+.SearchSection {
+    width: calc(100vw - 100px);
+    padding: 30px;
+    display: flex;
+}
+
+.SearchSection.Shrink .SearchGrid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.SearchTitle {
+    font-family: var(--Font3);
+    font-size: 2rem;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+}
+
+.SearchTitle span {
+    color: #51AE5E;
+    font-weight: 600;
+}
+
+.SearchGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 1.5rem;
+}
+
+.NoResult {
+    font-size: 1.3rem;
+    color: #777;
+}
+
+.SearchProductDetail h1 {
+    font-family: var(--Font3);
+    letter-spacing: -1px;
+}
+
+.SearchProductDetail {
+    width: 30%;
+    position: sticky;
+    right: 0;
+    top: 0;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    background: #fff;
+    border-left: 1px solid #eee;
+    padding: 0 20px;
+}
+
+.SearchProductDetail h2 {
+    font-size: 2rem;
+    font-family: var(--Font3);
+    margin-top: 12px;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.SearchProductDetail p {
+    margin-bottom: 12px;
+}
+
+.SearchProductDetail h3 {
+    color: #51AE5E;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    font-family: var(--Font3);
+}
+
+.DetailHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.DetailHeader button {
+    border: none;
+    background: #eee;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.SearchProductDetail img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.quantity-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.quantity-selector button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #eee;
+    border: none;
+}
+
+.AddToCartBtn {
+    width: 100%;
+    padding: 12px 0;
+    background: #51AE5E;
+    color: white;
+    font-size: 18px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}

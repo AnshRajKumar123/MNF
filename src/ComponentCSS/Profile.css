@@ -1,0 +1,271 @@
+.UserProfile {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 0;
+    width: 60vw;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: 100%;
+}
+
+.UserImageLogo {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    width: 37%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    overflow: hidden;
+}
+
+.UserLogo img {
+    overflow: hidden;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.UserLogo span {
+    font-size: 6rem;
+    color: #fff;
+    font-family: var(--Font3);
+}
+
+.UpdatedProButton {
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    transition: 0.2s ease-in-out;
+}
+
+.UpdatedProButton:hover {
+    background-color: rgb(225, 0, 0);
+}
+
+.UserName {
+    margin: 1rem 0 1.5rem;
+    font-family: var(--Font3);
+    letter-spacing: -1px;
+    font-size: 1.8rem;
+}
+
+.UserDetails {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem 0 1rem 2.5rem;
+}
+
+.LabelInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.LabelInput .InputLabelBox {
+    font-size: 21px;
+    font-family: var(--Font3);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.LabelInput input {
+    width: 100%;
+    height: 42px;
+    padding-left: 1rem;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    outline: none;
+}
+
+.LabelInput textarea {
+    width: 100%;
+    height: 200px;
+    padding: 0.5rem 0 0 0.5rem;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    outline: none;
+}
+
+.GenderOpt {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.GenderSect {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.GenderSect span {
+    padding-bottom: 4px;
+}
+
+.GenderSect input {
+    width: 20px;
+    height: 20px;
+}
+
+.ShakeField {
+    animation: shake 0.3s ease;
+    border: 1.5px solid red !important;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.SuccessGlow {
+    animation: glowEffect 1s ease;
+}
+
+@keyframes glowEffect {
+    0% {
+        box-shadow: 0 0 0px rgba(0, 200, 0, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    }
+
+    100% {
+        box-shadow: 0 0 0px rgba(0, 200, 0, 0);
+    }
+}
+
+.RemoveImageBtn {
+    margin-top: 10px;
+    padding: 6px 15px;
+    background: #ff4747;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.RemoveImageBtn:hover {
+    background: #e44040;
+}
+
+.DisabledBtn {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+}
+
+.GenderSelectContainer {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.GenderOptionCard {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.25s ease;
+    user-select: none;
+}
+
+.GenderOptionCard:hover {
+    background: #ececec;
+    transform: translateY(-2px);
+}
+
+.GenderOptionCard.GenderActive {
+    background: #51ae5e10;
+    border-color: #51ae5e;
+    box-shadow: 0 0 10px rgba(81, 174, 94, 0.3);
+}
+
+.GenderEmoji {
+    font-size: 20px;
+}
+
+.GenderText {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.UserLogo {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3d3d3d;
+    font-size: 45px;
+    font-weight: 700;
+    animation: pulseBorder 2s infinite ease-in-out;
+}
+
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 0 0 0 0 rgba(81, 174, 94, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(81, 174, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(81, 174, 94, 0);
+    }
+}
+
+.PhoneFlex {
+    display: flex;
+    gap: 8px;
+}
+
+.CountrySelect {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.FormattedPhone {
+    margin-top: 5px;
+    font-size: 14px;
+    opacity: 0.7;
+}

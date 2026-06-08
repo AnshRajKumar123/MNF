@@ -1,0 +1,78 @@
+.help-success-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4fff6;
+}
+
+.help-success-box {
+    background: white;
+    padding: 40px;
+    width: 440px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.help-success-icon-wrap {
+    width: 110px;
+    height: 110px;
+    background: #5bdb6f33;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-success-check {
+    width: 65px;
+    height: 65px;
+    background: #51AE5E;
+    border-radius: 50%;
+    position: relative;
+}
+
+.help-success-check::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 18px;
+    width: 24px;
+    height: 13px;
+    border-bottom: 3px solid white;
+    border-left: 3px solid white;
+    transform: rotate(-45deg);
+}
+
+.help-success-btn {
+    display: block;
+    margin: 15px auto;
+    padding: 12px 20px;
+    width: 75%;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #51AE5E;
+    color: white;
+    font-weight: 600;
+}
+
+.help-success-btn.outline {
+    background: transparent;
+    border: 2px solid #51AE5E;
+    color: #51AE5E;
+}
