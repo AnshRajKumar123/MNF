@@ -117,8 +117,8 @@
 }
 
 .CircleBoxBtn:hover {
-    background-color: #ffffff;
-    color: var(--bg-primary);
+    background-color: #00000015;
+    color: var(--text-core);
     border-color: #ffffff;
     box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
 }
@@ -220,4 +220,63 @@
     }
 
     /* Kept clean on smaller displays */
+}
+
+/* --- INLINE DROPDOWN TOGGLE SWITCH ARCHITECTURE --- */
+.DropdownThemeToggleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border-morphic);
+    cursor: pointer;
+    user-select: none;
+}
+
+.DropdownToggleLabelHub {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.DropdownToggleLabelHub i {
+    font-size: 16px;
+    color: var(--accent-blue-light);
+}
+
+.DropdownToggleLabelHub span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.ProDropdownSwitchTrack {
+    width: 36px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-morphic);
+    border-radius: 50px;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.ProDropdownSwitchThumb {
+    width: 12px;
+    height: 12px;
+    background-color: var(--text-muted);
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+
+.switch-on.ProDropdownSwitchTrack {
+    background-color: var(--accent-blue-dark);
+}
+
+.switch-on .ProDropdownSwitchThumb {
+    transform: translateX(14px);
+    background-color: #ffffff;
 }

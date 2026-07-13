@@ -1,450 +1,385 @@
-/* -----------------------------------
-   GLOBAL
-------------------------------------*/
-* {
-    transition: 0.25s ease;
-}
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD ENTERPRISE ABOUT SUITE ARCHITECTURE SHEET
+   ========================================================================== */
 
-/* -----------------------------------
-   ABOUT SECTION
-------------------------------------*/
-.AboutSection {
-    padding: 3rem 5rem;
-}
-
-/* -----------------------------------
-   PARALLAX / BANNER
-------------------------------------*/
-.BannerSectionAbout {
-    height: 550px;
+.ProAboutSuiteWrapper {
     width: 100%;
-    background-image: url(/public/VegetablesAbout.jpg);
+    background-color: var(--bg-primary);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+}
+
+.ProTaglineSectionText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-blue-light);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* --- ADJUSTED TOGGLE LINK ACTION ROW EXTENSION INSIDE NAVBAR --- */
+.NavbarThemeToggleActionBtn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-muted);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.NavbarThemeToggleActionBtn:hover {
+    color: var(--text-core);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- MODULE 1: PREMIUM HERO BILLBOARD PLATFORM --- */
+.ProAboutBanner {
+    height: 440px;
+    width: calc(100% - 8rem);
+    margin: 40px auto 0 auto;
+    background-image: url('/public/VegetablesAbout.jpg');
     background-size: cover;
     background-position: center;
-    border-radius: 30px;
+    border-radius: 20px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    background-attachment: fixed;
-    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 45px var(--shadow-premium);
+    border: 1px solid var(--border-morphic);
 }
 
-.BannerSectionAbout::after {
-    content: "";
+.BannerGlacialOverlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    border-radius: inherit;
+    background: linear-gradient(to bottom, rgba(10, 17, 40, 0.3) 0%, rgba(10, 17, 40, 0.85) 100%);
+    z-index: 1;
 }
 
-.BannerSectionAbout h1,
-.BannerSectionAbout p {
+.BannerTypographyContent {
     position: relative;
     z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
 }
 
-.BannerSectionAbout h1 {
-    font-size: 4rem;
-    color: #fff;
-    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
-    font-family: var(--Font2);
-    letter-spacing: 2px;
+.BannerTypographyContent h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.BannerSectionAbout p {
-    font-size: 1.3rem;
-    color: #fff;
-    font-family: var(--Font3);
+.BannerTypographyContent p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+}
+
+/* --- MODULE 2: HISTORY DOCK PANEL CHANNELS --- */
+.ProAboutJourney {
+    max-width: 1300px;
+    margin: 6rem auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.JourneyInfoTextColumn h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
     letter-spacing: -0.5px;
-    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1.5rem;
 }
 
-/* -----------------------------------
-   OUR JOURNEY SECTION
-------------------------------------*/
-.OurJourneyAbout {
-    margin-top: 8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 3rem;
+.JourneyInfoTextColumn p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
 }
 
-.InfoOurJourney h1 {
-    color: #51AE5E;
-    font-family: var(--Font3);
-    font-size: 3rem;
-    letter-spacing: -1.5px;
-}
-
-.InfoOurJourney p {
-    margin-top: 1.2rem;
-    font-weight: 400;
-    width: 70%;
-    line-height: 1.6rem;
-    letter-spacing: 0.3px;
-    color: #333;
-}
-
-.ImageOurJourney img {
-    width: 500px;
-    border-radius: 20px;
-    box-shadow: 6px 6px 22px rgba(0, 0, 0, 0.18);
-    object-fit: cover;
-}
-
-/* -----------------------------------
-   TIMELINE SECTION
-------------------------------------*/
-.TimelineSection {
-    margin-top: 6rem;
-    padding: 2rem 0;
-    text-align: center;
-}
-
-.TimelineSection h1 {
-    font-size: 3rem;
-    font-family: var(--Font3);
-    color: #222;
-}
-
-.TimelineContainer {
-    margin-top: 3rem;
-    width: 70%;
-    margin-inline: auto;
-    position: relative;
-    padding-left: 60px;
-}
-
-/* Center vertical line */
-.TimelineContainer::before {
-    content: "";
-    position: absolute;
-    left: 30px;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: #51AE5E;
-    border-radius: 10px;
-}
-
-.TimelineItem {
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.Dot {
-    position: absolute;
-    left: 18px;
-    top: 8px;
-    height: 18px;
-    width: 18px;
-    background: #51AE5E;
-    border-radius: 50%;
-}
-
-.TimelineItem h2 {
-    font-size: 1.7rem;
-    font-family: var(--Font3);
-    letter-spacing: -1px;
-    margin-bottom: 0.5rem;
-}
-
-.TimelineItem p {
-    font-size: 1rem;
-    width: 70%;
-    line-height: 1.5rem;
-    color: #444;
-}
-
-/* -----------------------------------
-   MISSION SECTION
-------------------------------------*/
-.OurMissionAbout {
-    width: 100%;
-    background-color: #76d68341;
-    margin-top: 8rem;
-    padding: 5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-}
-
-.OurMissionAbout p {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-family: var(--Font3);
-    font-size: 1rem;
-    letter-spacing: -0.6px;
-}
-
-.OurMissionAbout h1 {
-    font-size: 2.6rem;
-    margin-top: 1.3rem;
-    font-family: var(--Font3);
-    letter-spacing: -1.3px;
-}
-
-.OurMissionAbout span {
-    font-weight: 500;
-    color: #00000092;
-    margin-top: 1rem;
-    line-height: 1.6rem;
-    width: 85%;
-}
-
-/* CARDS */
-.ThreeCardsOfInd {
-    margin-top: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.CardsThree {
-    padding: 40px 35px;
-    border-radius: 18px;
-    background-color: #fff;
-    box-shadow: 5px 5px 22px rgba(0, 0, 0, 0.12);
-    width: 360px;
-    text-align: center;
-}
-
-.CardsThree:hover {
-    transform: translateY(-10px);
-    box-shadow: 5px 5px 26px rgba(0, 0, 0, 0.18);
-}
-
-.CardsThree img {
-    width: 90px;
-    height: 90px;
-    object-fit: cover;
-    margin-bottom: 1rem;
-}
-
-.CardsThree h1 {
-    font-family: var(--Font3);
-    letter-spacing: -1px;
-    font-size: 1.8rem;
-}
-
-.CardsThree p {
-    font-size: 0.8rem;
-    letter-spacing: 0.4px;
-    font-family: var(--Font1);
-    color: #000000b1;
-    margin-top: 0.7rem;
-    line-height: 1.2rem;
-}
-
-/* -----------------------------------
-   TEAM SECTION
-------------------------------------*/
-.OurTeamAbout {
-    background-color: #fff;
-    padding: 5rem 1rem;
-    text-align: center;
-}
-
-.OurTeamAbout h1 {
-    font-size: 2.8rem;
-    font-family: var(--Font3);
-    letter-spacing: -1.6px;
-}
-
-.OurTeamAbout p {
-    font-weight: 500;
-    color: #00000092;
-}
-
-.OurTeamPhoto {
-    margin-top: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.MembersPhoto {
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.MembersPhoto:hover {
-    transform: translateY(-10px);
-}
-
-.MemberNameMain {
-    height: 260px;
-    width: 260px;
-    border-radius: 50%;
-    position: relative;
+.JourneyImageWrapper {
+    border-radius: 16px;
     overflow: hidden;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 20px 45px var(--shadow-premium);
 }
 
-.MemberNameMain::after {
-    position: absolute;
-    content: "";
-    height: 100%;
+.JourneyImageWrapper img {
     width: 100%;
-    border: 4px solid #51ae5db4;
-    border-radius: 50%;
-    inset: 0;
-}
-
-.MemberNameMain img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
+    height: 380px;
     object-fit: cover;
-    object-position: top;
+    display: block;
 }
 
-.MembersPhoto h2 {
-    font-family: var(--Font3);
-    margin-top: 1rem;
-}
-
-.MembersPhoto p {
-    margin-top: 0.1rem !important;
-}
-
-/* -----------------------------------
-   MAGIC SECTION (CTA)
-------------------------------------*/
-.TasteMagicAbout {
-    height: 60vh;
-    padding: 3rem 5rem 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* --- MODULE 3: SYSTEM VALUE BENTO MATRIX GRID --- */
+.ProAboutMission {
     width: 100%;
-}
-
-.BoxSectionMagic {
-    width: 88%;
-    background-color: #51AE5E;
-    height: 100%;
-    border-radius: 40px;
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-morphic);
+    border-bottom: 1px solid var(--border-morphic);
+    padding: 5rem 4rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-.BoxSectionMagic h1 {
-    font-family: var(--Font3);
-    font-size: 3rem;
-    color: #fff;
-    letter-spacing: -1.5px;
+.ProAboutMission h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-top: 4px;
 }
 
-.BoxSectionMagic p {
-    font-weight: 600;
+.MissionMainSubtitleText {
+    font-size: 15px;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 750px;
     margin-top: 0.6rem;
-    color: #ffffffc8;
+    line-height: 1.6;
+    margin-bottom: 3.5rem;
 }
 
-.BoxSectionMagic button {
-    font-weight: 600;
-    background-color: red;
-    color: #fff;
-    padding: 12px 35px;
-    border-radius: 50px;
-    font-size: 1rem;
-    border: none;
-    margin-top: 1.2rem;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+.MissionBentoMatrixGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.MissionValueCardUnit {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    transition: border-color 0.25s ease;
+}
+
+.ValueIconCapFrame img {
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1.2rem;
+}
+
+.MissionValueCardUnit h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 0.6rem;
+}
+
+.MissionValueCardUnit p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.MissionValueCardUnit:hover {
+    border-color: var(--accent-blue-light);
+}
+
+/* --- MODULE 4: ARCHITECT TEAM CARDS DECK --- */
+.ProAboutTeamDeck {
+    max-width: 1300px;
+    margin: 6rem auto 3rem auto;
+    padding: 0 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProAboutTeamDeck h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+}
+
+.TeamMainSubtitleText {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 700px;
+    margin-top: 0.6rem;
+    line-height: 1.6;
+    margin-bottom: 3.5rem;
+}
+
+.TeamCardsMatrixGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    width: 100%;
+}
+
+.ProTeamMemberProfileCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
+    box-shadow: 0 15px 35px var(--shadow-premium);
 }
 
-.BoxSectionMagic button:hover {
-    transform: scale(0.95);
+.MemberAvatarShieldFrame {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border-morphic);
+    margin-bottom: 1.2rem;
+    transition: border-color 0.25s ease;
 }
 
-.BoxSectionMagic .Burger,
-.BoxSectionMagic .Pizaa {
+.MemberAvatarShieldFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProTeamMemberProfileCard h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 4px;
+}
+
+.ProTeamMemberProfileCard span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+}
+
+.ProTeamMemberProfileCard:hover .MemberAvatarShieldFrame {
+    border-color: var(--accent-blue-light);
+}
+
+/* --- MODULE 5: BRAND MARKETING CTA PANEL --- */
+.ProAboutCtaStation {
+    width: 100%;
+    padding: 2rem 4rem 6rem 4rem;
+    box-sizing: border-box;
+}
+
+.AboutCtaBoxContainer {
+    max-width: 1220px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--accent-blue-dark) 0%, #102A6B 100%);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px var(--shadow-premium);
+}
+
+.CtaTypographyHub {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.AboutCtaBoxContainer h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.AboutCtaBoxContainer p {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.8rem 0 1.8rem 0;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.CtaTerminalRedirectBtn {
+    background-color: #ffffff;
+    color: var(--text-core);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease;
+}
+
+.CtaTerminalRedirectBtn:hover {
+    transform: translateY(-2px);
+}
+
+.BackgroundGraphicLeft {
     position: absolute;
-}
-
-.BoxSectionMagic .Burger {
     top: 20px;
-    left: 40px;
+    left: 30px;
+    opacity: 0.12;
+    z-index: 1;
 }
 
-.BoxSectionMagic .Pizaa {
-    top: 280px;
-    right: -800px;
+.BackgroundGraphicLeft img {
+    width: 110px;
 }
 
-.BoxSectionMagic img {
-    width: 140px;
+.BackgroundGraphicRight {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    opacity: 0.15;
+    z-index: 1;
 }
 
-/* -----------------------------------
-   RESPONSIVE
-------------------------------------*/
-@media (max-width: 992px) {
-    .OurJourneyAbout {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .InfoOurJourney p {
-        width: 100%;
-    }
-
-    .TimelineContainer {
-        width: 90%;
-    }
-
-    .OurTeamPhoto {
-        gap: 3rem;
-    }
-
-    .TasteMagicAbout {
-        height: auto;
-    }
+.BackgroundGraphicRight img {
+    width: 150px;
 }
 
-@media (max-width: 768px) {
-    .BannerSectionAbout h1 {
-        font-size: 2.6rem;
-    }
-
-    .BannerSectionAbout p {
-        font-size: 1.1rem;
-    }
-
-    .CardsThree {
-        width: 90%;
-    }
-
-    .MemberNameMain {
-        height: 200px;
-        width: 200px;
-    }
-}
-
-/* ---------------------------
-   TEAM POPUP MODAL
-----------------------------*/
-
+/* --- COMPLIANCE DETAILS DIALOG MODALS --- */
 .TeamModalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(5px);
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -452,99 +387,157 @@
 }
 
 .TeamModal {
-    background: white;
-    width: 450px;
-    padding: 2rem;
-    border-radius: 25px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    width: 90%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
     text-align: center;
     position: relative;
-    animation: scaleIn 0.25s ease;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    animation: scaleModalUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes scaleIn {
+@keyframes scaleModalUp {
     from {
-        transform: scale(0.7);
         opacity: 0;
+        transform: scale(0.95);
     }
 
     to {
-        transform: scale(1);
         opacity: 1;
+        transform: scale(1);
     }
 }
 
 .CloseModal {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    background: #f1f1f1;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-core);
     border: none;
-    font-size: 1.4rem;
-    width: 35px;
-    height: 35px;
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CloseModal:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
 }
 
 .ModalImg {
-    width: 180px;
-    height: 180px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: top;
     margin-bottom: 1rem;
-    border: 5px solid #51AE5E;
-}
-
-.ModalRole {
-    font-weight: 600;
-    color: #51AE5E;
-    margin-bottom: 10px;
-}
-
-.ModalBio {
-    font-size: 0.95rem;
-    color: #444;
-    margin-top: 0.6rem;
-    line-height: 1.3rem;
-}
-
-.ModalSkills {
-    margin-top: 1.3rem;
-}
-
-.ModalSkills span {
-    background: #51AE5E;
-    color: white;
-    padding: 6px 14px;
-    margin: 4px;
-    border-radius: 20px;
-    display: inline-block;
-    font-size: 0.8rem;
-}
-
-.SocialLinks {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.SocialLinks i {
-    font-size: 1.6rem;
-    cursor: pointer;
-    color: #333;
-    transition: 0.3s;
-}
-
-.SocialLinks i:hover {
-    color: #51AE5E;
-    transform: scale(1.2);
+    border: 2px solid var(--accent-blue-light);
 }
 
 .TeamModal h2 {
-    font-family: var(--Font3);
-    font-size: 1.6rem;
-    letter-spacing: -0.8px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    color: var(--text-core);
+    margin-bottom: 4px;
+}
+
+.ModalRole {
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    text-transform: uppercase;
+}
+
+.ModalBio {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.ModalSkills {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.ModalSkills span {
+    background: rgba(58, 134, 200, 0.05);
+    color: var(--accent-blue-light);
+    border: 1px solid var(--border-morphic);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.SocialLinks {
+    margin-top: 1.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.SocialLinks a {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.SocialLinks a i {
+    font-size: 18px;
+}
+
+.SocialLinks a:hover {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE CONTRACTIONS --- */
+@media (max-width: 1024px) {
+    .ProAboutBanner {
+        width: calc(100% - 4rem);
+    }
+
+    .ProAboutJourney {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 0 2rem;
+    }
+
+    .MissionBentoMatrixGrid,
+    .TeamCardsMatrixGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .ProAboutMission,
+    .ProAboutTeamDeck,
+    .ProAboutCtaStation {
+        padding: 4rem 2rem;
+    }
+
+    .BackgroundGraphicLeft,
+    .BackgroundGraphicRight {
+        display: none;
+    }
 }

@@ -6,7 +6,22 @@ import { ResturantIG, midnightFoodData } from '../assets/assest';
 const AnotherNav = () => {
     const [userProfile, setUserProfile] = useState(null);
 
-    // Load user profile from localStorage securely[cite: 14]
+    // 🌊 Oceanic Theme Runtime Toggle Synchronization State Machine Engine
+    const [isLightOcean, setIsLightOcean] = useState(() => {
+        const savedTheme = localStorage.getItem('MNF_OceanTheme');
+        return savedTheme === 'light-ocean';
+    });
+
+    useEffect(() => {
+        if (isLightOcean) {
+            document.documentElement.setAttribute('data-theme', 'light-ocean');
+            localStorage.setItem('MNF_OceanTheme', 'light-ocean');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('MNF_OceanTheme', 'dark-blue');
+        }
+    }, [isLightOcean]);
+
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("MNF_UserProfile"));
         setUserProfile(saved);
@@ -23,7 +38,7 @@ const AnotherNav = () => {
     return (
         <section className='ProOceanicAnotherNav'>
             <Link to='/' className="WebNavLogo">
-                <img src={ResturantIG.WebLogo} alt="Corporate Logo" className="NavLogoWhiteFilter" />
+                <img src={ResturantIG.WebLogo} alt="Corporate Logo" />
                 <h1>{midnightFoodData.branding.title}</h1>
             </Link>
 
@@ -49,6 +64,16 @@ const AnotherNav = () => {
                                     <Link key={idx} to={opt.path}><button>{opt.label}</button></Link>
                                 )
                             ))}
+
+                            <div className="DropdownThemeToggleRow" onClick={() => setIsLightOcean(!isLightOcean)}>
+                                <div className="DropdownToggleLabelHub">
+                                    <i className={isLightOcean ? 'bx bx-sun' : 'bx bx-moon'}></i>
+                                    <span>{midnightFoodData.asideSettings.toggleLabel}</span>
+                                </div>
+                                <div className={`ProDropdownSwitchTrack ${isLightOcean ? 'switch-on' : ''}`}>
+                                    <span className="ProDropdownSwitchThumb"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -173,3 +173,65 @@ export const midnightCartData = {
         redeemBtn: "Redeem"
     }
 };
+
+export const midnightProfileData = {
+    labels: {
+        fallbackLetter: "A",
+        fallbackName: "Your Name Here",
+        uploadBtn: "Upload Profile Image",
+        removeBtn: "Purge Asset Image",
+        saveBtn: "Save Profile Parameters",
+        nameLabel: "Authorized Profile Identity :",
+        phoneLabel: "Phone Number :",
+        emailLabel: "Secure Email ID :",
+        buildingLabel: "Building / House Name :",
+        addressLabel: "Physical Dispatch Address :",
+        pincodeLabel: "Pin Code :",
+        genderLabel: "Bio Gender :"
+    },
+    genderOptions: [
+        { label: "Male", icon: "👨" },
+        { label: "Female", icon: "👩" },
+        { label: "Other", icon: "🌈" }
+    ],
+    countries: [
+        { name: "India", code: "IN", dial: "+91", flag: "🇮🇳" },
+        { name: "United States", code: "US", dial: "+1", flag: "🇺🇸" },
+        { name: "United Kingdom", code: "GB", dial: "+44", flag: "🇬🇧" },
+        { name: "Canada", code: "CA", dial: "+1", flag: "🇨🇦" },
+        { name: "Australia", code: "AU", dial: "+61", flag: "🇦🇺" }
+    ]
+};
+
+export const midnightAboutData = {
+    banner: {
+        title: "Our Story: From a Simple Idea to Your Table",
+        subtitle: "Discover the passion and dedication that goes into every magical bite we create."
+    },
+    journey: {
+        title: "Our Journey",
+        p1: "The foundation of MidNight N Food emerged from a basic late-night experience. The team leader Ayush Kumar and backend developer Aditya Raj stepped out for tea during their coding break. The team members stood under streetlights while discussing the absence of a service which would understand midnight food desires. The team members from student origins created this startup to serve students.",
+        p2: "The university students faced MST (Mid-Semester Tests) at that particular time. Students used their evenings to create during the time when their days were filled with academic work and school responsibilities. The team members Ayush Kumar developed the concept while Aditya Raj constructed the foundation and Ansh Raj designed the user interface and user experience.",
+        p3: "The team members experienced minimal sleep but generated countless ideas while maintaining strong motivation levels. Our goal was to create a meaningful platform which would unite late-night food cravings with high-quality comfort and easy access.",
+        p4: "Our initial service area covered a 5–7 km radius but we aim to expand our reach to all hostels and PGs and night-owls throughout the entire city. The service operates as our dedication to create comfort during nighttime hours."
+    },
+    mission: {
+        tagline: "What we believe in",
+        title: "Our Mission & Values",
+        description: "Our company exists to create unforgettable late-night food experiences for all customers. The team at MidNight N Food understands that excellent food provides comfort and happiness to people who need it most during late-night hunger. Our values determine all our decisions starting from ingredient selection to delivering hot meals directly to customers' homes.",
+        cards: [
+            { title: "Quality Ingredients", text: "We carefully source fresh, high-quality ingredients to make every late-night meal taste exceptional. Your midnight cravings deserve the best — and that’s exactly what we serve." },
+            { title: "Sustainability", text: "We’re committed to responsible cooking, eco-friendly packaging, and reducing waste wherever possible. Great food shouldn’t cost the planet — even at midnight." },
+            { title: "Community First", text: "We believe in giving back and supporting the people who support us. From local suppliers to night-shift workers, our community inspires everything we do." }
+        ]
+    },
+    team: {
+        title: "The People Behind the Munch",
+        subtitle: "Our team is a passionate group of night-owls, food lovers, and creators dedicated to making your late-night experience unforgettable. From the kitchen to your doorstep, we work around the clock to bring you comfort, flavor, and freshness — exactly when you need it."
+    },
+    cta: {
+        title: "Ready to Satisfy Your Cravings?",
+        subtitle: "Join the MNF family and discover your new favorite late-night meals. Explore our menu filled with fresh flavors and crave-worthy ingredients.",
+        btnText: "Crave Mode: ON"
+    }
+};
