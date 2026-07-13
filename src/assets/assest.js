@@ -344,3 +344,21 @@ export const midnightOrderSuccessData = {
         trackBtn: "Initialize Live Tracking"
     }
 };
+
+export const midnightTrackingData = {
+    labels: {
+        pageTitle: "Real-time Dispatch Tracking Terminal",
+        idPrefix: "Tracking Telemetry Node",
+        etaNotice: "Estimated Arrival Windows",
+        etaTime: "Arriving in approximately 18–25 minutes",
+        deliveryAlert: "Order Terminals Successfully Dispatched",
+        deliverySuccess: "🎉 Package verified and delivered. Enjoy your late-night meal!"
+    },
+    steps: [
+        "Order Confirmed",
+        "Preparing Order",
+        "Rider Assigned",
+        "Out for Delivery",
+        "Delivered"
+    ]
+};

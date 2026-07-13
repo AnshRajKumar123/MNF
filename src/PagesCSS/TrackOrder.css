@@ -1,122 +1,402 @@
-.track-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 25px;
-    background: #fff;
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD DYNAMIC HORIZONTAL TRACKING CONTROL MODULE
+   ========================================================================== */
+
+.ProTrackingOuterSuite {
+    width: 100%;
+    background-color: var(--bg-primary);
     min-height: 100vh;
-    font-family: var(--Font3);
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
 
-.track-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 10px;
+.ProTrackingSectionLayout {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
 }
 
-.track-order-id {
-    color: #555;
-    margin-bottom: 25px;
-    font-size: 17px;
+/* --- UPPER HEADER TRACKING CONFIGURATION TRACK --- */
+.ProTrackingHeaderDeckPanel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-morphic);
+    padding-bottom: 1.5rem;
 }
 
-/* Steps UI */
-.steps-container {
-    position: relative;
-    padding-left: 10px;
-    border-left: 3px solid #eee;
-    margin-bottom: 30px;
+.ProTrackingHeaderDeckPanel h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0;
 }
 
-.step {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.step-circle {
-    width: 25px;
-    height: 25px;
-    background: #ccc;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    font-weight: 700;
-    font-size: 14px;
-    position: absolute;
-    left: -13px;
-    top: 0;
-    color: white;
-}
-
-.step-circle.active {
-    background: #4caf50;
-}
-
-.step-label {
-    margin-left: 25px;
-    font-size: 17px;
-    margin-top: 2px;
-    color: #666;
-}
-
-.step-label.active {
-    color: #000;
-    font-weight: 600;
-}
-
-.step-line {
-    width: 2px;
-    height: 30px;
-    background: #ccc;
-    position: absolute;
-    left: -2px;
-    top: 25px;
-}
-
-.step-line.active {
-    background: #4caf50;
-}
-
-/* Rider Box */
-.rider-box {
+.ProTrackingTelemetryBox {
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    padding: 10px 16px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 15px;
-    border-radius: 12px;
-    background: #f6f6f6;
-    margin-bottom: 20px;
 }
 
-.rider-img {
-    width: 50px;
-    height: 50px;
+[data-theme="light-ocean"] .ProTrackingTelemetryBox {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
-.rider-name {
-    font-size: 18px;
+.ProTrackingTelemetryBox span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ProTrackingTelemetryBox strong {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+}
+
+/* --- THE RECONSTRUCTED DYNAMIC HORIZONTAL STEPPER --- */
+.ProHorizontalStepperContainer {
+    width: 100%;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.HorizontalTimelineTrackLine {
+    position: absolute;
+    top: 50px;
+    left: 8%;
+    right: 8%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    z-index: 1;
+}
+
+[data-theme="light-ocean"] .HorizontalTimelineTrackLine {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.TimelineTrackProgressFill {
+    height: 100%;
+    background-color: var(--accent-blue-light);
+    border-radius: 20px;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 10px rgba(58, 134, 200, 0.3);
+}
+
+.ProHorizontalStepsFlexRow {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.ProStepNodeCell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 16%;
+}
+
+.StepNodeCircleShield {
+    width: 36px;
+    height: 36px;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-morphic);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 700;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.StepNodeCircleShield i {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.StepNodeTextLabel {
+    margin-top: 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* Operational Stepper Node Status Toggles */
+.cell-completed .StepNodeCircleShield {
+    background-color: var(--accent-blue-light);
+    border-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.cell-completed .StepNodeTextLabel {
+    color: var(--text-core);
+}
+
+.cell-active .StepNodeCircleShield {
+    background-color: var(--accent-blue-dark);
+    border-color: var(--accent-blue-light);
+    color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(58, 134, 200, 0.25);
+}
+
+.cell-active .StepNodeTextLabel {
+    color: var(--accent-blue-light);
     font-weight: 700;
 }
 
-.rider-vehicle {
-    color: #555;
+/* Active Glow Tracking Rings */
+.StepNodeActivePulseNode {
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-blue-light);
+    animation: stepNodePulseEffect 2s infinite ease-in-out;
 }
 
-/* ETA Text */
-.eta-text {
-    text-align: center;
-    font-size: 17px;
-    padding: 12px;
-    color: #e53935;
-    font-weight: 600;
+@keyframes stepNodePulseEffect {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.35);
+        opacity: 0;
+    }
 }
 
-/* Delivered */
-.delivered-box {
-    text-align: center;
-    padding: 18px;
-    background: #e8ffe6;
+/* --- BOTTOM MULTI-ACTION BENTO METRICS PANEL --- */
+.ProTrackingBentoStatusDeck {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Rider Terminal Panel Card Elements */
+.ProRiderConsoleBentoCard {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    padding: 1.2rem 1.8rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    gap: 18px;
+    animation: bentoPanelFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.RiderAvatarFrame {
+    width: 54px;
+    height: 54px;
+    background-color: rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    font-size: 18px;
+    padding: 4px;
+    border: 1px solid var(--border-morphic);
+}
+
+.RiderAvatarFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.RiderProfileMetadata h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin: 0 0 2px 0;
+}
+
+.RiderProfileMetadata span {
+    font-size: 13px;
+    color: var(--text-muted);
     font-weight: 600;
-    color: #2e7d32;
+}
+
+.RiderStatusIndicatorTag {
+    margin-left: auto;
+    background-color: rgba(58, 134, 200, 0.06);
+    border: 1px solid var(--border-morphic);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.LiveStatusPulse {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-blue-light);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--accent-blue-light);
+}
+
+/* Real-time ETA Alerts Blocks Components */
+.ProArrivalEtaNoticeCard {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, rgba(229, 57, 53, 0.03) 0%, rgba(229, 57, 53, 0.08) 100%);
+    border: 1px solid rgba(229, 57, 53, 0.15);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    animation: bentoPanelFadeUp 0.4s ease both;
+}
+
+.EtaAlertIconBox {
+    font-size: 28px;
+    color: #e53935;
+    display: flex;
+    align-items: center;
+}
+
+.EtaAlertTextCluster h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: #e53935;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 2px 0;
+}
+
+.EtaAlertTextCluster p {
+    font-size: 14px;
+    color: var(--text-core);
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Dispatch Complete Banner Overlays */
+.ProDeliverySuccessBentoCard {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(58, 134, 200, 0.03);
+    border: 1px solid var(--border-morphic);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    animation: bentoPanelFadeUp 0.4s ease both;
+}
+
+.SuccessBadgeShieldIcon {
+    font-size: 32px;
+    color: var(--accent-blue-light);
+    display: flex;
+    align-items: center;
+}
+
+.SuccessTextCluster h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 2px 0;
+}
+
+.SuccessTextCluster p {
+    font-size: 14px;
+    color: var(--text-core);
+    font-weight: 600;
+    margin: 0;
+}
+
+@keyframes bentoPanelFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- RESPONSIVE WORKSPACE CONSTRAINTS BREAKPOINTS --- */
+@media (max-width: 992px) {
+    .ProTrackingSectionLayout {
+        padding: 0 2rem;
+    }
+
+    .HorizontalTimelineTrackLine {
+        display: none;
+    }
+
+    /* Switches to clean block intervals natively */
+    .ProHorizontalStepsFlexRow {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .ProStepNodeCell {
+        flex-direction: row;
+        text-align: left;
+        width: 100%;
+        gap: 14px;
+    }
+
+    .StepNodeTextLabel {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .ProTrackingHeaderDeckPanel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .ProTrackingTelemetryBox {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+    }
+
+    .ProRiderConsoleBentoCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .RiderStatusIndicatorTag {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
 }

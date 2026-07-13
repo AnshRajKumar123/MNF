@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../PagesCSS/Payment.css"; // Styles targeted below
+import "../PagesCSS/Payment.css";
 import { midnightOrderSuccessData } from "../assets/assest";
 
 const OrderSuccessPopup = () => {
