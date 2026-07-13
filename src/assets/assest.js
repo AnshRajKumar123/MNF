@@ -61,3 +61,41 @@ export const ResturantIG = {
     DeliveryPartner,
     MidNightQR,
 }
+
+export const midnightFoodData = {
+    branding: {
+        title: "MidNight N Food",
+        tagline: "Late Night Cravings, Delivered Smooth."
+    },
+    navigation: {
+        home: "/mainWebsite",
+        menu: "/mainWebsite/menu",
+        cart: "/mainWebsite/cart"
+    },
+    asideSettings: {
+        links: [
+            { label: "Feedback", path: "#" },
+            { label: "Bulk Order", path: "#" },
+            { label: "Profile", path: "/profile" },
+            { label: "About Us", path: "/about" },
+            { label: "Terms and Conditions", path: "#" }
+        ],
+        toggleLabel: "Oceanic Shift"
+    },
+    navMenuOptions: [
+        { label: "Order Tracking", action: "openOrderDetail" },
+        { label: "About Us", path: "/about" },
+        { label: "Report a Fraud", path: "/report-fraud" },
+        { label: "Help and Support", path: "/help-support" }
+    ],
+
+    anotherNav: {
+        moreLabel: "More",
+        options: [
+            { label: "Order Tracking", action: "openOrderDetail" },
+            { label: "About Us", path: "/about" },
+            { label: "Report a Fraud", path: "/report-fraud" },
+            { label: "Help and Support", path: "/help-support" }
+        ]
+    }
+};

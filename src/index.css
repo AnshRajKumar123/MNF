@@ -1,7 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap');
+
+/* ==========================================================================
+   🌊 DYNAMIC TOPO-OCEANIC BLUE DESIGN RESETS
+   ========================================================================== */
+
+:root {
+  --Font1: "Quicksand", sans-serif;
+  --Font2: "Dancing Script", cursive;
+  --Font3: "Libertinus Sans", sans-serif;
+
+  --bg-primary: #0A1128;
+  --bg-surface: #101F42;
+  --bg-glass: rgba(16, 31, 66, 0.4);
+
+  --accent-blue-dark: #004E98;
+  --accent-blue-light: #3A86C8;
+
+  --text-core: #F4F7F6;
+  --text-muted: #8E9AAF;
+
+  --border-morphic: rgba(58, 134, 200, 0.15);
+  --shadow-premium: rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light-ocean"] {
+  --bg-primary: #EAF2F8;
+  --bg-surface: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.6);
+
+  --accent-blue-dark: #1F618D;
+  --accent-blue-light: #5DADE2;
+
+  --text-core: #1A252C;
+  --text-muted: #566573;
+
+  --border-morphic: rgba(93, 173, 226, 0.25);
+  --shadow-premium: rgba(26, 37, 44, 0.06);
+}
 
 * {
   margin: 0;
@@ -13,17 +50,11 @@
 }
 
 body {
+  background-color: var(--bg-primary);
+  color: var(--text-core);
   overflow-x: hidden;
-}
-
-:root {
-  --Font1: "Quicksand", sans-serif;
-  --Font2: "Dancing Script", cursive;
-  --Font3: "Libertinus Sans", sans-serif;
-  --Font4: "Playwrite HU", cursive;
-
-  --TacentColor1: #0000001a;
-  --TacentColor2: #ffffff0f;
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .FlexBoxNA {

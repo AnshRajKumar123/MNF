@@ -1,63 +1,89 @@
-.AnotherNav {
+/* ==========================================================================
+   🌟 PARKLY/MNF TRANSITIONED ALTERNATIVE OCEANIC NAVBAR
+   ========================================================================== */
+
+.ProOceanicAnotherNav {
     width: 100%;
-    height: 100px;
-    padding: 0 1.2rem;
+    height: 80px;
+    padding: 0 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 9999;
-    background-color: #ffffff28;
-    backdrop-filter: blur(10px);
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-morphic);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.AnotherNav .WebNavLogo {
+.ProOceanicAnotherNav .WebNavLogo {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.8rem;
 }
 
-.AnotherNav .WebNavLogo img {
-    width: 73px;
+.ProOceanicNavbar .MidnightBrandLogo,
+.ProOceanicAnotherNav .WebNavLogo img {
+    height: 40px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+
+    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
+}
+
+[data-theme="light-ocean"] .ProOceanicNavbar .MidnightBrandLogo,
+[data-theme="light-ocean"] .ProOceanicAnotherNav .WebNavLogo img {
+    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
+}
+
+.ProOceanicAnotherNav .WebNavLogo h1 {
+    font-weight: 700;
+    font-family: var(--Font2);
+    font-size: 26px;
+    color: var(--accent-blue-light);
+    letter-spacing: -0.5px;
 }
 
 .AnotherNavLinks {
     display: flex;
     align-items: center;
-    gap: 1.3rem;
+    gap: 1.5rem;
 }
 
 .AnotherNavLinks .OnlyAccOpt {
-    font-size: 1.5rem;
-    color: #000;
-    padding: 11px 20px;
-    border-radius: 50px;
-    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--text-core);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
     font-family: var(--Font3);
-    letter-spacing: -1px;
+    letter-spacing: 0.3px;
     position: relative;
-    transition: 0.3s ease-in-out;
+    transition: all 0.2s ease;
 }
 
 .AnotherNavLinks .OnlyAccOpt::before {
     position: absolute;
     content: '';
     width: 0%;
-    height: 3px;
-    border-radius: 50px;
-    background-color: #51AE5E;
-    top: 80%;
-    left: 5px;
-    transition: 0.3s ease-in-out;
+    height: 2px;
+    border-radius: 4px;
+    background-color: var(--accent-blue-light);
+    top: 85%;
+    left: 16px;
+    transition: width 0.25s ease;
 }
 
 .AnotherNavLinks .OnlyAccOpt:hover::before {
-    width: 90%;
+    width: calc(100% - 32px);
 }
 
 .AnotherNavLinks .OnlyAccOpt:hover {
-    color: #51AE5E;
+    color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.04);
 }
 
 .AnotherNavDrop {
@@ -66,74 +92,132 @@
 }
 
 .CircleBoxBtn {
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
-    padding: 9px 30px;
+    padding: 9px 20px;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    background-color: #51AE5E;
-    color: #fff;
-    transition: 0.2s ease-in-out;
+    gap: 0.4rem;
+    background-color: var(--accent-blue-dark);
+    border: 1px solid var(--border-morphic);
+    color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 78, 152, 0.15);
 }
 
 .CircleBoxBtn span {
     font-family: var(--Font3);
-    font-size: 23.5px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .CircleBoxBtn i {
-    font-size: 26px;
-    margin-top: 5px;
+    font-size: 16px;
 }
 
-.CircleBoxBtn:hover,
-.NaviAccount:hover {
-    background-color: #3E8A4A;
+.CircleBoxBtn:hover {
+    background-color: #ffffff;
+    color: var(--bg-primary);
+    border-color: #ffffff;
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
 }
 
 .BezPadding {
-    padding-top: 10px;
+    padding-top: 8px;
     position: absolute;
     top: 100%;
     opacity: 0;
     pointer-events: none;
     right: 0;
-    transition: 0.3s ease-in-out;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .InsideBoxDrop {
-    padding: 15px;
+    padding: 6px;
     border-radius: 12px;
-    background-color: #fff;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    width: 220px;
-    backdrop-filter: blur(10px);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 25px 50px var(--shadow-premium);
+    width: 200px;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 2px;
 }
 
 .InsideBoxDrop button {
     border: none;
-    padding: 11px 0;
+    background-color: transparent;
+    color: var(--text-core);
     width: 100%;
+    text-align: left;
+    padding: 10px 14px;
     border-radius: 8px;
-    background-color: #000;
-    color: #fff;
+    font-size: 13.5px;
     font-weight: 600;
-    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
     cursor: pointer;
-    transition: 0.2s ease-in-out;
+}
+
+.InsideBoxDrop button:hover {
+    background-color: rgba(58, 134, 200, 0.06);
+    color: var(--accent-blue-light);
 }
 
 .AnotherNavDrop:hover .BezPadding {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
 }
 
-.InsideBoxDrop button:hover {
-    background-color: #00000026;
-    color: #000;
+/* Profile Avatar Uniform Standard Triggers */
+.NaviAdd {
+    border-radius: 12px;
+    border: 1px solid var(--border-morphic);
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--text-muted);
+    height: 42px;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.NaviAdd:hover {
+    border-color: var(--accent-blue-light);
+}
+
+.NavProfileImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.NavProfileLetter {
+    width: 100%;
+    height: 100%;
+    background: var(--accent-blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: var(--Font3);
+}
+
+@media (max-width: 768px) {
+    .ProOceanicAnotherNav {
+        padding: 0 1.5rem;
+    }
+
+    .AnotherNavLinks .OnlyAccOpt {
+        display: none;
+    }
+
+    /* Kept clean on smaller displays */
 }

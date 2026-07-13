@@ -1,104 +1,139 @@
-nav {
+/* ==========================================================================
+   🌟 PARKLY/MNF TRANSITIONED PREMIUM NAVBAR LAYER
+   ========================================================================== */
+
+.ProOceanicNavbar {
     width: calc(100vw - 100px);
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 3rem;
     position: sticky;
     top: 0;
-    z-index: 9999;
-    background-color: #ffffff28;
-    backdrop-filter: blur(10px);
+    z-index: 9998;
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-morphic);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .WebNavLogo h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-family: var(--Font2);
-    color: rgb(81, 174, 95);
+    font-size: 28px;
+    color: var(--accent-blue-light);
+    letter-spacing: -0.5px;
 }
 
 .NaviSearch {
-    background-color: #0000000f;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
     border-radius: 50px;
     display: flex;
     align-items: center;
+    padding: 2px;
+}
+
+[data-theme="light-ocean"] .NaviSearch {
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 .NaviSearch input {
-    height: 50px;
-    width: 500px;
-    font-size: 15px;
+    height: 44px;
+    width: 460px;
+    font-size: 14px;
+    font-weight: 500;
     border: none;
     background-color: transparent;
     outline: none;
+    color: var(--text-core);
+    padding-left: 4px;
+}
+
+.NaviSearch input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 .NaviSearch .SearchIcon {
-    border-radius: 50%;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 15px;
+    font-size: 18px;
+    color: var(--text-muted);
+    padding: 0 14px;
 }
 
-.NaviSearch button {
-    border: none;
+.KbdShortcutBtn {
+    border: 1px solid var(--border-morphic);
     display: flex;
-    gap: 1px;
+    gap: 2px;
     align-items: center;
-    font-size: 16px;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 5px;
-    margin-right: 15px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 11px;
+    font-weight: 700;
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-right: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .NaviLastOpt {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .NaviAdd {
-    border-radius: 50%;
-    border: none;
-    background-color: #0000000f;
-    height: 48px;
-    width: 48px;
+    border-radius: 12px;
+    border: 1px solid var(--border-morphic);
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--text-muted);
+    height: 44px;
+    width: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 20px;
     cursor: pointer;
-    transition: 0.1s ease-in-out;
-    position: relative;
+    transition: all 0.2s ease;
 }
 
-.NaviAccount {
-    background-color: rgb(81, 174, 95);
-    color: #fff;
-    border: none;
-    font-weight: 500;
-    cursor: pointer;
+.NaviAdd:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-core);
 }
 
 .NaviAdd:active {
-    scale: 0.89;
+    transform: scale(0.93);
+}
+
+.NaviAccount {
+    background-color: var(--accent-blue-dark);
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 78, 152, 0.2);
 }
 
 .IconHeCenter {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
-    width: 48px;
-    background-color: #0000000f;
-    border-radius: 50%;
-    font-size: 22px;
+    height: 44px;
+    width: 44px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-morphic);
+    border-radius: 12px;
+    font-size: 18px;
+    color: var(--text-muted);
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.IconHeCenter:hover {
+    color: var(--text-core);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .HoverEffectDrop {
@@ -106,61 +141,80 @@ nav {
     position: relative;
 }
 
+.BezPadding {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding-top: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .InsideMenuBar {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 4px;
     width: 200px;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    padding: 6px;
+    box-shadow: 0 25px 50px var(--shadow-premium);
     border-radius: 12px;
 }
 
 .InsideMenuBar button {
     border: none;
-    background-color: #000;
-    color: #fff;
+    background-color: transparent;
+    color: var(--text-core);
     width: 100%;
-    padding: 10px 0;
-    border-radius: 10px;
-    transition: 0.2s ease-in-out;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: all 0.2s ease;
     cursor: pointer;
-    font-weight: 500;
 }
 
 .InsideMenuBar button:hover {
-    background-color: #00000036;
-    color: #000;
-}
-
-.NaviNotifi:hover,
-.IconHeCenter:hover {
-    background-color: #00000025;
+    background-color: rgba(58, 134, 200, 0.06);
+    color: var(--accent-blue-light);
 }
 
 .HoverEffectDrop:hover .BezPadding {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
 }
 
 .NavProfileImg {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
     object-fit: cover;
 }
 
 .NavProfileLetter {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    background: #51AE5E;
+    background: var(--accent-blue-dark);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 28px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
     font-family: var(--Font3);
+}
+
+.Weblogo img {
+    width: 50px;
+    display: block;
+    transition: filter 0.3s ease, transform 0.2s ease;
+    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
+}
+
+[data-theme="light-ocean"] .Weblogo img {
+    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
 }
