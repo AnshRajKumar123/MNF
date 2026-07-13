@@ -335,3 +335,12 @@ export const midnightFraudConfig = {
         supportBtn: "Access Help Deck"
     }
 };
+
+export const midnightOrderSuccessData = {
+    labels: {
+        title: "Order Authorized",
+        subtitle: "Transaction Completed",
+        idPrefix: "Order ID Log",
+        trackBtn: "Initialize Live Tracking"
+    }
+};

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "../PagesCSS/Payment.css"; // Popup styles already included
 import { useNavigate } from "react-router-dom";
+import "../PagesCSS/Payment.css"; // Styles targeted below
+import { midnightOrderSuccessData } from "../assets/assest";
 
 const OrderSuccessPopup = () => {
     const navigate = useNavigate();
     const [orderId, setOrderId] = useState("");
 
-    // Generate Order ID → MNF-XXXXXX
     const generateOrderId = () => {
         const randomNum = Math.floor(100000 + Math.random() * 900000);
         return `MNF-${randomNum}`;
@@ -29,19 +29,26 @@ const OrderSuccessPopup = () => {
     };
 
     return (
-        <div className="order-success-overlay">
-            <div className="order-success-box">
+        <div className="ProOrderSuccessOverlay">
+            <div className="ProOrderSuccessBentoCard">
+                
+                {/* Neon-illuminated floating vector status badge shield */}
+                <div className="ProOrderSuccessIconShield">
+                    <div className="ProOrderPulseRing"></div>
+                    <i className='bx bx-party'></i>
+                </div>
 
-                <div className="success-icon">✔</div>
+                <span className="ProSystemLedgerTagText">{midnightOrderSuccessData.labels.title}</span>
+                <h2 className="ProOrderSuccessTitleText">{midnightOrderSuccessData.labels.subtitle}</h2>
 
-                <h2 className="order-success-title">Order Successful</h2>
+                {/* Morphic data bento slot row container for systemic credentials */}
+                <div className="ProOrderIdTelemetryBox">
+                    <span>{midnightOrderSuccessData.labels.idPrefix}</span>
+                    <strong>{orderId}</strong>
+                </div>
 
-                <p className="order-id-text">
-                    Order ID: <b>{orderId}</b>
-                </p>
-
-                <button className="track-btn" onClick={goToTrackOrder}>
-                    Track Order
+                <button className="ProOrderTrackCTA" onClick={goToTrackOrder}>
+                    {midnightOrderSuccessData.labels.trackBtn} <i className='bx bx-navigation'></i>
                 </button>
 
             </div>

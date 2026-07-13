@@ -1,0 +1,175 @@
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD BENTO CHECKOUT AUTHORIZATION POPUP STYLES
+   ========================================================================== */
+
+.ProOrderSuccessOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background-color: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.ProOrderSuccessBentoCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    padding: 3.5rem 2.5rem;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    border-radius: 16px;
+    box-shadow: 0 30px 70px var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    animation: proPopupScaleSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes proPopupScaleSlideUp {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --- GLACIAL STATUS NEON DISPATCH BADGE --- */
+.ProOrderSuccessIconShield {
+    width: 86px;
+    height: 86px;
+    background-color: rgba(58, 134, 200, 0.05);
+    border: 1px solid var(--border-morphic);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.8rem;
+}
+
+.ProOrderSuccessIconShield i {
+    font-size: 38px;
+    color: var(--accent-blue-light);
+    z-index: 2;
+}
+
+.ProOrderPulseRing {
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-blue-light);
+    opacity: 0.3;
+    animation: proSuccessRingPulse 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+@keyframes proSuccessRingPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+.ProSystemLedgerTagText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.ProOrderSuccessTitleText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.8rem;
+    margin-top: 0;
+}
+
+/* --- THE TELEMETRY BENTO COMPARTMENT CARD --- */
+.ProOrderIdTelemetryBox {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    padding: 14px 18px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+[data-theme="light-ocean"] .ProOrderIdTelemetryBox {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.ProOrderIdTelemetryBox span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.ProOrderIdTelemetryBox strong {
+    font-family: var(--Font3), sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+    letter-spacing: 0.5px;
+}
+
+/* --- SUBMIT INTERACTION ACTION TRACK --- */
+.ProOrderTrackCTA {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProOrderTrackCTA i {
+    font-size: 16px;
+}
+
+.ProOrderTrackCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 78, 152, 0.3);
+}
+
+@media (max-width: 480px) {
+    .ProOrderSuccessBentoCard {
+        padding: 2.5rem 1.5rem;
+    }
+}
