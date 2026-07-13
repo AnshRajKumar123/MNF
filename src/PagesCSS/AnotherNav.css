@@ -162,7 +162,7 @@
 
 .InsideBoxDrop button:hover {
     background-color: rgba(58, 134, 200, 0.06);
-    color: var(--accent-blue-light);
+    color: var(--accent-blue-dark);
 }
 
 .AnotherNavDrop:hover .BezPadding {

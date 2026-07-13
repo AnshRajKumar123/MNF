@@ -104,7 +104,7 @@ export const midnightMenuData = {
     labels: {
         detailHeading: "Item Profile Specifications",
         quantitySelect: "Configure Quantity Matrix",
-        ctaAdd: "Commit to Cart",
+        ctaAdd: "Add to Cart",
         toastUpdate: "Quantity Adjusted 🌊",
         toastAdd: "Logged to Cart Node 🛒"
     }
@@ -143,6 +143,6 @@ export const midnightSearchData = {
         emptyState: "No corresponding food items found inside the active registry.",
         detailHeading: "Item Profile Specifications",
         priceLabel: "Price Settlement",
-        ctaAdd: "Commit to Cart"
+        ctaAdd: "Add to Cart"
     }
 };

@@ -120,13 +120,6 @@
     height: 190px;
     object-fit: cover;
     display: block;
-    transition: filter 0.3s ease;
-    /* ⚡ Hue shifts embedded image wrapper matrix dynamically with global asset rule */
-    filter: hue-rotate(85deg) brightness(1.05);
-}
-
-[data-theme="light-ocean"] .DrawerImageFrame img {
-    filter: hue-rotate(95deg) brightness(0.95);
 }
 
 .DrawerConsoleBody h2 {
