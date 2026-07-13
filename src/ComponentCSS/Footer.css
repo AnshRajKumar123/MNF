@@ -1,113 +1,199 @@
-footer {
+/* ==========================================================================
+   🌊 PARKLY/MNF TRANSITIONED ENTERPRISE OCEANIC SITEMAP DECK FOOTER
+   ========================================================================== */
+
+.ProOceanicFooter {
     width: 100vw;
-    height: 60vh;
-    padding: 80px 240px;
-    background-color: #000;
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-morphic);
+    padding: 5rem 6rem 3rem 6rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.ProFooterTopRow {
+    width: 100%;
+    margin-bottom: 2.5rem;
 }
 
 .WebLogoFooter {
     display: flex;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
 }
 
 .WebLogoFooter img {
-    width: 100px;
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
+}
+
+[data-theme="light-ocean"] .WebLogoFooter img {
+    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
 }
 
 .WebLogoFooter h1 {
-    color: #fff;
+    font-weight: 700;
     font-family: var(--Font2);
-    letter-spacing: 2px;
-    font-size: 2.5rem;
-}
-
-.FlexFooterLine {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 5rem;
-    color: #fff;
-    margin: 30px 0 0 20px;
-}
-
-.FlexFooterLine ul {
-    list-style: none;
-}
-
-.FlexFooterLine ul li b {
-    font-size: 24px;
-    font-weight: 500;
-    font-family: var(--Font3);
+    font-size: 32px;
+    color: var(--accent-blue-light);
     letter-spacing: -0.5px;
-    color: #fff;
     margin: 0;
 }
 
-.FlexFooterLine ul li a {
+.FlexFooterLine {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+.FooterLinkColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.FooterLinkColumn h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.FooterLinkColumn ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.FooterLinkColumn ul li a {
     text-decoration: none;
-    color: #ffffff67;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
 }
 
-.FlexFooterLine ul li:nth-child(2) {
-    margin-top: 10px;
+.FooterLinkColumn ul li a:hover {
+    color: var(--accent-blue-light);
+    transform: translateX(3px);
 }
 
-.FlexFooterLine ul:last-child li:nth-child(2) i {
-    padding: 5px;
-    font-size: 18px;
+/* Social Vectors Column Matrix Styles */
+.ProFooterSocialRow {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-.FlexFooterLine ul:last-child li:nth-child(3) img {
-    width: 170px;
-    padding-top: 20px;
+.ProFooterSocialRow a {
+    width: 34px;
+    height: 34px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
 }
 
-.FlexFooterLine ul:last-child li:nth-child(4) img {
-    width: 180px;
-    padding-top: 20px;
+[data-theme="light-ocean"] .ProFooterSocialRow a {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
-.FlexFooterLine ul li a:hover {
-    color: #ffffffe1;
+.ProFooterSocialRow a i {
+    font-size: 16px;
+}
+
+.ProFooterSocialRow a:hover {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border-color: var(--accent-blue-light);
+    transform: translateY(-2px);
+}
+
+/* Marketplace App Download Wrapper */
+.ProFooterAppDownloadPlatform {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.AppStoreBadge img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid var(--border-morphic);
+    transition: transform 0.2s ease;
+}
+
+.AppStoreBadge:hover img {
+    transform: translateY(-1.5px);
 }
 
 .HoriLine {
-    height: .1px;
+    height: 1px;
     width: 100%;
-    margin-top: 20px;
-    background-color: #ffffff75;
+    margin: 3rem 0 1.5rem 0;
+    background-color: var(--border-morphic);
     border: none;
 }
 
-.BoxiBtn {
-    margin-top: 10px;
-    font-size: 11px;
-    letter-spacing: 0.2px;
-    width: 80%;
-    color: #ffffff88;
+.ProFooterBottomMeta {
+    width: 100%;
 }
 
-@media (max-width: 440px) {
-    footer {
-        height: 105vh;
-        padding: 30px;
-    }
+.BoxiBtn {
+    font-size: 12px;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    color: var(--text-muted);
+    margin: 0;
+}
 
-    .WebLogoFooter img {
-        width: 70px;
-    }
-
-    .WebLogoFooter h1 {
-        font-size: 2rem;
+/* --- RESPONSIVE ADAPTIVE BREAKPOINTS --- */
+@media (max-width: 1024px) {
+    .ProOceanicFooter {
+        padding: 4rem 3rem 2rem 3rem;
     }
 
     .FlexFooterLine {
-        margin: 30px 0 0 0;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .FlexFooterLine {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .FlexFooterLine {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .FlexFooterLine ul:nth-child(5) {
-        margin-bottom: 100px;
+    .ProOceanicFooter {
+        padding: 3rem 1.5rem 2rem 1.5rem;
     }
 }

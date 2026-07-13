@@ -391,3 +391,41 @@ export const midnightCheckoutData = {
         cod: "Cash On Delivery (COD Ledger)"
     }
 };
+
+export const midnightFooterData = {
+    copyright: "By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners 2008-2026 © MNF Ltd. All rights reserved.",
+    columns: [
+        {
+            title: "Eternal",
+            links: [
+                { label: "MNF", path: "#" },
+                { label: "Feeding India", path: "#" },
+                { label: "Investor Relations", path: "#" }
+            ]
+        },
+        {
+            title: "For Restaurants",
+            links: [
+                { label: "Partner with Us", path: "#" },
+                { label: "Apps for you", path: "#" }
+            ]
+        },
+        {
+            title: "Delivery Partners",
+            links: [
+                { label: "Partner with Us", path: "#" },
+                { label: "Apps for you", path: "#" }
+            ]
+        },
+        {
+            title: "Legal",
+            links: [
+                { label: "Privacy", path: "PrivacyPolicy", isExternal: true },
+                { label: "Security", path: "SecurityPolicy", isExternal: true },
+                { label: "Terms of Service", path: "TermsofService", isExternal: true },
+                { label: "Help and Support", path: "/help-support" },
+                { label: "Report a Fraud", path: "/report-fraud" }
+            ]
+        }
+    ]
+};
