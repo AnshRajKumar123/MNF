@@ -1,20 +1,17 @@
-import React from 'react'
-import '../ComponentCSS/SingleProduct.css'
+import React from 'react';
+import '../ComponentCSS/SingleProduct.css';
 
 const SingleProduct = ({ product }) => {
-
     if (!product) return null;
 
-    // Open product detail
     const handleViewProduct = () => {
         window.dispatchEvent(
             new CustomEvent('viewProductDetail', { detail: product })
         );
     };
 
-    // Add to cart WITHOUT blinking / disappearing product
     const handleAddToCart = (e) => {
-        e.stopPropagation(); // prevent opening detail
+        e.stopPropagation();
 
         let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
         const existing = cart.find(item => item.id === product.id);
@@ -22,12 +19,12 @@ const SingleProduct = ({ product }) => {
         if (existing) {
             existing.quantity += 1;
             window.dispatchEvent(new CustomEvent("MNF_ShowToast", {
-                detail: `${product.name} quantity updated 🛒`
+                detail: `${product.name} operational volume increased 🛒`
             }));
         } else {
             cart.push({ ...product, quantity: 1 });
             window.dispatchEvent(new CustomEvent("MNF_ShowToast", {
-                detail: `${product.name} added to cart 🛒`
+                detail: `${product.name} committed to cart ledger 🛒`
             }));
         }
 
@@ -36,20 +33,20 @@ const SingleProduct = ({ product }) => {
     };
 
     return (
-        <div className="product-box" onClick={handleViewProduct}>
-            <div className="product-img">
+        <div className="ProProductGridBoxCard" onClick={handleViewProduct}>
+            <div className="ProProductImageContainer">
                 <img src={product.image} alt={product.name} />
-
-                <button className="cart-btn" onClick={handleAddToCart}>
-                    +
+                
+                <button className="ProFloatingCartAppendCTA" onClick={handleAddToCart}>
+                    <i className='bx bx-plus'></i>
                 </button>
             </div>
 
-            <div className="product-details">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-category">{product.category}</p>
-                <p className="product-description">{product.description}</p>
-                <div className="product-price">₹{product.price}</div>
+            <div className="ProProductMetaDetails">
+                <h3 className="ProProductNameText">{product.name}</h3>
+                <span className="ProProductCategoryTag">{product.category}</span>
+                <p className="ProProductTruncatedDesc">{product.description}</p>
+                <div className="ProProductRateText">₹{product.price}</div>
             </div>
         </div>
     );

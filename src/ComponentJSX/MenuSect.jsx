@@ -3,6 +3,7 @@ import '../ComponentCSS/MenuSect.css';
 import HoriZontalScroll from './HoriZontalScroll';
 import SingleProduct from './SingleProduct';
 import { assets } from '../assets/assests1';
+import { midnightMenuData } from '../assets/assest';
 
 const MenuSect = () => {
     const [allProducts, setAllProducts] = useState([]);
@@ -11,43 +12,32 @@ const MenuSect = () => {
     const [quantity, setQuantity] = useState(1);
     const [toastMsg, setToastMsg] = useState('');
 
-    // Shuffle products on load
     useEffect(() => {
         const cleaned = assets.filter(Boolean);
         const shuffled = [...cleaned].sort(() => Math.random() - 0.5);
-
         setAllProducts(shuffled);
         setFilteredProducts(shuffled);
     }, []);
 
-    // Listen for product detail
     useEffect(() => {
         const handleView = (e) => {
             setSelectedProduct(e.detail);
             setQuantity(1);
         };
-
         window.addEventListener('viewProductDetail', handleView);
         return () => window.removeEventListener('viewProductDetail', handleView);
     }, []);
 
-    // Listen for category filter
     useEffect(() => {
         const handleFilter = (e) => {
             const slug = e.detail;
-
             if (slug === "all") {
                 setFilteredProducts(allProducts);
                 return;
             }
-
-            const filtered = allProducts.filter(item =>
-                item.slug.includes(slug)
-            );
-
+            const filtered = allProducts.filter(item => item.slug.includes(slug));
             setFilteredProducts(filtered);
         };
-
         window.addEventListener("filterCategory", handleFilter);
         return () => window.removeEventListener("filterCategory", handleFilter);
     }, [allProducts]);
@@ -57,7 +47,7 @@ const MenuSect = () => {
         setTimeout(() => setToastMsg(''), 2000);
     };
 
-    const increaseQty = () => setQuantity(q => q + 1);5
+    const increaseQty = () => setQuantity(q => q + 1);
     const decreaseQty = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
     const handleAddToCart = () => {
@@ -66,10 +56,10 @@ const MenuSect = () => {
 
         if (existing) {
             existing.quantity += quantity;
-            showToast("Quantity updated 🛒");
+            showToast(midnightMenuData.labels.toastUpdate);
         } else {
             savedCart.push({ ...selectedProduct, quantity });
-            showToast("Added to cart 🛒");
+            showToast(midnightMenuData.labels.toastAdd);
         }
 
         localStorage.setItem("cartItems", JSON.stringify(savedCart));
@@ -77,46 +67,55 @@ const MenuSect = () => {
     };
 
     return (
-        <section className={`MenuSection ${selectedProduct ? "Shrink" : ""}`}>
-            {toastMsg && <div className="CustomToast">{toastMsg}</div>}
+        <section className={`ProMenuSection ${selectedProduct ? "SectPanelShrink" : ""}`}>
+            {toastMsg && <div className="ProMenuCustomToast">{toastMsg}</div>}
 
-            {/* CATEGORY SCROLL */}
-            <div className='TwoCateProductIn'>
+            {/* Left Primary Scroll & Content Grid Stack */}
+            <div className='ProMenuCatalogContainer'>
                 <HoriZontalScroll />
 
-                {/* PRODUCTS GRID */}
-                <div className="MenuProductsGrid">
+                <div className="ProMenuGridBlueprint">
                     {filteredProducts.map((item) => (
                         <SingleProduct key={item.id} product={item} />
                     ))}
                 </div>
             </div>
 
-            {/* PRODUCT DETAIL SIDE PANEL */}
+            {/* Right Side Glassmorphic Profile Specification Drawer Panel */}
             {selectedProduct && (
-                <div className="ProductDetail">
-                    <div className="HeadingMoreButton">
-                        <h3>Product Detail</h3>
-                        <button className="OrderShowButton" onClick={() => setSelectedProduct(null)}>X</button>
+                <div className="ProProductDetailDrawer">
+                    <div className="DrawerHeaderHub">
+                        <h3>{midnightMenuData.labels.detailHeading}</h3>
+                        <button className="DrawerDismissCTA" onClick={() => setSelectedProduct(null)}>
+                            <i className='bx bx-x'></i>
+                        </button>
                     </div>
 
-                    <div className="ProductInfoBox">
-                        <img src={selectedProduct.image} alt={selectedProduct.name} />
-                        <h2>{selectedProduct.name}</h2>
-
-                        <p className="product-category">{selectedProduct.category}</p>
-                        <p className="product-description">{selectedProduct.description}</p>
-
-                        <h3 className="product-price">₹{selectedProduct.price}</h3>
-
-                        <div className="quantity-selector">
-                            <button onClick={decreaseQty}>−</button>
-                            <span>{quantity}</span>
-                            <button onClick={increaseQty}>+</button>
+                    <div className="DrawerConsoleBody">
+                        <div className="DrawerImageFrame">
+                            <img src={selectedProduct.image} alt={selectedProduct.name} />
                         </div>
 
-                        <button className="AddToCartBtn" onClick={handleAddToCart}>
-                            Add to Cart 🛒
+                        <h2>{selectedProduct.name}</h2>
+                        <span className="ProProductBadge">{selectedProduct.category}</span>
+                        <p className="ProProductDescText">{selectedProduct.description}</p>
+
+                        <div className="ProPriceMatrixBox">
+                            <span className="PriceLabelText">Price Settlement</span>
+                            <h3 className="PriceValueText">₹{selectedProduct.price}</h3>
+                        </div>
+
+                        <div className="ProQuantityStepperGroup">
+                            <label>{midnightMenuData.labels.quantitySelect}</label>
+                            <div className="StepperActionController">
+                                <button onClick={decreaseQty} className="StepBtn"><i className='bx bx-minus'></i></button>
+                                <span className="StepValueText">{quantity}</span>
+                                <button onClick={increaseQty} className="StepBtn"><i className='bx bx-plus'></i></button>
+                            </div>
+                        </div>
+
+                        <button className="ProAddToCartCTA" onClick={handleAddToCart}>
+                            {midnightMenuData.labels.ctaAdd} <i className='bx bx-shopping-bag'></i>
                         </button>
                     </div>
                 </div>

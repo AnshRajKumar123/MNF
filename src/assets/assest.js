@@ -99,3 +99,19 @@ export const midnightFoodData = {
         ]
     }
 };
+
+export const midnightMenuData = {
+    labels: {
+        detailHeading: "Item Profile Specifications",
+        quantitySelect: "Configure Quantity Matrix",
+        ctaAdd: "Commit to Cart",
+        toastUpdate: "Quantity Adjusted 🌊",
+        toastAdd: "Logged to Cart Node 🛒"
+    }
+};
+
+export const midnightCatalogData = {
+    scrollHeading: "Your Top Late-Night Choices",
+    allLabel: "All Categories",
+    allSlug: "all"
+};

@@ -1,50 +1,47 @@
-import React, { useState } from 'react'
-import '../ComponentCSS/HoriZontalScroll.css'
-import { buttonSectionAssets } from '../assets/assests1'
+import React, { useState } from 'react';
+import '../ComponentCSS/HoriZontalScroll.css';
+import { buttonSectionAssets } from '../assets/assests1';
+import { midnightCatalogData } from '../assets/assest';
 
 const HoriZontalScroll = () => {
-    const [activeCat, setActiveCat] = useState("all");
+    const [activeCat, setActiveCat] = useState(midnightCatalogData.allSlug);
 
     const selectCategory = (slug) => {
         setActiveCat(slug);
-
         window.dispatchEvent(
             new CustomEvent("filterCategory", { detail: slug })
         );
     };
 
     return (
-        <div className="HorizontalScroll">
+        <div className="ProOceanicScrollWrapper">
+            <h2 className="ProScrollHeading">{midnightCatalogData.scrollHeading}</h2>
 
-            <h2 className="ScrollHeading">Your Top Late-Night Choices!!</h2>
-
-            <div className="ScrollContainer">
-
-                {/* ALL Category */}
+            <div className="ProScrollTrack">
+                {/* ALL Category Item Option */}
                 <div
-                    className={`ScrollItem ${activeCat === "all" ? "ActiveScrollItem" : ""}`}
-                    onClick={() => selectCategory("all")}
+                    className={`ProScrollCardItem ${activeCat === midnightCatalogData.allSlug ? "scroll-item-active" : ""}`}
+                    onClick={() => selectCategory(midnightCatalogData.allSlug)}
                 >
-                    <div className="ScrollImageBox">
+                    <div className="ProScrollImageShield text-badge-shield">
                         <span>ALL</span>
                     </div>
-                    <span className="ScrollItemName">All</span>
+                    <span className="ProScrollCardName">{midnightCatalogData.allLabel}</span>
                 </div>
 
-                {/* Render All Categories */}
+                {/* Render Dynamic Categories */}
                 {buttonSectionAssets.map((item) => (
                     <div
                         key={item.id}
-                        className={`ScrollItem ${activeCat === item.slug ? "ActiveScrollItem" : ""}`}
+                        className={`ProScrollCardItem ${activeCat === item.slug ? "scroll-item-active" : ""}`}
                         onClick={() => selectCategory(item.slug)}
                     >
-                        <div className="ScrollImageBox">
+                        <div className="ProScrollImageShield">
                             <img src={item.image} alt={item.name} />
                         </div>
-                        <span className="ScrollItemName">{item.name}</span>
+                        <span className="ProScrollCardName">{item.name}</span>
                     </div>
                 ))}
-
             </div>
         </div>
     );

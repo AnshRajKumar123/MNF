@@ -1,89 +1,107 @@
-.HorizontalScroll {
-    width: calc(100vw - 100px);
-    margin: 2rem 0 2rem 0;
-    padding: 0 30px 0 30px;
-}
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD BENTO HORIZONTAL SCROLL SCENERY DECK
+   ========================================================================== */
 
-.MenuSection.Shrink .HorizontalScroll {
+.ProOceanicScrollWrapper {
     width: 100%;
+    margin: 2rem 0 1rem 0;
+    padding: 0 3rem;
+    box-sizing: border-box;
 }
 
-.ScrollHeading {
-    font-family: var(--Font3);
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    letter-spacing: -1.5px;
+.ProScrollHeading {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
 }
 
-.ScrollContainer {
+.ProScrollTrack {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     overflow-x: auto;
     white-space: nowrap;
     scroll-behavior: smooth;
-    padding-bottom: 10px;
-    height: 220px;
+    padding-bottom: 12px;
 }
 
-.ScrollContainer::-webkit-scrollbar {
+.ProScrollTrack::-webkit-scrollbar {
     display: none;
 }
 
-.ScrollItem {
+.ProScrollCardItem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ScrollItem:hover {
-    transform: translateY(-5px);
+.ProScrollCardItem:hover {
+    transform: translateY(-4px);
 }
 
-.ScrollImageBox {
-    border: none;
-    background: #51AE5E;
-    height: 150px;
-    width: 150px;
+.ProScrollImageShield {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
+    box-shadow: 0 10px 20px var(--shadow-premium);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ScrollImageBox img {
-    width: 120px;
-    height: 120px;
+.ProScrollImageShield img {
+    width: 65px;
+    height: 65px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+    transition: filter 0.3s ease;
+    filter: hue-rotate(85deg) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-.ScrollItemName {
-    font-family: var(--Font3);
-    font-weight: 500;
-    font-size: 1.05rem;
-    color: #333;
+[data-theme="light-ocean"] .ProScrollImageShield img {
+    filter: hue-rotate(95deg);
 }
 
-.ActiveScrollItem .ScrollImageBox {
-    background: #2e8f3f;
+.text-badge-shield span {
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: 0.5px;
+}
+
+.ProScrollCardName {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+/* --- ACTIVE OCEANIC STATE STYLES --- */
+.scroll-item-active .ProScrollImageShield {
+    background-color: var(--accent-blue-dark);
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 0 15px rgba(58, 134, 200, 0.3);
     transform: scale(1.05);
 }
 
-.ActiveScrollItem .ScrollItemName {
-    color: #2e8f3f;
-    font-weight: 600;
+.scroll-item-active .ProScrollImageShield img {
+    filter: hue-rotate(0deg) brightness(2);
 }
 
-.ScrollImageBox span {
-    font-size: 3rem;
-    font-family: var(--Font3);
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: -2px;
+.scroll-item-active .text-badge-shield span {
+    color: #ffffff;
+}
+
+.scroll-item-active .ProScrollCardName {
+    color: var(--accent-blue-light);
+    font-weight: 800;
 }
