@@ -136,3 +136,13 @@ export const midnightHomeData = {
         { id: "canceled", label: "Canceled" }
     ]
 };
+
+export const midnightSearchData = {
+    labels: {
+        headline: "Search Query Results",
+        emptyState: "No corresponding food items found inside the active registry.",
+        detailHeading: "Item Profile Specifications",
+        priceLabel: "Price Settlement",
+        ctaAdd: "Commit to Cart"
+    }
+};

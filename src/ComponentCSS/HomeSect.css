@@ -234,10 +234,6 @@
     gap: 12px;
 }
 
-[data-theme="light-ocean"] .ProBoxOfOrderPro {
-    background-color: rgba(0, 0, 0, 0.01);
-}
-
 .OrderImageCapFrame {
     width: 64px;
     height: 64px;
@@ -250,7 +246,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: hue-rotate(85deg);
 }
 
 .ProOrderShowDetContent {

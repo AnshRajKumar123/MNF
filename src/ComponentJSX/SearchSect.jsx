@@ -3,7 +3,8 @@ import "../ComponentCSS/SearchSect.css";
 import { assets } from "../assets/assests1";
 import SingleProduct from "./SingleProduct";
 import { useLocation } from "react-router-dom";
-import Toast from "./Toast";   // <-- Added
+import Toast from "./Toast";
+import { midnightSearchData } from "../assets/assest";
 
 const SearchSect = () => {
     const location = useLocation();
@@ -13,21 +14,17 @@ const SearchSect = () => {
         JSON.parse(localStorage.getItem("selectedSearchProduct")) || null
     );
     const [quantity, setQuantity] = useState(1);
+    const [toastMessage, setToastMessage] = useState("");
 
-    const [toastMessage, setToastMessage] = useState(""); // <-- Toast State
-
-    // Listen to product detail event
     useEffect(() => {
         const handleView = (e) => {
             setSelectedProduct(e.detail);
             localStorage.setItem("selectedSearchProduct", JSON.stringify(e.detail));
         };
-
         window.addEventListener("viewProductDetail", handleView);
         return () => window.removeEventListener("viewProductDetail", handleView);
     }, []);
 
-    // Read search query from URL
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const q = params.get("query")?.trim().toLowerCase() || "";
@@ -47,7 +44,6 @@ const SearchSect = () => {
                 item.tags?.some((tag) => tag.toLowerCase().includes(q))
             );
         });
-
         setResults(filtered);
     }, [location.search]);
 
@@ -66,61 +62,72 @@ const SearchSect = () => {
 
         localStorage.setItem("cartItems", JSON.stringify(savedCart));
         window.dispatchEvent(new Event("cartUpdated"));
-
-        // 🔥 Show toast
-        setToastMessage("Item added to cart!");
+        setToastMessage(`${selectedProduct.name} committed to cart ledger!`);
     };
 
     return (
-        <section className={`SearchSection ${selectedProduct ? "Shrink" : ""}`}>
-            <div className="MainSideBox">
-                <h1 className="SearchTitle">
-                    You searched: <span>'{query}'</span>
+        <section className={`ProSearchSection ${selectedProduct ? "SectPanelShrink" : ""}`}>
+
+            {/* Left Primary Search Output Deck */}
+            <div className="ProSearchCatalogContainer">
+                <h1 className="ProSearchTitle">
+                    {midnightSearchData.labels.headline}: <span className="QueryHighlightText">'{query}'</span>
                 </h1>
 
-                {/* PRODUCT RESULTS GRID */}
-                <div className="SearchGrid">
+                <div className="ProSearchGridBlueprint">
                     {results.length === 0 ? (
-                        <p className="NoResult">No items found.</p>
+                        <p className="ProSearchNoResultLabel">{midnightSearchData.labels.emptyState}</p>
                     ) : (
                         results.map((item) => <SingleProduct key={item.id} product={item} />)
                     )}
                 </div>
             </div>
 
+            {/* Right Side Glassmorphic Profile Drawer Panel */}
             {selectedProduct && (
-                <div className="SearchProductDetail">
-                    <div className="DetailHeader">
-                        <h1>Product Detail</h1>
+                <div className="ProProductDetailDrawer border-left-morphic">
+                    <div className="DrawerHeaderHub">
+                        <h3>{midnightSearchData.labels.detailHeading}</h3>
                         <button
+                            className="DrawerDismissCTA"
                             onClick={() => {
                                 setSelectedProduct(null);
                                 localStorage.removeItem("selectedSearchProduct");
                             }}
                         >
-                            X
+                            <i className='bx bx-x'></i>
                         </button>
                     </div>
 
-                    <img src={selectedProduct.image} alt={selectedProduct.name} />
+                    <div className="DrawerConsoleBody">
+                        <div className="DrawerImageFrame">
+                            <img src={selectedProduct.image} alt={selectedProduct.name} />
+                        </div>
 
-                    <h2>{selectedProduct.name}</h2>
-                    <p>{selectedProduct.description}</p>
-                    <h3>₹{selectedProduct.price}</h3>
+                        <h2>{selectedProduct.name}</h2>
+                        <span className="ProProductBadge">{selectedProduct.category}</span>
+                        <p className="ProProductDescText">{selectedProduct.description}</p>
 
-                    <div className="quantity-selector">
-                        <button onClick={decreaseQty}>-</button>
-                        <span>{quantity}</span>
-                        <button onClick={increaseQty}>+</button>
+                        <div className="ProPriceMatrixBox">
+                            <span className="PriceLabelText">{midnightSearchData.labels.priceLabel}</span>
+                            <h3 className="PriceValueText">₹{selectedProduct.price}</h3>
+                        </div>
+
+                        <div className="ProQuantityStepperGroup">
+                            <div className="StepperActionController">
+                                <button onClick={decreaseQty} className="StepBtn"><i className='bx bx-minus'></i></button>
+                                <span className="StepValueText">{quantity}</span>
+                                <button onClick={increaseQty} className="StepBtn"><i className='bx bx-plus'></i></button>
+                            </div>
+                        </div>
+
+                        <button className="ProAddToCartCTA" onClick={handleAddToCart}>
+                            {midnightSearchData.labels.ctaAdd} <i className='bx bx-shopping-bag'></i>
+                        </button>
                     </div>
-
-                    <button className="AddToCartBtn" onClick={handleAddToCart}>
-                        Add to Cart 🛒
-                    </button>
                 </div>
             )}
 
-            {/* 🔥 Toast UI */}
             {toastMessage && (
                 <Toast message={toastMessage} onClose={() => setToastMessage("")} />
             )}

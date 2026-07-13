@@ -1,117 +1,317 @@
-.SearchSection {
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD DYNAMIC OCEANIC SEARCH COMPLIANCE TERMINAL
+   ========================================================================== */
+
+.ProSearchSection {
     width: calc(100vw - 100px);
-    padding: 30px;
     display: flex;
+    position: relative;
+    box-sizing: border-box;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
 }
 
-.SearchSection.Shrink .SearchGrid {
-    grid-template-columns: repeat(3, 1fr);
+.ProSearchCatalogContainer {
+    width: 100%;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 3rem;
+    box-sizing: border-box;
 }
 
-.SearchTitle {
-    font-family: var(--Font3);
-    font-size: 2rem;
-    letter-spacing: -1px;
-    margin-bottom: 1rem;
+.SectPanelShrink .ProSearchCatalogContainer {
+    width: 70%;
 }
 
-.SearchTitle span {
-    color: #51AE5E;
-    font-weight: 600;
+.ProSearchTitle {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
 }
 
-.SearchGrid {
+.QueryHighlightText {
+    color: var(--accent-blue-light);
+}
+
+/* --- ADAPTIVE BLUE GRID MATRIX CONTEXT --- */
+.ProSearchGridBlueprint {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    gap: 24px;
     margin-top: 1.5rem;
 }
 
-.NoResult {
-    font-size: 1.3rem;
-    color: #777;
+.SectPanelShrink .ProSearchGridBlueprint {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.SearchProductDetail h1 {
-    font-family: var(--Font3);
-    letter-spacing: -1px;
+.ProSearchNoResultLabel {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    grid-column: 1 / -1;
 }
 
-.SearchProductDetail {
+/* --- SIDE SLIDER GLASSMORPHIC SPECIFICATION DRAWER --- */
+.border-left-morphic {
+    border-left: 1px solid var(--border-morphic);
+}
+
+.ProProductDetailDrawer {
     width: 30%;
     position: sticky;
-    right: 0;
-    top: 0;
     top: 80px;
     height: calc(100vh - 80px);
+    background-color: var(--bg-surface);
+    box-shadow: -15px 0 45px var(--shadow-premium);
     overflow-y: auto;
-    background: #fff;
-    border-left: 1px solid #eee;
-    padding: 0 20px;
+    padding: 2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
+    z-index: 999;
 }
 
-.SearchProductDetail h2 {
-    font-size: 2rem;
-    font-family: var(--Font3);
-    margin-top: 12px;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
+@keyframes drawerSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.SearchProductDetail p {
-    margin-bottom: 12px;
-}
-
-.SearchProductDetail h3 {
-    color: #51AE5E;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-top: 1rem;
-    font-family: var(--Font3);
-}
-
-.DetailHeader {
+.DrawerHeaderHub {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-morphic);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.DetailHeader button {
-    border: none;
-    background: #eee;
-    width: 35px;
-    height: 35px;
+.DrawerHeaderHub h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.DrawerDismissCTA {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
 }
 
-.SearchProductDetail img {
+.DrawerDismissCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
+}
+
+.DrawerConsoleBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.DrawerImageFrame {
     width: 100%;
     border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.quantity-selector {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.quantity-selector button {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: #eee;
-    border: none;
-}
-
-.AddToCartBtn {
+.DrawerImageFrame img {
     width: 100%;
-    padding: 12px 0;
-    background: #51AE5E;
-    color: white;
-    font-size: 18px;
-    border-radius: 50px;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+.DrawerConsoleBody h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.ProProductBadge {
+    align-self: flex-start;
+    padding: 4px 10px;
+    background-color: rgba(58, 134, 200, 0.08);
+    border: 1px solid var(--border-morphic);
+    color: var(--accent-blue-light);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ProProductDescText {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.ProPriceMatrixBox {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-morphic);
+    padding: 14px 18px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+[data-theme="light-ocean"] .ProPriceMatrixBox {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.PriceLabelText {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.PriceValueText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+}
+
+.ProQuantityStepperGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.StepperActionController {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    width: 140px;
+    justify-content: space-between;
+    padding: 3px;
+}
+
+.StepBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     border: none;
+    background-color: var(--bg-surface);
+    color: var(--text-core);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.StepBtn:hover {
+    background-color: var(--accent-blue-dark);
+    color: #ffffff;
+}
+
+.StepValueText {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.ProAddToCartCTA {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 1rem;
+}
+
+.ProAddToCartCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 78, 152, 0.3);
+}
+
+/* --- RESPONSIVE DECK BREAKPOINTS --- */
+@media (max-width: 1200px) {
+    .ProSearchGridBlueprint {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .SectPanelShrink .ProSearchGridBlueprint {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ProSearchCatalogContainer {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .ProSearchSection {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .SectPanelShrink .ProSearchCatalogContainer {
+        width: 100%;
+    }
+
+    .ProProductDetailDrawer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        height: 60vh;
+        z-index: 1000;
+        box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .ProSearchGridBlueprint,
+    .SectPanelShrink .ProSearchGridBlueprint {
+        grid-template-columns: 1fr;
+    }
 }
