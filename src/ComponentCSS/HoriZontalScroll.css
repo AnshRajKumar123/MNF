@@ -48,8 +48,8 @@
 .ProScrollImageShield {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-morphic);
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -59,15 +59,10 @@
 }
 
 .ProScrollImageShield img {
-    width: 65px;
-    height: 65px;
+    width: 95px;
+    height: 95px;
     object-fit: contain;
     transition: filter 0.3s ease;
-    filter: hue-rotate(85deg) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
-}
-
-[data-theme="light-ocean"] .ProScrollImageShield img {
-    filter: hue-rotate(95deg);
 }
 
 .text-badge-shield span {

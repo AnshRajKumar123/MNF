@@ -1,459 +1,385 @@
-.MainOpenWeb {
-    margin-top: 1.2rem;
+/* ==========================================================================
+   🌟 PARKLY/MNF ENTERPRISE HIGH-FI ACCENT INTEGRATED CENTRAL HUB SHEETS
+   ========================================================================== */
+
+.ProHomeLayoutWrapper {
+    width: 100%;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+}
+
+.ProMainOpenWeb {
+    margin-top: 0;
     display: flex;
     width: calc(100vw - 100px);
     align-items: flex-start;
 }
 
-.MainBoxSev {
-    width: 70%;
-    padding: 0 35px;
+.ProMainBoxSev {
+    width: 100%;
+    padding: 2rem 3rem;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
 }
 
-.HeroicBanner {
-    height: 350px;
+.PanelActiveSplit {
+    width: 70%;
+}
+
+/* --- THE ACCENT GRADIENT OCEANIC BILLBOARD BANNER --- */
+.ProHeroicBanner {
+    height: 320px;
     width: 100%;
-    border-radius: 30px;
-    background-color: #51AE5E;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent-blue-dark) 0%, #102A6B 100%);
+    border: 1px solid var(--border-morphic);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 15px 35px var(--shadow-premium);
 }
 
-.SwastikAbso {
+.ProSwastikAbso {
     position: absolute;
-    top: 0;
-    left: 70%;
-    rotate: 50deg;
+    top: -20px;
+    left: 72%;
+    opacity: 0.08;
+    transform: rotate(35deg);
 }
 
-.SwastikAbso img {
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(207deg) brightness(103%) contrast(101%);
+.ProSwastikAbso img {
+    width: 300px;
 }
 
-.BurgerBannerSect {
+.ProBurgerBannerSect {
     position: absolute;
-    top: -10%;
-    left: 55%;
+    top: -5%;
+    left: 60%;
+    z-index: 2;
 }
 
-.BurgerBannerSect img {
-    width: 420px;
+.ProBurgerBannerSect img {
+    width: 360px;
+    object-fit: contain;
 }
 
-.AboutInfoBanner {
-    margin: 4.6rem 4rem;
-}
-
-.AboutInfoBanner span {
-    background-color: #fff;
-    font-weight: 500;
-    font-family: var(--Font3);
-    font-size: 20px;
-    padding: 11px 35px;
-    border-radius: 50px;
-}
-
-.AboutInfoBanner h1 {
-    font-weight: 500;
-    margin-top: 1.5rem;
-    font-size: 27px;
-    color: #ffffffcf;
-    font-family: var(--Font3);
-}
-
-.AboutInfoBanner p {
-    font-size: 5rem;
-    font-family: var(--Font3);
-    color: #fff;
-    margin-top: 0.1rem;
-}
-
-.AboutInfoBanner pre {
-    color: #ffffffcf;
-}
-
-.AboutInfoBanner pre a {
-    margin-left: 20px;
-}
-
-.AboutInfoBanner pre a button {
-    padding: 11px 35px;
-    border-radius: 50px;
-    font-weight: 600;
-    background-color: #fff;
-    border: none;
-    font-size: 18px;
-}
-
-.CategoryResturant h3 {
-    font-family: var(--Font3);
-    letter-spacing: -1px;
-    font-size: 1.6rem;
-    margin: 0.6rem 0 1rem;
-}
-
-.AllCategory {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.CategorySetBox {
+.ProAboutInfoBanner {
+    padding: 3.5rem 3.5rem;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    z-index: 5;
+    position: relative;
 }
 
-.CategorySet button {
-    border: none;
-    background-color: #51AE5E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80px;
-    width: 80px;
-    padding-bottom: 4px;
-    border-radius: 8px;
+.ProAboutInfoBanner span {
+    align-self: flex-start;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 50px;
 }
 
-.CategorySet button img {
-    width: 50px;
-}
-
-.CategorySetBox span {
-    font-weight: 500;
-    font-family: var(--Font3);
-    font-size: 1.1rem;
+.ProAboutInfoBanner h1 {
+    font-weight: 800;
+    margin-top: 1rem;
+    font-size: 28px;
+    color: #ffffff;
+    font-family: var(--Font3), sans-serif;
     letter-spacing: -0.5px;
 }
 
-.OrderDetail {
-    width: 30%;
-    overflow: hidden;
-    height: calc(100vh - 19.2px - 80px);
-    padding: 0 25px;
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
-    position: sticky;
-    top: calc(19.2px + 80px);
-    align-self: flex-start;
-    z-index: 999;
+.PromoHighlightText {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--accent-blue-light);
+    line-height: 1;
+    margin: 4px 0;
+    font-family: var(--Font3), sans-serif;
 }
 
-.HeadingOrderDe {
-    margin-top: 5px;
+.PromoActionInlineRow {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 20px;
+    margin-top: 8px;
 }
 
-.HeadingOrderDe img {
-    width: 50px;
-}
-
-.HeadingOrderDe h3 {
-    font-size: 2rem;
-    font-family: var(--Font3);
-    letter-spacing: -1px;
-}
-
-.OrderSectionButtonChanger {
-    width: 100%;
-    border-radius: 50px;
-    background-color: #a1baba35;
-    margin: 1rem 0;
-    border-radius: 50px;
-    overflow: hidden;
-}
-
-.OrderSectionButtonChanger button {
-    border: none;
-    width: calc(100% / 3);
-    padding: 13px 0;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.OrderSectionButtonChanger button.activeSeccBtn {
-    background-color: #51AE5E;
-    color: #fff;
-}
-
-.OrderShowDetail {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-}
-
-.BoxOfOrderPro {
-    width: 100%;
-    padding: 15px;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    position: relative;
-    gap: 0.7rem;
-    overflow: hidden;
-}
-
-.BoxOfOrderPro img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.OrderShowDet .OrderProcHead {
-    font-weight: 500;
-    font-size: 18px;
-}
-
-.OrderOnProcess {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+.PromoDisclaimerText {
     font-size: 13px;
-    margin: 9px 0;
-}
-
-.OrderOnProcess p {
-    color: #00000074;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
-.OrderOnProcess div {
-    font-weight: 500;
-    color: rgb(194, 194, 0);
-}
-
-.ProcessOrderPrice {
-    font-size: 20px;
-    font-family: var(--Font3);
-    color: #51AE5E;
-    font-weight: 600;
-}
-
-.OrderPriceDetail {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    margin-top: 2rem;
-    border-radius: 20px;
-}
-
-.OrderPriceDetail div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
-}
-
-.OrderPriceDetail hr {
-    margin: 8px 0;
-}
-
-.OrderPriceDetail div p {
-    font-weight: 600;
-    font-family: var(--Font3);
-    font-size: 18px;
-}
-
-.OrderPriceDetail div span {
-    color: #0000006f;
-    font-weight: 600;
-}
-
-.OrderTrackingButton {
-    margin-top: 1.5rem;
-    font-size: 15px;
-    font-weight: 500;
-    background-color: #51AE5E;
-    color: #fff;
+.PromoClaimBtn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    background-color: #ffffff;
+    color: var(--text-core);
     border: none;
-    border-radius: 20px 0 12px 0px;
-    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease;
 }
 
-.HeadingMoreButton {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+.PromoClaimBtn:hover {
+    transform: translateY(-2px);
 }
 
-.HeadingMoreButton h3 {
-    font-family: var(--Font3);
-    font-size: 2rem;
-    letter-spacing: -1.2px;
+/* --- BLUE DYNAMIC blue CATALOG BLUE MESH --- */
+.ProAllProductSection {
+    margin-top: 2.5rem;
 }
 
-.OrderShowButton {
-    border: none;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: var(--Font3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    background-color: #00000021;
-    justify-content: center;
-    transition: 0.3s ease-in-out;
+.ProSectionTitle {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
 }
 
-.OrderShowButton:hover {
-    background-color: #00000041;
+.ProProductsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
 }
 
-.MainBoxSev {
-    width: 100%;
-    transition: 0.3s ease-in-out;
-}
-
-.MainBoxSev.FullWidth .ProductsGrid {
+.PanelActiveSplit .ProProductsGrid {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.MainBoxSev.FullWidth {
-    width: 70%;
+/* --- DUAL ACTION METRICS SIDE PANEL LAYOUT --- */
+.border-left-morphic {
+    border-left: 1px solid var(--border-morphic);
 }
 
-.ProductsGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* 4 boxes in a row */
-    gap: 25px;
-    margin-top: 1.5rem;
-}
-
-.ProductDetail {
-    width: 30%;
-    height: calc(100vh - 19.2px - 80px);
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 0 25px;
-    position: sticky;
-    top: calc(19.2px + 80px);
-    background-color: #fff;
-    overflow-y: auto;
-    z-index: 999;
-}
-
-.ProductInfoBox img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.ProductInfoBox h2 {
-    font-family: var(--Font3);
-    font-size: 1.8rem;
-    margin-top: 1rem;
-}
-
-.ProductInfoBox .product-categoryside {
-    color: #999;
-    font-weight: 500;
-    margin-top: 0.5rem;
-}
-
-.ProductInfoBox .product-descriptionside {
-    margin-top: 0.8rem;
-    color: #555;
-    /* line-height: 1.5; */
-}
-
-.ProductInfoBox .product-priceside {
-    color: #51AE5E;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-top: 1rem;
-    font-family: var(--Font3);
-}
-
-.quantity-selector {
+.HeaderInlineTitleGroup {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: 1.5rem 0;
+    gap: 10px;
 }
 
-.quantity-selector button {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: none;
-    background: #51AE5E;
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
+.AvatarTitleIcon {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
 }
 
-.quantity-selector span {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.AddToCartBtn {
+.ProOrderSectionButtonChanger {
     width: 100%;
-    padding: 12px 0;
-    background: #51AE5E;
-    color: #fff;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    margin: 0 0 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 3px;
+    display: flex;
+}
+
+[data-theme="light-ocean"] .ProOrderSectionButtonChanger {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.ProOrderSectionButtonChanger button {
     border: none;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 600;
+    background-color: transparent;
+    color: var(--text-muted);
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    transition: all 0.2s ease;
 }
 
-.AddToCartBtn:hover {
-    background: #43a250;
+.ProOrderSectionButtonChanger button.activeSeccBtn {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
 }
 
-.OnProcessSect {
+/* --- TRACKING CARD ARCHITECTURE NODES --- */
+.ProOnProcessSect {
     display: flex;
     flex-direction: column;
-    gap: 1.4rem;
+    gap: 14px;
 }
 
-@media (max-width: 1350px) {
-    .ProductsGrid,
-    .MenuSection.Shrink .MenuProductsGrid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .WebNavLogo h1 {
-        font-size: 1.8rem;
-    }
-
-    .NaviSearch input {
-        width: 300px;
-    }
+.EmptyStateLabel {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 2rem;
 }
 
-@media (max-width: 1000px) {
-    .ProductsGrid,
-    .MenuSection.Shrink .MenuProductsGrid {
+.ProOrderShowDetailCard {
+    width: 100%;
+}
+
+.ProBoxOfOrderPro {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 12px;
+}
+
+[data-theme="light-ocean"] .ProBoxOfOrderPro {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.OrderImageCapFrame {
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--border-morphic);
+}
+
+.OrderImageCapFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: hue-rotate(85deg);
+}
+
+.ProOrderShowDetContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ProOrderShowDetContent h4 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.MetaTimelineTagRow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px 0;
+}
+
+.MetaTimelineTagRow span:first-child {
+    color: var(--text-muted);
+}
+
+.ProcessStatusPulseText {
+    color: var(--accent-blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ProProcessOrderPrice {
+    font-family: var(--Font3), sans-serif;
+    font-weight: 800;
+    color: var(--text-core);
+    font-size: 16px;
+}
+
+.ProOrderTrackingCTA {
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: var(--accent-blue-dark);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.2s ease;
+}
+
+.ProOrderTrackingCTA:hover {
+    background-color: var(--accent-blue-light);
+}
+
+/* --- TOAST FRAME OVERRIDES --- */
+.ProHomeCustomToast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue-light);
+    color: var(--text-core);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 10000;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+}
+
+/* --- RESPONSIVE BREAKPOINT INTERCEPTS --- */
+@media (max-width: 1400px) {
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ProMainBoxSev {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .ProMainOpenWeb {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .PanelActiveSplit {
+        width: 100%;
+    }
+
+    .ProProductDetailDrawer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        height: 60vh;
+        z-index: 9999;
     }
 }
 
 @media (max-width: 650px) {
-    .ProductsGrid,
-    .MenuSection.Shrink .MenuProductsGrid {
-        grid-template-columns: repeat(1, 1fr);
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ProHeroicBanner {
+        height: auto;
+    }
+
+    .ProAboutInfoBanner {
+        padding: 2rem;
+    }
+
+    .ProBurgerBannerSect {
+        display: none;
     }
 }

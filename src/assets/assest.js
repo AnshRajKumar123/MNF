@@ -115,3 +115,24 @@ export const midnightCatalogData = {
     allLabel: "All Categories",
     allSlug: "all"
 };
+
+export const midnightHomeData = {
+    heroBanner: {
+        tagline: "Limited Time Offer!",
+        title: "Get Special Discount",
+        percentage: "35% OFF",
+        disclaimer: "All restaurants available | T&C Applied",
+        ctaText: "Claim Discount"
+    },
+    sections: {
+        gridTitle: "Explore Popular Dishes 🍴",
+        productDetailTitle: "Item Specifications",
+        orderDetailsTitle: "Order Details",
+        noOrders: "No active orders registered."
+    },
+    tabs: [
+        { id: "onprocess", label: "On Process" },
+        { id: "complete", label: "Complete" },
+        { id: "canceled", label: "Canceled" }
+    ]
+};

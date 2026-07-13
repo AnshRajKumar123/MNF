@@ -34,11 +34,6 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease, filter 0.3s ease;
-    filter: hue-rotate(85deg) brightness(1.02);
-}
-
-[data-theme="light-ocean"] .ProProductImageContainer img {
-    filter: hue-rotate(95deg) brightness(0.98);
 }
 
 .ProProductGridBoxCard:hover .ProProductImageContainer img {
