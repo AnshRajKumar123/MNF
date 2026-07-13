@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../ComponentCSS/CheckoutPopup.css";
+import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../assets/assest";
 
 const CheckoutPopup = ({ closePopup }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
@@ -24,7 +25,6 @@ const CheckoutPopup = ({ closePopup }) => {
         image: ""
     });
 
-    // Convert uploaded img to base64
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -36,7 +36,6 @@ const CheckoutPopup = ({ closePopup }) => {
         reader.readAsDataURL(file);
     };
 
-    // Load addresses & merge with profile
     useEffect(() => {
         const saved = JSON.parse(localStorage.getItem("MNF_UserAddresses")) || [];
         const profile = JSON.parse(localStorage.getItem("MNF_UserProfile"));
@@ -52,7 +51,7 @@ const CheckoutPopup = ({ closePopup }) => {
                     address: profile.address,
                     building: profile.building,
                     pincode: profile.pincode,
-                    image: profile.image || "/defaultUser.png"
+                    image: profile.image || ""
                 };
 
                 saved.unshift(profileAddr);
@@ -64,7 +63,6 @@ const CheckoutPopup = ({ closePopup }) => {
         if (saved.length > 0) setSelectedAddress(saved[0]);
     }, []);
 
-    // Remove Address
     const removeAddress = (id, e) => {
         e.stopPropagation();
         const updated = addresses.filter(a => a.id !== id);
@@ -77,7 +75,6 @@ const CheckoutPopup = ({ closePopup }) => {
         }
     };
 
-    // Save new address
     const saveAddress = () => {
         if (!newAddress.name || !newAddress.phone || !newAddress.address || !newAddress.pincode)
             return alert("Fill all required fields!");
@@ -90,24 +87,19 @@ const CheckoutPopup = ({ closePopup }) => {
         setAddNewMode(false);
     };
 
-    // Continue to Payment
     const goToPayment = () => {
         if (!selectedAddress) return alert("Select an address!");
-
         localStorage.setItem("MNF_SelectedAddress", JSON.stringify(selectedAddress));
         setStep("payment");
     };
 
-    // Final Pay
     const completePayment = () => {
         if (!selectedPayment) return alert("Choose a payment method!");
 
-        // Generate order id
         const id = "MNF-" + Math.floor(100000 + Math.random() * 900000);
         localStorage.setItem("MNF_OrderID", id);
         setOrderId(id);
 
-        // CART DETAILS
         const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
         const appliedCoupon = JSON.parse(localStorage.getItem("appliedCoupon")) || null;
         const tip = Number(localStorage.getItem("tip") || 0);
@@ -118,7 +110,6 @@ const CheckoutPopup = ({ closePopup }) => {
         const shipping = subtotal >= 500 ? 0 : 40;
         const total = subtotal - discountAmount + shipping + tip;
 
-        // SAVE ORDER
         const orderData = {
             id,
             items: cartItems,
@@ -138,7 +129,6 @@ const CheckoutPopup = ({ closePopup }) => {
         existing.unshift(orderData);
         localStorage.setItem("MNF_Orders", JSON.stringify(existing));
 
-        // CLEAR CART AFTER ORDER
         localStorage.removeItem("cartItems");
         localStorage.removeItem("appliedCoupon");
         localStorage.removeItem("tip");
@@ -149,182 +139,180 @@ const CheckoutPopup = ({ closePopup }) => {
         setShowSuccess(true);
     };
 
-    // ------------------------------------------
-    // RENDER UI
-    // ------------------------------------------
     return (
-        <div className="checkout-overlay">
-            <div className="checkout-popup">
+        <div className="ProCheckoutOverlay">
+            <div className="ProCheckoutPopupBentoCard">
 
-                {/* STEP 1 — ADDRESS SCREEN */}
+                {/* STEP 1 — ADDRESS SELECTION / FORM SCREEN */}
                 {step === "address" && (
-                    <>
-                        <h2 className="popup-title">Delivery Address</h2>
+                    <div className="ProCheckoutStepWrapper">
+                        <h2 className="ProPopupTitleText">{midnightCheckoutData.titles.addressStep}</h2>
 
                         {addresses.length > 0 && !addNewMode && (
                             <>
-                                <div className="address-list">
+                                <div className="ProAddressCardsGridTrack">
                                     {addresses.map((addr) => (
                                         <div
                                             key={addr.id}
-                                            className={`address-card ${selectedAddress?.id === addr.id ? "selected" : ""}`}
+                                            className={`ProAddressSlotCard ${selectedAddress?.id === addr.id ? "address-node-selected" : ""}`}
                                             onClick={() => setSelectedAddress(addr)}
                                         >
-                                            <button
-                                                className="remove-address-btn"
-                                                onClick={(e) => removeAddress(addr.id, e)}
-                                            >
-                                                ✕
+                                            <button className="ProAddressRemoveItemCTA" onClick={(e) => removeAddress(addr.id, e)}>
+                                                <i className='bx bx-x'></i>
                                             </button>
 
-                                            <div className="addr-head">
-                                                <img src={addr.image} className="addr-img" alt="" />
-                                                <div>
+                                            <div className="ProAddrHeadFlexGroup">
+                                                <div className="ProAddrAvatarShield">
+                                                    {addr.image ? (
+                                                        <img src={addr.image} alt="" />
+                                                    ) : (
+                                                        <span className="AvatarFallbackLetter">{addr.name?.charAt(0).toUpperCase()}</span>
+                                                    )}
+                                                </div>
+                                                <div className="ProAddrTextCluster">
                                                     <h4>{addr.name}</h4>
-                                                    <p>{addr.building}</p>
-                                                    <p className="small-text">{addr.address}</p>
+                                                    <h5>{addr.building}</h5>
+                                                    <p className="ProAddrTruncatedText">{addr.address}</p>
                                                 </div>
                                             </div>
-
-                                            <p className="addr-extra">{addr.phone} · {addr.pincode}</p>
+                                            <p className="ProAddrExtraFooterLine">{addr.phone} · {addr.pincode}</p>
                                         </div>
                                     ))}
                                 </div>
 
-                                <button className="add-new" onClick={() => setAddNewMode(true)}>
-                                    + Add New Address
+                                <button className="ProAddNewAddressCTA" onClick={() => setAddNewMode(true)}>
+                                    {midnightCheckoutData.actions.addNewAddress}
                                 </button>
                             </>
                         )}
 
                         {(addresses.length === 0 || addNewMode) && (
-                            <div className="new-addr-form">
-
-                                <label className="image-label">
+                            <div className="ProNewAddrFormFieldsStack">
+                                <label className="ProImageUploadContainerBox">
                                     {newAddress.image ? (
-                                        <img src={newAddress.image} className="preview-img" alt="" />
+                                        <img src={newAddress.image} className="ProPreviewImageElement" alt="" />
                                     ) : (
-                                        <div className="placeholder-img">Upload Image</div>
+                                        <div className="ProPlaceholderImgContent">
+                                            <i className='bx bx-cloud-upload'></i>
+                                            <span>{midnightCheckoutData.actions.uploadImg}</span>
+                                        </div>
                                     )}
                                     <input type="file" accept="image/*" hidden onChange={handleImageUpload} />
                                 </label>
 
-                                <input placeholder="Your Name" value={newAddress.name}
-                                    onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })} />
+                                <div className="ProFormInputRowField"><input placeholder={midnightCheckoutData.placeholders.name} value={newAddress.name} onChange={(e) => setNewAddress({ ...newAddress, name: e.target.value })} /></div>
+                                <div className="ProFormInputRowField"><input placeholder={midnightCheckoutData.placeholders.phone} value={newAddress.phone} onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })} /></div>
+                                <div className="ProFormInputRowField"><input placeholder={midnightCheckoutData.placeholders.building} value={newAddress.building} onChange={(e) => setNewAddress({ ...newAddress, building: e.target.value })} /></div>
+                                <div className="ProFormInputRowField"><input placeholder={midnightCheckoutData.placeholders.address} value={newAddress.address} onChange={(e) => setNewAddress({ ...newAddress, address: e.target.value })} /></div>
+                                <div className="ProFormInputRowField"><input placeholder={midnightCheckoutData.placeholders.pincode} value={newAddress.pincode} onChange={(e) => setNewAddress({ ...newAddress, pincode: e.target.value })} /></div>
 
-                                <input placeholder="Phone Number" value={newAddress.phone}
-                                    onChange={(e) => setNewAddress({ ...newAddress, phone: e.target.value })} />
-
-                                <input placeholder="House / Building" value={newAddress.building}
-                                    onChange={(e) => setNewAddress({ ...newAddress, building: e.target.value })} />
-
-                                <input placeholder="Address" value={newAddress.address}
-                                    onChange={(e) => setNewAddress({ ...newAddress, address: e.target.value })} />
-
-                                <input placeholder="Pincode" value={newAddress.pincode}
-                                    onChange={(e) => setNewAddress({ ...newAddress, pincode: e.target.value })} />
-
-                                <button className="save-btn" onClick={saveAddress}>Save & Continue</button>
+                                <button className="ProSaveAddressSubmitCTA" onClick={saveAddress}>{midnightCheckoutData.actions.saveContinue}</button>
                             </div>
                         )}
 
-                        <div className="popup-actions">
-                            <button className="cancel-btn" onClick={closePopup}>Cancel</button>
+                        <div className="ProPopupActionsRowDeck">
+                            <button className="ProCancelDismissCTA" onClick={closePopup}>{midnightCheckoutData.actions.cancel}</button>
                             {addresses.length > 0 && !addNewMode && (
-                                <button className="proceed-btn" onClick={goToPayment}>
-                                    Proceed to Payment
+                                <button className="ProProceedNavigateCTA" onClick={goToPayment}>
+                                    {midnightCheckoutData.actions.proceedPayment} <i className='bx bx-right-arrow-alt'></i>
                                 </button>
                             )}
                         </div>
-                    </>
+                    </div>
                 )}
 
-                {/* STEP 2 — PAYMENT SCREEN */}
+                {/* STEP 2 — SETTLEMENT ROUTER SCREEN */}
                 {step === "payment" && (
-                    <div className="payment-section">
-
-                        <div className="payment-header">
-                            <button className="back-arrow" onClick={() => setStep("address")}>←</button>
-                            <h2>Select Payment Method</h2>
+                    <div className="ProPaymentSectionContainer">
+                        <div className="ProPaymentHeaderInlineRow">
+                            <button className="ProPaymentBackArrowBtn" onClick={() => setStep("address")}>
+                                <i className='bx bx-left-arrow-alt'></i>
+                            </button>
+                            <h2>{midnightCheckoutData.titles.paymentStep}</h2>
                         </div>
 
-                        {/* UPI */}
-                        <div className="payment-group">
-                            <label className="payment-title">
-                                <input type="radio" checked={selectedPayment === "UPI"} onChange={() => setSelectedPayment("UPI")} />
-                                UPI
+                        {/* UPI OPTION LAYER */}
+                        <div className="ProPaymentMethodGroupBento">
+                            <label className="ProPaymentGroupTitleLabel">
+                                <input type="radio" checked={selectedPayment === "UPI" || selectedPayment === "Google Pay" || selectedPayment === "PhonePe" || selectedPayment === "Paytm"} onChange={() => setSelectedPayment("UPI")} />
+                                {midnightCheckoutData.paymentMethods.upi}
                             </label>
-
-                            {selectedPayment === "UPI" && (
-                                <div className="payment-options">
-                                    <button onClick={() => setSelectedPayment("Google Pay")}>Google Pay</button>
-                                    <button onClick={() => setSelectedPayment("PhonePe")}>PhonePe</button>
-                                    <button onClick={() => setSelectedPayment("Paytm")}>Paytm</button>
+                            {(selectedPayment === "UPI" || selectedPayment === "Google Pay" || selectedPayment === "PhonePe" || selectedPayment === "Paytm") && (
+                                <div className="ProPaymentSubOptionsListStack">
+                                    <button className={selectedPayment === "Google Pay" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("Google Pay")}><i className='bx bx-mobile-vibration'></i> Google Pay</button>
+                                    <button className={selectedPayment === "PhonePe" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("PhonePe")}><i className='bx bx-wallet'></i> PhonePe</button>
+                                    <button className={selectedPayment === "Paytm" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("Paytm")}><i className='bx bx-money'></i> Paytm</button>
                                 </div>
                             )}
                         </div>
 
-                        {/* CARD */}
-                        <div className="payment-group">
-                            <label className="payment-title">
+                        {/* CARD OPTION LAYER */}
+                        <div className="ProPaymentMethodGroupBento">
+                            <label className="ProPaymentGroupTitleLabel">
                                 <input type="radio" checked={selectedPayment === "CARD"} onChange={() => setSelectedPayment("CARD")} />
-                                Credit / Debit Card
+                                {midnightCheckoutData.paymentMethods.card}
                             </label>
-
                             {selectedPayment === "CARD" && (
-                                <div className="payment-options">
-                                    <input className="card-input" placeholder="Card Number" />
-                                    <input className="card-input" placeholder="Expiry (MM/YY)" />
-                                    <input className="card-input" placeholder="CVV" />
+                                <div className="ProPaymentSubOptionsListStack CardInputsGroupModifier">
+                                    <input className="ProCardInlineInputField" placeholder="Card Number Matrix Signature" />
+                                    <div className="ProCardInputsFlexInlineRow">
+                                        <input className="ProCardInlineInputField" placeholder="Expiry (MM/YY)" />
+                                        <input className="ProCardInlineInputField" placeholder="CVV" />
+                                    </div>
                                 </div>
                             )}
                         </div>
 
-                        {/* WALLETS */}
-                        <div className="payment-group">
-                            <label className="payment-title">
+                        {/* WALLETS OPTION LAYER */}
+                        <div className="ProPaymentMethodGroupBento">
+                            <label className="ProPaymentGroupTitleLabel">
                                 <input type="radio" checked={selectedPayment === "WALLET"} onChange={() => setSelectedPayment("WALLET")} />
-                                Wallets
+                                {midnightCheckoutData.paymentMethods.wallet}
                             </label>
-
                             {selectedPayment === "WALLET" && (
-                                <div className="payment-options">
-                                    <button>Amazon Pay</button>
-                                    <button>Mobikwik</button>
+                                <div className="ProPaymentSubOptionsListStack">
+                                    <button onClick={() => setSelectedPayment("Amazon Pay")}>Amazon Pay</button>
+                                    <button onClick={() => setSelectedPayment("Mobikwik")}>Mobikwik</button>
                                 </div>
                             )}
                         </div>
 
-                        {/* COD */}
-                        <div className="payment-group">
-                            <label className="payment-title">
+                        {/* COD OPTION LAYER */}
+                        <div className="ProPaymentMethodGroupBento">
+                            <label className="ProPaymentGroupTitleLabel">
                                 <input type="radio" checked={selectedPayment === "COD"} onChange={() => setSelectedPayment("COD")} />
-                                Cash On Delivery (COD)
+                                {midnightCheckoutData.paymentMethods.cod}
                             </label>
                         </div>
 
-                        <button className="pay-now-btn" onClick={completePayment}>
-                            Pay Now
+                        <button className="ProPayNowAuthorizationCTA" onClick={completePayment}>
+                            {midnightCheckoutData.actions.payNow} <i className='bx bx-shield-quarter'></i>
                         </button>
                     </div>
                 )}
 
-                {/* STEP 3 — SUCCESS SCREEN */}
+                {/* STEP 3 — REDESIGNED INTEGRATED TRANSACTION SUCCESS MODAL */}
                 {step === "success" && showSuccess && (
-                    <div className="order-success-overlay">
-                        <div className="order-success-box">
-                            <div className="success-icon">✔</div>
-
-                            <h2 className="order-success-title">Order Successful</h2>
-                            <p className="order-id-text">Order ID: <b>{orderId}</b></p>
-
-                            <button className="track-btn" onClick={() => {
-                                closePopup();
-                                window.location.href = "/track-order";
-                            }}>
-                                Track Order
-                            </button>
+                    <div className="ProOrderSuccessPopupEmbeddedView">
+                        <div className="ProOrderSuccessIconShield">
+                            <div className="ProOrderPulseRing"></div>
+                            <i className='bx bx-party'></i>
                         </div>
+
+                        <span className="ProSystemLedgerTagText">{midnightOrderSuccessData.labels.title}</span>
+                        <h2 className="ProOrderSuccessTitleText">{midnightOrderSuccessData.labels.subtitle}</h2>
+
+                        <div className="ProOrderIdTelemetryBox">
+                            <span>{midnightOrderSuccessData.labels.idPrefix}</span>
+                            <strong>{orderId}</strong>
+                        </div>
+
+                        <button className="ProOrderTrackCTA" onClick={() => {
+                            closePopup();
+                            window.location.href = "/track-order";
+                        }}>
+                            {midnightOrderSuccessData.labels.trackBtn} <i className='bx bx-navigation'></i>
+                        </button>
                     </div>
                 )}
 

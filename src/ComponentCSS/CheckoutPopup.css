@@ -1,491 +1,333 @@
-/* ============================
-   OVERLAY
-============================ */
-.checkout-overlay {
+/* ==========================================================================
+   🌊 DYNAMIC TOPO-OCEANIC CHECKOUT CONSOLE MODAL STYLES
+   ========================================================================== */
+
+.ProCheckoutOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
+    background-color: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
-/* ============================
-   POPUP BOX
-============================ */
-.checkout-popup {
-    width: 90%;
-    max-width: 450px;
-    background: #fff;
-    padding: 25px;
-    border-radius: 20px;
+.ProCheckoutPopupBentoCard {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    padding: 2.2rem;
+    border-radius: 16px;
     max-height: 90vh;
     overflow-y: auto;
-    animation: popupScale 0.25s ease;
+    box-sizing: border-box;
+    box-shadow: 0 25px 60px var(--shadow-premium);
+    animation: proPopupScaleSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes popupScale {
+.ProCheckoutPopupBentoCard::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes proPopupScaleSlideUp {
     from {
-        transform: scale(0.85);
         opacity: 0;
+        transform: scale(0.94) translateY(10px);
     }
 
     to {
-        transform: scale(1);
         opacity: 1;
+        transform: scale(1) translateY(0);
     }
 }
 
-.popup-title {
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    font-family: var(--Font3);
+.ProPopupTitleText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
 }
 
-/* ============================
-   ADDRESS LIST
-============================ */
-.address-list {
+/* --- ADAPTIVE COMPLIANCE ADDRESS CELL CARDS --- */
+.ProAddressCardsGridTrack {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.address-card {
-    background: #fafafa;
-    border: 1px solid #ddd;
+.ProAddressSlotCard {
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
     border-radius: 12px;
-    padding: 12px;
+    padding: 14px;
     cursor: pointer;
     position: relative;
-    transition: 0.2s;
+    box-sizing: border-box;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.address-card.selected {
-    border-color: #ff4d4d;
-    background: #fff3f3;
+[data-theme="light-ocean"] .ProAddressSlotCard {
+    background-color: rgba(0, 0, 0, 0.01);
 }
 
-/* Remove button (top-right X) */
-.remove-address-btn {
+.ProAddressSlotCard.address-node-selected {
+    border-color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.04);
+    box-shadow: 0 0 15px rgba(58, 134, 200, 0.1);
+}
+
+.ProAddressRemoveItemCTA {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    border: none;
-    background: #ff4d4d;
-    color: #fff;
-    width: 22px;
-    height: 22px;
+    top: 12px;
+    right: 12px;
+    border: 1px solid var(--border-morphic);
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 14px;
-}
-
-.addr-head {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
-.addr-img {
-    width: 55px;
-    height: 55px;
+.ProAddressRemoveItemCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
+}
+
+.ProAddrHeadFlexGroup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ProAddrAvatarShield {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProAddrAvatarShield img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.small-text {
-    font-size: 13px;
-    color: #555;
+.AvatarFallbackLetter {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+}
+
+.ProAddrTextCluster h4 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin: 0 0 2px 0;
+}
+
+.ProAddrTextCluster h5 {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin: 0 0 2px 0;
+}
+
+.ProAddrTruncatedText {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 92%;
+    max-width: 240px;
 }
 
-.addr-extra {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #666;
+.ProAddrExtraFooterLine {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
 }
 
-/* ============================
-   ADD NEW BUTTON
-============================ */
-.add-new {
+.ProAddNewAddressCTA {
     width: 100%;
-    padding: 10px;
-    background: #e53935;
-    color: #fff;
-    border: none;
-    margin-top: 12px;
-    border-radius: 10px;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px dashed var(--border-morphic);
+    color: var(--accent-blue-light);
+    font-family: var(--Font3), sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-top: 1rem;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.add-new:hover {
-    background: #c62828;
+.ProAddNewAddressCTA:hover {
+    background-color: rgba(58, 134, 200, 0.04);
+    border-style: solid;
 }
 
-/* ============================
-   NEW ADDRESS FORM
-============================ */
-.new-addr-form {
+/* --- NEW ADDRESS GENERATOR PARAMETERS STACK --- */
+.ProNewAddrFormFieldsStack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ProFormInputRowField input {
+    width: 100%;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    box-sizing: border-box;
+}
+
+[data-theme="light-ocean"] .ProFormInputRowField input {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.ProFormInputRowField input:focus {
+    border-color: var(--accent-blue-light);
+}
+
+.ProImageUploadContainerBox {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px dashed var(--border-morphic);
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: center;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.ProPlaceholderImgContent {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 2px;
+    color: var(--text-muted);
 }
 
-.new-addr-form input {
-    padding: 11px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 15px;
+.ProPlaceholderImgContent i {
+    font-size: 20px;
 }
 
-.save-btn {
-    padding: 12px;
-    background: #4caf50;
-    color: white;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 17px;
+.ProPlaceholderImgContent span {
+    font-size: 10px;
+    font-weight: 700;
 }
 
-.save-btn:hover {
-    background: #3d8e40;
-}
-
-/* ============================
-   IMAGE UPLOAD PREVIEW
-============================ */
-.image-upload-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.image-label {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 2px dashed #aaa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.placeholder-img {
-    font-size: 14px;
-    color: #777;
-}
-
-.preview-img {
+.ProPreviewImageElement {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
     object-fit: cover;
 }
 
-/* ============================
-   POPUP ACTION BUTTONS
-============================ */
-.popup-actions {
+.ProSaveAddressSubmitCTA {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border-radius: 8px;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 6px;
+    box-shadow: 0 4px 12px rgba(58, 134, 200, 0.2);
+}
+
+/* Modal Actions Utility Base */
+.ProPopupActionsRowDeck {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
-}
-
-.cancel-btn {
-    padding: 10px 15px;
-    border: none;
-    background: #757575;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.proceed-btn {
-    padding: 10px 15px;
-    border: none;
-    background: #e53935;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.proceed-btn:hover {
-    background: #c62828;
-}
-
-/* ============================
-   PAYMENT SCREEN
-============================ */
-.payment-container {
-    margin-top: 10px;
-}
-
-.payment-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.back-arrow {
-    font-size: 28px;
-    cursor: pointer;
-    margin-right: 8px;
-    transition: 0.2s;
-}
-
-.back-arrow:hover {
-    color: #e53935;
-}
-
-.pay-box {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    background: #fafafa;
-}
-
-.pay-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.upi-options,
-.wallet-options {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.upi-btn,
-.wallet-btn {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background: white;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.upi-btn:hover,
-.wallet-btn:hover {
-    border-color: #e53935;
-}
-
-.pay-now-btn {
-    width: 100%;
-    padding: 14px;
-    background: #e53935;
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.pay-now-btn:hover {
-    background: #c62828;
-}
-
-/* ============================
-   ORDER SUCCESS POPUP
-============================ */
-.order-success-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-}
-
-.order-success-box {
-    width: 85%;
-    max-width: 380px;
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    text-align: center;
-    animation: popupScale 0.3s ease;
-}
-
-.success-icon {
-    font-size: 60px;
-    color: #4caf50;
-    margin-bottom: 12px;
-}
-
-.order-success-title {
-    font-size: 25px;
-    font-weight: 700;
-}
-
-.order-id-text {
-    margin: 10px 0 20px;
-    font-size: 17px;
-    color: #444;
-}
-
-.track-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    background: #e53935;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.track-btn:hover {
-    background: #c62828;
-}
-
-/* PAYMENT SECTION */
-.payment-section {
-    padding: 10px 5px 20px;
-    animation: slideUp 0.25s ease;
-}
-
-/* Back + Title */
-.payment-header {
-    display: flex;
-    align-items: center;
+    margin-top: 24px;
     gap: 12px;
-    margin-bottom: 18px;
 }
 
-.back-arrow {
-    background: none;
+.ProCancelDismissCTA,
+.ProProceedNavigateCTA {
+    padding: 12px 20px;
     border: none;
-    font-size: 22px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
-}
-
-.back-arrow:hover {
-    background: #f2f2f2;
-}
-
-.payment-header h2 {
-    font-size: 20px;
+    border-radius: 8px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13.5px;
     font-weight: 700;
-    margin: 0;
-}
-
-/* Group Wrapper */
-.payment-group {
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-}
-
-/* Payment Title */
-.payment-title {
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-size: 17px;
-    cursor: pointer;
+    gap: 4px;
+    transition: all 0.2s ease;
 }
 
-/* Radio Button */
-.payment-title input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
+.ProCancelDismissCTA {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    border: 1px solid var(--border-morphic);
 }
 
-/* Options inside groups */
-.payment-options {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.ProCancelDismissCTA:hover {
+    color: var(--text-core);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-.payment-options button {
-    background: #f7f7f7;
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
+.ProProceedNavigateCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(58, 134, 200, 0.2);
 }
 
-.payment-options button:hover {
-    background: #eaeaea;
+.ProProceedNavigateCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1px);
 }
 
-/* Card Input Fields */
-.card-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    outline: none;
-    background: #fafafa;
+/* --- SETTLEMENT CONTROLLER CHANNEL LAYERS --- */
+.ProPaymentSectionContainer {
+    animation: proSlideUpTransition 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.card-input:focus {
-    border-color: #ff3d3d;
-    background: #fff;
-}
-
-/* Pay Now Button */
-.pay-now-btn {
-    width: 100%;
-    margin-top: 10px;
-    background: #ff3d3d;
-    color: white;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.pay-now-btn:hover {
-    background: #d93030;
-}
-
-/* Smooth slide animation */
-@keyframes slideUp {
+@keyframes proSlideUpTransition {
     from {
-        transform: translateY(20px);
+        transform: translateY(12px);
         opacity: 0;
     }
 
@@ -493,4 +335,261 @@
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.ProPaymentHeaderInlineRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-morphic);
+    padding-bottom: 12px;
+}
+
+.ProPaymentBackArrowBtn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.ProPaymentHeaderInlineRow h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.ProPaymentMethodGroupBento {
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.ProPaymentGroupTitleLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--text-core);
+    cursor: pointer;
+}
+
+.ProPaymentGroupTitleLabel input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-blue-light);
+}
+
+.ProPaymentSubOptionsListStack {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ProPaymentSubOptionsListStack button {
+    background-color: var(--bg-surface);
+    padding: 12px;
+    text-align: left;
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.ProPaymentSubOptionsListStack button:hover,
+.sub-payment-node-active {
+    border-color: var(--accent-blue-light) !important;
+    color: var(--accent-blue-light) !important;
+    background-color: rgba(58, 134, 200, 0.02) !important;
+}
+
+.CardInputsGroupModifier {
+    gap: 10px;
+}
+
+.ProCardInlineInputField {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-morphic);
+    font-size: 13.5px;
+    outline: none;
+    background-color: var(--bg-surface);
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+.ProCardInlineInputField:focus {
+    border-color: var(--accent-blue-light);
+}
+
+.ProCardInputsFlexInlineRow {
+    display: flex;
+    gap: 10px;
+}
+
+.ProPayNowAuthorizationCTA {
+    width: 100%;
+    margin-top: 14px;
+    background-color: var(--accent-blue-light);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.2s ease;
+}
+
+.ProPayNowAuthorizationCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1px);
+}
+
+/* --- EMBEDDED SUCCESS LAYER MODULE OVERRIDES --- */
+.ProOrderSuccessPopupEmbeddedView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: proPopupScaleSlideUp 0.35s ease both;
+}
+
+.ProOrderSuccessIconShield {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(58, 134, 200, 0.05);
+    border: 1px solid var(--border-morphic);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.ProOrderSuccessIconShield i {
+    font-size: 36px;
+    color: var(--accent-blue-light);
+    z-index: 2;
+}
+
+.ProOrderPulseRing {
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-blue-light);
+    opacity: 0.3;
+    animation: proSuccessRingPulse 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+@keyframes proSuccessRingPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+.ProSystemLedgerTagText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.ProOrderSuccessTitleText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+}
+
+.ProOrderIdTelemetryBox {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+[data-theme="light-ocean"] .ProOrderIdTelemetryBox {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.ProOrderIdTelemetryBox span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.ProOrderIdTelemetryBox strong {
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+}
+
+.ProOrderTrackCTA {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s ease;
+}
+
+.ProOrderTrackCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1px);
 }

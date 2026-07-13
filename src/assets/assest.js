@@ -362,3 +362,32 @@ export const midnightTrackingData = {
         "Delivered"
     ]
 };
+
+export const midnightCheckoutData = {
+    titles: {
+        addressStep: "Delivery Parameters",
+        paymentStep: "Select Settlement Vector",
+        successStep: "Order Authorized"
+    },
+    actions: {
+        addNewAddress: "+ Allocate New Terminal Address",
+        saveContinue: "Commit Parameters & Continue",
+        proceedPayment: "Proceed to Settlement Matrix",
+        payNow: "Authorize Payment Ledger",
+        cancel: "Cancel",
+        uploadImg: "Upload Image"
+    },
+    placeholders: {
+        name: "Full Profile Name",
+        phone: "Mobile Line Signature",
+        building: "House / Building Frame",
+        address: "Physical Address Layout",
+        pincode: "Routing Pincode"
+    },
+    paymentMethods: {
+        upi: "UPI Channels",
+        card: "Credit / Debit Card Signature",
+        wallet: "Digital Wallets Matrix",
+        cod: "Cash On Delivery (COD Ledger)"
+    }
+};
