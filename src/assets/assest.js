@@ -235,3 +235,103 @@ export const midnightAboutData = {
         btnText: "Crave Mode: ON"
     }
 };
+
+export const midnightHelpSuccessData = {
+    labels: {
+        title: "Transmission Secure Ledger",
+        subtitle: "We Received Your Request",
+        description: "Our support terminal dispatch operations team will contact you shortly via your registered email channel vector. Thanks for taking the time to report this to our dashboard network!",
+        homeBtn: "Return to Home Hub",
+        backBtn: "Back to Support Console"
+    }
+};
+
+export const midnightHelpData = {
+    tagline: "Support Operations Terminal",
+    title: "System Help & Communications",
+    defaultOption: "How can we help you?",
+    options: [
+        "I have an issue with my MNF Order.",
+        "My MNF app is not working.",
+        "I want to share feedback or a suggestion.",
+    ],
+    faqs: {
+        "I have an issue with my MNF Order.": [
+            "Where is my order?",
+            "I got a wrong/partial order.",
+            "Delivery partner misbehaved.",
+            "Refund not received.",
+        ],
+        "My MNF app is not working.": [
+            "App is crashing.",
+            "Notifications not coming.",
+            "Payment not going through.",
+        ],
+        "I want to share feedback or a suggestion.": [
+            "I want to appreciate a delivery partner.",
+            "I want to suggest a feature.",
+            "Report app UX/UI issue.",
+        ],
+    },
+    placeholders: {
+        name: "Enter full legal profile name",
+        email: "Enter validation email channel",
+        phone: "Enter optional contact number link",
+        message: "Describe your operational message narrative logs details..."
+    },
+    sideCards: {
+        emergency: {
+            title: "Report a Safety Emergency",
+            description: "We are committed to the security and safety of everyone using the MNF infrastructure network grid.",
+            cta: "Deploy Threat Report"
+        },
+        liveOrder: {
+            title: "Issue with your live order?",
+            description: "Go to Support / Order Help inside your active dispatch matrix menu track to communicate directly with the delivery operator instantly."
+        }
+    },
+    labels: {
+        toastSubmit: "Support request committed to ledger! 🌊",
+        charCount: "Characters",
+        uploadPrompt: "Drag and drop support screenshot validation file here or ",
+        browseLocal: "browse local grid storage",
+        purgeBtn: "Purge Screenshot Matrix",
+        submitBtn: "Submit Operational Ticket"
+    }
+};
+
+export const midnightFraudConfig = {
+    form: {
+        tagline: "Security Verification Console",
+        title: "System Threat & Fraud Ledger",
+        reasons: [
+            "Payment Fraud",
+            "Fake Order Activity",
+            "Scam Call / Message",
+            "Suspicious Profile",
+            "Impersonation of MNF Team",
+            "Other"
+        ],
+        placeholders: {
+            name: "Enter full legal reporter name",
+            email: "Enter validation email channel",
+            mobile: "Enter 10-digit primary mobile line",
+            accused: "Enter suspect entity, person, or organization details",
+            city: "Enter incident geographic operational city",
+            message: "Provide comprehensive structural evidence narrative breakdown..."
+        },
+        disclaimer: "This secure verification channel is strictly reserved for reporting suspected system fraud, malicious actors, or severe violations of the MNF Code of Conduct. Standard order anomalies must be resolved via support vectors.",
+        sideCard: {
+            title: "Security Operations Disclaimer",
+            description: "Please utilize this tracking form exclusively for malicious fraud parameters validation. For regular order assistance or general operations support:",
+            ctaText: "Access Support Console Hub"
+        }
+    },
+    success: {
+        title: "Threat Report Logged!",
+        subtitle: "Report Committed to Ledger",
+        description: "Thank you for safeguarding the ecosystem infrastructure network grid. Our internal system security integrity team will review your submitted evidence parameters shortly.",
+        homeBtn: "Terminate Terminal Session",
+        supportBtn: "Access Help Deck"
+    }
+};

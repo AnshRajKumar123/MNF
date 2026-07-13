@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import AnotherNav from "./AnotherNav";
 import "../PagesCSS/ReportFraud.css";
-import { Link } from "react-router-dom";
-import Toast from "../ComponentJSX/Toast"; // your existing toast component
+import { Link, useNavigate } from "react-router-dom";
+import Toast from "../ComponentJSX/Toast";
+import { midnightFraudConfig } from "../assets/assest";
 
 const ReportFraud = () => {
+    const navigate = useNavigate();
+    const [evidence, setEvidence] = useState(null);
     const [evidencePreview, setEvidencePreview] = useState(null);
+    const [reason, setReason] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [toast, setToast] = useState({ show: false, message: "", type: "" });
+
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -14,6 +21,15 @@ const ReportFraud = () => {
         city: "",
         message: "",
     });
+
+    const showToast = (msg, type = "success") => {
+        setToast({ show: true, message: msg, type });
+        setTimeout(() => setToast({ show: false }), 2500);
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleFile = (e) => {
         const file = e.target.files[0];
@@ -26,9 +42,7 @@ const ReportFraud = () => {
         }
     };
 
-    const handleDragOver = (e) => {
-        e.preventDefault();
-    };
+    const handleDragOver = (e) => e.preventDefault();
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -40,34 +54,17 @@ const ReportFraud = () => {
         }
     };
 
-    const [reason, setReason] = useState("");
-    const [evidence, setEvidence] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [toast, setToast] = useState({ show: false, message: "", type: "" });
-
-    const showToast = (msg, type = "success") => {
-        setToast({ show: true, message: msg, type });
-        setTimeout(() => setToast({ show: false }), 2500);
-    };
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
     const validateForm = () => {
         if (!formData.fullName.trim()) return "Full Name is required";
         if (!/\S+@\S+\.\S+/.test(formData.email)) return "Invalid email address";
-        if (!/^[0-9]{10}$/.test(formData.mobile))
-            return "Mobile number must be 10 digits";
+        if (!/^[0-9]{10}$/.test(formData.mobile)) return "Mobile number must be 10 digits";
         if (!reason) return "Please select the fraud type";
-        if (formData.message.length < 20)
-            return "Message must be at least 20 characters";
+        if (formData.message.length < 20) return "Message must be at least 20 characters";
         return null;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const error = validateForm();
         if (error) {
             showToast(error, "error");
@@ -75,131 +72,103 @@ const ReportFraud = () => {
         }
 
         setLoading(true);
-
-        // Simulate backend API request
-        await new Promise((res) => setTimeout(res, 1500));
-
+        await new Promise((res) => setTimeout(res, 1200));
         setLoading(false);
-        showToast("Fraud report submitted successfully!");
 
-        // Reset form
-        setFormData({
-            fullName: "",
-            email: "",
-            mobile: "",
-            accusedName: "",
-            city: "",
-            message: "",
-        });
+        // Reset system forms
+        setFormData({ fullName: "", email: "", mobile: "", accusedName: "", city: "", message: "" });
         setReason("");
         setEvidence(null);
+        setEvidencePreview(null);
 
-        setTimeout(() => {
-            window.location.href = "/fraud-success";
-        }, 800);
+        navigate("/fraud-success");
     };
 
-    const fraudReasons = [
-        "Payment Fraud",
-        "Fake Order Activity",
-        "Scam Call / Message",
-        "Suspicious Profile",
-        "Impersonation of MNF Team",
-        "Other",
-    ];
-
     return (
-        <>
+        <div className="ProFraudMainOuterSuite">
             <AnotherNav />
 
             {toast.show && <Toast message={toast.message} type={toast.type} />}
 
-            <section className="ReportSection">
-                <section className="HelpSectBanner">
-                    <h1>Report a Potential Fraud</h1>
-                </section>
+            <section className="ProFraudSectionLayout">
+                <header className="ProFraudHeaderDeckPanel">
+                    <span className="ProTaglineText">{midnightFraudConfig.form.tagline}</span>
+                    <h1>{midnightFraudConfig.form.title}</h1>
+                </header>
 
-                <section className="HelpFormSection">
-                    <form className="HelpForm" onSubmit={handleSubmit}>
-                        {/* Full Name */}
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input
-                                name="fullName"
-                                type="text"
-                                className="input-field"
-                                value={formData.fullName}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label className="input-label">Full Name</label>
+                <section className="ProFraudGridLayoutCore">
+                    <form className="ProHelpTerminalForm" onSubmit={handleSubmit}>
+
+                        <div className="ProHelpInputGridFields">
+                            <div className="ProHelpFieldSlotBlock">
+                                <label>Reporter Full Name</label>
+                                <input
+                                    name="fullName"
+                                    type="text"
+                                    value={formData.fullName}
+                                    onChange={handleChange}
+                                    placeholder={midnightFraudConfig.form.placeholders.name}
+                                    required
+                                />
+                            </div>
+
+                            <div className="ProHelpFieldSlotBlock">
+                                <label>Secure Email Address</label>
+                                <input
+                                    name="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder={midnightFraudConfig.form.placeholders.email}
+                                    required
+                                />
+                            </div>
                         </div>
 
-                        {/* Email */}
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input
-                                name="email"
-                                type="email"
-                                className="input-field"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label className="input-label">Email Address</label>
+                        <div className="ProHelpInputGridFields">
+                            <div className="ProHelpFieldSlotBlock">
+                                <label>Mobile Number Link</label>
+                                <input
+                                    name="mobile"
+                                    type="text"
+                                    value={formData.mobile}
+                                    onChange={handleChange}
+                                    placeholder={midnightFraudConfig.form.placeholders.mobile}
+                                    required
+                                />
+                            </div>
+
+                            <div className="ProHelpFieldSlotBlock">
+                                <label>Target Accused Entity</label>
+                                <input
+                                    name="accusedName"
+                                    type="text"
+                                    value={formData.accusedName}
+                                    onChange={handleChange}
+                                    placeholder={midnightFraudConfig.form.placeholders.accused}
+                                    required
+                                />
+                            </div>
                         </div>
 
-                        {/* Mobile */}
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input
-                                name="mobile"
-                                type="text"
-                                className="input-field"
-                                value={formData.mobile}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label className="input-label">Mobile Number</label>
-                        </div>
-
-                        {/* Accused Name */}
-                        <div className="input-box">
-                            <span className="input-accent"></span>
-                            <input
-                                name="accusedName"
-                                type="text"
-                                className="input-field"
-                                value={formData.accusedName}
-                                onChange={handleChange}
-                                required
-                            />
-                            <label className="input-label">
-                                Person / Organization Being Reported
-                            </label>
-                        </div>
-
-                        {/* City */}
-                        <div className="input-box">
-                            <span className="input-accent"></span>
+                        <div className="ProHelpFieldSlotBlock">
+                            <label>Geographic Incident City</label>
                             <input
                                 name="city"
                                 type="text"
-                                className="input-field"
                                 value={formData.city}
                                 onChange={handleChange}
+                                placeholder={midnightFraudConfig.form.placeholders.city}
                                 required
                             />
-                            <label className="input-label">City</label>
                         </div>
 
-                        {/* Fraud Type Section */}
-                        <div className="fraud-reason-section">
-                            <h3>Select Type of Fraud</h3>
-
-                            <div className="fraud-reason-options">
-                                {fraudReasons.map((r) => (
-                                    <label key={r} className="reasonLabel">
+                        {/* Highly Polished Option Selection Segment Grid */}
+                        <div className="ProFraudRadioSelectionSection">
+                            <h3>Select Vector Violation</h3>
+                            <div className="ProFraudRadioOptionsGridDeck">
+                                {midnightFraudConfig.form.reasons.map((r) => (
+                                    <label key={r} className={`ProRadioSlotLabelItem ${reason === r ? 'radio-item-active' : ''}`}>
                                         <input
                                             type="radio"
                                             value={r}
@@ -212,32 +181,29 @@ const ReportFraud = () => {
                             </div>
                         </div>
 
-                        {/* Message */}
-                        <div className="input-box TextAreaBox">
-                            <span className="input-accent"></span>
+                        <div className="ProHelpFieldSlotBlock TextareaFieldBlockModifier">
+                            <label>Incident Narrative Details</label>
                             <textarea
                                 name="message"
-                                className="input-field textarea-field"
                                 value={formData.message}
                                 onChange={handleChange}
+                                placeholder={midnightFraudConfig.form.placeholders.message}
+                                maxLength={500}
                                 required
                             ></textarea>
-
-                            <label className="input-label">Message (Details)</label>
-
-                            <div className="char-count">{formData.message.length}/500</div>
+                            <div className="ProCharCounterText">{formData.message.length}/500 Characters</div>
                         </div>
 
-                        {/* File Upload */}
+                        {/* File Upload Drop Area */}
                         <div
-                            className="upload-box"
+                            className="ProUploadTerminalZone"
                             onDragOver={handleDragOver}
                             onDrop={handleDrop}
                         >
                             {!evidence ? (
-                                <div className="upload-content">
-                                    <i className="bx bx-upload upload-icon"></i>
-                                    <p>Drag & drop evidence here or <span>browse</span></p>
+                                <div className="ZoneUploadPromptContent">
+                                    <i className="bx bx-shield-quarter ZoneUploadPromptIcon"></i>
+                                    <p>Drag and drop verification tokens here or <span className="BrowseActionHighlight">browse system logs</span></p>
                                     <input
                                         type="file"
                                         accept="image/*,application/pdf"
@@ -245,55 +211,45 @@ const ReportFraud = () => {
                                     />
                                 </div>
                             ) : (
-                                <div className="upload-preview">
+                                <div className="ZoneUploadPreviewState">
                                     {evidencePreview ? (
-                                        <img src={evidencePreview} alt="Preview" />
+                                        <img src={evidencePreview} alt="Forensic Matrix Data Preview" />
                                     ) : (
-                                        <div className="pdf-preview">
-                                            <i className="bx bxs-file-pdf pdf-icon"></i>
+                                        <div className="ProPdfPreviewBox">
+                                            <i className="bx bxs-file-pdf ForensicPdfIcon"></i>
                                             <p>{evidence.name}</p>
                                         </div>
                                     )}
 
-                                    <button
-                                        className="remove-file-btn"
-                                        onClick={() => {
-                                            setEvidence(null);
-                                            setEvidencePreview(null);
-                                        }}
-                                    >
-                                        Remove
+                                    <button type="button" className="ZoneRemoveImageCTA" onClick={() => { setEvidence(null); setEvidencePreview(null); }}>
+                                        Purge Evidence Parameter
                                     </button>
                                 </div>
                             )}
                         </div>
 
-                        {/* Disclaimer */}
-                        <p className="SomeTermsOfCond">
-                            This channel is only for reporting suspected fraud or violation of
-                            MNF’s Code of Conduct. Not for order-related issues.
+                        <p className="ProFormWarningDisclaimerText">
+                            <i className='bx bx-info-circle'></i> {midnightFraudConfig.form.disclaimer}
                         </p>
 
-                        {/* Submit */}
-                        <button className="SubmitButton" disabled={loading}>
-                            {loading ? "Submitting..." : "Submit Report"}
+                        <button className="ProFraudSubmitCTA" disabled={loading}>
+                            {loading ? "Processing Compliance Ledger..." : "Deploy System Threat Report"}
                         </button>
                     </form>
 
-                    {/* Right Box */}
-                    <div className="infoReportBoxes">
-                        <div className="SafetyEmergency">
-                            <h1>Disclaimer</h1>
-                            <p>
-                                Please use this form only to report potential fraud. For any
-                                order or general help:
-                            </p>
-                            <Link to="/help-support">Contact Support Here</Link>
+                    {/* Right Bento Side Panel */}
+                    <aside className="ProHelpAsideConsole">
+                        <div className="AsideSystemBentoCard">
+                            <h3>{midnightFraudConfig.form.sideCard.title}</h3>
+                            <p>{midnightFraudConfig.form.sideCard.description}</p>
+                            <Link to="/help-support" className="StandardSupportVectorLink">
+                                {midnightFraudConfig.form.sideCard.ctaText} <i className='bx bx-right-arrow-alt'></i>
+                            </Link>
                         </div>
-                    </div>
+                    </aside>
                 </section>
             </section>
-        </>
+        </div>
     );
 };
 

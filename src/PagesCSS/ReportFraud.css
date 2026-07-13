@@ -1,168 +1,189 @@
-.ReportSection {
-    height: 100%;
-}
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD COMPLIANCE SECURE THREAT MATRIX CONFIGURATION SHEET
+   ========================================================================== */
 
-.ReportSection .HelpSectBanner {
+.ProFraudMainOuterSuite {
     width: 100%;
-    height: 320px;
-    background-color: red;
-    display: flex;
-    align-items: center;
-    background-image: none;
-    justify-content: center;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
 
-.ReportSection .HelpSectBanner h1 {
-    font-family: var(--Font3);
-    letter-spacing: -2px;
-}
-
-.ReportSection .input-accent {
-    background: linear-gradient(to bottom, #E53935, #FF1A3C);
-}
-
-.ReportSection input.SubmitButton {
-    background-color: #E53935;
-}
-
-.ReportSection .input-field:focus {
-    box-shadow: 0 0 0 2px #FF9999;
-}
-
-.ReportSection .input-label,
-.ReportSection .input-field:focus+.input-label,
-.ReportSection .input-field:not(:placeholder-shown)+.input-label {
-    color: #FF9999;
-}
-
-.ReportSection .HelpForm {
-    height: 160vh;
-}
-
-.ReportSection .SomeTermsOfCond {
-    font-size: 12px;
-    color: #00000067;
-}
-
-.fraud-reason-section h3 {
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
-    font-family: var(--Font3);
-    letter-spacing: -0.4px;
-}
-
-.fraud-reason-options {
+.ProFraudSectionLayout {
+    width: 100%;
+    max-width: 1300px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    gap: 2.5rem;
 }
 
-.reasonLabel {
+.ProFraudHeaderDeckPanel h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+}
+
+.ProFraudGridLayoutCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    width: 100%;
+    align-items: start;
+}
+
+/* --- SELECTION MATRICES OPTION SLOTS --- */
+.ProFraudRadioSelectionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.ProFraudRadioSelectionSection h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.ProFraudRadioOptionsGridDeck {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ProRadioSlotLabelItem {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px;
-}
-
-.reasonLabel span {
-    padding-bottom: 1px;
-}
-
-.fraud-reason-options input {
-    height: 20px;
-    width: 20px;
-}
-
-button.SubmitButton {
-    border: none;
-    height: 45px;
-    background-color: red;
-    color: #fff;
-    font-size: 18px;
+    gap: 12px;
+    padding: 12px 14px;
     cursor: pointer;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: 0.2s ease-in-out;
-}
-
-button.SubmitButton:hover {
-    background-color: rgb(227, 0, 0);
-}
-
-.upload-box {
-    border: 2px dashed #8884;
-    background: #fafafa;
-    border-radius: 18px;
-    padding: 30px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.25s;
-    margin-top: 20px;
-    position: relative;
-}
-
-.upload-box:hover {
-    background: #f5f5f5;
-    border-color: #51AE5E;
-}
-
-.upload-content input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-.upload-icon {
-    font-size: 45px;
-    color: #51AE5E;
-}
-
-.upload-content p {
-    font-size: 15px;
-    margin-top: 10px;
-    color: #777;
-}
-
-.upload-content p span {
-    color: #51AE5E;
-    font-weight: 600;
-}
-
-.upload-preview img {
-    max-width: 100%;
-    height: 160px;
-    object-fit: contain;
-    border-radius: 10px;
-}
-
-.pdf-preview {
-    text-align: center;
-}
-
-.pdf-icon {
-    font-size: 50px;
-    color: #d9534f;
-}
-
-.remove-file-btn {
-    margin-top: 12px;
-    background: #ff4747;
-    color: white;
-    border: none;
-    padding: 6px 14px;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
     border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.ProRadioSlotLabelItem:hover {
+    background-color: rgba(58, 134, 200, 0.04);
+}
+
+.ProRadioSlotLabelItem input[type="radio"] {
+    accent-color: var(--accent-blue-light);
+    width: 15px;
+    height: 15px;
     cursor: pointer;
+}
+
+.ProRadioSlotLabelItem span {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.radio-item-active {
+    border-color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.06);
+}
+
+.radio-item-active span {
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+.ProFormWarningDisclaimerText {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: rgba(255, 77, 77, 0.65);
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    margin: 4px 0 0 0;
+}
+
+.ProFormWarningDisclaimerText i {
+    font-size: 16px;
+}
+
+/* Custom forensic PDF boxes icons styles mapping */
+.ProPdfPreviewBox {
+    text-align: center;
+}
+
+.ForensicPdfIcon {
+    font-size: 40px;
+    color: #ff4d4d;
+    margin-bottom: 2px;
+}
+
+.ProPdfPreviewBox p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.ProFraudSubmitCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProFraudSubmitCTA:hover:not(:disabled) {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1.5px);
+}
+
+.ProFraudSubmitCTA:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.StandardSupportVectorLink {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    text-decoration: none;
     font-size: 14px;
-    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 1.5rem;
+    transition: transform 0.2s ease;
 }
 
-.remove-file-btn:hover {
-    background: #e63e3e;
+.StandardSupportVectorLink:hover {
+    transform: translateX(3px);
 }
 
-.TextAreaBox .input-accent {
-    height: 82%;
+@media (max-width: 1024px) {
+    .ProFraudSectionLayout {
+        padding: 0 2rem;
+    }
+
+    .ProFraudGridLayoutCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .ProFraudRadioOptionsGridDeck {
+        grid-template-columns: 1fr;
+    }
 }

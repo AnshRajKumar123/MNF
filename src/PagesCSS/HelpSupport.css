@@ -1,253 +1,436 @@
-.HelpSectBanner {
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD COMPLIANCE & ACCENT CONTROL HELPDESK MODULE CSS
+   ========================================================================== */
+
+.ProHelpMainOuterSuite {
     width: 100%;
-    height: 320px;
-    background-image: url(/public/HelpBanner.avif);
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
 
-.HelpSectBanner h1 {
-    font-size: 4.5rem;
-    color: #fff;
-    font-family: var(--Font2);
-    letter-spacing: 2px;
-}
-
-.HelpFormSection {
-    display: flex;
-    gap: 2rem;
-    padding: 3rem 0;
-    width: 70%;
-    margin: 0 auto;
-}
-
-.HelpForm {
-    width: 70%;
-    height: 120vh;
+.ProHelpSectionLayout {
+    width: 100%;
+    max-width: 1300px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 0 3rem;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
-.DropContainer {
+/* --- UPPER HEADER TRACK METADATA PANEL --- */
+.ProHelpHeaderDeckPanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.ProTaglineText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-blue-light);
+    margin-bottom: 4px;
+}
+
+.ProHelpHeaderDeckPanel h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+}
+
+/* --- GRID MASTER DISTRIBUTION MATRIX --- */
+.ProHelpGridLayoutCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
     width: 100%;
-    max-width: 350px;
-    position: relative;
-    font-family: sans-serif;
+    align-items: start;
 }
 
-/* Header */
-.DropHeader {
+.ProHelpTerminalForm {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+/* --- CUSTOM SELECT RECONSTRUCTION DOCK --- */
+.ProHelpDropdownContainer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 50;
+}
+
+.TerminalLabelField {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.ProHelpDropHeaderBox {
     padding: 14px 16px;
     width: 100%;
-    border: 1px solid #ddd;
+    box-sizing: border-box;
+    border: 1px solid var(--border-morphic);
     border-radius: 8px;
-    background: #fff;
-    font-size: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    position: relative;
+    transition: border-color 0.25s ease;
 }
 
-.inputAcc {
-    position: absolute;
-    left: -2px;
-    top: 8px;
-    bottom: 8px;
-    width: 6px;
-    border-radius: 6px;
-    background: linear-gradient(to bottom, #A5F7B1, #3E8A4A);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
+[data-theme="light-ocean"] .ProHelpDropHeaderBox {
+    background-color: rgba(0, 0, 0, 0.01);
 }
 
-.SelectHelp {
+.ProHelpDropHeaderBox:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.DropChevronIcon {
     font-size: 18px;
-    color: #6BCB78;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
 }
 
-.Arrow {
-    transition: 0.2s ease;
-    font-size: 26px;
-    color: #777;
-    transition: 0.3s ease-in-out;
-}
-
-.Rotate {
+.RotateIcon {
     transform: rotate(180deg);
+    color: var(--accent-blue-light);
 }
 
-/* Dropdown list */
-.DropList {
-    margin-top: 8px;
-    background: #fff;
+.DimTextNode {
+    color: var(--text-muted);
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.HighlightTextNode {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.ProHelpDropListStack {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 6px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
     width: 100%;
     list-style: none;
-    padding: 0;
+    padding: 6px;
+    box-sizing: border-box;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px var(--shadow-premium);
     overflow: hidden;
 }
 
-.DropItem {
-    padding: 18px;
-    width: 100%;
-    font-size: 15px;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.DropItem:hover {
-    background: #f3f3f3;
-}
-
-.HelpForm input {
-    width: 100%;
-    height: 60px;
-    font-size: 18px;
-    padding-left: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    outline: none;
-}
-
-
-/* Wrapper */
-.input-box {
-    position: relative;
-    width: 100%;
-}
-
-/* Left gradient bar */
-.input-accent {
-    position: absolute;
-    left: -2px;
-    top: 8px;
-    bottom: 8px;
-    width: 6px;
-    border-radius: 6px;
-    background: linear-gradient(to bottom, #A5F7B1, #3E8A4A);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.input-box:focus-within .input-accent {
-    opacity: 1;
-}
-
-/* Input */
-.input-field {
-    width: 100%;
-    height: 200px;
-    padding: 24px 16px 8px 24px;
+.ProHelpDropItemCard {
+    padding: 12px 14px;
     font-size: 14px;
-    color: #1f2937;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.input-field:focus {
-    border-color: transparent;
-    outline: none;
-    box-shadow: 0 0 0 2px #6bcb78d6;
-}
-
-/* Label */
-.input-label {
-    position: absolute;
-    left: 24px;
-    top: 19px;
-    font-size: 17px;
-    color: #6BCB78;
-    cursor: text;
+    color: var(--text-core);
+    cursor: pointer;
+    border-radius: 6px;
     transition: all 0.2s ease;
 }
 
-/* Label moves up when input is focused */
-.input-field:focus+.input-label {
-    top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #6BCB78;
+.ProHelpDropItemCard:hover {
+    background-color: rgba(58, 134, 200, 0.06);
+    color: var(--accent-blue-light);
 }
 
-/* Label stays centered when empty */
-.input-field:not(:placeholder-shown)+.input-label {
-    top: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #6BCB78;
+/* --- SUGGESTED REFERENCE FAQ BLOCKS --- */
+.ProFAQBentoCardView {
+    background: rgba(58, 134, 200, 0.02);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-morphic);
 }
 
-input.SubmitButton {
-    background-color: #3E8A4A;
-    color: #fff;
-    font-weight: 500;
-    font-family: var(--Font3);
-    font-size: 1.5rem;
-    letter-spacing: -1px;
+.ProFAQBentoCardView h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.infoReportBoxes {
+.ProFAQBentoCardView ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.ProFaqListItemRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+}
+
+.ProFaqListItemRow i {
+    color: var(--accent-blue-light);
+    font-size: 16px;
+}
+
+/* --- INPUT CONFIGURATION BLOCKS --- */
+.ProHelpInputGridFields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
 
-.SafetyEmergency {
-    padding: 15px;
-    width: 370px;
-    border-radius: 12px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+.ProHelpFieldSlotBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    position: relative;
 }
 
-.SafetyEmergency h1 {
-    font-size: 1.7rem;
-    font-family: var(--Font3);
-    letter-spacing: -1.2px;
-    margin-bottom: 0.8rem;
-    font-weight: 600;
+.ProHelpFieldSlotBlock label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
 }
 
-.SafetyEmergency p {
+.ProHelpFieldSlotBlock input,
+.ProHelpFieldSlotBlock textarea {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text-core);
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+[data-theme="light-ocean"] .ProHelpFieldSlotBlock input,
+[data-theme="light-ocean"] .ProHelpFieldSlotBlock textarea {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.ProHelpFieldSlotBlock input:focus,
+.ProHelpFieldSlotBlock textarea:focus {
+    border-color: var(--accent-blue-light);
+}
+
+.TextareaFieldBlockModifier textarea {
+    height: 120px;
+    resize: none;
+}
+
+.ProCharCounterText {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* --- VALIDATION ASSET DRAG DRAG FRAMES --- */
+.ProUploadTerminalZone {
+    width: 100%;
+    border: 1px dashed var(--border-morphic);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: border-color 0.25s ease;
+}
+
+.ProUploadTerminalZone:hover {
+    border-color: var(--accent-blue-light);
+}
+
+.ZoneUploadPromptContent input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.ZoneUploadPromptIcon {
+    font-size: 36px;
+    color: var(--accent-blue-light);
+    margin-bottom: 6px;
+}
+
+.ZoneUploadPromptContent p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.BrowseActionHighlight {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.ZoneUploadPreviewState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.ZoneUploadPreviewState img {
+    max-height: 120px;
+    border-radius: 6px;
+    border: 1px solid var(--border-morphic);
+}
+
+.ZoneRemoveImageCTA {
+    background-color: rgba(255, 77, 77, 0.05);
+    border: 1px solid rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.ZoneRemoveImageCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+.ProHelpSubmitCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProHelpSubmitCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1.5px);
+}
+
+/* --- RIGHT SIDE AUXILIARY PANEL ASIDE --- */
+.ProHelpAsideConsole {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.AsideSystemBentoCard {
+    padding: 2.2rem 1.8rem;
+    background-color: var(--bg-surface);
+    border-radius: 16px;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 15px 35px var(--shadow-premium);
+}
+
+.AsideSystemBentoCard h3 {
     font-size: 18px;
-    color: #7f8081;
+    font-family: var(--Font3), sans-serif;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.AsideSystemBentoCard p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.EmergencyRedBorderCard {
+    border-color: rgba(255, 77, 77, 0.15);
+}
+
+.EmergencyRedBorderCard h3 {
+    color: #ff4d4d;
+}
+
+.EmergencyRedBorderCard p {
     margin-bottom: 1.5rem;
-    line-height: 25px;
 }
 
-.SafetyEmergency a {
-    color: red;
-    font-weight: 500;
-}
-
-.FAQBox h3 {
-    font-family: var(--Font3);
-    font-size: 1.4rem;
-    letter-spacing: -0.5px;
-}
-
-.FAQBox ul {
-    padding: 0.6rem 0 0 1rem;
-}
-
-.FAQBox ul .faqListItem {
-    padding: 5px;
+.EmergencyTriggerLink {
+    color: #ff4d4d;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 4px;
+    transition: transform 0.2s ease;
 }
 
-.FAQBox ul .faqListItem span {
-    padding-bottom: 2px;
+.EmergencyTriggerLink:hover {
+    transform: translateX(3px);
+}
+
+/* --- RESPONSIVE INTERCEPT BANDS --- */
+@media (max-width: 1024px) {
+    .ProHelpSectionLayout {
+        padding: 0 2rem;
+    }
+
+    .ProHelpGridLayoutCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProHelpInputGridFields {
+        grid-template-columns: 1fr;
+    }
+
+    .ProHelpTerminalForm {
+        padding: 1.5rem;
+    }
 }

@@ -1,25 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../PagesCSS/FraudSuccess.css";
+import { midnightFraudConfig } from "../assets/assest";
 
 const FraudSuccess = () => {
     return (
-        <div className="success-container">
-            <div className="success-box">
-                <div className="success-icon-wrap">
-                    <div className="success-check"></div>
+        <div className="ProFraudSuccessContainer">
+            <div className="ProFraudSuccessBentoCard">
+
+                {/* Immersive security checking ring indicator badge panel */}
+                <div className="ProFraudSuccessIconShield">
+                    <div className="ProFraudSuccessPulseRing"></div>
+                    <i className='bx bx-check-shield'></i>
                 </div>
 
-                <h1>Report Submitted</h1>
-                <p>
-                    Thank you for helping keep MNF safe.
-                    Our internal security team will review your report shortly.
-                </p>
+                <span className="ProSystemLedgerText">{midnightFraudConfig.success.title}</span>
+                <h1>{midnightFraudConfig.success.subtitle}</h1>
+                <p>{midnightFraudConfig.success.description}</p>
 
-                <div className="AlignCenter">
-                    <Link to="/mainWebsite" className="success-btn">Go to Home</Link>
-                    <Link to="/help-support" className="success-btn outline">Help & Support</Link>
+                <div className="ProFraudSuccessActionGroup">
+                    <Link to="/mainWebsite" className="ProFraudSuccessBtn">
+                        {midnightFraudConfig.success.homeBtn} <i className='bx bx-log-out-circle'></i>
+                    </Link>
+                    <Link to="/help-support" className="ProFraudSuccessBtn ButtonOutlineVariant">
+                        {midnightFraudConfig.success.supportBtn}
+                    </Link>
                 </div>
+
             </div>
         </div>
     );

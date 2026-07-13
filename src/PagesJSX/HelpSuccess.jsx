@@ -1,24 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../PagesCSS/HelpSuccess.css";
+import { midnightHelpSuccessData } from "../assets/assest";
 
 const HelpSuccess = () => {
     return (
-        <div className="help-success-container">
-            <div className="help-success-box">
-                <div className="help-success-icon-wrap">
-                    <div className="help-success-check"></div>
+        <div className="ProHelpSuccessContainer">
+            <div className="ProHelpSuccessBentoCard">
+
+                {/* Clean morphic neon-illuminated vector indicator badge */}
+                <div className="ProHelpSuccessIconShield">
+                    <div className="ProHelpSuccessPulseRing"></div>
+                    <i className='bx bx-check-shield'></i>
                 </div>
 
-                <h1>We Received Your Request</h1>
-                <p>
-                    Our support team will contact you shortly via email.
-                    Thanks for taking the time to reach out!
-                </p>
+                <span className="ProSystemLedgerText">{midnightHelpSuccessData.labels.title}</span>
+                <h1>{midnightHelpSuccessData.labels.subtitle}</h1>
+                <p>{midnightHelpSuccessData.labels.description}</p>
 
-                <div className="AlignCenter">
-                    <Link to="/mainWebsite" className="help-success-btn">Go to Home</Link>
-                    <Link to="/help-support" className="help-success-btn outline">Back to Help</Link>
+                <div className="ProHelpSuccessActionGroup">
+                    <Link to="/mainWebsite" className="ProHelpSuccessBtn">
+                        {midnightHelpSuccessData.labels.homeBtn} <i className='bx bx-home-alt'></i>
+                    </Link>
+                    <Link to="/help-support" className="ProHelpSuccessBtn ButtonOutlineVariant">
+                        {midnightHelpSuccessData.labels.backBtn}
+                    </Link>
                 </div>
             </div>
         </div>
