@@ -429,3 +429,26 @@ export const midnightFooterData = {
         }
     ]
 };
+
+export const midnightHeroData = {
+    hero: {
+        title: "MNF",
+        subtitle: "Crave Operations Hub",
+        desc: "Experience zero-friction midnight food delivery infrastructure engineered for night owls.",
+        ctaWeb: "Enter Main Terminal Hub"
+    },
+    logistics: {
+        title: "MNF: Powering\nTomorrow's Logistics",
+        desc: "For over a decade, we've engineered hyper-local supply links and decentralized ghost kitchen grids—delivering freshness while the city sleeps."
+    },
+    features: {
+        title: "Engineered For The Night",
+        desc: "Our localized application matrix is packed with modular systems enabling you to command your taste parameters seamlessly.",
+        scheduleLabel: "Schedule Dispatch Log"
+    },
+    download: {
+        title: "Initialize App ",
+        desc: "Scan the localized matrix signature or navigate to global marketplaces to download the software hub instantly.",
+        qrLabel: "Scan QR signature to bind terminal link"
+    }
+};

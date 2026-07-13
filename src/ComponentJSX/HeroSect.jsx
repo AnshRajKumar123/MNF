@@ -1,233 +1,185 @@
-import React from 'react'
-import '../ComponentCSS/HeroSect.css'
-import { ResturantIG } from '../assets/assest'
-import Footer from './Footer'
-import FancyRope from './FancyRope'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
+import React, { useEffect, useState } from 'react';
+import '../ComponentCSS/HeroSect.css';
+import { ResturantIG, midnightHeroData } from '../assets/assest';
+import FancyRope from './FancyRope';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSect = () => {
-
     const navigate = useNavigate();
 
     const handleClick = () => {
         const isLoggedIn = localStorage.getItem("mnfUserLoggedIn");
-
         if (isLoggedIn === "true") {
-            // user already logged in → direct to main website
             navigate("/mainWebsite");
         } else {
-            // not logged in → go to login page first
             navigate("/SignInUp");
         }
     };
 
     useGSAP(() => {
-        gsap.to(".AnimationButton", {
-            y: 50,
-            duration: 0.9,
+        // High-end subtle pulsing micro-interaction for primary gate CTA
+        gsap.to(".ProHeroAnimationButton", {
+            boxShadow: "0 0 25px rgba(58, 134, 200, 0.6)",
+            scale: 1.03,
+            duration: 1.2,
             repeat: -1,
-            yoyo: true
-        })
+            yoyo: true,
+            ease: "power1.inOut"
+        });
 
-        gsap.from(".AppInfoBox .MainMobile", {
-            y: 400,
+        // Parallax image scrolling elements engine setup
+        gsap.from(".ProMainMobileMock img", {
+            y: 120,
             opacity: 0,
-            duration: 0.7,
+            duration: 0.9,
             scrollTrigger: {
-                trigger: ".AppSection .MainMobile",
-                start: "top 120%",   // when 80% of viewport hits top of element
+                trigger: ".ProAppBentoSectionGrid",
+                start: "top 80%",
             }
-        })
-    })
+        });
+    });
 
     return (
-        <>
-            <div className='OverFlowHidden'>
-                <section className="VideoATitle">
-                    <video src={ResturantIG.HeroVideo} autoPlay loop muted playsInline className="FullVideo"></video>
-                    <div className="Opactiy"></div>
-                    <div className="AboutAPP">
-                        <h1>MNF</h1>
-                        <h2>food delivery app</h2>
-                        <p>Experience fast & easy online ordering <br /> on the MNF App</p>
+        <div className='ProHeroSuiteOverflowControl'>
 
-                        <div className="APPBtn">
-                            <button>
-                                <img src={ResturantIG.GooglePlay} />
-                            </button>
+            {/* MODULE 1: CINEMATIC VIDEO SCREEN GATEWAY */}
+            <section className="ProCinematicHeroStage">
+                <video src={ResturantIG.HeroVideo} autoPlay loop muted playsInline className="ProHeroFullVideoBg"></video>
+                <div className="ProHeroMorphicGlassOverlay"></div>
 
-                            <button>
-                                <img src={ResturantIG.IOS} />
-                            </button>
-                        </div>
+                <div className="ProHeroCentralTypographyHub">
+                    <h1 className="ProBrandMegaTitle">{midnightHeroData.hero.title}</h1>
+                    <h2 className="ProBrandSubTag">{midnightHeroData.hero.subtitle}</h2>
+                    <p className="ProBrandCoreDesc">{midnightHeroData.hero.desc}</p>
 
-                        <button onClick={handleClick} className="AnimationButton">Visit Our Website!!</button>
-                    </div>
-                </section>
-
-                <section className='RopeSection'>
-                    <div className='RopeFancy'>
-                        <div className='DivForMobile'>
-                            <FancyRope />
-                        </div>
-                        <div className="Burger"><img src={ResturantIG.AbsoluteBurg} /></div>
-                        <div className='Pizaa'><img src={ResturantIG.AbsolutePizz} /></div>
-                        <div className="Leave"><img src={ResturantIG.AbsoluteLeav} /></div>
-                        <div className="Tomato"><img src={ResturantIG.AbsoluteTom} /></div>
-                        <div className="Tomato NumberTwo"><img src={ResturantIG.AbsoluteTom} /></div>
+                    <div className="ProHeroMarketCTAsRow">
+                        <button className="MarketBadgeBtn"><img src={ResturantIG.GooglePlay} alt="Play Store Link" /></button>
+                        <button className="MarketBadgeBtn"><img src={ResturantIG.IOS} alt="App Store Link" /></button>
                     </div>
 
-                    <div className="AboutInfoFree">
-                        <h1>MNF: Powering <br />Tomorrow's Logistics</h1>
-                        <p>For over a decade, we've provided <br />
-                            cutting logistics and supply chain <br />
-                            solutions, connecting busineses globally.</p>
-                    </div>
-                </section>
+                    <button onClick={handleClick} className="ProHeroAnimationButton">
+                        {midnightHeroData.hero.ctaWeb} <i className='bx bx-right-arrow-alt'></i>
+                    </button>
+                </div>
+            </section>
 
-                <section className='AppSection'>
-                    <h1>What’s waiting for you <br /> on the app?</h1>
-                    <p>Our app is packed with features that <br /> enable you to experience food <br /> delivery like never before</p>
+            {/* MODULE 2: AMBIENT PARALLAX FLOATING ASSETS DECK */}
+            <section className="ProParallaxRopeScenery">
+                <div className="ParallaxRopeTrack">
+                    <div className='MobileRopeHideWrapper'><FancyRope /></div>
+                    <div className="FloatingAssetItem AssetBurger"><img src={ResturantIG.AbsoluteBurg} alt="" /></div>
+                    <div className="FloatingAssetItem AssetPizza"><img src={ResturantIG.AbsolutePizz} alt="" /></div>
+                    <div className="FloatingAssetItem AssetLeave"><img src={ResturantIG.AbsoluteLeav} alt="" /></div>
+                    <div className="FloatingAssetItem AssetTomatoOne"><img src={ResturantIG.AbsoluteTom} alt="" /></div>
+                    <div className="FloatingAssetItem AssetTomatoTwo"><img src={ResturantIG.AbsoluteTom} alt="" /></div>
+                </div>
 
-                    <div className="AppInfoBox">
-                        <div className='ThreeTypeHereL'>
-                            <div className='DisplayFlex'>
-                                <div className="boxSect">
-                                    <img src={ResturantIG.healthy} />
-                                    <span>Healthy</span>
-                                </div>
-                                <div className="boxSect boxpadding">
-                                    <img src={ResturantIG.VegMode} />
-                                    <span>Veg Mode</span>
-                                </div>
-                            </div>
-                            <div className="boxSect">
-                                <img src={ResturantIG.Party} />
-                                <span>Plan a Party</span>
-                            </div>
+                <div className="ProLogisticsAboutCard">
+                    <h2>{midnightHeroData.logistics.title}</h2>
+                    <p>{midnightHeroData.logistics.desc}</p>
+                </div>
+            </section>
+
+            {/* MODULE 3: THE HIGH-FI APPLICATION FEATURES BENTO MESH */}
+            <section className="ProAppBentoSectionGrid">
+                <div className="BentoSectionTypographyHeader">
+                    <h2>{midnightHeroData.features.title}</h2>
+                    <p>{midnightHeroData.features.desc}</p>
+                </div>
+
+                {/* Desktop High-Fi Core Layout Layer */}
+                <div className="ProAppBentoMatrixCluster">
+                    <div className="BentoCardColumn SideColumnLayout">
+                        <div className="BentoMiniMetricSlotCard">
+                            <img src={ResturantIG.healthy} alt="" />
+                            <span>Healthy Parameter</span>
                         </div>
-                        <div className='MainMobile'>
-                            <img src={ResturantIG.MainMobile} />
-                            <div className='Calendar'>
-                                <img src={ResturantIG.Calendar} />
-                                <span>Schedule <br /> your order</span>
-                            </div>
+                        <div className="BentoMiniMetricSlotCard">
+                            <img src={ResturantIG.VegMode} alt="" />
+                            <span>Veg Protocol Mode</span>
                         </div>
-                        <div className='ThreeTypeHereL'>
-                            <div className='DisplayFlex'>
-                                <div className="boxSect">
-                                    <img src={ResturantIG.Gourmet} />
-                                    <span>Gourmet</span>
-                                </div>
-                                <div className="boxSect boxpadding">
-                                    <img src={ResturantIG.Offer} />
-                                    <span>Offer</span>
-                                </div>
-                            </div>
-                            <div className="boxSect">
-                                <img src={ResturantIG.Party} />
-                                <span>Plan a Party</span>
-                            </div>
+                        <div className="BentoMiniMetricSlotCard SpanFullRowBlock">
+                            <img src={ResturantIG.Party} alt="" />
+                            <span>Plan a Party Infrastructure</span>
                         </div>
                     </div>
 
-                    <div className="AppInfoBoxForMobile">
-                        <div className="InsideBoxMobileOf">
-                            <div className="ThreeLineOfMobile">
-                                <div className="boxSect">
-                                    <img src={ResturantIG.Party} />
-                                    <span>Plan a Party</span>
-                                </div>
-                                <div className="boxSect boxpadding">
-                                    <img src={ResturantIG.VegMode} />
-                                    <span>Veg Mode</span>
-                                </div>
-                            </div>
-
-                            <div className='ThreeLineOfMobile BezMargin'>
-                                <div className="boxSect">
-                                    <img src={ResturantIG.healthy} />
-                                    <span>Healthy</span>
-                                </div>
-                                <div className="boxSect">
-                                    <img src={ResturantIG.Gourmet} />
-                                    <span>Gourmet</span>
-                                </div>
-                            </div>
-
-                            <div className='ThreeLineOfMobile'>
-                                <div className="boxSect boxpadding">
-                                    <img src={ResturantIG.Offer} />
-                                    <span>Offer</span>
-                                </div>
-                                <div className="boxSect">
-                                    <img src={ResturantIG.Party} />
-                                    <span>Plan a Party</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p>...and a lot more</p>
-                    </div>
-                </section>
-
-                <section className='DownloadApp'>
-                    <div className="InsideBoxDown">
-                        <div className="InfoAppDownload">
-                            <h1>Download the app now!</h1>
-                            <p>Experience seamless online ordering <br />only on the Zomato app</p>
-
-                            <div className="DownloadButton">
-                                <button>
-                                    <img src={ResturantIG.GooglePlay} />
-                                </button>
-
-                                <button>
-                                    <img src={ResturantIG.IOS} />
-                                </button>
-                            </div>
-                        </div>
-                        <div className="ImageAppDownload">
-                            <div className='MobileCase'>
-                                <img src={ResturantIG.MainMobile} />
-                            </div>
-                            <div className="MobileQRCode">
-                                <span>Scan the QR code to download the app</span>
-                                <img src={ResturantIG.MidNightQR} />
-
-                                <div className="greenColor"></div>
-                            </div>
+                    <div className="ProMainMobileMock">
+                        <img src={ResturantIG.MainMobile} alt="MNF Engine Software Shell Mockup" />
+                        <div className="BentoEmbeddedCalendarCard">
+                            <img src={ResturantIG.Calendar} alt="" />
+                            <span>{midnightHeroData.features.scheduleLabel}</span>
                         </div>
                     </div>
 
-                    <div className='DownloadAppSectionForMobile'>
-                        <div className="ImageBoxMobile">
-                            <img src={ResturantIG.AppMobileView} />
+                    <div className="BentoCardColumn SideColumnLayout">
+                        <div className="BentoMiniMetricSlotCard">
+                            <img src={ResturantIG.Gourmet} alt="" />
+                            <span>Gourmet Fleet</span>
                         </div>
+                        <div className="BentoMiniMetricSlotCard">
+                            <img src={ResturantIG.Offer} alt="" />
+                            <span>Redeemable Discounts</span>
+                        </div>
+                        <div className="BentoMiniMetricSlotCard SpanFullRowBlock">
+                            <img src={ResturantIG.Party} alt="" />
+                            <span>Plan a Party Infrastructure</span>
+                        </div>
+                    </div>
+                </div>
 
-                        <div className="AboutInfoMobile">
-                            <h1>Download the app now!!</h1>
-                            <p>Experience seamless food ordering <br /> with the MNF App</p>
+                {/* Mobile Fallback Responsive Stack Node */}
+                <div className="ProAppInfoBoxForMobile">
+                    <div className="MobileFeaturesGridBox">
+                        {[
+                            { img: ResturantIG.Party, label: "Party Mode" },
+                            { img: ResturantIG.VegMode, label: "Veg Protocol" },
+                            { img: ResturantIG.healthy, label: "Healthy Stream" },
+                            { img: ResturantIG.Gourmet, label: "Gourmet Hub" },
+                            { img: ResturantIG.Offer, label: "Tokens" }
+                        ].map((feat, idx) => (
+                            <div key={idx} className="BentoMiniMetricSlotCard">
+                                <img src={feat.img} alt="" />
+                                <span>{feat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-                            <div className="APPBtn">
-                                <button>
-                                    <img src={ResturantIG.GooglePlay} />
-                                </button>
+            {/* MODULE 4: ECOSYSTEM HARDWARE INTEGRATION SCAN STATION */}
+            <section className="ProDownloadConsoleStation">
+                <div className="ProDownloadConsoleBentoCard">
+                    <div className="DownloadConsoleLeftTypography">
+                        <h2>{midnightHeroData.download.title}</h2>
+                        <p>{midnightHeroData.download.desc}</p>
 
-                                <button>
-                                    <img src={ResturantIG.IOS} />
-                                </button>
+                        <div className="DownloadMarketBadgesRowDeck">
+                            <button className="MarketBadgeBtn"><img src={ResturantIG.GooglePlay} alt="" /></button>
+                            <button className="MarketBadgeBtn"><img src={ResturantIG.IOS} alt="" /></button>
+                        </div>
+                    </div>
+
+                    <div className="DownloadConsoleRightGraphics">
+                        <div className="ConsoleMobileCaseWrapper">
+                            <img src={ResturantIG.MainMobile} alt="" />
+                        </div>
+                        <div className="ConsoleQrMatrixFrameBox">
+                            <span>{midnightHeroData.download.qrLabel}</span>
+                            <div className="QrImageShellWrapper">
+                                <img src={ResturantIG.MidNightQR} alt="Ecosystem App Integration Token QR Code" />
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
-        </>
-    )
-}
+                </div>
+            </section>
+        </div>
+    );
+};
 
-export default HeroSect
+export default HeroSect;
