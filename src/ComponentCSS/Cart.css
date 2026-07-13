@@ -1,516 +1,579 @@
-/* MAIN CONTAINER */
-.cart-container {
+/* ==========================================================================
+   🌟 PARKLY/MNF TRANSITIONED OCEANIC CHECKOUT COMPLIANCE TERMINAL
+   ========================================================================== */
+
+.ProCartContainer {
     width: 100%;
-    min-height: 100vh;
+    max-width: 1400px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    background: #f7f7f7;
+    gap: 4rem;
+    box-sizing: border-box;
+    background-color: var(--bg-primary);
 }
 
-/* LEFT SECTION */
-.cart-left {
-    width: 70%;
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.cart-title {
-    font-size: 2.3rem;
-    letter-spacing: -1px;
-    font-weight: 700;
-    font-family: var(--Font3);
-    margin-bottom: 15px;
-}
-
-.empty-text {
-    color: gray;
-    font-size: 16px;
-}
-
-/* CART ITEM */
-.cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fafafa;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.item-info {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.item-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-}
-
-.item-name {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.item-price {
-    color: #555;
-}
-
-/* QUANTITY */
-.qty-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.qty-btn {
-    background: #e4e4e4;
-    padding: 6px 12px;
-    font-size: 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    border: none;
-}
-
-.qty-btn:hover {
-    background: #d4d4d4;
-}
-
-.qty-value {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* SUBTOTAL */
-.subtotal {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-/* REMOVE BUTTON */
-.remove-btn {
-    border: none;
-    background: #ff4d4d;
-    color: white;
-    padding: 6px 10px;
-    font-size: 18px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.remove-btn:hover {
-    background: #e60000;
-}
-
-.cart-right {
+/* --- LEFT SIDE: CART ARRAY ITEMS SHEET --- */
+.ProCartLeftSection {
+    width: 65%;
     display: flex;
     flex-direction: column;
-    width: 30%;
-    gap: 20px;
-    position: sticky;
-    height: fit-content;
-    top: 100px;
+    gap: 16px;
 }
 
-/* RIGHT SUMMARY */
-.cart-summary {
-    width: 100%;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.summary-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-/* COUPON BOX */
-.coupon-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.cart-coupon-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    width: 100%;
-}
-
-.coupon-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.coupon-title,
-.summary-title {
-    font-family: var(--Font3);
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-}
-
-.summary-title {
-    font-size: 2rem;
-    letter-spacing: -1.2px;
-}
-
-.CouPonBox {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-}
-
-.apply-coupon-btn {
-    padding: 10px 15px;
-    background: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.apply-coupon-btn:hover {
-    background: #3d8e40;
-}
-
-.divider {
-    margin: 1rem 0;
-}
-
-.summary-total {
-    display: flex;
-    justify-content: space-between;
-    font-size: 22px;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    background: #e53935;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.checkout-btn:hover {
-    background: #c62828;
-}
-
-/* Free Delivery Section */
-.free-delivery-box {
-    margin-top: 10px;
-    background: #f9f9f9;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-}
-
-.free-text {
-    font-size: 14px;
-    font-weight: 600;
+.ProCartTitle {
+    font-family: var(--Font3), sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
     margin-bottom: 8px;
-    color: #444;
 }
 
-/* Progress Bar Wrapper */
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #ddd;
-    border-radius: 20px;
+.ProCartEmptyText {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.ProCartItemCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px var(--shadow-premium);
+}
+
+.ProItemInfoCluster {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 40%;
+}
+
+.ProCartImageFrame {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
     overflow: hidden;
+    border: 1px solid var(--border-morphic);
 }
 
-/* Animated Progress Fill */
-.progress-fill {
+.ProCartImageFrame img {
+    width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #4caf50, #76ff7a);
-    transition: width 0.4s ease-in-out;
+    object-fit: cover;
 }
 
-.free-popup {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #4caf50;
-    color: white;
-    padding: 15px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeInOut 2.5s ease forwards;
-    z-index: 9999;
-}
-
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    90% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
-/* DELIVERY BOX */
-.delivery-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.delivery-title {
-    font-size: 1.8rem;
-    font-family: var(--Font3);
-    margin-bottom: 15px;
-}
-
-.delivery-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 12px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.delivery-option:hover {
-    background: #f8f8f8;
-}
-
-.delivery-option.active {
-    border: 2px solid #ff8000;
-    background: #fff7ef;
-}
-
-.delivery-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.delivery-name {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.standard {
-    color: #ff6600;
-}
-
-.delivery-price {
-    margin-left: 5px;
-    font-weight: 600;
-}
-
-.delivery-time {
+.ProItemTextMeta h2 {
+    font-family: var(--Font3), sans-serif;
     font-size: 15px;
-    color: #444;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 2px;
 }
 
-.active-time {
-    color: #ff6600;
+.ProItemUnitRate {
+    font-size: 13px;
+    color: var(--accent-blue-light);
     font-weight: 700;
 }
 
-.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.disabled-text {
-    color: #aaa;
-}
-
-.cart-extra-box {
-    width: 100%;
-    background: #fff;
-    padding: 0;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-}
-
-.tab-header {
+/* --- ARITHMETIC STEPPER FRAMEWORK --- */
+.ProCartQtyBox {
     display: flex;
-    background: #fff5e6;
-    border-bottom: 1px solid #eee;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    border-radius: 6px;
+    padding: 2px;
+    gap: 8px;
 }
 
-.tab-btn {
-    flex: 1;
-    padding: 14px;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    transition: 0.2s;
+[data-theme="light-ocean"] .ProCartQtyBox {
+    background-color: rgba(0, 0, 0, 0.02);
 }
 
-.tab-btn:hover {
-    background: #ffe7c4;
-}
-
-.active-tab {
-    background: #ffbb66;
-    color: #000;
-    font-weight: 700;
-}
-
-.tab-content {
-    padding: 18px;
-}
-
-/* DELIVERY */
-.delivery-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    cursor: pointer;
-}
-
-.del-active {
-    border-color: #ff8800;
-    background: #fff3e6;
-}
-
-.del-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* TIP */
-.tip-item {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    margin-bottom: 10px;
+.ProQtyActionBtn {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
+    transition: background 0.2s ease;
 }
 
-.tip-active {
-    border-color: #ff8800;
-    background: #fff3e6;
+.ProQtyActionBtn:hover {
+    background-color: var(--accent-blue-dark);
+    color: #ffffff;
 }
 
-.custom-tip {
-    display: flex;
-    gap: 10px;
+.ProQtyValueDisplay {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-core);
+    min-width: 16px;
+    text-align: center;
 }
 
-.custom-tip input {
-    flex: 1;
-    padding: 8px;
+.ProCartSubtotalBox p {
+    font-family: var(--Font3), sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-core);
 }
 
-.custom-tip button {
-    padding: 7.3px 15px;
-}
-
-/* INSTRUCTION */
-.instruction-item {
+.ProCartRemoveItemCTA {
+    background: rgba(255, 77, 77, 0.05);
+    border: 1px solid rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
-.inst-active {
-    border-color: #ff8800;
-    background: #fff3e6;
+.ProCartRemoveItemCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
 }
 
-.instruction-item i {
-    font-size: 20px;
-}
-
-.OnOneLine {
+/* --- RIGHT SIDE: COMPLIANCE CONFIGURATOR DECKS --- */
+.ProCartRightSection {
     display: flex;
     flex-direction: column;
+    width: 35%;
+    gap: 20px;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
 }
 
-.OnOneLine p:last-child {
-    font-size: 12px;
+.ProCartExtraBentoCard,
+.ProCartCouponBentoCard,
+.ProCartSummaryBentoCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    box-sizing: border-box;
 }
 
-.OneOneLine2 {
+/* Tab Header Configurations */
+.ProTabHeaderDeck {
     display: flex;
-    gap: 1rem;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid var(--border-morphic);
+    padding: 3px;
 }
 
-.OnOneLine3 {
+[data-theme="light-ocean"] .ProTabHeaderDeck {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.ProTabTriggerBtn {
+    flex: 1;
+    padding: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.ProTabTriggerBtn:hover {
+    color: var(--text-core);
+}
+
+.active-tab-node {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.ProTabContentPanel {
+    padding: 1.5rem;
+}
+
+/* Delivery Item Vectors */
+.ProDeliveryOptionItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-morphic);
     margin-bottom: 10px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
-.OnOneLine3 p {
-    font-size: 14.5px;
-    /* width: 75x/%; */
+.ProDeliveryOptionItem input[type="radio"] {
+    accent-color: var(--accent-blue-light);
+    margin-right: 4px;
+}
+
+.delivery-node-active {
+    border-color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.04);
+}
+
+.delivery-node-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.ProDeliveryTextLine {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ProDeliveryLabelText {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.ProDeliveryTimeSpan {
+    font-size: 11px;
+    color: var(--text-muted);
     font-weight: 500;
 }
 
-.OnOneLine3 img {
-    width: 80px;
+.ProDeliveryChargeText {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+/* Rider Gratuity Mechanics */
+.ProTipBannerInline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.ProTipBannerInline p {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.ProTipBannerInline img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.ProTipSelectorChipsRow {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ProTipChipCard {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-morphic);
+    background-color: rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-core);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tip-chip-active {
+    background-color: var(--accent-blue-light);
+    border-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.ProCustomTipInputGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.ProCustomTipInputGroup input {
+    flex: 1;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    border-radius: 6px;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.ProCustomTipInputGroup button {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    padding: 0 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Dispatch Instruction Cards */
+.ProInstructionOptionsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ProInstructionItemCard {
+    border: 1px solid var(--border-morphic);
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.ProInstructionItemCard i {
+    font-size: 20px;
+    color: var(--accent-blue-light);
+}
+
+.ProInstructionItemCard p {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.instruction-node-active {
+    border-color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.04);
+}
+
+/* --- TOKEN PROMO INTERFACE --- */
+.ProCartCouponBentoCard {
+    padding: 1.5rem;
+}
+
+.ProCartCouponBentoCard h3,
+.ProCartSummaryBentoCard h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ProCouponActionRow {
+    display: flex;
+    gap: 8px;
+}
+
+.ProCouponActionRow input {
+    flex: 1;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    padding: 12px;
+    color: #ffffff;
+    font-size: 13.5px;
+}
+
+.ProCouponActionRow button {
+    background-color: var(--accent-blue-dark);
+    border: none;
+    color: #ffffff;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.ProCouponActionRow button:hover {
+    background-color: var(--accent-blue-light);
+}
+
+/* --- SUMMARY TRANSACTION SHEET METRICS --- */
+.ProCartSummaryBentoCard {
+    padding: 1.5rem;
+}
+
+.ProSummaryRowItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.ProSummaryRowItem span {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.ProSummaryRowItem strong {
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+.CouponDiscountHighlightRow span,
+.CouponDiscountHighlightRow strong {
+    color: #ff4d4d !important;
+}
+
+/* Progress Vector Frameworks */
+.ProFreeDeliveryMetricsBox {
+    margin-top: 12px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.ProFreeDeliveryNotifyText {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+.ProFreeDeliveryNotifyText.SuccessColor {
+    color: var(--accent-blue-light);
+}
+
+.ProGlacialProgressBar {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.ProGlacialFill {
+    height: 100%;
+    background-color: var(--accent-blue-light);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProSummarySplitDividerLine {
+    height: 1px;
+    width: 100%;
+    background-color: var(--border-morphic);
+    margin: 16px 0;
+}
+
+.ProSummaryFinalTotalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    margin-bottom: 1.2rem;
+    font-weight: 800;
+    font-family: var(--Font3), sans-serif;
+    color: var(--text-core);
+}
+
+.ProCheckoutAuthorizeCTA {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProCheckoutAuthorizeCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 78, 152, 0.3);
+}
+
+/* System Toast Overlays */
+.ProGlacialToastOverlay {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 10000;
+    animation: toastSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.ProGlacialToastBody {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue-light);
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    color: var(--text-core);
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- RESPONSIVE CONTRACTIONS --- */
+@media (max-width: 1024px) {
+    .ProCartContainer {
+        flex-direction: column;
+        padding: 0 2rem;
+        margin-top: 2rem;
+    }
+
+    .ProCartLeftSection,
+    .ProCartRightSection {
+        width: 100%;
+    }
+
+    .ProCartRightSection {
+        position: static;
+    }
 }

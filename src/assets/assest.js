@@ -146,3 +146,30 @@ export const midnightSearchData = {
         ctaAdd: "Add to Cart"
     }
 };
+
+export const midnightCartData = {
+    labels: {
+        title: "Your Cart",
+        emptyText: "Your collection is currently unallocated.",
+        summaryTitle: "Settlement Summary",
+        subtotal: "Subtotal Ledger",
+        shipping: "Logistics Shipping",
+        deliveryType: "Transport Speed",
+        tip: "Rider Gratuity",
+        total: "Total Authorization",
+        checkoutBtn: "Authorize Checkout",
+        freeDeliverySuccess: "Congratulations! You unlocked FREE Delivery 🎉",
+        freeDeliveryProgress: "Add ₹{amount} more for FREE Delivery",
+        freePopupText: "🎉 Free Delivery Unlocked! You saved ₹40 on shipping."
+    },
+    tabs: [
+        { id: "delivery", label: "Delivery Type" },
+        { id: "tip", label: "Tip Matrix" },
+        { id: "instruction", label: "Instructions" }
+    ],
+    coupon: {
+        title: "Apply Promotional Token",
+        placeholder: "Enter token signature",
+        redeemBtn: "Redeem"
+    }
+};
