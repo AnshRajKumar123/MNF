@@ -1,121 +1,197 @@
-/* ==========================================================================
-   🌟 PARKLY/MNF HIGH-END BLUE BLUE BLUE Blue COMPONENT SYSTEM CARD
-   ========================================================================== */
-
-.ProProductGridBoxCard {
+.ProProductFloatingDiskCard {
     width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
+    min-width: 0;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-morphic);
-    box-shadow: 0 15px 35px var(--shadow-premium);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px var(--shadow-premium);
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
-    position: relative;
     display: flex;
     flex-direction: column;
-}
-
-.ProProductGridBoxCard:hover {
-    transform: translateY(-6px);
-    border-color: rgba(58, 134, 200, 0.3);
-}
-
-.ProProductImageContainer {
-    width: 100%;
+    align-items: center;
     position: relative;
-    overflow: hidden;
-    height: 170px;
-    background-color: rgba(0, 0, 0, 0.1);
+    padding-top: 2rem;
+    margin-top: 2.5rem;
+    box-sizing: border-box;
+    overflow: visible;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.3s ease;
 }
 
-.ProProductImageContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease, filter 0.3s ease;
+.ProProductFloatingDiskCard:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 30px 55px var(--shadow-premium);
 }
 
-.ProProductGridBoxCard:hover .ProProductImageContainer img {
-    transform: scale(1.06);
-}
-
-/* --- PREMIUM INTERACTIVE CORNER ACCENT ADD TO CART FLOATING BTN --- */
-.ProFloatingCartAppendCTA {
+.DiskImageAnchorFrame {
+    width: 120px;
+    height: 120px;
     position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background-color: var(--accent-blue-light);
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
-    cursor: pointer;
+    top: -60px;
+    z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 5;
 }
 
-.ProFloatingCartAppendCTA i {
-    transition: transform 0.2s ease;
+.DiskImageAnchorFrame img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-morphic);
+    background-color: var(--bg-primary);
+    z-index: 3;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
 }
 
-.ProFloatingCartAppendCTA:hover {
+.DiskAmbientGlowBackdrop {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-blue-light) 0%, transparent 70%);
+    opacity: 0.15;
+    z-index: 1;
+    filter: blur(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ProProductFloatingDiskCard:hover .DiskAmbientGlowBackdrop {
+    opacity: 0.35;
+    transform: scale(1.2);
+}
+
+.ProProductFloatingDiskCard:hover .DiskImageAnchorFrame img {
+    transform: scale(1.05) rotate(4deg);
+}
+
+.DiskFloatingCategoryTag {
+    position: absolute;
+    bottom: -2px;
     background-color: var(--accent-blue-dark);
-    transform: scale(1.05);
+    border: 1px solid var(--border-morphic);
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.ProFloatingCartAppendCTA:hover i {
-    transform: rotate(90deg);
-}
-
-/* --- CARD TEXT METRICS PANEL --- */
-.ProProductMetaDetails {
-    padding: 1.2rem;
+.DiskMetaTypographyDetails {
+    width: 100%;
+    padding: 4.5rem 1.2rem 1.2rem 1.2rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
     flex-grow: 1;
+    min-width: 0;
 }
 
-.ProProductNameText {
+.DiskProductNameText {
     font-family: var(--Font3), sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
     color: var(--text-core);
-    margin-bottom: 4px;
+    margin: 0 0 6px 0;
     letter-spacing: -0.2px;
-}
-
-.ProProductCategoryTag {
-    font-size: 11px;
-    color: var(--accent-blue-light);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-}
-
-.ProProductTruncatedDesc {
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--text-muted);
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 1rem;
 }
 
-.ProProductRateText {
+.DiskProductTruncatedDesc {
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--text-muted);
+    margin: 0 0 14px 0;
+    width: 100%;
+
+    /* 🛠️ FIX: Changed from absolute single line to beautiful multi-line description truncation */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    height: 36px;
+}
+
+.DiskProductRateText {
     font-family: var(--Font3), sans-serif;
     font-weight: 800;
     color: var(--text-core);
-    font-size: 22px;
+    font-size: 19px;
     margin-top: auto;
-    /* Aligns to cards baseline bottom parameter uniformly */
+}
+
+/* --- SOLID CONSOLE FOOTER ACTION ROW --- */
+.DiskConsoleFooterActionRow {
+    width: 100%;
+    display: flex;
+    border-top: 1px solid var(--border-morphic);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+}
+
+[data-theme="light-ocean"] .DiskConsoleFooterActionRow {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.DiskInspectConsoleCTA,
+.DiskCartAppendCTA {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    padding: 12px 0;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.DiskInspectConsoleCTA {
+    color: var(--text-muted);
+    border-right: 1px solid var(--border-morphic);
+}
+
+.DiskInspectConsoleCTA i {
+    font-size: 14px;
+}
+
+.DiskInspectConsoleCTA:hover {
+    color: var(--text-core);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.DiskCartAppendCTA {
+    color: var(--accent-blue-light);
+}
+
+.DiskCartAppendCTA i {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+}
+
+.DiskCartAppendCTA:hover {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.DiskCartAppendCTA:hover i {
+    transform: scale(1.1) translateY(-1px);
 }
