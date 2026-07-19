@@ -117,7 +117,39 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getProfile = async (req, res) => {
+    try {
+
+        // 👇 Add it here
+        const user = await User.findById(req.user.id).select("-password");
+
+        return res.status(200).json({
+            success: true,
+            user,
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+const logoutUser = (req, res) => {
+    res.clearCookie("token");
+
+    return res.status(200).json({
+        success: true,
+        message: "Logged out successfully",
+    });
+};
+
 module.exports = {
     registerUser,
     loginUser,
+    getProfile,
+    logoutUser,
 };

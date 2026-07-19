@@ -63,10 +63,8 @@ const SignInUp = () => {
             );
 
             toast.success(response.data.message);
-            console.log(response.data);
-
-            // We'll add this after JWT
-            // navigate("/mainWebsite");
+            // console.log(response.data);
+            navigate("/mainWebsite");
 
         } catch (error) {
             toast.error(error.response?.data?.message || "Something went wrong");
