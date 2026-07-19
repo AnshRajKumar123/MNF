@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../ComponentCSS/Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { midnightFoodData } from '../assets/assest';
+import axios from "axios";
 
 const Navbar = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,15 +11,41 @@ const Navbar = () => {
     const [userProfile, setUserProfile] = useState(null);
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("MNF_UserProfile"));
-        setUserProfile(saved);
 
-        const handleUpdate = () => {
-            const updated = JSON.parse(localStorage.getItem("MNF_UserProfile"));
-            setUserProfile(updated);
+        const fetchProfile = async () => {
+
+            try {
+
+                const response = await axios.get(
+                    "http://localhost:3000/auth/profile",
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const user = response.data.user;
+
+                setUserProfile({
+                    name: user.fullName,
+                    image: user.image,
+                });
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
         };
-        window.addEventListener("profileUpdated", handleUpdate);
-        return () => window.removeEventListener("profileUpdated", handleUpdate);
+
+        fetchProfile();
+
+        window.addEventListener("profileUpdated", fetchProfile);
+
+        return () => {
+            window.removeEventListener("profileUpdated", fetchProfile);
+        };
+
     }, []);
 
     useEffect(() => {

@@ -177,7 +177,8 @@ const Profile = () => {
             );
 
             showToast(response.data.message);
-
+            
+            window.dispatchEvent(new Event("profileUpdated"));
         } catch (error) {
 
             showToast(

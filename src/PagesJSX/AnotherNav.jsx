@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../PagesCSS/AnotherNav.css';
 import { Link } from 'react-router-dom';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
+import axios from "axios";
 
 const AnotherNav = () => {
     const [userProfile, setUserProfile] = useState(null);
@@ -23,16 +24,41 @@ const AnotherNav = () => {
     }, [isLightOcean]);
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("MNF_UserProfile"));
-        setUserProfile(saved);
 
-        const handleUpdate = () => {
-            const updated = JSON.parse(localStorage.getItem("MNF_UserProfile"));
-            setUserProfile(updated);
+        const fetchProfile = async () => {
+
+            try {
+
+                const response = await axios.get(
+                    "http://localhost:3000/auth/profile",
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const user = response.data.user;
+
+                setUserProfile({
+                    name: user.fullName,
+                    image: user.image,
+                });
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
         };
 
-        window.addEventListener("profileUpdated", handleUpdate);
-        return () => window.removeEventListener("profileUpdated", handleUpdate);
+        fetchProfile();
+
+        window.addEventListener("profileUpdated", fetchProfile);
+
+        return () => {
+            window.removeEventListener("profileUpdated", fetchProfile);
+        };
+
     }, []);
 
     return (
