@@ -1,8 +1,8 @@
+import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
 
     const [loading, setLoading] = useState(true);
     const [authenticated, setAuthenticated] = useState(false);
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }) => {
 
                 setAuthenticated(true);
 
-            } catch (error) {
+            } catch {
 
                 setAuthenticated(false);
 
@@ -38,16 +38,9 @@ const ProtectedRoute = ({ children }) => {
 
     }, []);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    if (loading) return <h2>Loading...</h2>;
 
-    if (!authenticated) {
-        return <Navigate to="/SignInUp" replace />;
-    }
-
-    return children;
-
+    return authenticated ? <Outlet /> : <Navigate to="/SignInUp" replace />;
 };
 
 export default ProtectedRoute;
