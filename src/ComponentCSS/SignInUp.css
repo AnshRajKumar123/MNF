@@ -1,259 +1,363 @@
-.SignUpPop {
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD ECOSYSTEM HIGH-FI SLIDING AUTH GATEWAY SHEET
+   ========================================================================== */
+
+.ProAuthOverlayWrapper {
     height: 100vh;
     width: 100vw;
     position: relative;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: var(--bg-primary);
+    box-sizing: border-box;
 }
 
-.SignUpPop::before {
+/* Background Atmospheric Canvas Overlay Triggers */
+.ProAuthOverlayWrapper::before {
     content: '';
     position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: url(/public/LoginBanner.jpeg);
+    inset: 0;
+    background-image: url('/public/LoginBanner.jpeg');
     background-position: center;
     background-size: cover;
-    opacity: 0.5;
-    inset: 0;
-    filter: blur(10px);
-    transform: scale(1.1);   /* prevents blur edge cut */
-    z-index: 0;
+    opacity: 0.15;
+    filter: blur(12px);
+    transform: scale(1.05);
+    z-index: 1;
 }
 
-.SignUpPop::after {
-    height: 100%;
+[data-theme="light-ocean"] .ProAuthOverlayWrapper::before {
+    opacity: 0.05;
+}
+
+/* --- HOUSING CONTAINER CARD --- */
+.ProAuthBentoContainer {
+    position: relative;
     width: 100%;
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.45);
-    z-index: -1;
-}
-
-.SignInsidePop {
-    padding: 20px;
-    background-color: #fff;
-    width: 54%;
-    border-radius: 15px;
-    box-shadow: 9px 8px 11px 0px rgb(64, 63, 63, 0.3);
+    max-width: 900px;
+    height: 560px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    box-shadow: 0 30px 70px var(--shadow-premium);
     display: flex;
     overflow: hidden;
-    position: relative;
+    z-index: 5;
 }
 
-/* =================== Sign In Section =================== */
-
-.WebLogoImg {
-    width: 100px;
-}
-
-.FirstSignUp {
+/* Base Configuration For Nested Form Blocks */
+.ProAuthFormBlock {
     width: 50%;
     height: 100%;
-    padding: 40px 40px;
-    text-align: center;
-    transition: all 0.5s ease-in-out;
-}
-
-.FirstSignUp h1,
-.SecondSignIn h1 {
-    font-size: 45px;
-    letter-spacing: -2px;
-    font-family: var(--Font3);
-    font-weight: 900;
-    margin-bottom: 20px;
-}
-
-.MediaIconSect {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 1rem;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.MediaIconSect .IconSect {
-    height: 45px;
-    width: 45px;
-    border: 1.2px solid black;
-    border-radius: 50%;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-}
-
-#LetterSect {
-    letter-spacing: 0.3px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.InputSectBox {
-    width: 100%;
+    padding: 3rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
-    gap: 1rem;
-}
-
-.InputSectBox input {
-    width: 84%;
-    border: none;
-    padding: 13px 14px;
-    background-color: #00000015;
-    font-size: 15px;
-    outline: none;
-    border-radius: 5px;
-}
-
-#SectFort {
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.NormalSect {
-    border: none;
-    font-size: 15px;
-    padding: 14px 55px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #fff;
-    background-color: #51AE5E;
-    cursor: pointer;
-}
-
-/* =================== Sign Up Section =================== */
-
-.SecondSignIn {
-    width: 50%;
-    height: 100%;
-    padding: 40px 40px;
+    justify-content: center;
     text-align: center;
+    background-color: var(--bg-surface);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out;
+    z-index: 2;
+}
+
+.FirstSignUpSection {
+    transform: translateX(0);
+}
+
+.SecondSignUpSection {
     position: absolute;
     top: 0;
     left: 0;
-    transition: all 0.5s ease-in-out;
+    transform: translateX(-100%);
 }
 
-/* =================== Sliding Panel =================== */
+/* Layout Triggers During Toggle State Shifts */
+.AuthFormHiddenState .FirstSignUpSection {
+    transform: translateX(100%);
+}
 
-.MoveBtnBox {
+.PanelStateShiftActive .SecondSignUpSection {
+    transform: translateX(100%);
+}
+
+/* --- BRANDING & TEXT METRICS LINES --- */
+.AuthFormHeaderBrand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.AuthBrandLogoImage {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: hue-rotate(85deg) brightness(1.1);
+}
+
+[data-theme="light-ocean"] .AuthBrandLogoImage {
+    filter: hue-rotate(95deg) brightness(0.9);
+}
+
+.AuthFormHeaderBrand h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+/* Premium Social Buttons Grid Row */
+.ProSocialAuthRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.SocialIconCell {
+    height: 38px;
+    width: 38px;
+    border: 1px solid var(--border-morphic);
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.SocialIconCell:hover {
+    border-color: var(--accent-blue-light);
+    color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.04);
+}
+
+.AuthTaglineLabelText {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0 0 1.2rem 0;
+}
+
+/* Form Input Configurations */
+.ProAuthInputsVerticalStack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.ProAuthFieldInputRow {
+    width: 100%;
+}
+
+.ProAuthFieldInputRow input {
+    width: 100%;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+[data-theme="light-ocean"] .ProAuthFieldInputRow input {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.ProAuthFieldInputRow input:focus {
+    border-color: var(--accent-blue-light);
+}
+
+.AuthForgotSecretAction {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: 0 0 1.5rem 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.AuthForgotSecretAction:hover {
+    color: var(--accent-blue-light);
+    color: #102A6B;
+}
+
+.ProAuthSubmitCTA {
+    border: none;
+    font-size: 14px;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-family: var(--Font3), sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: var(--accent-blue-light);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProAuthSubmitCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1.5px);
+}
+
+/* --- THE RUNTIME SLIDING CONSOLE PANEL CONTAINER --- */
+.ProAuthSlidingConsolePanel {
     position: absolute;
     top: 0;
     left: 50%;
     height: 100%;
     width: 50%;
-    background-color: #51AE5E;
+    background: linear-gradient(135deg, var(--accent-blue-dark) 0%, #102A6B 100%);
+    border-left: 1px solid var(--border-morphic);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    color: #fff;
-    transition: all 0.5s ease-in-out;
+    box-sizing: border-box;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
 }
 
-.CloseSectSign {
-    display: none;
-    transition: all 0.5s ease-in-out;
+.PanelStateShiftActive .ProAuthSlidingConsolePanel {
+    transform: translateX(-100%);
 }
 
-.MoveBtnBox h1 {
-    font-size: 45px;
-    font-family: var(--Font3);
-    font-weight: 900;
-    letter-spacing: -1.3px;
-    text-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
-}
-
-.MoveBtnBox p {
-    line-height: 20px;
-    letter-spacing: 0.3px;
-    font-weight: 500;
-    margin: 14px 0 25px;
-}
-
-.MoveBtnBox button {
-    padding: 10px 55px;
-    background-color: transparent;
-    border-radius: 50px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 550;
-    letter-spacing: 0.3px;
-    border: 1.5px solid #fff;
-    cursor: pointer;
-    transition: all 0.33s ease;
-}
-
-.MoveBtnBox .StartSectSign button:hover {
-    box-shadow: 10px 7px 18px 2px rgb(0 0 0 / 38%);
-}
-
-.MoveBtnBox .CloseSectSign button:hover {
-    box-shadow: -11px 12px 18px 2px rgb(0 0 0 / 38%);
-}
-
-/* =================== Form Switch Animation =================== */
-
-.SignInsidePop .FirstSignUp,
-.SignInsidePop .SecondSignIn {
-    transition: transform 0.6s ease-in-out, opacity 0.4s ease-in-out;
-}
-
-.HideForm {
-    opacity: 0;
-    transform: translateX(100%);
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.FirstSignUp,
-.SecondSignIn {
+.SlidingConsoleContentBody {
     position: relative;
-    z-index: 2;
+    z-index: 5;
+    padding: 0 2.5rem;
+    text-align: center;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.MoveBtnBox {
+.ConsoleStateNodeAnimate h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 10px 0;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.ConsoleStateNodeAnimate p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 2rem 0;
+}
+
+.ConsolePanelTriggerBtn {
+    padding: 11px 44px;
+    background: transparent;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ConsolePanelTriggerBtn:hover {
+    background-color: #ffffff;
+    color: #1A252C;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+}
+
+/* --- ABSOLUTE GRAPHIC VECTOR BADGES --- */
+.MorphicPanelGraphicsAnchor {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.MorphicAssetVector {
+    position: absolute;
+    opacity: 0.12;
+}
+
+.MorphicAssetVector img {
+    width: 140px;
+    height: auto;
+    filter: hue-rotate(85deg);
+}
+
+.AbsoluteBurgerAsset {
+    bottom: -20px;
+    left: -20px;
+    transform: rotate(-15deg);
+}
+
+.AbsolutePizzaAsset {
+    top: -20px;
+    right: -20px;
+    transform: rotate(15deg);
+}
+
+/* Hidden Form Handlers */
+.AuthFormHiddenState {
+    opacity: 0 !important;
+    pointer-events: none;
     z-index: 1;
 }
 
-.BurgerAbosulet {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-}
+/* --- BREAKPOINT CONTRACTS RESPONSIVE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .ProAuthBentoContainer {
+        max-width: 440px;
+        height: auto;
+        flex-direction: column;
+    }
 
-.BurgerAbosulet img {
-    width: 180px;
-}
+    .ProAuthFormBlock {
+        width: 100%;
+        padding: 2.5rem 1.5rem;
+    }
 
-.PizaaAbosulet {
-    position: absolute;
-    top: 1%;
-    right: 20px;
-}
+    .ProAuthSlidingConsolePanel {
+        display: none;
+        /* Safely hides sliding slider panel logic layouts on mobile footprints */
+    }
 
-.PizaaAbosulet img {
-    width: 180px;
-}
+    .SecondSignUpSection {
+        position: static;
+        transform: none;
+    }
 
-.CloseSectSign .BurgerAbosulet {
-    left: 56%;
-}
+    .PanelStateShiftActive .FirstSignUpSection {
+        display: none;
+    }
 
-.CloseSectSign .PizaaAbosulet {
-    right: 56%;
+    .AuthFormHiddenState {
+        display: none;
+    }
 }

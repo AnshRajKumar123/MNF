@@ -452,3 +452,23 @@ export const midnightHeroData = {
         qrLabel: "Scan QR signature to bind terminal link"
     }
 };
+
+export const midnightAuthData = {
+    signIn: {
+        title: "Sign In",
+        tagline: "Or use your authenticated account signature",
+        forgotText: "Forgot Authentication Secret?"
+    },
+    signUp: {
+        title: "Create Account",
+        tagline: "Or use your email vector for node registration"
+    },
+    panels: {
+        greetTitle: "Hello, Friend!",
+        greetDesc: "Sign in and continue your premium late-night food logistics journey with MNF.",
+        greetBtn: "SIGN UP",
+        welcomeTitle: "Welcome Back!",
+        welcomeDesc: "Initialize your secure MNF identity to explore endless midnight food dispatches.",
+        welcomeBtn: "SIGN IN"
+    }
+};
