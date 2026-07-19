@@ -7,15 +7,31 @@ const SignInUp = () => {
     const [isSignUp, setIsSignUp] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        localStorage.setItem("mnfUserLoggedIn", "true");
-        navigate("/mainWebsite");
+    const [signUpData, setSignUpData] = useState({
+        fullName: "",
+        email: "",
+        password: "",
+    });
+
+    const [signInData, setSignInData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleSignInChange = (e) => {
+        setSignInData({
+            ...signInData,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    const handleSignUp = () => {
-        localStorage.setItem("mnfUserLoggedIn", "true");
-        navigate("/mainWebsite");
+    const handleSignUpChange = (e) => {
+        setSignUpData({
+            ...signUpData,
+            [e.target.name]: e.target.value,
+        });
     };
+
 
     return (
         <div className="ProAuthOverlayWrapper">
@@ -36,20 +52,22 @@ const SignInUp = () => {
 
                     <p className="AuthTaglineLabelText">{midnightAuthData.signIn.tagline}</p>
 
-                    <div className="ProAuthInputsVerticalStack">
-                        <div className="ProAuthFieldInputRow">
-                            <input type="email" placeholder="Email or Security Number" required />
+                    <form className="FormClass">
+                        <div className="ProAuthInputsVerticalStack">
+                            <div className="ProAuthFieldInputRow">
+                                <input name="email" type="email" placeholder="Email" required value={signInData.email} onChange={handleSignInChange} />
+                            </div>
+                            <div className="ProAuthFieldInputRow">
+                                <input name="password" type="password" placeholder="Password" required value={signInData.password} onChange={handleSignInChange} />
+                            </div>
                         </div>
-                        <div className="ProAuthFieldInputRow">
-                            <input type="number" placeholder="One-Time PIN (OTP)" />
-                        </div>
-                    </div>
 
-                    <p className="AuthForgotSecretAction">{midnightAuthData.signIn.forgotText}</p>
+                        <p className="AuthForgotSecretAction">{midnightAuthData.signIn.forgotText}</p>
 
-                    <button className="ProAuthSubmitCTA" onClick={handleLogin}>
-                        Sign In <i className='bx bx-log-in-circle'></i>
-                    </button>
+                        <button className="ProAuthSubmitCTA">
+                            Sign In <i className='bx bx-log-in-circle'></i>
+                        </button>
+                    </form>
                 </div>
 
                 {/* ================= LEFT / RIGHT LAYER: SIGN UP FORM ================= */}
@@ -67,21 +85,23 @@ const SignInUp = () => {
 
                     <p className="AuthTaglineLabelText">{midnightAuthData.signUp.tagline}</p>
 
-                    <div className="ProAuthInputsVerticalStack">
-                        <div className="ProAuthFieldInputRow">
-                            <input type="text" placeholder="Full Identity Name" />
+                    <form className="FormClass">
+                        <div className="ProAuthInputsVerticalStack">
+                            <div className="ProAuthFieldInputRow">
+                                <input name="fullName" type="text" placeholder="Full Name" required value={signUpData.fullName} onChange={handleSignUpChange} />
+                            </div>
+                            <div className="ProAuthFieldInputRow">
+                                <input name="email" type="email" placeholder="Email" required value={signUpData.email} onChange={handleSignUpChange} />
+                            </div>
+                            <div className="ProAuthFieldInputRow">
+                                <input name="password" type="password" placeholder="Password" required value={signUpData.password} onChange={handleSignUpChange} />
+                            </div>
                         </div>
-                        <div className="ProAuthFieldInputRow">
-                            <input type="email" placeholder="Email Vector Link" required />
-                        </div>
-                        <div className="ProAuthFieldInputRow">
-                            <input type="number" placeholder="Request Verification OTP" />
-                        </div>
-                    </div>
 
-                    <button className="ProAuthSubmitCTA" onClick={handleSignUp}>
-                        Sign Up <i className='bx bx-user-plus'></i>
-                    </button>
+                        <button className="ProAuthSubmitCTA">
+                            Sign Up <i className='bx bx-user-plus'></i>
+                        </button>
+                    </form>
                 </div>
 
                 {/* ================= SLIDING CONSOLE CONTENT SIDEBAR ================= */}

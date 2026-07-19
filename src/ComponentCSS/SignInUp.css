@@ -289,6 +289,10 @@
     transform: translateY(-1px);
 }
 
+.FormClass {
+    width: 80%;
+}
+
 /* --- ABSOLUTE GRAPHIC VECTOR BADGES --- */
 .MorphicPanelGraphicsAnchor {
     position: absolute;
