@@ -13,11 +13,13 @@ import Profile from './ComponentJSX/Profile'
 import FraudSuccess from './PagesJSX/FraudSuccess'
 import HelpSuccess from './PagesJSX/HelpSuccess'
 import TrackOrder from './PagesJSX/TrackOrder'
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
     <>
       <ScrollToTop />
+      <Toaster position="top-center" />
       <Routes>
         <Route path='/' element={<HeroSect />} />
 

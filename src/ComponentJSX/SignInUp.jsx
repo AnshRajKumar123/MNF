@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../ComponentCSS/SignInUp.css";
 import { ResturantIG, midnightAuthData } from "../assets/assest";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SignInUp = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -32,6 +34,46 @@ const SignInUp = () => {
         });
     };
 
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/auth/register",
+                signUpData
+            );
+
+            toast.success(response.data.message);
+
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Something went wrong");
+        }
+    };
+
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                "http://localhost:3000/auth/login",
+                signInData,
+                {
+                    withCredentials: true,
+                }
+            );
+
+            toast.success(response.data.message);
+            console.log(response.data);
+
+            // We'll add this after JWT
+            // navigate("/mainWebsite");
+
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Something went wrong");
+        }
+    };
+
+
 
     return (
         <div className="ProAuthOverlayWrapper">
@@ -52,7 +94,7 @@ const SignInUp = () => {
 
                     <p className="AuthTaglineLabelText">{midnightAuthData.signIn.tagline}</p>
 
-                    <form className="FormClass">
+                    <form onSubmit={handleSignIn} className="FormClass">
                         <div className="ProAuthInputsVerticalStack">
                             <div className="ProAuthFieldInputRow">
                                 <input name="email" type="email" placeholder="Email" required value={signInData.email} onChange={handleSignInChange} />
@@ -64,7 +106,7 @@ const SignInUp = () => {
 
                         <p className="AuthForgotSecretAction">{midnightAuthData.signIn.forgotText}</p>
 
-                        <button className="ProAuthSubmitCTA">
+                        <button type="submit" className="ProAuthSubmitCTA">
                             Sign In <i className='bx bx-log-in-circle'></i>
                         </button>
                     </form>
@@ -85,7 +127,7 @@ const SignInUp = () => {
 
                     <p className="AuthTaglineLabelText">{midnightAuthData.signUp.tagline}</p>
 
-                    <form className="FormClass">
+                    <form onSubmit={handleSignUp} className="FormClass">
                         <div className="ProAuthInputsVerticalStack">
                             <div className="ProAuthFieldInputRow">
                                 <input name="fullName" type="text" placeholder="Full Name" required value={signUpData.fullName} onChange={handleSignUpChange} />
@@ -98,8 +140,8 @@ const SignInUp = () => {
                             </div>
                         </div>
 
-                        <button className="ProAuthSubmitCTA">
-                            Sign Up <i className='bx bx-user-plus'></i>
+                        <button type="submit" className="ProAuthSubmitCTA">
+                            Sign Up <i className="bx bx-user-plus"></i>
                         </button>
                     </form>
                 </div>
