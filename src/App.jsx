@@ -15,6 +15,7 @@ import HelpSuccess from './PagesJSX/HelpSuccess'
 import TrackOrder from './PagesJSX/TrackOrder'
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ComponentJSX/ProtectedRoute";
+import NotFound from './PagesJSX/NotFound'
 
 const App = () => {
     return (
@@ -39,6 +40,8 @@ const App = () => {
                     <Route path='/track-order' element={<TrackOrder />} />
                     
                 </Route>
+
+                <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
         </>

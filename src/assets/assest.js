@@ -472,3 +472,13 @@ export const midnightAuthData = {
         welcomeBtn: "SIGN IN"
     }
 };
+
+export const midnightErrorData = {
+    labels: {
+        errorCode: "Status Code: 404",
+        title: "Ecosystem Route Exception",
+        subtitle: "Requested Not Found",
+        description: "The targeted logistical address vector does not exist inside the active dispatch registry. The resource may have been purged or unallocated from our midnight server grid.",
+        actionBtn: "Re-initialize Core Terminal"
+    }
+};
