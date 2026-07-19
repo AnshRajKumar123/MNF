@@ -12,13 +12,53 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-            lowercase: true,
             trim: true,
+            lowercase: true,
         },
 
         password: {
             type: String,
             required: true,
+        },
+
+        phone: {
+            type: String,
+            default: "",
+        },
+
+        country: {
+            type: String,
+            default: "IN",
+        },
+
+        dial: {
+            type: String,
+            default: "+91",
+        },
+
+        building: {
+            type: String,
+            default: "",
+        },
+
+        address: {
+            type: String,
+            default: "",
+        },
+
+        pincode: {
+            type: String,
+            default: "",
+        },
+
+        gender: {
+            type: String,
+            default: "",
+        },
+
+        image: {
+            type: String,
+            default: "",
         },
     },
     {
@@ -26,6 +66,4 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

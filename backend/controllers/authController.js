@@ -147,9 +147,43 @@ const logoutUser = (req, res) => {
     });
 };
 
+const updateProfile = async (req, res) => {
+    try {
+
+        const { phone, country, dial, building, address, pincode, gender, image, } = req.body;
+
+        const updatedUser = await User.findByIdAndUpdate(
+            req.user.id,
+            { phone, country, dial, building, address, pincode, gender, image, },
+
+            {
+                new: true,
+            }
+        ).select("-password");
+
+        // 3️⃣ Return the updated user
+        return res.status(200).json({
+            success: true,
+            message: "Profile updated successfully",
+            user: updatedUser,
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+};
+
 module.exports = {
     registerUser,
     loginUser,
     getProfile,
     logoutUser,
+    updateProfile,
 };

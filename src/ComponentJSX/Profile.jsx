@@ -3,6 +3,8 @@ import "../ComponentCSS/Profile.css";
 import AnotherNav from "../PagesJSX/AnotherNav";
 import Toast from "../ComponentJSX/Toast";
 import { midnightProfileData } from "../assets/assest";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const [profile, setProfile] = useState({
@@ -16,15 +18,75 @@ const Profile = () => {
         image: "",
     });
 
+    const navigate = useNavigate();
     const [toastMessage, setToastMessage] = useState("");
     const [changed, setChanged] = useState(false);
     const [shakeField, setShakeField] = useState("");
     const [glow, setGlow] = useState(false);
 
     useEffect(() => {
-        const saved = localStorage.getItem("MNF_UserProfile");
-        if (saved) setProfile(JSON.parse(saved));
+
+        const fetchProfile = async () => {
+
+            try {
+
+                const response = await axios.get(
+                    "http://localhost:3000/auth/profile",
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const user = response.data.user;
+
+                setProfile({
+                    name: user.fullName,
+                    phone: user.phone || "",
+                    email: user.email,
+                    building: user.building || "",
+                    address: user.address || "",
+                    pincode: user.pincode || "",
+                    gender: user.gender || "",
+                    image: user.image || "",
+                    country: user.country || "IN",
+                    dial: user.dial || "+91",
+                });
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        };
+
+        fetchProfile();
+
     }, []);
+
+    const handleLogout = async () => {
+        try {
+
+            const response = await axios.post(
+                "http://localhost:3000/auth/logout",
+                {},
+                {
+                    withCredentials: true,
+                }
+            );
+
+            showToast(response.data.message);
+
+            setTimeout(() => {
+                navigate("/SignInUp");
+            }, 1000);
+
+        } catch (error) {
+
+            showToast(
+                error.response?.data?.message || "Something went wrong"
+            );
+
+        }
+    };
 
     const showToast = (msg) => setToastMessage(msg);
     const closeToast = () => setToastMessage("");
@@ -92,12 +154,38 @@ const Profile = () => {
         return true;
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (!validate()) return;
 
-        localStorage.setItem("MNF_UserProfile", JSON.stringify(profile));
-        window.dispatchEvent(new Event("profileUpdated"));
-        showToast("Profile Updated Successfully!");
+        try {
+
+            const response = await axios.put(
+                "http://localhost:3000/auth/profile",
+                {
+                    phone: profile.phone,
+                    country: profile.country,
+                    dial: profile.dial,
+                    building: profile.building,
+                    address: profile.address,
+                    pincode: profile.pincode,
+                    gender: profile.gender,
+                    image: profile.image,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
+
+            showToast(response.data.message);
+
+        } catch (error) {
+
+            showToast(
+                error.response?.data?.message || "Something went wrong"
+            );
+
+            return;
+        }
         setChanged(false);
 
         setGlow(true);
@@ -137,6 +225,14 @@ const Profile = () => {
                             {midnightProfileData.labels.removeBtn}
                         </button>
                     )}
+
+                    <button
+                        className="ProLogoutBtn"
+                        onClick={handleLogout}
+                    >
+                        <i className='bx bx-log-out'></i>
+                        Logout
+                    </button>
                 </div>
 
                 {/* ---------- RIGHT COMPARTMENT: USER DATA LEDGER FORM ---------- */}
@@ -148,7 +244,7 @@ const Profile = () => {
                             type="text"
                             name="name"
                             placeholder="Full Name"
-                            className={shakeField === "name" ? "ProFieldShakeAnimation" : ""}
+                            className={`ProReadOnlyField ${shakeField === "name" ? "ProFieldShakeAnimation" : ""}`}
                             value={profile.name}
                             onChange={(e) => {
                                 setProfile((prev) => ({ ...prev, name: e.target.value }));
@@ -158,6 +254,7 @@ const Profile = () => {
                                 const formatted = formatName(e.target.value);
                                 setProfile((prev) => ({ ...prev, name: formatted }));
                             }}
+                            readOnly
                         />
                     </div>
 
@@ -210,9 +307,10 @@ const Profile = () => {
                             type="email"
                             name="email"
                             placeholder="Email Address"
-                            className={shakeField === "email" ? "ProFieldShakeAnimation" : ""}
+                            className={`ProReadOnlyField ${shakeField === "email" ? "ProFieldShakeAnimation" : ""}`}
                             value={profile.email}
                             onChange={handleChange}
+                            readOnly
                         />
                     </div>
 

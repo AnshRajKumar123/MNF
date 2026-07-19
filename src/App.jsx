@@ -14,31 +14,38 @@ import FraudSuccess from './PagesJSX/FraudSuccess'
 import HelpSuccess from './PagesJSX/HelpSuccess'
 import TrackOrder from './PagesJSX/TrackOrder'
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./ComponentJSX/ProtectedRoute";
 
 const App = () => {
-  return (
-    <>
-      <ScrollToTop />
-      <Toaster position="top-center" />
-      <Routes>
-        <Route path='/' element={<HeroSect />} />
+    return (
+        <>
+            <ScrollToTop />
+            <Toaster position="top-center" />
+            <Routes>
+                <Route path='/' element={<HeroSect />} />
+                <Route path='/signInUp' element={<SignInUp />} />
 
-        {/* YOUR MAIN WEBSITE */}
-        <Route path='/mainWebsite/*' element={<MainSection />} />
-
-        {/* Other Pages */}
-        <Route path='/about' element={<About />} />
-        <Route path='/help-support' element={<HelpSupport />} />
-        <Route path='/report-fraud' element={<ReportFraud />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path="/fraud-success" element={<FraudSuccess />} />
-        <Route path="/help-success" element={<HelpSuccess />} />
-        <Route path='/signInUp' element={<SignInUp />} />
-        <Route path='/track-order' element={<TrackOrder />} />
-      </Routes>
-      <Footer />
-    </>
-  )
+                <Route
+                    path="/*"
+                    element={
+                        <ProtectedRoute>
+                            <Routes>
+                                <Route path='/mainWebsite/*' element={<MainSection />} />
+                                <Route path='/about' element={<About />} />
+                                <Route path='/help-support' element={<HelpSupport />} />
+                                <Route path='/report-fraud' element={<ReportFraud />} />
+                                <Route path='/profile' element={<Profile />} />
+                                <Route path="/fraud-success" element={<FraudSuccess />} />
+                                <Route path="/help-success" element={<HelpSuccess />} />
+                                <Route path='/track-order' element={<TrackOrder />} />
+                            </Routes>
+                        </ProtectedRoute>
+                    }
+                />
+            </Routes>
+            <Footer />
+        </>
+    )
 }
 
 export default App
