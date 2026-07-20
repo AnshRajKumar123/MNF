@@ -13,18 +13,21 @@ const productSchema = new mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true,
+        trim: true,
     },
 
     description: {
         type: String,
         required: true,
+        trim: true,
     },
 
-    currency: {
+    alt: {
         type: String,
-        default: "INR",
+        default: "",
+        trim: true,
     },
-    
+
     image: {
         type: String,
         required: true,
@@ -33,18 +36,30 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+        min: 0,
+    },
+
+    currency: {
+        type: String,
+        default: "INR",
     },
 
     category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
+        type: String,
         required: true,
+        trim: true,
     },
+
+    tags: [{
+        type: String,
+        trim: true,
+        lowercase: true,
+    }],
 
     foodType: {
         type: String,
         enum: ["veg", "non-veg", "egg"],
-        required: true,
+        default: "veg",
     },
 
     isAvailable: {
@@ -60,6 +75,8 @@ const productSchema = new mongoose.Schema({
     averageRating: {
         type: Number,
         default: 0,
+        min: 0,
+        max: 5,
     },
 
     reviewCount: {
