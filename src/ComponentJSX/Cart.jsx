@@ -89,11 +89,22 @@ const Cart = () => {
         window.dispatchEvent(new Event("cartUpdated"));
     };
 
-    const removeItem = (index) => {
-        const updated = cartItems.filter((_, i) => i !== index);
-        setCartItems(updated);
-        localStorage.setItem('cartItems', JSON.stringify(updated));
-        window.dispatchEvent(new Event("cartUpdated"));
+    const removeItem = async (cartId) => {
+
+        try {
+
+            await api.delete(`/cart/remove/${cartId}`);
+
+            setCartItems(prev =>
+                prev.filter(item => item._id !== cartId)
+            );
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
     };
 
     const handleApplyCoupon = () => {
@@ -166,7 +177,7 @@ const Cart = () => {
                                 <p>₹{item.product.price * item.quantity}</p>
                             </div>
 
-                            <button className="ProCartRemoveItemCTA" onClick={() => removeItem(index)}>
+                            <button className="ProCartRemoveItemCTA" onClick={() => removeItem(item._id)}>
                                 <i className='bx bx-trash'></i>
                             </button>
                         </div>

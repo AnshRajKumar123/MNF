@@ -1,5 +1,6 @@
 import React from 'react';
 import '../ComponentCSS/SingleProduct.css';
+import api from "../config/axios";
 
 const SingleProduct = ({ product }) => {
     if (!product) return null;
@@ -10,25 +11,32 @@ const SingleProduct = ({ product }) => {
         );
     };
 
-    const handleAddToCart = async () => {
+    const handleAddToCart = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
 
         try {
 
-            await api.post("/cart/add", {
-                productId: selectedProduct._id,
-                quantity,
+            const res = await api.post("/cart/add", {
+                productId: product._id,
+                quantity: 1,
             });
 
-            showToast(midnightMenuData.labels.toastAdd);
+            window.dispatchEvent(
+                new CustomEvent("MNF_ShowToast", {
+                    detail: (
+                        <>
+                            <strong>{product.name}</strong> added to cart 🛒
+                        </>
+                    ),
+                })
+            );
 
             window.dispatchEvent(new Event("cartUpdated"));
 
         } catch (error) {
-
             console.log(error);
-
         }
-
     };
 
     return (

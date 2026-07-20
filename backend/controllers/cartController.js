@@ -92,7 +92,32 @@ const getCart = async (req, res) => {
 
 };
 
+const removeCartItem = async (req, res) => {
+
+    try {
+
+        const { cartId } = req.params;
+
+        await Cart.findByIdAndDelete(cartId);
+
+        return res.status(200).json({
+            success: true,
+            message: "Item removed from cart",
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
 module.exports = {
     addToCart,
-    getCart
+    getCart,
+    removeCartItem
 };

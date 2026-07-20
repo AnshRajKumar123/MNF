@@ -89,7 +89,15 @@ const HomeSect = () => {
                 quantity,
             });
 
-            showToast(midnightMenuData.labels.toastAdd);
+            window.dispatchEvent(
+                new CustomEvent("MNF_ShowToast", {
+                    detail: (
+                        <>
+                            <strong>{selectedProduct.name}</strong> added to cart 🛒
+                        </>
+                    ),
+                })
+            );
 
             window.dispatchEvent(new Event("cartUpdated"));
 

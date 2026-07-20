@@ -11,19 +11,34 @@ const SearchSect = () => {
     const [results, setResults] = useState([]);
     const [products, setProducts] = useState([]);
     const [query, setQuery] = useState("");
-    const [selectedProduct, setSelectedProduct] = useState(
-        JSON.parse(localStorage.getItem("selectedSearchProduct")) || null
-    );
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [toastMessage, setToastMessage] = useState("");
 
     useEffect(() => {
         const handleView = (e) => {
             setSelectedProduct(e.detail);
-            localStorage.setItem("selectedSearchProduct", JSON.stringify(e.detail));
+            setQuantity(1);
         };
         window.addEventListener("viewProductDetail", handleView);
         return () => window.removeEventListener("viewProductDetail", handleView);
+    }, []);
+
+    useEffect(() => {
+
+        const showToastListener = (e) => {
+            setToastMessage(e.detail);
+
+            setTimeout(() => {
+                setToastMessage("");
+            }, 2000);
+        };
+
+        window.addEventListener("MNF_ShowToast", showToastListener);
+
+        return () =>
+            window.removeEventListener("MNF_ShowToast", showToastListener);
+
     }, []);
 
     useEffect(() => {
@@ -32,9 +47,9 @@ const SearchSect = () => {
 
             try {
 
-                const res = await api.get("/product/all");
+                const { data } = await api.get("/product/all");
 
-                setProducts(res.data.products);
+                setProducts(data.products);
 
             } catch (error) {
 
@@ -58,20 +73,17 @@ const SearchSect = () => {
             return;
         }
 
-        const filtered = products.filter((item) => {
+        const filtered = products.filter(item => {
+
+            const search = q.toLowerCase();
 
             return (
-
-                item.name.toLowerCase().includes(q) ||
-
-                item.category.toLowerCase().includes(q) ||
-
-                item.slug.toLowerCase().includes(q) ||
-
+                item.name.toLowerCase().includes(search) ||
+                item.category.toLowerCase().includes(search) ||
+                item.slug.toLowerCase().includes(search) ||
                 item.tags?.some(tag =>
-                    tag.toLowerCase().includes(q)
+                    tag.toLowerCase().includes(search)
                 )
-
             );
 
         });
@@ -81,19 +93,33 @@ const SearchSect = () => {
     const increaseQty = () => setQuantity((q) => q + 1);
     const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
-    const handleAddToCart = () => {
-        const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const exists = savedCart.find((item) => item.id === selectedProduct.id);
+    const handleAddToCart = async () => {
 
-        if (exists) {
-            exists.quantity += quantity;
-        } else {
-            savedCart.push({ ...selectedProduct, quantity });
+        try {
+
+            await api.post("/cart/add", {
+                productId: selectedProduct._id,
+                quantity,
+            });
+
+            window.dispatchEvent(
+                new CustomEvent("MNF_ShowToast", {
+                    detail: (
+                        <>
+                            <strong>{selectedProduct.name}</strong> added to cart 🛒
+                        </>
+                    ),
+                })
+            );
+
+            window.dispatchEvent(new Event("cartUpdated"));
+
+        } catch (error) {
+
+            console.log(error);
+
         }
 
-        localStorage.setItem("cartItems", JSON.stringify(savedCart));
-        window.dispatchEvent(new Event("cartUpdated"));
-        setToastMessage(`${selectedProduct.name} committed to cart ledger!`);
     };
 
     return (
@@ -123,7 +149,6 @@ const SearchSect = () => {
                             className="DrawerDismissCTA"
                             onClick={() => {
                                 setSelectedProduct(null);
-                                localStorage.removeItem("selectedSearchProduct");
                             }}
                         >
                             <i className='bx bx-x'></i>

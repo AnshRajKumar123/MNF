@@ -14,6 +14,23 @@ const MenuSect = () => {
 
     useEffect(() => {
 
+        const showToastListener = (e) => {
+            setToastMsg(e.detail);
+
+            setTimeout(() => {
+                setToastMsg("");
+            }, 2000);
+        };
+
+        window.addEventListener("MNF_ShowToast", showToastListener);
+
+        return () =>
+            window.removeEventListener("MNF_ShowToast", showToastListener);
+
+    }, []);
+
+    useEffect(() => {
+
         const fetchProducts = async () => {
 
             try {
@@ -72,20 +89,27 @@ const MenuSect = () => {
     const handleAddToCart = async () => {
 
         try {
-            const res = await api.post("/cart/add", {
+
+            await api.post("/cart/add", {
                 productId: selectedProduct._id,
                 quantity,
             });
 
-            showToast(res.data.message);
+            window.dispatchEvent(
+                new CustomEvent("MNF_ShowToast", {
+                    detail: (
+                        <>
+                            <strong>{selectedProduct.name}</strong> added to cart 🛒
+                        </>
+                    ),
+                })
+            );
 
             window.dispatchEvent(new Event("cartUpdated"));
 
         } catch (error) {
 
             console.log(error);
-
-            showToast("Failed to add product.");
 
         }
 
