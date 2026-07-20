@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../ComponentCSS/MenuSect.css';
 import HoriZontalScroll from './HoriZontalScroll';
 import SingleProduct from './SingleProduct';
-import { assets } from '../assets/assests1';
 import { midnightMenuData } from '../assets/assest';
+import api from "../config/axios";
 
 const MenuSect = () => {
     const [allProducts, setAllProducts] = useState([]);
@@ -13,10 +13,29 @@ const MenuSect = () => {
     const [toastMsg, setToastMsg] = useState('');
 
     useEffect(() => {
-        const cleaned = assets.filter(Boolean);
-        const shuffled = [...cleaned].sort(() => Math.random() - 0.5);
-        setAllProducts(shuffled);
-        setFilteredProducts(shuffled);
+
+        const fetchProducts = async () => {
+
+            try {
+
+                const res = await api.get("/product/all");
+
+                const shuffled = [...res.data.products]
+                    .sort(() => Math.random() - 0.5);
+
+                setAllProducts(shuffled);
+                setFilteredProducts(shuffled);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        fetchProducts();
+
     }, []);
 
     useEffect(() => {
@@ -76,7 +95,7 @@ const MenuSect = () => {
 
                 <div className="ProMenuGridBlueprint">
                     {filteredProducts.map((item) => (
-                        <SingleProduct key={item.id} product={item} />
+                        <SingleProduct key={item._id} product={item} />
                     ))}
                 </div>
             </div>

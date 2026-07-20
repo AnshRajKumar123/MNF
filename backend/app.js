@@ -10,6 +10,7 @@ var logger = require("morgan");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
@@ -34,5 +35,6 @@ app.use(
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRoutes);
+app.use("/product", productRoutes);
 
 module.exports = app;

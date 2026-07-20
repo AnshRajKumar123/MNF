@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../ComponentCSS/SearchSect.css";
-import { assets } from "../assets/assests1";
 import SingleProduct from "./SingleProduct";
 import { useLocation } from "react-router-dom";
 import Toast from "./Toast";
 import { midnightSearchData } from "../assets/assest";
+import api from "../config/axios";
 
 const SearchSect = () => {
     const location = useLocation();
     const [results, setResults] = useState([]);
+    const [products, setProducts] = useState([]);
     const [query, setQuery] = useState("");
     const [selectedProduct, setSelectedProduct] = useState(
         JSON.parse(localStorage.getItem("selectedSearchProduct")) || null
@@ -26,6 +27,28 @@ const SearchSect = () => {
     }, []);
 
     useEffect(() => {
+
+        const fetchProducts = async () => {
+
+            try {
+
+                const res = await api.get("/product/all");
+
+                setProducts(res.data.products);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        fetchProducts();
+
+    }, []);
+
+    useEffect(() => {
         const params = new URLSearchParams(location.search);
         const q = params.get("query")?.trim().toLowerCase() || "";
         setQuery(q);
@@ -35,17 +58,25 @@ const SearchSect = () => {
             return;
         }
 
-        const filtered = assets.filter((item) => {
-            if (!item) return false;
+        const filtered = products.filter((item) => {
+
             return (
+
                 item.name.toLowerCase().includes(q) ||
+
                 item.category.toLowerCase().includes(q) ||
+
                 item.slug.toLowerCase().includes(q) ||
-                item.tags?.some((tag) => tag.toLowerCase().includes(q))
+
+                item.tags?.some(tag =>
+                    tag.toLowerCase().includes(q)
+                )
+
             );
+
         });
         setResults(filtered);
-    }, [location.search]);
+    }, [location.search, products]);
 
     const increaseQty = () => setQuantity((q) => q + 1);
     const decreaseQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
@@ -78,7 +109,7 @@ const SearchSect = () => {
                     {results.length === 0 ? (
                         <p className="ProSearchNoResultLabel">{midnightSearchData.labels.emptyState}</p>
                     ) : (
-                        results.map((item) => <SingleProduct key={item.id} product={item} />)
+                        results.map((item) => <SingleProduct key={item._id} product={item} />)
                     )}
                 </div>
             </div>

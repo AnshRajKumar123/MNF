@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../ComponentCSS/HomeSect.css';
 import { ResturantIG, midnightHomeData } from '../assets/assest';
-import { assets } from '../assets/assests1';
+import axios from "axios";
 import SingleProduct from './SingleProduct';
 import Toast from './Toast';
+import api from "../config/axios";
 
 const HomeSect = () => {
     const [activeSection, setActiveSection] = useState('onprocess');
@@ -11,6 +12,29 @@ const HomeSect = () => {
     const [quantity, setQuantity] = useState(1);
     const [globalToast, setGlobalToast] = useState("");
     const [orders, setOrders] = useState([]);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+
+        const fetchProducts = async () => {
+
+            try {
+
+                const res = await api.get("/product/all");
+
+                setProducts(res.data.products);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        fetchProducts();
+
+    }, []);
 
     const [showOrderDetail, setShowOrderDetail] = useState(() => {
         const saved = localStorage.getItem("MNF_ShowOrderDetail");
@@ -105,8 +129,11 @@ const HomeSect = () => {
                     <div className="ProAllProductSection">
                         <h2 className="ProSectionTitle">{midnightHomeData.sections.gridTitle}</h2>
                         <div className="ProProductsGrid">
-                            {assets.slice(0, 27).map(item => (
-                                <SingleProduct key={item.id} product={item} />
+                            {products.slice(0, 27).map(product => (
+                                <SingleProduct
+                                    key={product._id}
+                                    product={product}
+                                />
                             ))}
                         </div>
                     </div>
