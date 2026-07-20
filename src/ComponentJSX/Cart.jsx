@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../ComponentCSS/Cart.css';
 import { ResturantIG, midnightCartData } from '../assets/assest';
 import CheckoutPopup from "../ComponentJSX/CheckoutPopup";
+import api from "../config/axios";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -51,10 +52,31 @@ const Cart = () => {
     const SHIPPING_COST = 40;
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem('cartItems')) || [];
-        setCartItems(saved);
-        const savedCoupon = JSON.parse(localStorage.getItem('appliedCoupon'));
-        if (savedCoupon) setAppliedCoupon(savedCoupon);
+
+        const fetchCart = async () => {
+
+            try {
+
+                const res = await api.get("/cart");
+
+                setCartItems(res.data.cart);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        fetchCart();
+
+        const savedCoupon = JSON.parse(localStorage.getItem("appliedCoupon"));
+
+        if (savedCoupon) {
+            setAppliedCoupon(savedCoupon);
+        }
+
     }, []);
 
     const updateQuantity = (index, delta) => {
@@ -87,7 +109,10 @@ const Cart = () => {
         }
     };
 
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const subtotal = cartItems.reduce(
+        (sum, item) => sum + item.product.price * item.quantity,
+        0
+    );
     const shipping = subtotal >= FREE_SHIPPING_LIMIT || subtotal === 0 ? 0 : SHIPPING_COST;
     const discountAmount = appliedCoupon ? Math.round(subtotal * (appliedCoupon.percent / 100)) : 0;
     const deliveryCharge = deliveryOptions[deliveryType].price;
@@ -117,11 +142,11 @@ const Cart = () => {
                         <div key={index} className="ProCartItemCard">
                             <div className="ProItemInfoCluster">
                                 <div className="ProCartImageFrame">
-                                    <img src={item.image} alt={item.name} />
+                                    <img src={item.product.image} alt={item.name} />
                                 </div>
                                 <div className="ProItemTextMeta">
-                                    <h2>{item.name}</h2>
-                                    <p className="ProItemUnitRate">₹{item.price}</p>
+                                    <h2>{item.product.name}</h2>
+                                    <p className="ProItemUnitRate">₹{item.product.price}</p>
                                 </div>
                             </div>
 
@@ -138,7 +163,7 @@ const Cart = () => {
 
                             {/* ITEM MATRIX TOTALS */}
                             <div className="ProCartSubtotalBox">
-                                <p>₹{item.price * item.quantity}</p>
+                                <p>₹{item.product.price * item.quantity}</p>
                             </div>
 
                             <button className="ProCartRemoveItemCTA" onClick={() => removeItem(index)}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../ComponentCSS/HomeSect.css';
-import { ResturantIG, midnightHomeData } from '../assets/assest';
+import { ResturantIG, midnightHomeData, midnightMenuData } from '../assets/assest';
 import axios from "axios";
 import SingleProduct from './SingleProduct';
 import Toast from './Toast';
@@ -80,20 +80,25 @@ const HomeSect = () => {
     const increaseQty = () => setQuantity(q => q + 1);
     const decreaseQty = () => setQuantity(q => q > 1 ? q - 1 : 1);
 
-    const handleAddToCart = (product, qty) => {
-        const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const existing = cart.find(item => item.id === product.id);
+    const handleAddToCart = async () => {
 
-        if (existing) {
-            existing.quantity += qty;
-            showToast(`${product.name} quantity updated 🛒`);
-        } else {
-            cart.push({ ...product, quantity: qty });
-            showToast(`${product.name} added to cart 🛒`);
+        try {
+
+            await api.post("/cart/add", {
+                productId: selectedProduct._id,
+                quantity,
+            });
+
+            showToast(midnightMenuData.labels.toastAdd);
+
+            window.dispatchEvent(new Event("cartUpdated"));
+
+        } catch (error) {
+
+            console.log(error);
+
         }
 
-        localStorage.setItem("cartItems", JSON.stringify(cart));
-        window.dispatchEvent(new Event("cartUpdated"));
     };
 
     return (

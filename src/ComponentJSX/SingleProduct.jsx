@@ -10,26 +10,25 @@ const SingleProduct = ({ product }) => {
         );
     };
 
-    const handleAddToCart = (e) => {
-        e.stopPropagation(); // Stop parent layout detail routing triggering[cite: 38]
+    const handleAddToCart = async () => {
 
-        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const existing = cart.find(item => item.id === product.id);
+        try {
 
-        if (existing) {
-            existing.quantity += 1;
-            window.dispatchEvent(new CustomEvent("MNF_ShowToast", {
-                detail: `${product.name} parameter increments updated 🛒`
-            }));
-        } else {
-            cart.push({ ...product, quantity: 1 });
-            window.dispatchEvent(new CustomEvent("MNF_ShowToast", {
-                detail: `${product.name} catalog node initialized 🛒`
-            }));
+            await api.post("/cart/add", {
+                productId: selectedProduct._id,
+                quantity,
+            });
+
+            showToast(midnightMenuData.labels.toastAdd);
+
+            window.dispatchEvent(new Event("cartUpdated"));
+
+        } catch (error) {
+
+            console.log(error);
+
         }
 
-        localStorage.setItem("cartItems", JSON.stringify(cart));
-        window.dispatchEvent(new Event("cartUpdated"));
     };
 
     return (

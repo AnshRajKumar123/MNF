@@ -69,20 +69,26 @@ const MenuSect = () => {
     const increaseQty = () => setQuantity(q => q + 1);
     const decreaseQty = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
-    const handleAddToCart = () => {
-        const savedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const existing = savedCart.find(item => item.id === selectedProduct.id);
+    const handleAddToCart = async () => {
 
-        if (existing) {
-            existing.quantity += quantity;
-            showToast(midnightMenuData.labels.toastUpdate);
-        } else {
-            savedCart.push({ ...selectedProduct, quantity });
-            showToast(midnightMenuData.labels.toastAdd);
+        try {
+            const res = await api.post("/cart/add", {
+                productId: selectedProduct._id,
+                quantity,
+            });
+
+            showToast(res.data.message);
+
+            window.dispatchEvent(new Event("cartUpdated"));
+
+        } catch (error) {
+
+            console.log(error);
+
+            showToast("Failed to add product.");
+
         }
 
-        localStorage.setItem("cartItems", JSON.stringify(savedCart));
-        window.dispatchEvent(new Event("cartUpdated"));
     };
 
     return (
