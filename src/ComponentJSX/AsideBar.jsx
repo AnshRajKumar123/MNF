@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../ComponentCSS/AsideBar.css';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
 import { Link, useLocation } from 'react-router-dom';
+import api from "../config/axios";
 
 const AsideBar = () => {
     const [cartCount, setCartCount] = useState(0);
@@ -24,19 +25,37 @@ const AsideBar = () => {
         }
     }, [isLightOcean]);
 
-    const updateCartCount = () => {
-        const savedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
-        setCartCount(savedCart.length);
+    const updateCartCount = async () => {
+
+        try {
+
+            const { data } = await api.get("/cart");
+
+            const totalItems = data.cart.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+
+            setCartCount(totalItems);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
     };
 
     useEffect(() => {
+
         updateCartCount();
-        window.addEventListener('storage', updateCartCount);
-        window.addEventListener('cartUpdated', updateCartCount);
+
+        window.addEventListener("cartUpdated", updateCartCount);
+
         return () => {
-            window.removeEventListener('storage', updateCartCount);
-            window.removeEventListener('cartUpdated', updateCartCount);
+            window.removeEventListener("cartUpdated", updateCartCount);
         };
+
     }, []);
 
     return (

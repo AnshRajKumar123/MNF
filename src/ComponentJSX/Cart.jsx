@@ -90,7 +90,6 @@ const Cart = () => {
     };
 
     const removeItem = async (cartId) => {
-
         try {
 
             await api.delete(`/cart/remove/${cartId}`);
@@ -99,12 +98,11 @@ const Cart = () => {
                 prev.filter(item => item._id !== cartId)
             );
 
+            window.dispatchEvent(new Event("cartUpdated"));
+
         } catch (error) {
-
             console.log(error);
-
         }
-
     };
 
     const handleApplyCoupon = () => {
