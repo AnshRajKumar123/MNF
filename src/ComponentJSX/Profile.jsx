@@ -5,6 +5,7 @@ import Toast from "../ComponentJSX/Toast";
 import { midnightProfileData } from "../assets/assest";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/api";
 
 const Profile = () => {
     
@@ -32,7 +33,7 @@ const Profile = () => {
             try {
 
                 const response = await axios.get(
-                    "http://localhost:3000/auth/profile",
+                    `${API_URL}/auth/profile`,
                     {
                         withCredentials: true,
                     }
@@ -67,7 +68,7 @@ const Profile = () => {
         try {
 
             const response = await axios.post(
-                "http://localhost:3000/auth/logout",
+                `${API_URL}/auth/logout`,
                 {},
                 {
                     withCredentials: true,
@@ -122,7 +123,7 @@ const Profile = () => {
             formData.append("image", file);
 
             const response = await axios.post(
-                "http://localhost:3000/auth/upload-profile-image",
+                `${API_URL}/auth/upload-profile-image`,
                 formData,
                 {
                     withCredentials: true,
@@ -157,7 +158,7 @@ const Profile = () => {
         try {
 
             const response = await axios.delete(
-                "http://localhost:3000/auth/remove-profile-image",
+                `${API_URL}/auth/remove-profile-image`,
                 {
                     withCredentials: true,
                 }
@@ -209,7 +210,7 @@ const Profile = () => {
         try {
 
             const response = await axios.put(
-                "http://localhost:3000/auth/profile",
+                `${API_URL}/auth/profile`,
                 {
                     phone: profile.phone,
                     country: profile.country,
@@ -256,7 +257,7 @@ const Profile = () => {
                     <div className="ProUserLogoBadge">
                         {profile.image ? (
                             <img
-                                src={`http://localhost:3000${profile.image}`}
+                                src={`${API_URL}${profile.image}`}
                                 alt="User Profile Avatar"
                             />
                         ) : (

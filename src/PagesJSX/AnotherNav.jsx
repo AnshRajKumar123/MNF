@@ -3,6 +3,7 @@ import '../PagesCSS/AnotherNav.css';
 import { Link } from 'react-router-dom';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
 import axios from "axios";
+import { API_URL } from "../config/api";
 
 const AnotherNav = () => {
     const [userProfile, setUserProfile] = useState(null);
@@ -26,11 +27,10 @@ const AnotherNav = () => {
     useEffect(() => {
 
         const fetchProfile = async () => {
-
             try {
 
                 const response = await axios.get(
-                    "http://localhost:3000/auth/profile",
+                    `${API_URL}/auth/profile`,
                     {
                         withCredentials: true,
                     }
@@ -48,7 +48,6 @@ const AnotherNav = () => {
                 console.log(error);
 
             }
-
         };
 
         fetchProfile();
@@ -107,7 +106,11 @@ const AnotherNav = () => {
                 <Link to='/profile'>
                     <button className="NaviAccount NaviAdd">
                         {userProfile?.image ? (
-                            <img src={userProfile.image} className="NavProfileImg" alt="" />
+                            <img
+                                src={`${API_URL}${userProfile.image}`}
+                                className="NavProfileImg"
+                                alt="Profile"
+                            />
                         ) : (
                             <span className="NavProfileLetter">
                                 {userProfile?.name ? userProfile.name.charAt(0).toUpperCase() : "A"}

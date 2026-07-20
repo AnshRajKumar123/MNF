@@ -4,6 +4,8 @@ import { ResturantIG, midnightAuthData } from "../assets/assest";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_URL } from "../config/api";
+import api from "../config/axios";
 
 const SignInUp = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -39,7 +41,7 @@ const SignInUp = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/auth/register",
+                `${API_URL}/auth/register`,
                 signUpData
             );
 
@@ -54,13 +56,7 @@ const SignInUp = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
-                "http://localhost:3000/auth/login",
-                signInData,
-                {
-                    withCredentials: true,
-                }
-            );
+            const response = await api.get("/auth/login");
 
             toast.success(response.data.message);
             // console.log(response.data);
