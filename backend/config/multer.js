@@ -1,47 +1,54 @@
 const multer = require("multer");
 const path = require("path");
 
-// Storage Configuration
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/profile");
-    },
+const createUploader = (folderName) => {
 
-    filename: (req, file, cb) => {
-        const uniqueName =
-            Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const storage = multer.diskStorage({
 
-        cb(
-            null,
-            uniqueName + path.extname(file.originalname)
-        );
-    },
-});
+        destination: (req, file, cb) => {
+            cb(null, `uploads/${folderName}`);
+        },
 
-// Allow only image files
-const fileFilter = (req, file, cb) => {
+        filename: (req, file, cb) => {
 
-    const allowedTypes = /jpeg|jpg|png|webp/;
+            const uniqueName =
+                Date.now() + "-" + Math.round(Math.random() * 1e9);
 
-    const isValid =
-        allowedTypes.test(file.mimetype) &&
-        allowedTypes.test(
-            path.extname(file.originalname).toLowerCase()
-        );
+            cb(
+                null,
+                uniqueName + path.extname(file.originalname)
+            );
 
-    if (isValid) {
-        cb(null, true);
-    } else {
-        cb(new Error("Only image files are allowed!"));
-    }
+        },
+
+    });
+
+    const fileFilter = (req, file, cb) => {
+
+        const allowedTypes = /jpeg|jpg|png|webp/;
+
+        const isValid =
+            allowedTypes.test(file.mimetype) &&
+            allowedTypes.test(
+                path.extname(file.originalname).toLowerCase()
+            );
+
+        if (isValid) {
+            cb(null, true);
+        } else {
+            cb(new Error("Only image files are allowed!"));
+        }
+
+    };
+
+    return multer({
+        storage,
+        fileFilter,
+        limits: {
+            fileSize: 5 * 1024 * 1024,
+        },
+    });
+
 };
 
-const upload = multer({
-    storage,
-    fileFilter,
-    limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB
-    },
-});
-
-module.exports = upload;
+module.exports = createUploader;

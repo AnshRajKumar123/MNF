@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../config/multer");
+const createUploader = require("../config/multer");
+
+const uploadProfile = createUploader("profile");
 
 const {
     registerUser,
@@ -25,7 +27,7 @@ router.put("/profile", authMiddleware, updateProfile);
 router.post(
     "/upload-profile-image",
     authMiddleware,
-    upload.single("image"),
+    uploadProfile.single("image"),
     uploadProfileImage
 );
 
