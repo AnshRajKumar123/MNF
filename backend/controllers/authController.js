@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 
 const registerUser = async (req, res) => {
     try {
@@ -180,10 +182,100 @@ const updateProfile = async (req, res) => {
     }
 };
 
+const uploadProfileImage = async (req, res) => {
+    try {
+
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: "Please select an image.",
+            });
+        }
+
+        const user = await User.findById(req.user.id);
+
+        // Delete old image if it exists
+        if (user.image) {
+
+            const oldImagePath = path.join(
+                __dirname,
+                "..",
+                user.image
+            );
+
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+            }
+        }
+
+        const imagePath = `/uploads/profile/${req.file.filename}`;
+
+        user.image = imagePath;
+
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Profile image uploaded successfully.",
+            user,
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+};
+
+const removeProfileImage = async (req, res) => {
+
+    try {
+
+        const user = await User.findById(req.user.id);
+
+        if (user.image) {
+
+            const imagePath = path.join(
+                __dirname,
+                "..",
+                user.image
+            );
+
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        user.image = "";
+
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Profile image removed successfully.",
+            user,
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
 module.exports = {
     registerUser,
     loginUser,
     getProfile,
     logoutUser,
     updateProfile,
+    uploadProfileImage,
+    removeProfileImage
 };

@@ -26,6 +26,11 @@ app.use(cors({
     credentials: true,
 }));
 
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "uploads"))
+);
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRoutes);

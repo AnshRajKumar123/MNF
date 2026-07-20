@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    
     const [profile, setProfile] = useState({
         name: "",
         phone: "",
@@ -110,29 +111,77 @@ const Profile = () => {
         setChanged(true);
     };
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const file = e.target.files[0];
+
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = () => {
-            const updated = { ...profile, image: reader.result };
-            setProfile(updated);
-            localStorage.setItem("MNF_UserProfile", JSON.stringify(updated));
+        try {
+
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const response = await axios.post(
+                "http://localhost:3000/auth/upload-profile-image",
+                formData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+
+            setProfile((prev) => ({
+                ...prev,
+                image: response.data.user.image,
+            }));
+
             window.dispatchEvent(new Event("profileUpdated"));
-            showToast("Profile Image Updated!");
-        };
-        reader.readAsDataURL(file);
-        setChanged(true);
+
+            showToast(response.data.message);
+
+            setChanged(true);
+
+        } catch (error) {
+
+            showToast(
+                error.response?.data?.message || "Image upload failed."
+            );
+
+        }
     };
 
-    const removeImage = () => {
-        const updated = { ...profile, image: "" };
-        setProfile(updated);
-        localStorage.setItem("MNF_UserProfile", JSON.stringify(updated));
-        window.dispatchEvent(new Event("profileUpdated"));
-        showToast("Profile Image Removed!");
-        setChanged(true);
+    const removeImage = async () => {
+
+        try {
+
+            const response = await axios.delete(
+                "http://localhost:3000/auth/remove-profile-image",
+                {
+                    withCredentials: true,
+                }
+            );
+
+            setProfile((prev) => ({
+                ...prev,
+                image: "",
+            }));
+
+            window.dispatchEvent(new Event("profileUpdated"));
+
+            showToast(response.data.message);
+
+            setChanged(true);
+
+        } catch (error) {
+
+            showToast(
+                error.response?.data?.message || "Failed to remove image."
+            );
+
+        }
+
     };
 
     const validate = () => {
@@ -177,7 +226,7 @@ const Profile = () => {
             );
 
             showToast(response.data.message);
-            
+
             window.dispatchEvent(new Event("profileUpdated"));
         } catch (error) {
 
@@ -206,7 +255,10 @@ const Profile = () => {
                 <div className="ProUserAvatarCard">
                     <div className="ProUserLogoBadge">
                         {profile.image ? (
-                            <img src={profile.image} alt="User Profile Avatar" />
+                            <img
+                                src={`http://localhost:3000${profile.image}`}
+                                alt="User Profile Avatar"
+                            />
                         ) : (
                             <span>
                                 {profile.name ? profile.name.charAt(0).toUpperCase() : midnightProfileData.labels.fallbackLetter}
