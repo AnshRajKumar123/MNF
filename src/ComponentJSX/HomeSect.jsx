@@ -13,6 +13,7 @@ const HomeSect = () => {
     const [globalToast, setGlobalToast] = useState("");
     const [orders, setOrders] = useState([]);
     const [products, setProducts] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     useEffect(() => {
 
@@ -88,6 +89,71 @@ const HomeSect = () => {
         window.addEventListener("openOrderDetail", openOrder);
         return () => window.removeEventListener("openOrderDetail", openOrder);
     }, []);
+
+    const openOrderDetails = (order) => {
+
+        setSelectedOrder(order);
+
+    };
+
+    const closeOrderDetails = () => {
+
+        setSelectedOrder(null);
+
+    };
+
+    const removeOrder = async (id) => {
+
+        try {
+
+            await api.delete(`/order/${id}`);
+
+            setOrders(prev =>
+                prev.filter(order => order._id !== id)
+            );
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to remove order."
+            );
+
+        }
+
+    };
+
+    const cancelOrder = async (id) => {
+
+        try {
+
+            await api.patch(`/order/cancel/${id}`);
+
+            setOrders(prev =>
+                prev.map(order =>
+                    order._id === id
+                        ? {
+                            ...order,
+                            orderStatus: "Cancelled",
+                        }
+                        : order
+                )
+            );
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to cancel order."
+            );
+
+        }
+
+    };
 
     const showToast = (msg) => {
         setToastMsg(msg);
@@ -241,23 +307,18 @@ const HomeSect = () => {
                             <div className="ProOnProcessSect">
                                 {orders.length === 0 && <p className="EmptyStateLabel">{midnightHomeData.sections.noOrders}</p>}
                                 {orders.filter(order => order.orderStatus === "On Process").map(order => (
-                                    <div key={order.id} className="ProOrderShowDetailCard">
+                                    <div key={order._id} className="ProOrderShowDetailCard">
                                         <div className="ProBoxOfOrderPro">
                                             <div className="OrderImageCapFrame">
                                                 <img
                                                     src={order.items[0]?.product?.image}
                                                     alt=""
                                                 />
-
-                                                {/* <img
-                                                    src={`${API_URL}${order.items[0]?.product?.image}`}
-                                                    alt=""
-                                                /> */}
                                             </div>
 
                                             <div className="ProOrderShowDetContent">
                                                 <h4>
-                                                   {order.items[0]?.product?.name}
+                                                    {order.items[0]?.product?.name}
                                                     {order.items.length > 1 && ` +${order.items.length - 1} items`}
                                                 </h4>
                                                 <div className="MetaTimelineTagRow">
@@ -270,14 +331,288 @@ const HomeSect = () => {
                                             <button className="ProOrderTrackingCTA" onClick={() => window.location.href = `/track-order/${order._id}`}>
                                                 Track <i className='bx bx-navigation'></i>
                                             </button>
+                                            <button
+                                                className="ProCancelOrderCTA"
+                                                onClick={() => cancelOrder(order._id)}
+                                            >
+                                                Cancel
+                                                <i className='bx bx-x-circle'></i>
+                                            </button>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         )}
+
+                        {/* CANCELLED ORDERS */}
+                        {activeSection === "cancelled" && (
+                            <div className="ProCancelledSect">
+
+                                {orders.filter(order => order.orderStatus === "Cancelled").length === 0 && (
+                                    <p className="EmptyStateLabel">
+                                        No cancelled orders.
+                                    </p>
+                                )}
+
+                                {orders
+                                    .filter(order => order.orderStatus === "Cancelled")
+                                    .map(order => (
+
+                                        <div
+                                            key={order._id}
+                                            className="ProOrderShowDetailCard"
+                                        >
+                                            <div className="ProBoxOfOrderPro">
+
+                                                <div className="OrderImageCapFrame">
+                                                    <img
+                                                        src={order.items[0]?.product?.image}
+                                                        alt=""
+                                                    />
+                                                </div>
+
+                                                <div className="ProOrderShowDetContent">
+
+                                                    <h4>
+                                                        {order.items[0]?.product?.name}
+                                                        {order.items.length > 1 &&
+                                                            ` +${order.items.length - 1} items`}
+                                                    </h4>
+
+                                                    <div className="MetaTimelineTagRow">
+                                                        <span>
+                                                            {new Date(order.createdAt).toLocaleDateString()}
+                                                        </span>
+
+                                                        <span className="CancelledStatusText">
+                                                            Cancelled
+                                                        </span>
+                                                    </div>
+
+                                                    <div className="ProProcessOrderPrice">
+                                                        ₹{order.totalAmount}
+                                                    </div>
+
+                                                </div>
+
+                                                <button
+                                                    className="ProRemoveOrderCTA"
+                                                    onClick={() => removeOrder(order._id)}
+                                                >
+                                                    Remove
+                                                    <i className='bx bx-trash'></i>
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    ))}
+
+                            </div>
+                        )}
+
+                        {/* COMPLETED ORDERS */}
+                        {activeSection === "completed" && (
+
+                            <div className="ProCompletedSect">
+
+                                {orders.filter(order => order.orderStatus === "Delivered").length === 0 && (
+                                    <p className="EmptyStateLabel">
+                                        No completed orders.
+                                    </p>
+                                )}
+
+                                {orders
+                                    .filter(order => order.orderStatus === "Delivered")
+                                    .map(order => (
+
+                                        <div
+                                            key={order._id}
+                                            className="ProOrderShowDetailCard"
+                                        >
+
+                                            <div className="ProBoxOfOrderPro">
+
+                                                <div className="OrderImageCapFrame">
+                                                    <img
+                                                        src={order.items[0]?.product?.image}
+                                                        alt=""
+                                                    />
+                                                </div>
+
+                                                <div className="ProOrderShowDetContent">
+
+                                                    <h4>
+                                                        {order.items[0]?.product?.name}
+                                                        {order.items.length > 1 &&
+                                                            ` +${order.items.length - 1} items`}
+                                                    </h4>
+
+                                                    <div className="MetaTimelineTagRow">
+
+                                                        <span>
+                                                            {new Date(order.createdAt).toLocaleDateString()}
+                                                        </span>
+
+                                                        <span className="CompletedStatusText">
+                                                            Delivered
+                                                        </span>
+
+                                                    </div>
+
+                                                    <div className="ProProcessOrderPrice">
+                                                        ₹{order.totalAmount}
+                                                    </div>
+
+                                                </div>
+
+                                                <button
+                                                    className="ProViewOrderDetailCTA"
+                                                    onClick={() => openOrderDetails(order)}
+                                                >
+                                                    View Details
+                                                    <i className='bx bx-receipt'></i>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    ))}
+
+                            </div>
+
+                        )}
+
                     </div>
                 )}
             </section>
+
+            {selectedOrder && (
+
+                <div className="ProOrderDetailOverlay">
+
+                    <div className="ProOrderDetailPopup">
+
+                        <button
+                            className="ProCloseOrderPopup"
+                            onClick={closeOrderDetails}
+                        >
+                            <i className='bx bx-x'></i>
+                        </button>
+
+                        <h2>Order Details</h2>
+
+                        <div className="ProOrderPopupItems">
+
+                            {selectedOrder.items.map((item, index) => (
+
+                                <div
+                                    key={index}
+                                    className="ProPopupOrderItem"
+                                >
+
+                                    <img
+                                        src={item.product?.image}
+                                        alt=""
+                                    />
+
+                                    <div>
+
+                                        <h4>{item.product?.name}</h4>
+
+                                        <p>
+
+                                            Qty : {item.quantity}
+
+                                        </p>
+
+                                        <span>
+
+                                            ₹{item.price}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            ))}
+
+                        </div>
+
+                        <div className="ProPopupInfoRow">
+
+                            <span>Delivery</span>
+
+                            <strong>
+
+                                {selectedOrder.deliveryType}
+
+                            </strong>
+
+                        </div>
+
+                        <div className="ProPopupInfoRow">
+
+                            <span>Payment</span>
+
+                            <strong>
+
+                                {selectedOrder.paymentMethod}
+
+                            </strong>
+
+                        </div>
+
+                        <div className="ProPopupInfoRow">
+
+                            <span>Total</span>
+
+                            <strong>
+
+                                ₹{selectedOrder.totalAmount}
+
+                            </strong>
+
+                        </div>
+
+                        <div className="ProPopupAddressBox">
+
+                            <h4>Delivery Address</h4>
+
+                            <p>
+
+                                {selectedOrder.address.building}
+
+                            </p>
+
+                            <p>
+
+                                {selectedOrder.address.address}
+
+                            </p>
+
+                            <p>
+
+                                {selectedOrder.address.pincode}
+
+                            </p>
+
+                        </div>
+
+                        <button
+                            className="ProCloseOrderDetailsBtn"
+                            onClick={closeOrderDetails}
+                        >
+                            Close
+                        </button>
+
+                    </div>
+
+                </div>
+
+            )}
 
             {globalToast && (
                 <Toast message={globalToast} onClose={() => setGlobalToast("")} />

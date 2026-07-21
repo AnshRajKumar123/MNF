@@ -378,3 +378,334 @@
         display: none;
     }
 }
+
+.ProCancelOrderCTA {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 125px;
+    height: 46px;
+
+    border: none;
+    outline: none;
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #ff5f5f, #e63946);
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all .3s ease;
+    box-shadow: 0 10px 20px rgba(230, 57, 70, .18);
+}
+
+.ProCancelOrderCTA i {
+    font-size: 18px;
+    transition: transform .3s ease;
+}
+
+.ProCancelOrderCTA:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(230, 57, 70, .28);
+}
+
+.ProCancelOrderCTA:hover i {
+    transform: rotate(-12deg);
+}
+
+.ProCancelOrderCTA:active {
+    transform: scale(.97);
+}
+
+.ProCancelOrderCTA:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ===========================
+   CANCELLED ORDERS
+=========================== */
+
+.ProCancelledSect {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.CancelledStatusText {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 10px;
+
+    border-radius: 30px;
+
+    background: #ffe5e5;
+    color: #e63946;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.ProRemoveOrderCTA {
+
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: #2b2b2b;
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+.ProRemoveOrderCTA:hover {
+
+    background: #e63946;
+
+    transform: translateY(-2px);
+
+}
+
+.ProRemoveOrderCTA i {
+
+    font-size: 17px;
+
+}
+
+/* ===========================
+   COMPLETED ORDERS
+=========================== */
+
+.ProCompletedSect {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.CompletedStatusText {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 10px;
+
+    border-radius: 30px;
+
+    background: #dff8e8;
+    color: #1e9d59;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .4px;
+
+}
+
+.ProViewOrderDetailCTA {
+
+    position: absolute;
+
+    right: 14px;
+    bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    border: none;
+
+    cursor: pointer;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #2f80ed, #1c5fd4);
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+.ProViewOrderDetailCTA:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px rgba(47, 128, 237, .25);
+
+}
+
+.ProViewOrderDetailCTA i {
+
+    font-size: 17px;
+
+}
+
+/*==============================
+ORDER DETAILS POPUP
+==============================*/
+
+.ProOrderDetailOverlay {
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, .45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 99999;
+
+    backdrop-filter: blur(6px);
+
+}
+
+.ProOrderDetailPopup {
+
+    width: 520px;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: var(--bg-surface);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    position: relative;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+
+}
+
+.ProCloseOrderPopup {
+
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+}
+
+.ProOrderPopupItems {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin: 25px 0;
+
+}
+
+.ProPopupOrderItem {
+
+    display: flex;
+
+    gap: 16px;
+
+    align-items: center;
+
+}
+
+.ProPopupOrderItem img {
+
+    width: 70px;
+    height: 70px;
+
+    border-radius: 12px;
+
+    object-fit: cover;
+
+}
+
+.ProPopupInfoRow {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin: 14px 0;
+
+}
+
+.ProPopupAddressBox {
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, .05);
+
+}
+
+.ProCloseOrderDetailsBtn {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: var(--accent-blue-dark);
+
+    color: #fff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}

@@ -132,8 +132,8 @@ export const midnightHomeData = {
     },
     tabs: [
         { id: "onprocess", label: "On Process" },
-        { id: "complete", label: "Complete" },
-        { id: "canceled", label: "Canceled" }
+        { id: "completed", label: "Complete" },
+        { id: "cancelled", label: "Canceled" }
     ]
 };
 

@@ -181,8 +181,98 @@ const getOrder = async (req, res) => {
 
 };
 
+const cancelOrder = async (req, res) => {
+
+    try {
+
+        const order = await Order.findOne({
+            _id: req.params.id,
+            user: req.user.id,
+        });
+
+        if (!order) {
+            return res.status(404).json({
+                message: "Order not found",
+            });
+        }
+
+        if (order.orderStatus === "Delivered") {
+            return res.status(400).json({
+                message: "Delivered orders cannot be cancelled.",
+            });
+        }
+
+        if (order.orderStatus === "Cancelled") {
+            return res.status(400).json({
+                message: "Order is already cancelled.",
+            });
+        }
+
+        await Order.updateOne(
+            { _id: order._id },
+            {
+                $set: {
+                    orderStatus: "Cancelled",
+                    cancelReason: "Cancelled by user",
+                },
+            }
+        );
+
+        res.json({
+            success: true,
+            message: "Order cancelled successfully.",
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: "Server Error",
+        });
+
+    }
+
+};
+
+const deleteOrder = async (req, res) => {
+
+    try {
+
+        const order = await Order.findOne({
+            _id: req.params.id,
+            user: req.user.id,
+        });
+
+        if (!order) {
+            return res.status(404).json({
+                message: "Order not found",
+            });
+        }
+
+        await order.deleteOne();
+
+        res.json({
+            success: true,
+            message: "Order removed successfully.",
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            message: "Server Error",
+        });
+
+    }
+
+};
+
 module.exports = {
     placeOrder,
     myOrders,
     getOrder,
+    cancelOrder,
+    deleteOrder
 };
