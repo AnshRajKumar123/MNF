@@ -8,11 +8,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
+const crypto = require("crypto");
 
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoute = require("./routes/orderRoute");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -41,5 +43,6 @@ app.use("/auth", authRoutes);
 app.use("/product", productRoutes);
 app.use("/cart", cartRoutes);
 app.use("/order", orderRoute);
+app.use("/payment", paymentRoutes);
 
 module.exports = app;

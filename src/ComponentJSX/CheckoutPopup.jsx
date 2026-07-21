@@ -170,6 +170,57 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCart
 
     };
 
+    const openRazorpay = async () => {
+
+        try {
+
+            const { data } = await axios.post(
+                `${API_URL}/payment/create-order`,
+                {
+                    amount: finalTotal
+                }
+            );
+
+            const options = {
+
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+
+                amount: data.order.amount,
+
+                currency: data.order.currency,
+
+                name: "MidNight Food",
+
+                description: "Food Order",
+
+                order_id: data.order.id,
+
+                handler: function (response) {
+
+                    console.log("Payment Successful");
+
+                    console.log(response);
+
+                },
+
+                theme: {
+                    color: "#ff6b35",
+                },
+
+            };
+
+            const razorpay = new window.Razorpay(options);
+
+            razorpay.open();
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+
     return (
         <div className="ProCheckoutOverlay">
             <div className="ProCheckoutPopupBentoCard">
