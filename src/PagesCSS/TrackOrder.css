@@ -1,165 +1,386 @@
-/* ==========================================================================
-   🌊 MIDNIGHT FOOD DYNAMIC HORIZONTAL TRACKING CONTROL MODULE
-   ========================================================================== */
-
 .ProTrackingOuterSuite {
     width: 100%;
-    background-color: var(--bg-primary);
     min-height: 100vh;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease;
+    background: var(--bg-primary);
+    transition: background .35s ease;
 }
 
 .ProTrackingSectionLayout {
-    width: 100%;
-    max-width: 1100px;
-    margin: 40px auto 6rem auto;
-    padding: 0 4rem;
-    box-sizing: border-box;
+    width: min(1150px, 92%);
+    margin: 40px auto 80px;
     display: flex;
     flex-direction: column;
-    gap: 3.5rem;
+    gap: 32px;
 }
 
-/* --- UPPER HEADER TRACKING CONFIGURATION TRACK --- */
-.ProTrackingHeaderDeckPanel {
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.TrackLoading {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.TrackLoading h2 {
+    font-family: var(--Font3);
+    font-size: 28px;
+    color: var(--accent-blue-light);
+    animation: pulseLoading 1.5s infinite;
+}
+
+@keyframes pulseLoading {
+
+    0% {
+        opacity: .45;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .45;
+    }
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.TrackHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border-morphic);
-    padding-bottom: 1.5rem;
+    gap: 20px;
 }
 
-.ProTrackingHeaderDeckPanel h1 {
-    font-family: var(--Font3), sans-serif;
-    font-size: 24px;
+.TrackHeader h1 {
+    font-family: var(--Font3);
+    font-size: 34px;
     font-weight: 800;
     color: var(--text-core);
-    letter-spacing: -0.5px;
-    margin: 0;
+    margin-bottom: 8px;
 }
 
-.ProTrackingTelemetryBox {
-    background-color: rgba(0, 0, 0, 0.12);
-    border: 1px solid var(--border-morphic);
-    padding: 10px 16px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-[data-theme="light-ocean"] .ProTrackingTelemetryBox {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-.ProTrackingTelemetryBox span {
-    font-size: 11px;
-    font-weight: 700;
+.TrackHeader p {
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 15px;
+    font-weight: 600;
 }
 
-.ProTrackingTelemetryBox strong {
-    font-family: var(--Font3), sans-serif;
-    font-size: 14.5px;
-    font-weight: 800;
+/* ==========================================================
+   STATUS BADGE
+========================================================== */
+
+.OrderStatusBadge {
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    border: 1px solid var(--border-morphic);
+    backdrop-filter: blur(14px);
+}
+
+/* ON PROCESS */
+
+.OrderStatusBadge.OnProcess {
+    background: rgba(58, 134, 200, .12);
     color: var(--accent-blue-light);
 }
 
-/* --- THE RECONSTRUCTED DYNAMIC HORIZONTAL STEPPER --- */
+/* DELIVERED */
+
+.OrderStatusBadge.Delivered {
+    background: rgba(46, 204, 113, .12);
+    color: #2ECC71;
+}
+
+/* CANCELLED */
+
+.OrderStatusBadge.Cancelled {
+    background: rgba(231, 76, 60, .12);
+    color: #E74C3C;
+}
+
+/* ==========================================================
+   SUMMARY + COUNTDOWN GRID
+========================================================== */
+
+.OrderSummaryCard,
+.CountdownCard {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow:
+        0 15px 35px var(--shadow-premium);
+    transition: .35s;
+}
+
+.OrderSummaryCard:hover,
+.CountdownCard:hover {
+    transform: translateY(-5px);
+}
+
+.OrderSummaryCard h2,
+.CountdownCard h3 {
+    font-family: var(--Font3);
+    margin-bottom: 24px;
+    color: var(--text-core);
+    font-size: 22px;
+}
+
+/* ==========================================================
+   ORDER ITEMS
+========================================================== */
+
+.OrderItemRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-morphic);
+}
+
+.OrderItemRow:last-child {
+    border-bottom: none;
+}
+
+.OrderItemRow h4 {
+    font-size: 17px;
+    color: var(--text-core);
+    margin-bottom: 5px;
+}
+
+.OrderItemRow span {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.OrderItemRow strong {
+    font-size: 18px;
+    color: var(--accent-blue-light);
+    font-family: var(--Font3);
+}
+
+.OrderItemLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.OrderProductImage {
+    width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 1px solid var(--border-morphic);
+    background: var(--bg-primary);
+    flex-shrink: 0;
+}
+
+.OrderProductInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.OrderProductInfo h4 {
+    margin: 0;
+    font-size: 17px;
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+.OrderProductInfo span {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ==========================================================
+   TOTAL
+========================================================== */
+
+.OrderSummaryCard hr {
+    margin: 22px 0;
+    border: none;
+    height: 1px;
+    background: var(--border-morphic);
+}
+
+.SummaryRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    margin-top: 15px;
+}
+
+.SummaryRow span {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.SummaryRow strong {
+    color: var(--text-core);
+    font-size: 17px;
+    font-family: var(--Font3);
+}
+
+.Total {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-morphic);
+}
+
+.Total span {
+    font-size: 18px;
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+.Total strong {
+    font-size: 26px;
+    color: var(--accent-blue-light);
+}
+
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+.CountdownCard {
+    text-align: center;
+}
+
+.CountdownCard h1 {
+    font-size: 70px;
+    font-family: var(--Font3);
+    color: var(--accent-blue-light);
+    margin: 18px 0;
+    letter-spacing: 2px;
+}
+
+.CountdownCard p {
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.CountdownCard span {
+    font-size: 20px;
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
 .ProHorizontalStepperContainer {
     width: 100%;
     position: relative;
-    padding: 2rem 0;
+    padding: 18px 0 10px;
 }
 
 .HorizontalTimelineTrackLine {
     position: absolute;
-    top: 50px;
-    left: 8%;
-    right: 8%;
-    height: 4px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
+    top: 44px;
+    left: 5%;
+    width: 90%;
+    height: 5px;
+    background: rgba(255, 255, 255, .06);
+    border-radius: 50px;
+    overflow: hidden;
     z-index: 1;
 }
 
 [data-theme="light-ocean"] .HorizontalTimelineTrackLine {
-    background-color: rgba(0, 0, 0, 0.06);
+    background: rgba(0, 0, 0, .08);
 }
 
 .TimelineTrackProgressFill {
     height: 100%;
-    background-color: var(--accent-blue-light);
-    border-radius: 20px;
-    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 0 10px rgba(58, 134, 200, 0.3);
+    width: 0;
+    background: linear-gradient(90deg,
+            var(--accent-blue-dark),
+            var(--accent-blue-light));
+    border-radius: 50px;
+    transition: width .6s cubic-bezier(.16, 1, .3, 1);
+    box-shadow:
+        0 0 16px rgba(58, 134, 200, .45);
 }
 
 .ProHorizontalStepsFlexRow {
-    display: flex;
-    justify-content: space-between;
     position: relative;
     z-index: 2;
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .ProStepNodeCell {
+    width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 16%;
 }
 
 .StepNodeCircleShield {
-    width: 36px;
-    height: 36px;
-    background-color: var(--bg-surface);
-    border: 2px solid var(--border-morphic);
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
+    background: var(--bg-surface);
+    border: 2px solid var(--border-morphic);
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-weight: 700;
+    align-items: center;
     position: relative;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 15px;
+    transition: .35s;
 }
 
 .StepNodeCircleShield i {
-    font-size: 16px;
-    color: #ffffff;
+    font-size: 24px;
 }
 
 .StepNodeTextLabel {
-    margin-top: 12px;
-    font-size: 13.5px;
-    font-weight: 600;
+    margin-top: 14px;
     color: var(--text-muted);
-    transition: color 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    max-width: 90px;
 }
 
-/* Operational Stepper Node Status Toggles */
+/* COMPLETED */
+
 .cell-completed .StepNodeCircleShield {
-    background-color: var(--accent-blue-light);
+    background: var(--accent-blue-light);
     border-color: var(--accent-blue-light);
-    color: #ffffff;
+    color: white;
 }
 
 .cell-completed .StepNodeTextLabel {
     color: var(--text-core);
 }
 
+/* ACTIVE */
+
 .cell-active .StepNodeCircleShield {
-    background-color: var(--accent-blue-dark);
+    background: var(--accent-blue-dark);
     border-color: var(--accent-blue-light);
-    color: #ffffff;
+    color: white;
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(58, 134, 200, 0.25);
+    box-shadow:
+        0 0 18px rgba(58, 134, 200, .45);
 }
 
 .cell-active .StepNodeTextLabel {
@@ -167,177 +388,288 @@
     font-weight: 700;
 }
 
-/* Active Glow Tracking Rings */
+/* Pulse */
+
 .StepNodeActivePulseNode {
     position: absolute;
-    inset: -2px;
+    inset: -4px;
     border-radius: 50%;
     border: 2px solid var(--accent-blue-light);
-    animation: stepNodePulseEffect 2s infinite ease-in-out;
+    animation: trackingPulse 1.8s infinite;
 }
 
-@keyframes stepNodePulseEffect {
+@keyframes trackingPulse {
     0% {
         transform: scale(1);
-        opacity: 0.8;
+        opacity: .9;
     }
 
     100% {
-        transform: scale(1.35);
+        transform: scale(1.45);
         opacity: 0;
     }
 }
 
-/* --- BOTTOM MULTI-ACTION BENTO METRICS PANEL --- */
-.ProTrackingBentoStatusDeck {
-    width: 100%;
+
+/* ==========================================================
+   RIDER CARD
+========================================================== */
+
+.RiderCard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow:
+        0 15px 35px var(--shadow-premium);
+    transition: .35s;
+    margin-bottom: 1.3rem;
+}
+
+.RiderCard:hover {
+    transform: translateY(-5px);
+}
+
+.RiderCard img {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.RiderInfo {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 6px;
 }
 
-/* Rider Terminal Panel Card Elements */
-.ProRiderConsoleBentoCard {
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-morphic);
-    padding: 1.2rem 1.8rem;
-    border-radius: 16px;
-    box-shadow: 0 15px 35px var(--shadow-premium);
-    gap: 18px;
-    animation: bentoPanelFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.RiderAvatarFrame {
-    width: 54px;
-    height: 54px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 12px;
-    padding: 4px;
-    border: 1px solid var(--border-morphic);
-}
-
-.RiderAvatarFrame img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.RiderProfileMetadata h3 {
-    font-family: var(--Font3), sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+.RiderInfo h3 {
+    font-family: var(--Font3);
+    font-size: 24px;
     color: var(--text-core);
-    margin: 0 0 2px 0;
 }
 
-.RiderProfileMetadata span {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 600;
-}
-
-.RiderStatusIndicatorTag {
-    margin-left: auto;
-    background-color: rgba(58, 134, 200, 0.06);
-    border: 1px solid var(--border-morphic);
-    padding: 6px 14px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
+.RiderInfo p {
     color: var(--accent-blue-light);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-weight: 700;
 }
 
-.LiveStatusPulse {
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent-blue-light);
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 8px var(--accent-blue-light);
+.RiderInfo span {
+    color: var(--text-muted);
+    font-size: 14px;
 }
 
-/* Real-time ETA Alerts Blocks Components */
+
+/* ==========================================================
+   INFO GRID
+========================================================== */
+
+.InfoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.InfoCard {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow:
+        0 15px 35px var(--shadow-premium);
+
+    transition: .35s;
+}
+
+.InfoCard:hover {
+    transform: translateY(-5px);
+}
+
+.InfoCard h3 {
+    font-family: var(--Font3);
+    margin-bottom: 14px;
+    color: var(--text-core);
+    font-size: 20px;
+}
+
+.InfoCard p {
+    color: var(--text-core);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.InfoCard span {
+    display: inline-flex;
+    padding: 8px 14px;
+    border-radius: 50px;
+    background: rgba(58, 134, 200, .12);
+    color: var(--accent-blue-light);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ==========================================================
+   ETA CARD
+========================================================== */
+
 .ProArrivalEtaNoticeCard {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: linear-gradient(135deg, rgba(229, 57, 53, 0.03) 0%, rgba(229, 57, 53, 0.08) 100%);
-    border: 1px solid rgba(229, 57, 53, 0.15);
-    padding: 1.5rem 2rem;
-    border-radius: 16px;
-    animation: bentoPanelFadeUp 0.4s ease both;
+    gap: 20px;
+    padding: 24px;
+    margin-top: 1.3rem;
+    border-radius: 22px;
+    background: linear-gradient(135deg,
+            rgba(58, 134, 200, .08),
+            rgba(58, 134, 200, .15));
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 15px 35px var(--shadow-premium);
 }
 
 .EtaAlertIconBox {
-    font-size: 28px;
-    color: #e53935;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    background: rgba(58, 134, 200, .15);
+    color: var(--accent-blue-light);
+    font-size: 28px;
+}
+
+.EtaAlertTextCluster {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .EtaAlertTextCluster h3 {
-    font-family: var(--Font3), sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    color: #e53935;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 2px 0;
+    font-family: var(--Font3);
+    font-size: 22px;
+    color: var(--text-core);
 }
 
 .EtaAlertTextCluster p {
-    font-size: 14px;
-    color: var(--text-core);
-    font-weight: 600;
-    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    font-family: var(--Font3);
 }
 
-/* Dispatch Complete Banner Overlays */
+
+
+/* ==========================================================
+   SUCCESS CARD
+========================================================== */
+
 .ProDeliverySuccessBentoCard {
     display: flex;
     align-items: center;
-    gap: 18px;
-    background: rgba(58, 134, 200, 0.03);
-    border: 1px solid var(--border-morphic);
-    padding: 1.5rem 2rem;
-    border-radius: 16px;
+    gap: 22px;
+    padding: 28px;
+    border-radius: 22px;
+    background: linear-gradient(135deg,
+            rgba(46, 204, 113, .10),
+            rgba(46, 204, 113, .18));
+    border: 1px solid rgba(46, 204, 113, .25);
     box-shadow: 0 15px 35px var(--shadow-premium);
-    animation: bentoPanelFadeUp 0.4s ease both;
+    margin-top: 1.3rem;
 }
 
 .SuccessBadgeShieldIcon {
-    font-size: 32px;
-    color: var(--accent-blue-light);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    background: rgba(46, 204, 113, .18);
+    color: #2ECC71;
+    font-size: 36px;
+}
+
+.SuccessTextCluster {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .SuccessTextCluster h3 {
-    font-family: var(--Font3), sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--accent-blue-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 2px 0;
+    font-family: var(--Font3);
+    font-size: 24px;
+    color: #2ECC71;
 }
 
 .SuccessTextCluster p {
-    font-size: 14px;
     color: var(--text-core);
-    font-weight: 600;
-    margin: 0;
+    font-size: 16px;
 }
 
-@keyframes bentoPanelFadeUp {
+.SuccessTextCluster small {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+
+
+/* ==========================================================
+   CANCEL BUTTON
+========================================================== */
+
+.CancelOrderButton {
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg,
+            #ff5b5b,
+            #dc3545);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .35s;
+    margin-top: 10px;
+    box-shadow:
+        0 15px 35px rgba(220, 53, 69, .25);
+}
+
+.CancelOrderButton:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 20px 40px rgba(220, 53, 69, .35);
+}
+
+.CancelOrderButton:active {
+    transform: scale(.98);
+}
+
+
+
+/* ==========================================================
+   SCROLL ANIMATION
+========================================================== */
+
+.OrderSummaryCard,
+.CountdownCard,
+.ProHorizontalStepperContainer,
+.RiderCard,
+.InfoCard,
+.ProArrivalEtaNoticeCard,
+.ProDeliverySuccessBentoCard {
+    animation: trackFade .55s ease;
+}
+
+@keyframes trackFade {
+
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(18px);
     }
 
     to {
@@ -346,57 +678,125 @@
     }
 }
 
-/* --- RESPONSIVE WORKSPACE CONSTRAINTS BREAKPOINTS --- */
-@media (max-width: 992px) {
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:900px) {
+
+    .TrackHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .InfoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .CountdownCard h1 {
+        font-size: 56px;
+    }
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:650px) {
     .ProTrackingSectionLayout {
-        padding: 0 2rem;
+        width: 94%;
+        gap: 24px;
+        margin: 25px auto 60px;
+    }
+
+    .TrackHeader h1 {
+        font-size: 28px;
+    }
+
+    .TrackHeader p {
+        font-size: 13px;
+    }
+
+    .OrderSummaryCard,
+    .CountdownCard,
+    .InfoCard,
+    .RiderCard,
+    .ProArrivalEtaNoticeCard,
+    .ProDeliverySuccessBentoCard {
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .CountdownCard h1 {
+        font-size: 42px;
+    }
+
+    .RiderCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .RiderCard img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .ProHorizontalStepsFlexRow {
+        flex-direction: column;
+        gap: 24px;
+        align-items: flex-start;
     }
 
     .HorizontalTimelineTrackLine {
         display: none;
     }
 
-    /* Switches to clean block intervals natively */
-    .ProHorizontalStepsFlexRow {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-    }
-
     .ProStepNodeCell {
-        flex-direction: row;
-        text-align: left;
         width: 100%;
-        gap: 14px;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 16px;
     }
 
     .StepNodeTextLabel {
         margin-top: 0;
+        max-width: none;
+    }
+
+    .CancelOrderButton {
+        height: 54px;
+        font-size: 16px;
     }
 }
 
-@media (max-width: 650px) {
-    .ProTrackingHeaderDeckPanel {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media(max-width:420px) {
+    .TrackHeader h1 {
+        font-size: 24px;
     }
 
-    .ProTrackingTelemetryBox {
-        width: 100%;
-        box-sizing: border-box;
-        justify-content: space-between;
+    .CountdownCard h1 {
+        font-size: 34px;
     }
 
-    .ProRiderConsoleBentoCard {
-        flex-direction: column;
-        align-items: flex-start;
+    .OrderItemRow h4 {
+        font-size: 15px;
     }
 
-    .RiderStatusIndicatorTag {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
-        box-sizing: border-box;
+    .SummaryRow strong {
+        font-size: 15px;
+    }
+
+    .Total strong {
+        font-size: 22px;
     }
 }

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import AnotherNav from "./AnotherNav";
 import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
-import { useParams } from "react-router-dom";
 import api from "../config/axios";
 
-
 const TrackOrder = () => {
+
+    const { orderId } = useParams();
+
     const [order, setOrder] = useState(null);
     const [timeLeft, setTimeLeft] = useState(0);
     const [progress, setProgress] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
-    const { orderId } = useParams();
+
+    const steps = midnightTrackingData.steps;
 
     useEffect(() => {
 
@@ -47,13 +50,11 @@ const TrackOrder = () => {
 
         const timer = setInterval(() => {
 
-            const now = new Date().getTime();
+            const now = Date.now();
 
             const delivery = new Date(order.estimatedDelivery).getTime();
 
-            const remaining = Math.max(0, delivery - now);
-
-            setTimeLeft(remaining);
+            setTimeLeft(Math.max(0, delivery - now));
 
         }, 1000);
 
@@ -78,14 +79,19 @@ const TrackOrder = () => {
             const elapsed = now - created;
 
             const percent = Math.min(
-
                 100,
-
                 Math.max(0, (elapsed / total) * 100)
-
             );
 
-            setProgress(percent);
+            if (order.orderStatus === "Delivered") {
+
+                setProgress(100);
+
+            } else {
+
+                setProgress(percent);
+
+            }
 
         }, 1000);
 
@@ -93,21 +99,15 @@ const TrackOrder = () => {
 
     }, [order]);
 
-    const formatTime = (ms) => {
-
-        const totalSeconds = Math.floor(ms / 1000);
-
-        const minutes = Math.floor(totalSeconds / 60);
-
-        const seconds = totalSeconds % 60;
-
-        return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-    };
-
-    const steps = midnightTrackingData.steps;
-
     useEffect(() => {
+
+        if (order?.orderStatus === "Delivered") {
+
+            setCurrentStep(4);
+
+            return;
+
+        }
 
         if (progress < 20) {
 
@@ -131,94 +131,392 @@ const TrackOrder = () => {
 
         }
 
-    }, [progress]);
+    }, [progress, order]);
+
+    const formatTime = (ms) => {
+
+        const totalSeconds = Math.floor(ms / 1000);
+
+        const minutes = Math.floor(totalSeconds / 60);
+
+        const seconds = totalSeconds % 60;
+
+        return `${minutes.toString().padStart(2, "0")}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+    };
+
+    const cancelOrder = async () => {
+
+        try {
+
+            await api.patch(`/order/cancel/${order._id}`);
+
+            setOrder(prev => ({
+                ...prev,
+                orderStatus: "Cancelled",
+            }));
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+
+    if (!order) {
+
+        return (
+            <>
+                <AnotherNav />
+
+                <div className="TrackLoading">
+
+                    <h2>Loading Order...</h2>
+
+                </div>
+            </>
+        );
+
+    }
 
     return (
         <div className="ProTrackingOuterSuite">
+
             <AnotherNav />
 
             <section className="ProTrackingSectionLayout">
-                <header className="ProTrackingHeaderDeckPanel">
-                    <h1>{midnightTrackingData.labels.pageTitle}</h1>
 
-                    <div className="ProTrackingTelemetryBox">
-                        <span>{midnightTrackingData.labels.idPrefix}</span>
-                        <strong>{orderId || "MNF-PENDING"}</strong>
+                <header className="TrackHeader">
+
+                    <div>
+
+                        <h1>Track Order</h1>
+
+                        <p>Order #{order._id}</p>
+
                     </div>
+
+                    <span
+                        className={`OrderStatusBadge ${order.orderStatus.replace(/\s/g, "")}`}
+                    >
+                        {order.orderStatus}
+                    </span>
+
                 </header>
 
-                {/* --- MODERN DYNAMIC HORIZONTAL STEPPER LAYER --- */}
+                <div className="OrderSummaryCard">
+
+                    <h2>Order Summary</h2>
+
+                    {order.items.map((item) => (
+                        <div className="OrderItemRow" key={item._id}>
+
+                            <div className="OrderItemLeft">
+
+                                <img
+                                    src={item.product.image}
+                                    alt={item.product.name}
+                                    className="OrderProductImage"
+                                />
+
+                                <div className="OrderProductInfo">
+                                    <h4>{item.product.name}</h4>
+                                    <span>Qty : {item.quantity}</span>
+                                </div>
+
+                            </div>
+
+                            <strong>₹{item.product.price * item.quantity}</strong>
+
+                        </div>
+                    ))}
+
+
+                    <div className="SummaryRow">
+
+                        <span>Delivery Charge</span>
+
+                        <strong>
+
+                            ₹{order.deliveryCharge}
+
+                        </strong>
+
+                    </div>
+
+                    <div className="SummaryRow Total">
+
+                        <span>Total</span>
+
+                        <strong>
+
+                            ₹{order.totalAmount}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div className="CountdownCard">
+
+                    <h3>
+
+                        Remaining Time
+
+                    </h3>
+
+                    <h1>
+
+                        {order.orderStatus === "Delivered"
+                            ? "Delivered"
+                            : formatTime(timeLeft)}
+
+                    </h1>
+
+                    <p>
+
+                        Estimated Delivery
+
+                    </p>
+
+                    <span>
+
+                        {new Date(order.estimatedDelivery).toLocaleTimeString(
+                            [],
+                            {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            }
+                        )}
+
+                    </span>
+
+                </div>
+
                 <div className="ProHorizontalStepperContainer">
+
                     <div className="HorizontalTimelineTrackLine">
+
                         <div
                             className="TimelineTrackProgressFill"
-                            style={{ width: `${progress}%` }}
+                            style={{
+                                width: `${progress}%`,
+                            }}
                         ></div>
+
                     </div>
 
                     <div className="ProHorizontalStepsFlexRow">
+
                         {steps.map((step, index) => {
+
                             const isCompleted = index < currentStep;
+
                             const isActive = index === currentStep;
 
                             return (
-                                <div className={`ProStepNodeCell ${isActive ? "cell-active" : ""} ${isCompleted ? "cell-completed" : ""}`} key={index}>
-                                    <div className="StepNodeCircleShield">
-                                        {isCompleted ? <i className='bx bx-check'></i> : <span>{index + 1}</span>}
-                                        {isActive && <span className="StepNodeActivePulseNode"></span>}
-                                    </div>
-                                    <p className="StepNodeTextLabel">{step}</p>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
 
-                {/* --- BOTTOM BENTO CONTROL DECKS --- */}
+                                <div
+                                    key={index}
+                                    className={`ProStepNodeCell ${isCompleted ? "cell-completed" : ""} ${isActive ? "cell-active" : ""}`}
+                                >
+
+                                    <div className="StepNodeCircleShield">
+
+                                        {isCompleted ? (
+
+                                            <i className="bx bx-check"></i>
+
+                                        ) : (
+
+                                            <span>
+
+                                                {index + 1}
+
+                                            </span>
+
+                                        )}
+
+                                        {isActive && (
+                                            <span className="StepNodeActivePulseNode"></span>
+                                        )}
+
+                                    </div>
+
+                                    <p className="StepNodeTextLabel">
+
+                                        {step}
+
+                                    </p>
+
+                                </div>
+
+                            );
+
+                        })}
+
+                    </div>
+
+                </div>
                 <div className="ProTrackingBentoStatusDeck">
 
-                    {/* LIVE RIDER TELEMETRY DATA PANEL */}
-                    {currentStep >= 2 && currentStep < 4 && (
-                        <div className="ProRiderConsoleBentoCard">
-                            <div className="RiderAvatarFrame">
-                                <img src={order?.rider?.image} alt="" />
+                    {order.orderStatus === "On Process" && (
+
+                        <div className="RiderCard">
+
+                            <img
+                                src={order.rider.image}
+                                alt={order.rider.name}
+                            />
+
+                            <div className="RiderInfo">
+
+                                <h3>{order.rider.name}</h3>
+
+                                <p>{order.rider.vehicle}</p>
+
+                                <span>{order.rider.phone}</span>
+
                             </div>
-                            <div className="RiderProfileMetadata">
-                                <h3>{order?.rider?.name}</h3>
-                                <span>{order?.rider?.vehicle}</span>
-                            </div>
-                            <div className="RiderStatusIndicatorTag">
-                                <span className="LiveStatusPulse"></span> Active Courier
-                            </div>
+
                         </div>
+
                     )}
 
-                    {/* DYNAMIC REALTIME ARRIVAL NOTICES */}
-                    {currentStep === 3 && (
+                    <div className="InfoGrid">
+
+                        <div className="InfoCard">
+
+                            <h3>Delivery Address</h3>
+
+                            <p>
+                                {order.address.building}, {order.address.address},
+                                {order.address.pincode}
+                            </p>
+
+                        </div>
+
+                        <div className="InfoCard">
+
+                            <h3>Payment Method</h3>
+
+                            <p>{order.paymentMethod}</p>
+
+                            <span>{order.deliveryType} Delivery</span>
+
+                        </div>
+
+                    </div>
+
+                    {order.orderStatus === "On Process" && (
+
                         <div className="ProArrivalEtaNoticeCard">
-                            <div className="EtaAlertIconBox"><i className='bx bx-time-five'></i></div>
-                            <div className="EtaAlertTextCluster">
-                                <h3>{midnightTrackingData.labels.etaNotice}</h3>
-                                <p>{formatTime(timeLeft)}</p>
+
+                            <div className="EtaAlertIconBox">
+
+                                <i className="bx bx-time-five"></i>
+
                             </div>
+
+                            <div className="EtaAlertTextCluster">
+
+                                <h3>Estimated Arrival</h3>
+
+                                <p>{formatTime(timeLeft)}</p>
+
+                            </div>
+
                         </div>
+
                     )}
 
-                    {/* TRANSIT COMPLETE NOTIFICATION PANEL */}
-                    {currentStep === 4 && (
+                    {order.orderStatus === "Delivered" && (
+
                         <div className="ProDeliverySuccessBentoCard">
-                            <div className="SuccessBadgeShieldIcon"><i className='bx bx-badge-check'></i></div>
-                            <div className="SuccessTextCluster">
-                                <h3>{midnightTrackingData.labels.deliveryAlert}</h3>
-                                <p>{midnightTrackingData.labels.deliverySuccess}</p>
+
+                            <div className="SuccessBadgeShieldIcon">
+
+                                <i className="bx bx-badge-check"></i>
+
                             </div>
+
+                            <div className="SuccessTextCluster">
+
+                                <h3>Order Delivered</h3>
+
+                                <p>
+
+                                    Delivered Successfully
+
+                                </p>
+
+                                <small>
+
+                                    {order.completedAt &&
+                                        new Date(order.completedAt).toLocaleTimeString([], {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+
+                                </small>
+
+                            </div>
+
                         </div>
+
+                    )}
+
+                    {order.orderStatus === "Cancelled" && (
+
+                        <div className="ProDeliverySuccessBentoCard">
+
+                            <div className="SuccessBadgeShieldIcon">
+
+                                <i className="bx bx-x-circle"></i>
+
+                            </div>
+
+                            <div className="SuccessTextCluster">
+
+                                <h3>Order Cancelled</h3>
+
+                                <p>
+
+                                    {order.cancelReason}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
                     )}
 
                 </div>
+
+                {order.orderStatus === "On Process" && (
+
+                    <button
+                        className="CancelOrderButton"
+                        onClick={cancelOrder}
+                    >
+
+                        Cancel Order
+
+                    </button>
+
+                )}
+
             </section>
+
         </div>
+
     );
+
 };
 
 export default TrackOrder;
