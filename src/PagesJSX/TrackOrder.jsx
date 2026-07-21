@@ -4,6 +4,8 @@ import AnotherNav from "./AnotherNav";
 import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
 import api from "../config/axios";
+import axios from "axios";
+
 
 const TrackOrder = () => {
     const { orderId } = useParams();
@@ -128,6 +130,83 @@ const TrackOrder = () => {
             </div>
         );
     }
+
+    const payOnlineNow = async () => {
+
+        try {
+
+            const { data } = await axios.post(
+                "http://localhost:3000/payment/create-order",
+                {
+                    amount: order.totalAmount
+                },
+                {
+                    withCredentials: true
+                }
+            );
+
+            const options = {
+
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+
+                amount: data.order.amount,
+
+                currency: "INR",
+
+                name: "MidNight Food",
+
+                description: "Pay for existing order",
+
+                order_id: data.order.id,
+
+                handler: async function (response) {
+
+                    const verify = await axios.post(
+                        "http://localhost:3000/payment/verify",
+                        {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    );
+
+                    if (!verify.data.success) {
+                        alert("Payment Failed");
+                        return;
+                    }
+
+                    await axios.post(
+                        "http://localhost:3000/payment/pay-existing-order",
+                        {
+                            orderId: order._id
+                        },
+                        {
+                            withCredentials: true
+                        }
+                    );
+
+                    await fetchOrder();
+
+                    alert("Payment Successful");
+
+                }
+
+            };
+
+            const razor = new window.Razorpay(options);
+
+            razor.open();
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    };
 
     return (
         <div className="ProTrackingOuterSuite">
@@ -395,6 +474,20 @@ const TrackOrder = () => {
                             Terminate & Cancel Order <i className='bx bx-block'></i>
                         </button>
                     )}
+
+                    {
+                        order.paymentMethod === "COD" &&
+                        order.paymentStatus === "Pending" && (
+
+                            <button
+                                className="PayOnlineBtn"
+                                onClick={payOnlineNow}
+                            >
+                                Pay Online Now
+                            </button>
+
+                        )
+                    }
 
                 </div>
 

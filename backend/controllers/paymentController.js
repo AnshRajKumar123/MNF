@@ -1,5 +1,6 @@
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
+const Order = require("../models/Order");
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -99,8 +100,46 @@ const verifyPayment = async (req, res) => {
 
 };
 
+const payExistingOrder = async (req, res) => {
+    try {
+
+        const { orderId } = req.body;
+
+        const order = await Order.findOne({
+            _id: orderId,
+            user: req.user.id
+        });
+
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        order.paymentStatus = "Paid";
+
+        await order.save();
+
+        res.json({
+            success: true,
+            message: "Payment updated"
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            success: false
+        });
+
+    }
+};
+
 module.exports = {
     razorpay,
     createOrder,
     verifyPayment,
+    payExistingOrder,
 };
