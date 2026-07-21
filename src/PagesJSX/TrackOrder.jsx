@@ -23,18 +23,19 @@ const TrackOrder = () => {
         "Delivered"
     ];
 
+    const fetchOrder = async () => {
+        try {
+            const { data } = await api.get(`/order/${orderId}`);
+            setOrder(data.order);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
     // 🔄 Fetch Order Polling Engine
     useEffect(() => {
         if (!orderId) return;
-
-        const fetchOrder = async () => {
-            try {
-                const { data } = await api.get(`/order/${orderId}`);
-                setOrder(data.order);
-            } catch (error) {
-                console.error("Order polling exception:", error);
-            }
-        };
 
         fetchOrder();
         const interval = setInterval(fetchOrder, 5000);
