@@ -1,4 +1,5 @@
 const Razorpay = require("razorpay");
+const crypto = require("crypto");
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -38,7 +39,68 @@ const createOrder = async (req, res) => {
 
 };
 
+const verifyPayment = async (req, res) => {
+
+    try {
+
+        const {
+
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+
+        } = req.body;
+
+        const body =
+            razorpay_order_id +
+            "|" +
+            razorpay_payment_id;
+
+        const expectedSignature =
+            crypto
+                .createHmac(
+                    "sha256",
+                    process.env.RAZORPAY_KEY_SECRET
+                )
+                .update(body.toString())
+                .digest("hex");
+
+        if (expectedSignature !== razorpay_signature) {
+
+            return res.status(400).json({
+
+                success: false,
+                message: "Payment verification failed",
+
+            });
+
+        }
+
+        return res.json({
+
+            success: true,
+            message: "Payment verified",
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({
+
+            success: false,
+
+        });
+
+    }
+
+};
+
 module.exports = {
-    createOrder,
     razorpay,
+    createOrder,
+    verifyPayment,
 };

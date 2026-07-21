@@ -362,6 +362,7 @@ const Cart = () => {
                     appliedCoupon={appliedCoupon}
                     tip={tip}
                     deliveryType={deliveryType}
+                    finalTotal={finalTotal}
                     clearCartData={() => {
                         setAppliedCoupon(null);
                         setCoupon("");

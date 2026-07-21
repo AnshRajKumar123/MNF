@@ -11,6 +11,7 @@ const placeOrder = async (req, res) => {
             deliveryType,
             coupon,
             tip = 0,
+            paymentStatus,
         } = req.body;
 
         const cart = await Cart.find({ user: req.user.id })
@@ -109,6 +110,7 @@ const placeOrder = async (req, res) => {
             totalAmount,
             address,
             paymentMethod,
+            paymentStatus: paymentStatus || "Pending",
             deliveryType,
             deliveryMinutes,
             deliveryCharge,

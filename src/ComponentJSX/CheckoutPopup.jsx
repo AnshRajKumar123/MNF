@@ -4,7 +4,7 @@ import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../
 import api from "../config/axios";
 import { API_URL } from "../config/api";
 
-const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCartData }) => {
+const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTotal, clearCartData }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
 
     const [addresses, setAddresses] = useState([]);
@@ -145,27 +145,38 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCart
 
         try {
 
-            const { data } = await api.post("/order/place", {
-                address: selectedAddress,
-                paymentMethod: selectedPayment,
-                deliveryType,
-                coupon: appliedCoupon,
-                tip
-            });
-            clearCartData();
-            window.dispatchEvent(new Event("cartUpdated"));
-            setOrderId(data.order._id);
-            setStep("success");
-            setShowSuccess(true);
+            // Cash On Delivery
+            if (selectedPayment === "COD") {
+
+                const { data } = await api.post("/order/place", {
+                    address: selectedAddress,
+                    paymentMethod: selectedPayment,
+                    deliveryType,
+                    coupon: appliedCoupon,
+                    tip,
+                });
+
+                clearCartData();
+                window.dispatchEvent(new Event("cartUpdated"));
+
+                setOrderId(data.order._id);
+                setStep("success");
+                setShowSuccess(true);
+
+                return;
+            }
+
+            // Online Payment
+            await openRazorpay();
 
         } catch (error) {
 
             console.log(error);
 
             alert(
-                error.response?.data?.message || "Failed to place order."
+                error.response?.data?.message ||
+                "Failed to place order."
             );
-
         }
 
     };
@@ -174,8 +185,8 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCart
 
         try {
 
-            const { data } = await axios.post(
-                `${API_URL}/payment/create-order`,
+            const { data } = await api.post(
+                "/payment/create-order",
                 {
                     amount: finalTotal
                 }
@@ -195,11 +206,65 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCart
 
                 order_id: data.order.id,
 
-                handler: function (response) {
+                handler: async function (response) {
 
-                    console.log("Payment Successful");
+                    try {
 
-                    console.log(response);
+                        // 1. Verify payment
+
+                        const verify = await api.post("/payment/verify", {
+
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+
+                        });
+
+                        if (!verify.data.success) {
+
+                            return alert("Payment verification failed.");
+
+                        }
+
+                        // 2. Create order
+
+                        const { data } = await api.post("/order/place", {
+
+                            address: selectedAddress,
+                            paymentMethod: selectedPayment,
+                            deliveryType,
+                            coupon: appliedCoupon,
+                            tip,
+
+                            paymentStatus: "Paid"
+
+                        });
+
+                        // 3. Clear cart
+
+                        clearCartData();
+
+                        window.dispatchEvent(
+                            new Event("cartUpdated")
+                        );
+
+                        // 4. Show success popup
+
+                        setOrderId(data.order._id);
+
+                        setStep("success");
+
+                        setShowSuccess(true);
+
+                    }
+
+                    catch (error) {
+
+                        console.log(error);
+
+                        alert("Payment completed but order creation failed.");
+
+                    }
 
                 },
 
