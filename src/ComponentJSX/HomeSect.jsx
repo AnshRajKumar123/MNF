@@ -43,8 +43,25 @@ const HomeSect = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
-        const savedOrders = JSON.parse(localStorage.getItem("MNF_Orders")) || [];
-        setOrders(savedOrders);
+
+        const fetchOrders = async () => {
+
+            try {
+
+                const { data } = await api.get("/order/my-orders");
+
+                setOrders(data.orders);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        fetchOrders();
+
     }, []);
 
     useEffect(() => {
@@ -223,26 +240,34 @@ const HomeSect = () => {
                         {activeSection === "onprocess" && (
                             <div className="ProOnProcessSect">
                                 {orders.length === 0 && <p className="EmptyStateLabel">{midnightHomeData.sections.noOrders}</p>}
-                                {orders.filter(o => o.status === "On Process").map(order => (
+                                {orders.filter(order => order.orderStatus === "On Process").map(order => (
                                     <div key={order.id} className="ProOrderShowDetailCard">
                                         <div className="ProBoxOfOrderPro">
                                             <div className="OrderImageCapFrame">
-                                                <img src={order.items[0]?.image} alt="" />
+                                                <img
+                                                    src={order.items[0]?.product?.image}
+                                                    alt=""
+                                                />
+
+                                                {/* <img
+                                                    src={`${API_URL}${order.items[0]?.product?.image}`}
+                                                    alt=""
+                                                /> */}
                                             </div>
 
                                             <div className="ProOrderShowDetContent">
                                                 <h4>
-                                                    {order.items[0]?.name}
+                                                   {order.items[0]?.product?.name}
                                                     {order.items.length > 1 && ` +${order.items.length - 1} items`}
                                                 </h4>
                                                 <div className="MetaTimelineTagRow">
-                                                    <span>{order.date}</span>
+                                                    <span>{new Date(order.createdAt).toLocaleDateString()}</span>
                                                     <span className="ProcessStatusPulseText">Active Transit</span>
                                                 </div>
-                                                <div className="ProProcessOrderPrice">₹{order.total}</div>
+                                                <div className="ProProcessOrderPrice">₹{order.totalAmount}</div>
                                             </div>
 
-                                            <button className="ProOrderTrackingCTA" onClick={() => window.location.href = "/track-order"}>
+                                            <button className="ProOrderTrackingCTA" onClick={() => window.location.href = `/track-order/${order._id}`}>
                                                 Track <i className='bx bx-navigation'></i>
                                             </button>
                                         </div>
