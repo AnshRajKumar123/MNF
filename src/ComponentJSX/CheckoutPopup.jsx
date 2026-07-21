@@ -282,7 +282,7 @@ const CheckoutPopup = ({ closePopup }) => {
                             >
                                 <div>
                                     <h3>⚡ Express</h3>
-                                    <p>20–25 Minutes</p>
+                                    <p>15–20 Minutes</p>
                                 </div>
 
                                 <span>₹49</span>
@@ -297,7 +297,7 @@ const CheckoutPopup = ({ closePopup }) => {
                             >
                                 <div>
                                     <h3>🚴 Standard</h3>
-                                    <p>30–35 Minutes</p>
+                                    <p>20-25 Minutes</p>
                                 </div>
 
                                 <span>FREE</span>
@@ -312,7 +312,7 @@ const CheckoutPopup = ({ closePopup }) => {
                             >
                                 <div>
                                     <h3>🕒 Economy</h3>
-                                    <p>45–50 Minutes</p>
+                                    <p>25-30 Minutes</p>
                                 </div>
 
                                 <span>FREE</span>

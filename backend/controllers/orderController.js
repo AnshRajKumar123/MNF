@@ -32,42 +32,28 @@ const placeOrder = async (req, res) => {
             0
         );
 
-        let deliveryMinutes = 30;
+        let deliveryMinutes = 20;
         let deliveryCharge = 0;
 
         switch (deliveryType) {
 
-            // case "Express":
-            //     deliveryMinutes = 20;
-            //     deliveryCharge = 49;
-            //     break;
-
-            // case "Standard":
-            //     deliveryMinutes = 30;
-            //     deliveryCharge = 0;
-            //     break;
-
-            // case "Economy":
-            //     deliveryMinutes = 45;
-            //     deliveryCharge = 0;
-            //     break;
-
             case "Express":
-                deliveryMinutes = 1;
+                deliveryMinutes = 15;
                 deliveryCharge = 49;
                 break;
 
             case "Standard":
-                deliveryMinutes = 2;
+                deliveryMinutes = 20;
+                deliveryCharge = 0;
                 break;
 
             case "Economy":
-                deliveryMinutes = 3;
+                deliveryMinutes = 25;
+                deliveryCharge = 0;
                 break;
 
-
             default:
-                deliveryMinutes = 30;
+                deliveryMinutes = 20;
                 deliveryCharge = 0;
 
         }

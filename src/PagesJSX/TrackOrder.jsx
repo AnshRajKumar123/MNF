@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import AnotherNav from "./AnotherNav";
 import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
 import api from "../config/axios";
 
 const TrackOrder = () => {
-
     const { orderId } = useParams();
 
     const [order, setOrder] = useState(null);
@@ -14,509 +13,361 @@ const TrackOrder = () => {
     const [progress, setProgress] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
 
-    const steps = midnightTrackingData.steps;
+    const steps = midnightTrackingData?.steps || [
+        "Order Confirmed",
+        "Preparing Order",
+        "Rider Assigned",
+        "Out for Delivery",
+        "Delivered"
+    ];
 
+    // 🔄 Fetch Order Polling Engine
     useEffect(() => {
-
         if (!orderId) return;
 
         const fetchOrder = async () => {
-
             try {
-
                 const { data } = await api.get(`/order/${orderId}`);
-
                 setOrder(data.order);
-
             } catch (error) {
-
-                console.log(error);
-
+                console.error("Order polling exception:", error);
             }
-
         };
 
         fetchOrder();
-
         const interval = setInterval(fetchOrder, 5000);
-
         return () => clearInterval(interval);
-
     }, [orderId]);
 
+    // ⏱️ Real-time Countdown Timer
     useEffect(() => {
-
         if (!order) return;
 
         const timer = setInterval(() => {
-
             const now = Date.now();
-
             const delivery = new Date(order.estimatedDelivery).getTime();
-
             setTimeLeft(Math.max(0, delivery - now));
-
         }, 1000);
 
         return () => clearInterval(timer);
-
     }, [order]);
 
+    // 📊 Dynamic Progress Fill Calculator
     useEffect(() => {
-
         if (!order) return;
 
         const timer = setInterval(() => {
-
             const created = new Date(order.createdAt).getTime();
-
             const delivery = new Date(order.estimatedDelivery).getTime();
-
             const now = Date.now();
 
             const total = delivery - created;
-
             const elapsed = now - created;
-
-            const percent = Math.min(
-                100,
-                Math.max(0, (elapsed / total) * 100)
-            );
+            const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
 
             if (order.orderStatus === "Delivered") {
-
                 setProgress(100);
-
             } else {
-
                 setProgress(percent);
-
             }
-
         }, 1000);
 
         return () => clearInterval(timer);
-
     }, [order]);
 
+    // 🎯 Active Step Node Evaluator
     useEffect(() => {
-
         if (order?.orderStatus === "Delivered") {
-
             setCurrentStep(4);
-
             return;
-
         }
 
         if (progress < 20) {
-
             setCurrentStep(0);
-
         } else if (progress < 45) {
-
             setCurrentStep(1);
-
         } else if (progress < 75) {
-
             setCurrentStep(2);
-
         } else if (progress < 100) {
-
             setCurrentStep(3);
-
         } else {
-
             setCurrentStep(4);
-
         }
-
     }, [progress, order]);
 
     const formatTime = (ms) => {
-
         const totalSeconds = Math.floor(ms / 1000);
-
         const minutes = Math.floor(totalSeconds / 60);
-
         const seconds = totalSeconds % 60;
-
-        return `${minutes.toString().padStart(2, "0")}:${seconds
-            .toString()
-            .padStart(2, "0")}`;
-
+        return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
     };
 
     const cancelOrder = async () => {
-
         try {
-
             await api.patch(`/order/cancel/${order._id}`);
-
             setOrder(prev => ({
                 ...prev,
                 orderStatus: "Cancelled",
             }));
-
         } catch (error) {
-
-            console.log(error);
-
+            console.error("Order cancellation failure:", error);
         }
-
     };
 
     if (!order) {
-
         return (
-            <>
+            <div className="ProTrackingOuterSuite">
                 <AnotherNav />
-
-                <div className="TrackLoading">
-
-                    <h2>Loading Order...</h2>
-
+                <div className="TrackLoadingState">
+                    <div className="TrackLoadingSpinner">
+                        <i className='bx bx-radar bx-spin'></i>
+                    </div>
+                    <h2>Synchronizing Dispatch Telemetry...</h2>
+                    <p>Fetching active route coordinates from server grid</p>
                 </div>
-            </>
+            </div>
         );
-
     }
 
     return (
         <div className="ProTrackingOuterSuite">
-
             <AnotherNav />
 
             <section className="ProTrackingSectionLayout">
 
-                <header className="TrackHeader">
-
-                    <div>
-
-                        <h1>Track Order</h1>
-
-                        <p>Order #{order._id}</p>
-
+                {/* ================= HEADER CONTROL BAR ================= */}
+                <header className="ProTrackHeaderBar">
+                    <div className="HeaderTitleGroup">
+                        <span className="ProTaglineSectionText">Dispatch Operations Console</span>
+                        <h1>Live Order Tracking</h1>
+                        <p className="OrderIdPill">Node Signature: <strong>#{order._id}</strong></p>
                     </div>
 
-                    <span
-                        className={`OrderStatusBadge ${order.orderStatus.replace(/\s/g, "")}`}
-                    >
-                        {order.orderStatus}
-                    </span>
-
+                    <div className="HeaderStatusBadgeGroup">
+                        <span className={`ProOrderStatusBadge ${order.orderStatus.replace(/\s/g, "")}`}>
+                            <span className="StatusPulseDot"></span>
+                            {order.orderStatus}
+                        </span>
+                    </div>
                 </header>
 
-                <div className="OrderSummaryCard">
+                {/* ================= COMMAND BENTO GRID ================= */}
+                <div className="ProTrackingDashboardBentoGrid">
 
-                    <h2>Order Summary</h2>
+                    {/* ---------- LEFT COLUMN: TIMELINE & COUNTDOWN ---------- */}
+                    <div className="ProBentoColumn PrimaryTimelineColumn">
 
-                    {order.items.map((item) => (
-                        <div className="OrderItemRow" key={item._id}>
-
-                            <div className="OrderItemLeft">
-
-                                <img
-                                    src={item.product.image}
-                                    alt={item.product.name}
-                                    className="OrderProductImage"
-                                />
-
-                                <div className="OrderProductInfo">
-                                    <h4>{item.product.name}</h4>
-                                    <span>Qty : {item.quantity}</span>
-                                </div>
-
+                        {/* COUNTDOWN TIMER CARD */}
+                        <div className="ProBentoCard CountdownTelemetryCard">
+                            <div className="CardHeaderTag">
+                                <i className='bx bx-stopwatch'></i>
+                                <span>Time-to-Destination</span>
                             </div>
 
-                            <strong>₹{item.product.price * item.quantity}</strong>
+                            <h1 className="CountdownDigitalDisplay">
+                                {order.orderStatus === "Delivered" ? "DELIVERED" : formatTime(timeLeft)}
+                            </h1>
 
+                            <div className="TargetDeliveryMetaRow">
+                                <span>Estimated Dispatch Arrival:</span>
+                                <strong>
+                                    {new Date(order.estimatedDelivery).toLocaleTimeString([], {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    })}
+                                </strong>
+                            </div>
                         </div>
-                    ))}
 
+                        {/* STEPPER PROGRESS TIMELINE */}
+                        <div className="ProBentoCard StepperTimelineCard">
+                            <h3 className="CardTitleText">Logistics Milestones</h3>
 
-                    <div className="SummaryRow">
+                            <div className="ProVerticalStepperTrack">
+                                <div className="VerticalTrackLine">
+                                    <div
+                                        className="VerticalFillProgress"
+                                        style={{ height: `${progress}%` }}
+                                    ></div>
+                                </div>
 
-                        <span>Delivery Charge</span>
+                                <div className="ProVerticalStepsStack">
+                                    {steps.map((step, index) => {
+                                        const isCompleted = index < currentStep;
+                                        const isActive = index === currentStep;
+                                        const isLastStep = index === steps.length - 1;
 
-                        <strong>
+                                        return (
+                                            <div
+                                                key={index}
+                                                className={`ProStepRowNode ${isCompleted ? "node-completed" : ""} ${isActive ? "node-active" : ""}`}
+                                            >
+                                                <div className="StepCircleIconShield">
+                                                    {isCompleted ? (
+                                                        <i className="bx bx-check"></i>
+                                                    ) : (
+                                                        <span>{index + 1}</span>
+                                                    )}
+                                                    {isActive && <span className="StepActivePulseGlow"></span>}
+                                                </div>
 
-                            ₹{order.deliveryCharge}
+                                                <div className="StepTextCluster">
+                                                    <span className="StepNodeLabel">{step}</span>
 
-                        </strong>
-
+                                                    {/* DYNAMIC STEP NOTICE: Displays "Completed" on final step, else "In Progress..." */}
+                                                    {isActive && (
+                                                        <small className={`ActiveStepNotice ${isLastStep ? "NoticeCompleted" : ""}`}>
+                                                            {isLastStep ? "Completed" : "In Progress..."}
+                                                        </small>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="SummaryRow Total">
+                    {/* ---------- RIGHT COLUMN: ORDER SUMMARY & DISPATCH INFO ---------- */}
+                    <div className="ProBentoColumn SecondarySummaryColumn">
 
-                        <span>Total</span>
+                        {/* ITEM SUMMARY LEDGER */}
+                        <div className="ProBentoCard SummaryLedgerCard">
+                            <h3 className="CardTitleText">Item Ledger Summary</h3>
 
-                        <strong>
+                            <div className="ItemsScrollViewStack">
+                                {order.items.map((item) => (
+                                    <div className="ProOrderItemRowCard" key={item._id}>
+                                        <div className="ItemImageThumbFrame">
+                                            <img
+                                                src={item.product?.image}
+                                                alt={item.product?.name}
+                                            />
+                                        </div>
 
-                            ₹{order.totalAmount}
+                                        <div className="ItemDetailMeta">
+                                            <h4>{item.product?.name}</h4>
+                                            <span className="QtyBadge">Qty: {item.quantity}</span>
+                                        </div>
 
-                        </strong>
-
-                    </div>
-
-                </div>
-
-                <div className="CountdownCard">
-
-                    <h3>
-
-                        Remaining Time
-
-                    </h3>
-
-                    <h1>
-
-                        {order.orderStatus === "Delivered"
-                            ? "Delivered"
-                            : formatTime(timeLeft)}
-
-                    </h1>
-
-                    <p>
-
-                        Estimated Delivery
-
-                    </p>
-
-                    <span>
-
-                        {new Date(order.estimatedDelivery).toLocaleTimeString(
-                            [],
-                            {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            }
-                        )}
-
-                    </span>
-
-                </div>
-
-                <div className="ProHorizontalStepperContainer">
-
-                    <div className="HorizontalTimelineTrackLine">
-
-                        <div
-                            className="TimelineTrackProgressFill"
-                            style={{
-                                width: `${progress}%`,
-                            }}
-                        ></div>
-
-                    </div>
-
-                    <div className="ProHorizontalStepsFlexRow">
-
-                        {steps.map((step, index) => {
-
-                            const isCompleted = index < currentStep;
-
-                            const isActive = index === currentStep;
-
-                            return (
-
-                                <div
-                                    key={index}
-                                    className={`ProStepNodeCell ${isCompleted ? "cell-completed" : ""} ${isActive ? "cell-active" : ""}`}
-                                >
-
-                                    <div className="StepNodeCircleShield">
-
-                                        {isCompleted ? (
-
-                                            <i className="bx bx-check"></i>
-
-                                        ) : (
-
-                                            <span>
-
-                                                {index + 1}
-
-                                            </span>
-
-                                        )}
-
-                                        {isActive && (
-                                            <span className="StepNodeActivePulseNode"></span>
-                                        )}
-
+                                        <strong className="ItemRowRate">
+                                            ₹{(item.product?.price || 0) * item.quantity}
+                                        </strong>
                                     </div>
+                                ))}
+                            </div>
 
-                                    <p className="StepNodeTextLabel">
-
-                                        {step}
-
-                                    </p>
-
+                            <div className="ProSummaryCostBreakdown">
+                                <div className="CostRow">
+                                    <span>Logistics Transit Fee</span>
+                                    <strong>₹{order.deliveryCharge}</strong>
                                 </div>
+                                <div className="CostRow TotalAmountRow">
+                                    <span>Total Authorized Amount</span>
+                                    <strong>₹{order.totalAmount}</strong>
+                                </div>
+                            </div>
+                        </div>
 
-                            );
+                        {/* DISPATCH ADDRESS & PAYMENT INFO */}
+                        <div className="ProBentoCard MetadataInfoCard">
+                            <div className="InfoMetaBlock">
+                                <h3><i className='bx bx-map-pin'></i> Target Address</h3>
+                                <p>
+                                    {order.address?.building}, {order.address?.address}, {order.address?.pincode}
+                                </p>
+                            </div>
 
-                        })}
+                            <div className="InfoMetaBlock">
+                                <h3><i className='bx bx-credit-card-alt'></i> Settlement Method</h3>
+                                <div className="PaymentPillsFlex">
+                                    <span className="MethodPill">{order.paymentMethod}</span>
+                                    <span className="TypePill">{order.deliveryType} Delivery</span>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
                 </div>
-                <div className="ProTrackingBentoStatusDeck">
 
-                    {order.orderStatus === "On Process" && (
+                {/* ================= BOTTOM TELEMETRY STATUS DECKS ================= */}
+                <div className="ProTrackingBottomStatusSection">
 
-                        <div className="RiderCard">
+                    {/* RIDER TELEMETRY CARD */}
+                    {order.orderStatus === "On Process" && order.rider && (
+                        <div className="ProBentoCard RiderConsoleCard">
+                            <div className="RiderAvatarShield">
+                                <img src={order.rider.image} alt={order.rider.name} />
+                            </div>
 
-                            <img
-                                src={order.rider.image}
-                                alt={order.rider.name}
-                            />
-
-                            <div className="RiderInfo">
-
+                            <div className="RiderMetaDetails">
+                                <span className="RiderRoleTag"><i className='bx bx-cycling'></i> Assigned Delivery Operator</span>
                                 <h3>{order.rider.name}</h3>
-
-                                <p>{order.rider.vehicle}</p>
-
-                                <span>{order.rider.phone}</span>
-
+                                <p>Vehicle: <strong>{order.rider.vehicle}</strong></p>
                             </div>
 
+                            <a href={`tel:${order.rider.phone}`} className="RiderContactCTA">
+                                <i className='bx bx-phone-call'></i> Call Operator
+                            </a>
                         </div>
-
                     )}
 
-                    <div className="InfoGrid">
-
-                        <div className="InfoCard">
-
-                            <h3>Delivery Address</h3>
-
-                            <p>
-                                {order.address.building}, {order.address.address},
-                                {order.address.pincode}
-                            </p>
-
-                        </div>
-
-                        <div className="InfoCard">
-
-                            <h3>Payment Method</h3>
-
-                            <p>{order.paymentMethod}</p>
-
-                            <span>{order.deliveryType} Delivery</span>
-
-                        </div>
-
-                    </div>
-
+                    {/* ESTIMATED ARRIVAL BANNER */}
                     {order.orderStatus === "On Process" && (
-
-                        <div className="ProArrivalEtaNoticeCard">
-
-                            <div className="EtaAlertIconBox">
-
+                        <div className="ProBentoCard EtaNoticeAlertCard">
+                            <div className="AlertIconShield">
                                 <i className="bx bx-time-five"></i>
-
                             </div>
-
-                            <div className="EtaAlertTextCluster">
-
-                                <h3>Estimated Arrival</h3>
-
-                                <p>{formatTime(timeLeft)}</p>
-
+                            <div className="AlertTextCluster">
+                                <h3>Estimated Arrival Target</h3>
+                                <p>Transit payload arriving in <strong>{formatTime(timeLeft)}</strong></p>
                             </div>
-
                         </div>
-
                     )}
 
+                    {/* DELIVERED SUCCESS BANNER */}
                     {order.orderStatus === "Delivered" && (
-
-                        <div className="ProDeliverySuccessBentoCard">
-
-                            <div className="SuccessBadgeShieldIcon">
-
+                        <div className="ProBentoCard DeliverySuccessAlertCard">
+                            <div className="SuccessIconShield">
                                 <i className="bx bx-badge-check"></i>
-
                             </div>
-
                             <div className="SuccessTextCluster">
-
-                                <h3>Order Delivered</h3>
-
-                                <p>
-
-                                    Delivered Successfully
-
-                                </p>
-
-                                <small>
-
-                                    {order.completedAt &&
-                                        new Date(order.completedAt).toLocaleTimeString([], {
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                        })}
-
-                                </small>
-
+                                <h3>Dispatch Protocol Completed</h3>
+                                <p>Package verified and delivered to designated coordinates.</p>
+                                {order.completedAt && (
+                                    <small>Timestamp: {new Date(order.completedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</small>
+                                )}
                             </div>
-
                         </div>
-
                     )}
 
+                    {/* CANCELLED BANNER */}
                     {order.orderStatus === "Cancelled" && (
-
-                        <div className="ProDeliverySuccessBentoCard">
-
-                            <div className="SuccessBadgeShieldIcon">
-
+                        <div className="ProBentoCard OrderCancelledAlertCard">
+                            <div className="CancelledIconShield">
                                 <i className="bx bx-x-circle"></i>
-
                             </div>
-
-                            <div className="SuccessTextCluster">
-
-                                <h3>Order Cancelled</h3>
-
-                                <p>
-
-                                    {order.cancelReason}
-
-                                </p>
-
+                            <div className="CancelledTextCluster">
+                                <h3>Order Terminated</h3>
+                                <p>{order.cancelReason || "The dispatch sequence was manually cancelled."}</p>
                             </div>
-
                         </div>
+                    )}
 
+                    {/* CANCEL ACTION TRIGGER BUTTON */}
+                    {order.orderStatus === "On Process" && (
+                        <button className="ProCancelOrderTriggerCTA" onClick={cancelOrder}>
+                            Terminate & Cancel Order <i className='bx bx-block'></i>
+                        </button>
                     )}
 
                 </div>
-
-                {order.orderStatus === "On Process" && (
-
-                    <button
-                        className="CancelOrderButton"
-                        onClick={cancelOrder}
-                    >
-
-                        Cancel Order
-
-                    </button>
-
-                )}
 
             </section>
-
         </div>
-
     );
-
 };
 
 export default TrackOrder;

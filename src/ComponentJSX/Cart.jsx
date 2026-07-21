@@ -12,9 +12,9 @@ const Cart = () => {
     const [showCheckout, setShowCheckout] = useState(false);
 
     const deliveryOptions = {
-        express: { label: "Express Transport", price: 19, time: "20-25 mins" },
-        standard: { label: "Standard Fleet", price: 0, time: "30-35 mins" },
-        eco: { label: "Eco Saver Link", price: 0, time: "Not available", disabled: true }
+        express: { label: "Express Transport", price: 19, time: "15-20 mins" },
+        standard: { label: "Standard Fleet", price: 0, time: "20-25 mins" },
+        eco: { label: "Eco Saver Link", price: 0, time: "25-30 mins" }
     };
 
     const [activeTab, setActiveTab] = useState("delivery");
