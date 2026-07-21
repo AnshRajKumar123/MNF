@@ -12,6 +12,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const orderRoute = require("./routes/orderRoute");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -39,5 +40,6 @@ app.use("/users", usersRouter);
 app.use("/auth", authRoutes);
 app.use("/product", productRoutes);
 app.use("/cart", cartRoutes);
+app.use("/order", orderRoute);
 
 module.exports = app;

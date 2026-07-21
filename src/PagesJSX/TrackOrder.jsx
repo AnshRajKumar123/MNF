@@ -2,10 +2,35 @@ import React, { useEffect, useState } from "react";
 import AnotherNav from "./AnotherNav";
 import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
+import { useParams } from "react-router-dom";
+
 
 const TrackOrder = () => {
     const [orderId, setOrderId] = useState("");
     const [currentStep, setCurrentStep] = useState(0);
+    const [order, setOrder] = useState(null);
+
+    useEffect(() => {
+
+        const fetchOrder = async () => {
+
+            try {
+
+                const { data } = await api.get(`/order/${orderId}`);
+
+                setOrder(data.order);
+
+            } catch (err) {
+
+                console.log(err);
+
+            }
+
+        };
+
+        fetchOrder();
+
+    }, [orderId]);
 
     const steps = midnightTrackingData.steps;
 

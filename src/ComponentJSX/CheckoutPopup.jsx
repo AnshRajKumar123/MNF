@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../ComponentCSS/CheckoutPopup.css";
 import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../assets/assest";
+import api from "../config/axios";
+import { API_URL } from "../config/api";
 
 const CheckoutPopup = ({ closePopup }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
@@ -8,6 +10,7 @@ const CheckoutPopup = ({ closePopup }) => {
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [addNewMode, setAddNewMode] = useState(false);
+    const [deliveryType, setDeliveryType] = useState("Standard");
 
     const [selectedPayment, setSelectedPayment] = useState(
         localStorage.getItem("MNF_SelectedPayment") || ""
@@ -37,30 +40,34 @@ const CheckoutPopup = ({ closePopup }) => {
     };
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("MNF_UserAddresses")) || [];
-        const profile = JSON.parse(localStorage.getItem("MNF_UserProfile"));
 
-        if (profile) {
-            const exists = saved.some(a => a.phone === profile.phone);
+        const fetchProfile = async () => {
 
-            if (!exists) {
-                const profileAddr = {
-                    id: Date.now(),
-                    name: profile.name,
-                    phone: profile.phone,
-                    address: profile.address,
-                    building: profile.building,
-                    pincode: profile.pincode,
-                    image: profile.image || ""
+            try {
+
+                const { data } = await api.get("/auth/profile");
+
+                const profileAddress = {
+                    id: "profile",
+                    name: data.user.fullName,
+                    phone: data.user.phone || "",
+                    building: data.user.building || "",
+                    address: data.user.address || "",
+                    pincode: data.user.pincode || "",
+                    image: data.user.image || "",
                 };
 
-                saved.unshift(profileAddr);
-                localStorage.setItem("MNF_UserAddresses", JSON.stringify(saved));
-            }
-        }
+                setAddresses([profileAddress]);
+                setSelectedAddress(profileAddress);
 
-        setAddresses(saved);
-        if (saved.length > 0) setSelectedAddress(saved[0]);
+            } catch (error) {
+                console.log(error);
+            }
+
+        };
+
+        fetchProfile();
+
     }, []);
 
     const removeAddress = (id, e) => {
@@ -75,68 +82,93 @@ const CheckoutPopup = ({ closePopup }) => {
         }
     };
 
-    const saveAddress = () => {
-        if (!newAddress.name || !newAddress.phone || !newAddress.address || !newAddress.pincode)
+    const saveAddress = async () => {
+
+        if (
+            !newAddress.name ||
+            !newAddress.phone ||
+            !newAddress.address ||
+            !newAddress.pincode
+        ) {
             return alert("Fill all required fields!");
+        }
 
-        const updated = [...addresses, { id: Date.now(), ...newAddress }];
-        localStorage.setItem("MNF_UserAddresses", JSON.stringify(updated));
+        try {
 
-        setAddresses(updated);
-        setSelectedAddress(updated[updated.length - 1]);
-        setAddNewMode(false);
+            await api.put("/auth/profile", {
+                phone: newAddress.phone,
+                building: newAddress.building,
+                address: newAddress.address,
+                pincode: newAddress.pincode,
+                image: newAddress.image,
+            });
+
+            const profileAddress = {
+                id: "profile",
+                ...newAddress,
+            };
+
+            setAddresses([profileAddress]);
+            setSelectedAddress(profileAddress);
+            setAddNewMode(false);
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
+
+    const goToDelivery = () => {
+
+        if (!selectedAddress) {
+            return alert("Select an address!");
+        }
+
+        setStep("delivery");
+
     };
 
     const goToPayment = () => {
-        if (!selectedAddress) return alert("Select an address!");
-        localStorage.setItem("MNF_SelectedAddress", JSON.stringify(selectedAddress));
+
+        if (!deliveryType) {
+            return alert("Select a delivery type!");
+        }
+
         setStep("payment");
+
     };
 
-    const completePayment = () => {
-        if (!selectedPayment) return alert("Choose a payment method!");
+    const completePayment = async () => {
 
-        const id = "MNF-" + Math.floor(100000 + Math.random() * 900000);
-        localStorage.setItem("MNF_OrderID", id);
-        setOrderId(id);
+        if (!selectedPayment) {
+            return alert("Choose a payment method!");
+        }
 
-        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const appliedCoupon = JSON.parse(localStorage.getItem("appliedCoupon")) || null;
-        const tip = Number(localStorage.getItem("tip") || 0);
-        const deliveryType = localStorage.getItem("deliveryType") || "standard";
+        try {
 
-        const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        const discountAmount = appliedCoupon ? Math.round(subtotal * (appliedCoupon.percent / 100)) : 0;
-        const shipping = subtotal >= 500 ? 0 : 40;
-        const total = subtotal - discountAmount + shipping + tip;
+            const { data } = await api.post("/order/place", {
+                address: selectedAddress,
+                paymentMethod: selectedPayment,
+                deliveryType,
+            });
 
-        const orderData = {
-            id,
-            items: cartItems,
-            subtotal,
-            discount: discountAmount,
-            shipping,
-            tip,
-            total,
-            deliveryType,
-            payment: selectedPayment,
-            address: JSON.parse(localStorage.getItem("MNF_SelectedAddress")),
-            date: new Date().toLocaleString(),
-            status: "On Process"
-        };
+            setOrderId(data.order._id);
 
-        const existing = JSON.parse(localStorage.getItem("MNF_Orders")) || [];
-        existing.unshift(orderData);
-        localStorage.setItem("MNF_Orders", JSON.stringify(existing));
+            window.dispatchEvent(new Event("cartUpdated"));
 
-        localStorage.removeItem("cartItems");
-        localStorage.removeItem("appliedCoupon");
-        localStorage.removeItem("tip");
-        localStorage.removeItem("instruction");
-        localStorage.removeItem("deliveryType");
+            setStep("success");
+            setShowSuccess(true);
 
-        setStep("success");
-        setShowSuccess(true);
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error.response?.data?.message || "Failed to place order."
+            );
+
+        }
+
     };
 
     return (
@@ -164,7 +196,10 @@ const CheckoutPopup = ({ closePopup }) => {
                                             <div className="ProAddrHeadFlexGroup">
                                                 <div className="ProAddrAvatarShield">
                                                     {addr.image ? (
-                                                        <img src={addr.image} alt="" />
+                                                        <img
+                                                            src={addr.image ? `${API_URL}${addr.image}` : ""}
+                                                            alt={addr.name}
+                                                        />
                                                     ) : (
                                                         <span className="AvatarFallbackLetter">{addr.name?.charAt(0).toUpperCase()}</span>
                                                     )}
@@ -213,7 +248,7 @@ const CheckoutPopup = ({ closePopup }) => {
                         <div className="ProPopupActionsRowDeck">
                             <button className="ProCancelDismissCTA" onClick={closePopup}>{midnightCheckoutData.actions.cancel}</button>
                             {addresses.length > 0 && !addNewMode && (
-                                <button className="ProProceedNavigateCTA" onClick={goToPayment}>
+                                <button className="ProProceedNavigateCTA" onClick={goToDelivery}>
                                     {midnightCheckoutData.actions.proceedPayment} <i className='bx bx-right-arrow-alt'></i>
                                 </button>
                             )}
@@ -221,11 +256,90 @@ const CheckoutPopup = ({ closePopup }) => {
                     </div>
                 )}
 
+                {step === "delivery" && (
+
+                    <div className="ProDeliverySectionContainer">
+
+                        <div className="ProPaymentHeaderInlineRow">
+                            <button
+                                className="ProPaymentBackArrowBtn"
+                                onClick={() => setStep("address")}
+                            >
+                                <i className='bx bx-left-arrow-alt'></i>
+                            </button>
+
+                            <h2>Select Delivery</h2>
+                        </div>
+
+                        <div className="ProDeliveryCards">
+
+                            <div
+                                className={`ProDeliveryCard ${deliveryType === "Express"
+                                    ? "delivery-active"
+                                    : ""
+                                    }`}
+                                onClick={() => setDeliveryType("Express")}
+                            >
+                                <div>
+                                    <h3>⚡ Express</h3>
+                                    <p>20–25 Minutes</p>
+                                </div>
+
+                                <span>₹49</span>
+                            </div>
+
+                            <div
+                                className={`ProDeliveryCard ${deliveryType === "Standard"
+                                    ? "delivery-active"
+                                    : ""
+                                    }`}
+                                onClick={() => setDeliveryType("Standard")}
+                            >
+                                <div>
+                                    <h3>🚴 Standard</h3>
+                                    <p>30–35 Minutes</p>
+                                </div>
+
+                                <span>FREE</span>
+                            </div>
+
+                            <div
+                                className={`ProDeliveryCard ${deliveryType === "Economy"
+                                    ? "delivery-active"
+                                    : ""
+                                    }`}
+                                onClick={() => setDeliveryType("Economy")}
+                            >
+                                <div>
+                                    <h3>🕒 Economy</h3>
+                                    <p>45–50 Minutes</p>
+                                </div>
+
+                                <span>FREE</span>
+                            </div>
+
+                        </div>
+
+                        <button
+                            className="ProPayNowAuthorizationCTA"
+                            onClick={goToPayment}
+                        >
+                            Continue to Payment
+                            <i className='bx bx-right-arrow-alt'></i>
+                        </button>
+
+                    </div>
+
+                )}
+
                 {/* STEP 2 — SETTLEMENT ROUTER SCREEN */}
                 {step === "payment" && (
                     <div className="ProPaymentSectionContainer">
                         <div className="ProPaymentHeaderInlineRow">
-                            <button className="ProPaymentBackArrowBtn" onClick={() => setStep("address")}>
+                            <button
+                                className="ProPaymentBackArrowBtn"
+                                onClick={() => setStep("delivery")}
+                            >
                                 <i className='bx bx-left-arrow-alt'></i>
                             </button>
                             <h2>{midnightCheckoutData.titles.paymentStep}</h2>
@@ -304,13 +418,18 @@ const CheckoutPopup = ({ closePopup }) => {
 
                         <div className="ProOrderIdTelemetryBox">
                             <span>{midnightOrderSuccessData.labels.idPrefix}</span>
-                            <strong>{orderId}</strong>
+                            <strong>
+                                #{orderId.slice(-6).toUpperCase()}
+                            </strong>
                         </div>
 
-                        <button className="ProOrderTrackCTA" onClick={() => {
-                            closePopup();
-                            window.location.href = "/track-order";
-                        }}>
+                        <button
+                            className="ProOrderTrackCTA"
+                            onClick={() => {
+                                closePopup();
+                                window.location.href = `/track-order/${orderId}`;
+                            }}
+                        >
                             {midnightOrderSuccessData.labels.trackBtn} <i className='bx bx-navigation'></i>
                         </button>
                     </div>

@@ -23,7 +23,7 @@ const App = () => {
             <ScrollToTop />
             <Toaster position="top-center" />
             <Routes>
-                
+
                 <Route path='/' element={<HeroSect />} />
                 <Route path='/signInUp' element={<SignInUp />} />
 
@@ -37,8 +37,8 @@ const App = () => {
                     <Route path='/profile' element={<Profile />} />
                     <Route path="/fraud-success" element={<FraudSuccess />} />
                     <Route path="/help-success" element={<HelpSuccess />} />
-                    <Route path='/track-order' element={<TrackOrder />} />
-                    
+                    <Route path="/track-order/:orderId" element={<TrackOrder />} />
+
                 </Route>
 
                 <Route path="*" element={<NotFound />} />
