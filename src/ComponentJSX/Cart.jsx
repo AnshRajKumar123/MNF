@@ -12,9 +12,9 @@ const Cart = () => {
     const [showCheckout, setShowCheckout] = useState(false);
 
     const deliveryOptions = {
-        express: { label: "Express Transport", price: 19, time: "15-20 mins" },
+        express: { label: "Express Transport", price: 49, time: "15-20 mins" },
         standard: { label: "Standard Fleet", price: 0, time: "20-25 mins" },
-        eco: { label: "Eco Saver Link", price: 0, time: "25-30 mins" }
+        economy: { label: "Eco Saver Link", price: 0, time: "25-30 mins" }
     };
 
     const [activeTab, setActiveTab] = useState("delivery");
@@ -71,12 +71,6 @@ const Cart = () => {
 
         fetchCart();
 
-        const savedCoupon = JSON.parse(localStorage.getItem("appliedCoupon"));
-
-        if (savedCoupon) {
-            setAppliedCoupon(savedCoupon);
-        }
-
     }, []);
 
     const updateQuantity = (index, delta) => {
@@ -107,13 +101,14 @@ const Cart = () => {
 
     const handleApplyCoupon = () => {
         const code = coupon.trim().toUpperCase();
+
         if (couponsList[code]) {
-            const couponObj = { title: code, percent: couponsList[code] };
-            setAppliedCoupon(couponObj);
-            localStorage.setItem("appliedCoupon", JSON.stringify(couponObj));
+            setAppliedCoupon({
+                title: code,
+                percent: couponsList[code]
+            });
         } else {
             setAppliedCoupon(null);
-            localStorage.removeItem("appliedCoupon");
             alert("Invalid coupon code");
         }
     };
@@ -124,6 +119,9 @@ const Cart = () => {
     );
     const shipping = subtotal >= FREE_SHIPPING_LIMIT || subtotal === 0 ? 0 : SHIPPING_COST;
     const discountAmount = appliedCoupon ? Math.round(subtotal * (appliedCoupon.percent / 100)) : 0;
+    console.log("deliveryType:", deliveryType);
+    console.log("deliveryOptions:", deliveryOptions);
+    console.log("selected option:", deliveryOptions[deliveryType]);
     const deliveryCharge = deliveryOptions[deliveryType].price;
     const finalTotal = subtotal - discountAmount + shipping + deliveryCharge + tip;
 
@@ -359,7 +357,25 @@ const Cart = () => {
             )}
 
             {showCheckout && (
-                <CheckoutPopup closePopup={() => setShowCheckout(false)} />
+                <CheckoutPopup
+                    closePopup={() => setShowCheckout(false)}
+                    appliedCoupon={appliedCoupon}
+                    tip={tip}
+                    deliveryType={deliveryType}
+                    clearCartData={() => {
+                        setAppliedCoupon(null);
+                        setCoupon("");
+                        setTip(0);
+                        setCustomTip("");
+                        setInstruction("");
+                        setDeliveryType("standard");
+
+                        localStorage.removeItem("tip");
+                        localStorage.removeItem("instruction");
+                        localStorage.removeItem("deliveryType");
+                        localStorage.setItem("deliveryType", "standard");
+                    }}
+                />
             )}
 
         </div>

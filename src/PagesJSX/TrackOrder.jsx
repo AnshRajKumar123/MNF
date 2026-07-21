@@ -259,14 +259,47 @@ const TrackOrder = () => {
                             </div>
 
                             <div className="ProSummaryCostBreakdown">
+
                                 <div className="CostRow">
-                                    <span>Logistics Transit Fee</span>
-                                    <strong>₹{order.deliveryCharge}</strong>
+                                    <span>Subtotal</span>
+                                    <strong>
+                                        ₹{order.subtotal ?? order.items.reduce(
+                                            (sum, item) => sum + item.price * item.quantity,
+                                            0
+                                        )}
+                                    </strong>
                                 </div>
+
+                                {order.discount > 0 && (
+                                    <div className="CostRow">
+                                        <span>
+                                            Coupon ({order.couponCode})
+                                        </span>
+                                        <strong>-₹{order.discount}</strong>
+                                    </div>
+                                )}
+
+                                <div className="CostRow">
+                                    <span>Delivery Charge</span>
+                                    <strong>
+                                        {order.deliveryCharge === 0
+                                            ? "FREE"
+                                            : `₹${order.deliveryCharge}`}
+                                    </strong>
+                                </div>
+
+                                {order.tip > 0 && (
+                                    <div className="CostRow">
+                                        <span>Delivery Tip</span>
+                                        <strong>₹{order.tip}</strong>
+                                    </div>
+                                )}
+
                                 <div className="CostRow TotalAmountRow">
-                                    <span>Total Authorized Amount</span>
+                                    <span>Total Paid</span>
                                     <strong>₹{order.totalAmount}</strong>
                                 </div>
+
                             </div>
                         </div>
 

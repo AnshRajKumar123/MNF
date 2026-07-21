@@ -94,8 +94,8 @@ const orderSchema = new mongoose.Schema(
 
         deliveryType: {
             type: String,
-            enum: ["Express", "Standard", "Economy"],
-            default: "Standard",
+            enum: ["express", "standard", "economy"],
+            default: "standard",
         },
 
         deliveryMinutes: {
@@ -106,6 +106,26 @@ const orderSchema = new mongoose.Schema(
 
         estimatedDelivery: {
             type: Date,
+            required: true,
+        },
+
+        discount: {
+            type: Number,
+            default: 0,
+        },
+
+        couponCode: {
+            type: String,
+            default: "",
+        },
+
+        tip: {
+            type: Number,
+            default: 0,
+        },
+
+        subtotal: {
+            type: Number,
             required: true,
         },
 

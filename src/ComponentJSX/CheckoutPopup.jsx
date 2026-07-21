@@ -4,13 +4,12 @@ import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../
 import api from "../config/axios";
 import { API_URL } from "../config/api";
 
-const CheckoutPopup = ({ closePopup }) => {
+const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, clearCartData }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
 
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
     const [addNewMode, setAddNewMode] = useState(false);
-    const [deliveryType, setDeliveryType] = useState("Standard");
 
     const [selectedPayment, setSelectedPayment] = useState(
         localStorage.getItem("MNF_SelectedPayment") || ""
@@ -124,7 +123,7 @@ const CheckoutPopup = ({ closePopup }) => {
             return alert("Select an address!");
         }
 
-        setStep("delivery");
+        setStep("payment");
 
     };
 
@@ -150,12 +149,12 @@ const CheckoutPopup = ({ closePopup }) => {
                 address: selectedAddress,
                 paymentMethod: selectedPayment,
                 deliveryType,
+                coupon: appliedCoupon,
+                tip
             });
-
-            setOrderId(data.order._id);
-
+            clearCartData();
             window.dispatchEvent(new Event("cartUpdated"));
-
+            setOrderId(data.order._id);
             setStep("success");
             setShowSuccess(true);
 
@@ -254,82 +253,6 @@ const CheckoutPopup = ({ closePopup }) => {
                             )}
                         </div>
                     </div>
-                )}
-
-                {step === "delivery" && (
-
-                    <div className="ProDeliverySectionContainer">
-
-                        <div className="ProPaymentHeaderInlineRow">
-                            <button
-                                className="ProPaymentBackArrowBtn"
-                                onClick={() => setStep("address")}
-                            >
-                                <i className='bx bx-left-arrow-alt'></i>
-                            </button>
-
-                            <h2>Select Delivery</h2>
-                        </div>
-
-                        <div className="ProDeliveryCards">
-
-                            <div
-                                className={`ProDeliveryCard ${deliveryType === "Express"
-                                    ? "delivery-active"
-                                    : ""
-                                    }`}
-                                onClick={() => setDeliveryType("Express")}
-                            >
-                                <div>
-                                    <h3>⚡ Express</h3>
-                                    <p>15–20 Minutes</p>
-                                </div>
-
-                                <span>₹49</span>
-                            </div>
-
-                            <div
-                                className={`ProDeliveryCard ${deliveryType === "Standard"
-                                    ? "delivery-active"
-                                    : ""
-                                    }`}
-                                onClick={() => setDeliveryType("Standard")}
-                            >
-                                <div>
-                                    <h3>🚴 Standard</h3>
-                                    <p>20-25 Minutes</p>
-                                </div>
-
-                                <span>FREE</span>
-                            </div>
-
-                            <div
-                                className={`ProDeliveryCard ${deliveryType === "Economy"
-                                    ? "delivery-active"
-                                    : ""
-                                    }`}
-                                onClick={() => setDeliveryType("Economy")}
-                            >
-                                <div>
-                                    <h3>🕒 Economy</h3>
-                                    <p>25-30 Minutes</p>
-                                </div>
-
-                                <span>FREE</span>
-                            </div>
-
-                        </div>
-
-                        <button
-                            className="ProPayNowAuthorizationCTA"
-                            onClick={goToPayment}
-                        >
-                            Continue to Payment
-                            <i className='bx bx-right-arrow-alt'></i>
-                        </button>
-
-                    </div>
-
                 )}
 
                 {/* STEP 2 — SETTLEMENT ROUTER SCREEN */}

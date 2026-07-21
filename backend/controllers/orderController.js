@@ -9,6 +9,8 @@ const placeOrder = async (req, res) => {
             address,
             paymentMethod,
             deliveryType,
+            coupon,
+            tip = 0,
         } = req.body;
 
         const cart = await Cart.find({ user: req.user.id })
@@ -32,22 +34,30 @@ const placeOrder = async (req, res) => {
             0
         );
 
+        let discount = 0;
+
+        if (coupon) {
+            discount = Math.round(
+                foodTotal * (coupon.percent / 100)
+            );
+        }
+
         let deliveryMinutes = 20;
         let deliveryCharge = 0;
 
         switch (deliveryType) {
 
-            case "Express":
+            case "express":
                 deliveryMinutes = 15;
                 deliveryCharge = 49;
                 break;
 
-            case "Standard":
+            case "standard":
                 deliveryMinutes = 20;
                 deliveryCharge = 0;
                 break;
 
-            case "Economy":
+            case "economy":
                 deliveryMinutes = 25;
                 deliveryCharge = 0;
                 break;
@@ -58,7 +68,7 @@ const placeOrder = async (req, res) => {
 
         }
 
-        const totalAmount = foodTotal + deliveryCharge;
+        const totalAmount = foodTotal - discount + deliveryCharge + tip;
 
         const estimatedDelivery = new Date(
             Date.now() + deliveryMinutes * 60 * 1000
@@ -94,14 +104,17 @@ const placeOrder = async (req, res) => {
 
         const order = await Order.create({
             user: req.user.id,
-
             items,
+            subtotal: foodTotal,
             totalAmount,
             address,
             paymentMethod,
             deliveryType,
             deliveryMinutes,
             deliveryCharge,
+            discount,
+            couponCode: coupon?.title || "",
+            tip,
             estimatedDelivery,
             rider,
         });
