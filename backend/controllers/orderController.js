@@ -79,24 +79,32 @@ const placeOrder = async (req, res) => {
         );
 
         const riders = [
+
             {
                 name: "Rohit Kumar",
+                phone: "9876543210",
                 vehicle: "UP14 AQ 9921",
-                image: "/Uploads/riders/rider1.png",
+                image: "https://cdn-icons-png.flaticon.com/512/3917/3917036.png",
             },
+
             {
                 name: "Aman Singh",
-                vehicle: "DL05 AB 4421",
-                image: "/Uploads/riders/rider2.png",
+                phone: "9123456780",
+                vehicle: "DL8CAF9021",
+                image: "https://cdn-icons-png.flaticon.com/512/3917/3917036.png",
             },
+
             {
                 name: "Rahul Verma",
-                vehicle: "HR26 TR 1182",
-                image: "/Uploads/riders/rider3.png",
-            },
+                phone: "9988776655",
+                vehicle: "HR26BF3321",
+                image: "https://cdn-icons-png.flaticon.com/512/3917/3917036.png",
+            }
+
         ];
 
-        const rider = riders[Math.floor(Math.random() * riders.length)];
+        const rider =
+            riders[Math.floor(Math.random() * riders.length)];
 
         const order = await Order.create({
             user: req.user.id,
@@ -133,34 +141,6 @@ const placeOrder = async (req, res) => {
 
 };
 
-const myOrders = async (req, res) => {
-
-    try {
-
-        const orders = await Order.find({
-            user: req.user.id,
-        })
-            .populate("items.product")
-            .sort({ createdAt: -1 });
-
-        return res.status(200).json({
-            success: true,
-            orders,
-        });
-
-    } catch (error) {
-
-        console.log(error);
-
-        return res.status(500).json({
-            success: false,
-            message: "Internal Server Error",
-        });
-
-    }
-
-};
-
 const getOrder = async (req, res) => {
 
     try {
@@ -180,6 +160,35 @@ const getOrder = async (req, res) => {
         return res.status(200).json({
             success: true,
             order,
+            serverTime: new Date(),
+        });;
+
+    } catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Server Error",
+        });
+
+    }
+
+};
+
+const myOrders = async (req, res) => {
+
+    try {
+
+        const orders = await Order.find({
+            user: req.user.id,
+        })
+            .populate("items.product")
+            .sort({ createdAt: -1 });
+
+        return res.status(200).json({
+            success: true,
+            orders,
         });
 
     } catch (error) {
@@ -285,8 +294,8 @@ const deleteOrder = async (req, res) => {
 
 module.exports = {
     placeOrder,
-    myOrders,
     getOrder,
+    myOrders,
     cancelOrder,
     deleteOrder
 };

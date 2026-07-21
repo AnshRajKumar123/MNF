@@ -3,14 +3,19 @@ import AnotherNav from "./AnotherNav";
 import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
 import { useParams } from "react-router-dom";
+import api from "../config/axios";
 
 
 const TrackOrder = () => {
-    const [orderId, setOrderId] = useState("");
-    const [currentStep, setCurrentStep] = useState(0);
     const [order, setOrder] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [progress, setProgress] = useState(0);
+    const [currentStep, setCurrentStep] = useState(0);
+    const { orderId } = useParams();
 
     useEffect(() => {
+
+        if (!orderId) return;
 
         const fetchOrder = async () => {
 
@@ -20,9 +25,9 @@ const TrackOrder = () => {
 
                 setOrder(data.order);
 
-            } catch (err) {
+            } catch (error) {
 
-                console.log(err);
+                console.log(error);
 
             }
 
@@ -30,31 +35,103 @@ const TrackOrder = () => {
 
         fetchOrder();
 
+        const interval = setInterval(fetchOrder, 5000);
+
+        return () => clearInterval(interval);
+
     }, [orderId]);
+
+    useEffect(() => {
+
+        if (!order) return;
+
+        const timer = setInterval(() => {
+
+            const now = new Date().getTime();
+
+            const delivery = new Date(order.estimatedDelivery).getTime();
+
+            const remaining = Math.max(0, delivery - now);
+
+            setTimeLeft(remaining);
+
+        }, 1000);
+
+        return () => clearInterval(timer);
+
+    }, [order]);
+
+    useEffect(() => {
+
+        if (!order) return;
+
+        const timer = setInterval(() => {
+
+            const created = new Date(order.createdAt).getTime();
+
+            const delivery = new Date(order.estimatedDelivery).getTime();
+
+            const now = Date.now();
+
+            const total = delivery - created;
+
+            const elapsed = now - created;
+
+            const percent = Math.min(
+
+                100,
+
+                Math.max(0, (elapsed / total) * 100)
+
+            );
+
+            setProgress(percent);
+
+        }, 1000);
+
+        return () => clearInterval(timer);
+
+    }, [order]);
+
+    const formatTime = (ms) => {
+
+        const totalSeconds = Math.floor(ms / 1000);
+
+        const minutes = Math.floor(totalSeconds / 60);
+
+        const seconds = totalSeconds % 60;
+
+        return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+    };
 
     const steps = midnightTrackingData.steps;
 
-    const rider = {
-        name: "Rohit Kumar",
-        vehicle: "UP14 AQ 9921",
-        image: "https://cdn-icons-png.flaticon.com/512/3917/3917036.png"
-    };
-
     useEffect(() => {
-        const id = localStorage.getItem("MNF_OrderID");
-        if (id) setOrderId(id);
-    }, []);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentStep((prev) => {
-                if (prev < steps.length - 1) return prev + 1;
-                return prev;
-            });
-        }, 3000);
+        if (progress < 20) {
 
-        return () => clearInterval(timer);
-    }, [steps.length]);
+            setCurrentStep(0);
+
+        } else if (progress < 45) {
+
+            setCurrentStep(1);
+
+        } else if (progress < 75) {
+
+            setCurrentStep(2);
+
+        } else if (progress < 100) {
+
+            setCurrentStep(3);
+
+        } else {
+
+            setCurrentStep(4);
+
+        }
+
+    }, [progress]);
 
     return (
         <div className="ProTrackingOuterSuite">
@@ -75,7 +152,7 @@ const TrackOrder = () => {
                     <div className="HorizontalTimelineTrackLine">
                         <div
                             className="TimelineTrackProgressFill"
-                            style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+                            style={{ width: `${progress}%` }}
                         ></div>
                     </div>
 
@@ -104,11 +181,11 @@ const TrackOrder = () => {
                     {currentStep >= 2 && currentStep < 4 && (
                         <div className="ProRiderConsoleBentoCard">
                             <div className="RiderAvatarFrame">
-                                <img src={rider.image} alt="Rider Operational Avatar" />
+                                <img src={order?.rider?.image} alt="" />
                             </div>
                             <div className="RiderProfileMetadata">
-                                <h3>{rider.name}</h3>
-                                <span>{rider.vehicle}</span>
+                                <h3>{order?.rider?.name}</h3>
+                                <span>{order?.rider?.vehicle}</span>
                             </div>
                             <div className="RiderStatusIndicatorTag">
                                 <span className="LiveStatusPulse"></span> Active Courier
@@ -122,7 +199,7 @@ const TrackOrder = () => {
                             <div className="EtaAlertIconBox"><i className='bx bx-time-five'></i></div>
                             <div className="EtaAlertTextCluster">
                                 <h3>{midnightTrackingData.labels.etaNotice}</h3>
-                                <p>{midnightTrackingData.labels.etaTime}</p>
+                                <p>{formatTime(timeLeft)}</p>
                             </div>
                         </div>
                     )}
