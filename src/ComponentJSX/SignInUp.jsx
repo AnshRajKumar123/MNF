@@ -63,7 +63,6 @@ const SignInUp = () => {
                     withCredentials: true,
                 }
             );
-
             toast.success(response.data.message);
             navigate("/mainWebsite");
 
