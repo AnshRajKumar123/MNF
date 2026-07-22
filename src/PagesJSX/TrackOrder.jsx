@@ -209,6 +209,35 @@ const TrackOrder = () => {
 
     };
 
+
+    const downloadInvoice = async () => {
+        try {
+
+            const response = await api.get(`/invoice/${order._id}`, {
+                responseType: "blob",
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+
+            const link = document.createElement("a");
+
+            link.href = url;
+            link.download = `Invoice-${order._id}.pdf`;
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+            window.URL.revokeObjectURL(url);
+
+        } catch (error) {
+            console.log(error);
+            alert("Failed to download invoice");
+        }
+    };
+
     return (
         <div className="ProTrackingOuterSuite">
             <AnotherNav />
@@ -489,6 +518,10 @@ const TrackOrder = () => {
 
                         )
                     }
+
+                    <button onClick={downloadInvoice}>
+                        Download Invoice
+                    </button>
 
                 </div>
 
