@@ -84,6 +84,7 @@ export const midnightFoodData = {
     },
     navMenuOptions: [
         { label: "Order Tracking", action: "openOrderDetail" },
+        { label: "Order History", path: "/order-history" },
         { label: "About Us", path: "/about" },
         { label: "Report a Fraud", path: "/report-fraud" },
         { label: "Help and Support", path: "/help-support" }
@@ -92,7 +93,7 @@ export const midnightFoodData = {
     anotherNav: {
         moreLabel: "More",
         options: [
-            { label: "Order Tracking", action: "openOrderDetail" },
+            { label: "Order History", path: "/order-history" },
             { label: "About Us", path: "/about" },
             { label: "Report a Fraud", path: "/report-fraud" },
             { label: "Help and Support", path: "/help-support" }

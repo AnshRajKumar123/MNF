@@ -1,0 +1,453 @@
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD ENTERPRISE ORDER HISTORY LEDGER SHEET
+   ========================================================================== */
+
+.ProHistoryOuterSuite {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    box-sizing: border-box;
+    transition: background-color 0.35s ease;
+}
+
+.ProHistorySectionLayout {
+    width: 100%;
+    max-width: 1250px;
+    margin: 40px auto 6rem auto;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+
+/* ==========================================================================
+   LOADING & EMPTY STATES
+   ========================================================================== */
+
+.OrderHistoryLoading {
+    width: 100%;
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.OrderHistoryLoading h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0 0 6px 0;
+}
+
+.OrderHistoryLoading p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.ProEmptyOrdersBentoCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 45px var(--shadow-premium);
+}
+
+.EmptyIconShield {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(58, 134, 200, 0.05);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    color: var(--accent-blue-light);
+    margin-bottom: 1.5rem;
+}
+
+.ProEmptyOrdersBentoCard h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0 0 8px 0;
+}
+
+.ProEmptyOrdersBentoCard p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 2rem 0;
+}
+
+.ProEmptyExploreCTA {
+    padding: 12px 28px;
+    border-radius: 8px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.ProEmptyExploreCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   HEADER CONTROL BAR
+   ========================================================================== */
+
+.ProHistoryHeaderBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-morphic);
+}
+
+.ProHistoryHeaderBar h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
+}
+
+.ProHistoryHeaderBar p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ==========================================================================
+   ORDER BENTO CARDS GRID STACK
+   ========================================================================== */
+
+.ProOrderGridStack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    width: 100%;
+}
+
+.ProOrderBentoCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    box-sizing: border-box;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.ProOrderBentoCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(58, 134, 200, 0.35);
+}
+
+/* LEFT IMAGE SHIELD FRAME */
+.OrderImageShieldFrame {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    border: 1px solid var(--border-morphic);
+    background-color: var(--bg-primary);
+}
+
+.OrderImageShieldFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.ProOrderBentoCard:hover .OrderImageShieldFrame img {
+    transform: scale(1.06);
+}
+
+.PlusMoreBadge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(4px);
+    color: var(--accent-blue-light);
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    padding: 3px 0;
+    letter-spacing: 0.5px;
+}
+
+/* MIDDLE CONTENT METADATA */
+.OrderMetaBodyDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.OrderTitleHeaderRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.OrderTitleText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0;
+    letter-spacing: -0.2px;
+}
+
+.OrderNodeIdPill {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background-color: rgba(0, 0, 0, 0.12);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-morphic);
+}
+
+[data-theme="light-ocean"] .OrderNodeIdPill {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.MetaPillsFlexRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.MetaPill {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-morphic);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+[data-theme="light-ocean"] .MetaPill {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.MetaPill.HighlightAmount {
+    color: var(--accent-blue-light);
+    font-weight: 800;
+    font-family: var(--Font3), sans-serif;
+}
+
+.SecondaryMetaRow {
+    margin-top: 2px;
+}
+
+.SubMetaItem {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.CouponTag {
+    color: #2ecc71;
+    font-weight: 700;
+}
+
+/* RIGHT ACTION DOCK */
+.OrderRightActionDock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+/* STATUS BADGE INDICATORS */
+.ProOrderStatusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border: 1px solid var(--border-morphic);
+}
+
+.StatusPulseDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ProOrderStatusBadge.OnProcess,
+.ProOrderStatusBadge.OnProcess .StatusPulseDot {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(58, 134, 200, 0.3);
+}
+
+.ProOrderStatusBadge.Delivered {
+    background-color: rgba(46, 204, 113, 0.12);
+    border-color: rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+}
+
+.ProOrderStatusBadge.Delivered .StatusPulseDot {
+    background-color: #2ecc71;
+}
+
+.ProOrderStatusBadge.Cancelled {
+    background-color: rgba(255, 77, 77, 0.12);
+    border-color: rgba(255, 77, 77, 0.3);
+    color: #ff4d4d;
+}
+
+.ProOrderStatusBadge.Cancelled .StatusPulseDot {
+    background-color: #ff4d4d;
+}
+
+/* ACTION BUTTONS */
+.ProHistoryActionsGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.HistoryActionBtn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.HistoryActionBtn.TrackBtn {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.HistoryActionBtn.TrackBtn:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+}
+
+.HistoryActionBtn.InvoiceBtn {
+    background-color: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+    color: #2ecc71;
+}
+
+.HistoryActionBtn.InvoiceBtn:hover {
+    background-color: #2ecc71;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.HistoryActionBtn.DeleteBtn {
+    background-color: rgba(255, 77, 77, 0.08);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+}
+
+.HistoryActionBtn.DeleteBtn:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT CONSTRAINTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .ProOrderBentoCard {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    .OrderImageShieldFrame {
+        width: 100%;
+        height: 180px;
+    }
+
+    .OrderRightActionDock {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-morphic);
+    }
+}
+
+@media (max-width: 600px) {
+    .ProHistorySectionLayout {
+        padding: 0 1.5rem;
+    }
+
+    .OrderRightActionDock {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .ProHistoryActionsGroup {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .HistoryActionBtn {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+}

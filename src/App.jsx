@@ -16,6 +16,7 @@ import TrackOrder from './PagesJSX/TrackOrder'
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ComponentJSX/ProtectedRoute";
 import NotFound from './PagesJSX/NotFound'
+import OrderHistory from "./PagesJSX/OrderHistory";
 
 const App = () => {
     return (
@@ -38,6 +39,7 @@ const App = () => {
                     <Route path="/fraud-success" element={<FraudSuccess />} />
                     <Route path="/help-success" element={<HelpSuccess />} />
                     <Route path="/track-order/:orderId" element={<TrackOrder />} />
+                    <Route path="/order-history" element={<OrderHistory />} />
 
                 </Route>
 
