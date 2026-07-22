@@ -227,6 +227,18 @@
     letter-spacing: -1px;
 }
 
+.CountdownDigitalDisplay.Cancelled {
+    color: #ff4d4d;
+}
+
+.CountdownDigitalDisplay.Delivered {
+    color: #2ecc71;
+}
+
+.CountdownDigitalDisplay.OnProcess {
+    color: var(--accent-blue-light);
+}
+
 .TargetDeliveryMetaRow {
     display: flex;
     align-items: center;
@@ -250,12 +262,12 @@
 /* --- VERTICAL STEPPER TIMELINE --- */
 .ProVerticalStepperTrack {
     position: relative;
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 
 .VerticalTrackLine {
     position: absolute;
-    left: 48.5px;
+    left: 32px;
     top: 0px;
     bottom: 25px;
     width: 3px;
@@ -305,6 +317,7 @@
     position: relative;
     z-index: 2;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .StepTextCluster {
@@ -407,6 +420,7 @@
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-morphic);
+    flex-shrink: 0;
 }
 
 .ItemImageThumbFrame img {
@@ -495,6 +509,7 @@
     display: flex;
     gap: 10px;
     margin-top: 6px;
+    flex-wrap: wrap;
 }
 
 .MethodPill,
@@ -509,7 +524,7 @@
 }
 
 /* ==========================================================================
-   BOTTOM STATUS DECKS
+   BOTTOM STATUS DECKS & ACTION DOCK
    ========================================================================== */
 
 .ProTrackingBottomStatusSection {
@@ -531,6 +546,7 @@
     height: 64px;
     border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .RiderAvatarShield img {
@@ -596,7 +612,8 @@
 
 .AlertIconShield,
 .SuccessIconShield,
-.CancelledIconShield {
+.CancelledIconShield,
+.SuccessBadgeShieldIcon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -612,7 +629,8 @@
     color: var(--accent-blue-light);
 }
 
-.SuccessIconShield {
+.SuccessIconShield,
+.SuccessBadgeShieldIcon {
     background-color: rgba(46, 204, 113, 0.1);
     color: #2ecc71;
 }
@@ -629,6 +647,7 @@
     font-size: 16px;
     font-weight: 800;
     margin: 0 0 2px 0;
+    color: var(--text-core);
 }
 
 .AlertTextCluster p,
@@ -637,65 +656,6 @@
     font-size: 14px;
     color: var(--text-muted);
     margin: 0;
-}
-
-/* CANCEL ORDER ACTION BUTTON */
-.ProCancelOrderTriggerCTA {
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-    background-color: rgba(255, 77, 77, 0.08);
-    border: 1px solid rgba(255, 77, 77, 0.2);
-    color: #ff4d4d;
-    font-family: var(--Font3), sans-serif;
-    font-size: 14.5px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.25s ease;
-}
-
-.ProCancelOrderTriggerCTA:hover {
-    background-color: #ff4d4d;
-    color: #ffffff;
-    box-shadow: 0 6px 20px rgba(255, 77, 77, 0.25);
-}
-
-/* ==========================================================================
-   RESPONSIVE ADAPTATIONS
-   ========================================================================== */
-
-@media (max-width: 992px) {
-    .ProTrackingDashboardBentoGrid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 600px) {
-    .ProTrackingSectionLayout {
-        padding: 0 1.5rem;
-    }
-
-    .ProTrackHeaderBar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-    }
-
-    .RiderConsoleCard {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .RiderContactCTA {
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
-        box-sizing: border-box;
-    }
 }
 
 /* ==========================================================================
@@ -710,7 +670,6 @@
     box-sizing: border-box;
 }
 
-/* Base button properties */
 .ProActionCTA {
     flex: 1;
     padding: 16px 20px;
@@ -732,7 +691,7 @@
     font-size: 18px;
 }
 
-/* --- 1. PAY ONLINE NOW CTA --- */
+/* Pay Online CTA */
 .PayOnlineBtn {
     background-color: #10b981;
     color: #ffffff;
@@ -745,7 +704,7 @@
     box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
 }
 
-/* --- 2. DOWNLOAD INVOICE CTA --- */
+/* Download Invoice CTA */
 .DownloadInvoiceBtn {
     background-color: var(--accent-blue-light);
     color: #ffffff;
@@ -758,7 +717,7 @@
     box-shadow: 0 8px 22px rgba(0, 78, 152, 0.35);
 }
 
-/* --- 3. TERMINATE & CANCEL ORDER CTA --- */
+/* Terminate Order CTA */
 .ProCancelOrderTriggerCTA {
     background-color: rgba(255, 77, 77, 0.08);
     border: 1px solid rgba(255, 77, 77, 0.25);
@@ -772,13 +731,62 @@
     box-shadow: 0 8px 22px rgba(255, 77, 77, 0.3);
 }
 
-/* Active Press States */
 .ProActionCTA:active {
     transform: scale(0.98);
 }
 
-/* Mobile Responsive Wrap */
+/* ==========================================================================
+   📱 RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .ProTrackingDashboardBentoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .ProTrackingSectionLayout {
+        padding: 0 1.5rem;
+        margin: 20px auto 7rem auto;
+    }
+}
+
 @media (max-width: 650px) {
+    .ProTrackingSectionLayout {
+        padding: 0 1rem;
+    }
+
+    .ProTrackHeaderBar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .HeaderTitleGroup h1 {
+        font-size: 1.8rem;
+    }
+
+    .CountdownDigitalDisplay {
+        font-size: 2.5rem;
+    }
+
+    .TargetDeliveryMetaRow {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+    }
+
+    .RiderConsoleCard {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .RiderContactCTA {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
     .ProActionControlsDock {
         flex-direction: column;
         gap: 12px;
@@ -789,16 +797,4 @@
         padding: 14px 18px;
         font-size: 14px;
     }
-}
-
-.CountdownDigitalDisplay.Cancelled {
-    color: #ff4d4d;
-}
-
-.CountdownDigitalDisplay.Delivered {
-    color: #2ecc71;
-}
-
-.CountdownDigitalDisplay.OnProcess {
-    color: var(--accent-blue-light);
 }
