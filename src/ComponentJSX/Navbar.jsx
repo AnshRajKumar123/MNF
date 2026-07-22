@@ -5,47 +5,32 @@ import { midnightFoodData } from '../assets/assest';
 import axios from "axios";
 import { API_URL } from "../config/api";
 
-const Navbar = () => {
+const Navbar = ({ onOpenMobileDrawer }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const searchRef = useRef(null);
     const navigate = useNavigate();
     const [userProfile, setUserProfile] = useState(null);
 
     useEffect(() => {
-
         const fetchProfile = async () => {
             try {
-
                 const response = await axios.get(
                     `${API_URL}/auth/profile`,
-                    {
-                        withCredentials: true,
-                    }
+                    { withCredentials: true }
                 );
-
                 const user = response.data.user;
-
                 setUserProfile({
                     name: user.fullName,
                     image: user.image,
                 });
-
             } catch (error) {
-
                 console.log(error);
-
             }
         };
 
-
         fetchProfile();
-
         window.addEventListener("profileUpdated", fetchProfile);
-
-        return () => {
-            window.removeEventListener("profileUpdated", fetchProfile);
-        };
-
+        return () => window.removeEventListener("profileUpdated", fetchProfile);
     }, []);
 
     useEffect(() => {
@@ -70,11 +55,13 @@ const Navbar = () => {
 
     return (
         <nav className="ProOceanicNavbar">
+            {/* BRAND LOGO */}
             <Link to='/' className="WebNavLogo">
                 <h1>{midnightFoodData.branding.title}</h1>
             </Link>
 
-            <div className="NaviSearch">
+            {/* DESKTOP SEARCH BAR */}
+            <div className="NaviSearch DesktopSearchOnly">
                 <i className="ri-search-line SearchIcon"></i>
                 <input
                     ref={searchRef}
@@ -90,7 +77,8 @@ const Navbar = () => {
                 </button>
             </div>
 
-            <div className="NaviLastOpt">
+            {/* DESKTOP ACTIONS */}
+            <div className="NaviLastOpt DesktopLastOptOnly">
                 <button className="NaviNotifi NaviAdd">
                     <i className="bx bx-bell"></i>
                 </button>
@@ -130,6 +118,16 @@ const Navbar = () => {
                         )}
                     </button>
                 </Link>
+            </div>
+
+            {/* MOBILE ONLY TOP ACTIONS */}
+            <div className="MobileNavActions">
+                <button className="MobileSearchIconBtn" onClick={() => navigate('/mainWebsite/search')}>
+                    <i className="ri-search-line"></i>
+                </button>
+                <button className="MobileBarMenuBtn" onClick={onOpenMobileDrawer}>
+                    <i className="ri-menu-3-line"></i>
+                </button>
             </div>
         </nav>
     );

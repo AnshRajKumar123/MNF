@@ -1,5 +1,5 @@
 /* ==========================================================================
-   🌟 PARKLY/MNF TRANSITIONED PREMIUM NAVBAR LAYER
+   🌟 PARKLY/MNF TRANSITIONED PREMIUM NAVBAR LAYER & MOBILE RESPONSIVE DOCK
    ========================================================================== */
 
 .ProOceanicNavbar {
@@ -17,6 +17,7 @@
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-morphic);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
 }
 
 .WebNavLogo h1 {
@@ -25,6 +26,7 @@
     font-size: 28px;
     color: var(--accent-blue-light);
     letter-spacing: -0.5px;
+    margin: 0;
 }
 
 .NaviSearch {
@@ -42,7 +44,7 @@
 
 .NaviSearch input {
     height: 44px;
-    width: 460px;
+    width: 380px;
     font-size: 14px;
     font-weight: 500;
     border: none;
@@ -104,10 +106,6 @@
     color: var(--text-core);
 }
 
-.NaviAdd:active {
-    transform: scale(0.93);
-}
-
 .NaviAccount {
     background-color: var(--accent-blue-dark);
     border: none;
@@ -129,11 +127,6 @@
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-.IconHeCenter:hover {
-    color: var(--text-core);
-    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .HoverEffectDrop {
@@ -208,13 +201,253 @@
     font-family: var(--Font3);
 }
 
-.Weblogo img {
-    width: 50px;
-    display: block;
-    transition: filter 0.3s ease, transform 0.2s ease;
-    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
+/* Hidden on desktop */
+.MobileNavActions,
+.ProMobileBottomNavbar,
+.ProMobileSideDrawerOverlay {
+    display: none;
 }
 
-[data-theme="light-ocean"] .Weblogo img {
-    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
+/* ==========================================================================
+   📱 MOBILE & TABLET BREAKPOINTS (MAX-WIDTH: 768PX)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* Hide desktop-specific components */
+    .DesktopSearchOnly,
+    .DesktopLastOptOnly,
+    aside,
+    .AsideBarContainer {
+        display: none !important;
+    }
+
+    .FlexBoxNA {
+        flex-direction: column;
+    }
+
+    .NextToBT {
+        width: 100vw !important;
+    }
+
+    .ProOceanicNavbar {
+        width: 100vw;
+        height: 65px;
+        padding: 0 1.2rem;
+    }
+
+    .WebNavLogo h1 {
+        font-size: 22px;
+    }
+
+    /* Mobile Header Right Icons */
+    .MobileNavActions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .MobileSearchIconBtn,
+    .MobileBarMenuBtn {
+        background: transparent;
+        border: 1px solid var(--border-morphic);
+        color: var(--text-core);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Fixed Bottom Navigation Dock */
+    .ProMobileBottomNavbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        background-color: var(--bg-glass);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border-morphic);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 9999;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .BottomTabItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .BottomTabItem i {
+        font-size: 22px;
+    }
+
+    .BottomTabItem.tab-active {
+        color: var(--accent-blue-light);
+    }
+
+    /* Slide-over Right Side Panel Drawer */
+    .ProMobileSideDrawerOverlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 99999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .ProMobileSideDrawerOverlay.drawer-open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .ProMobileDrawerPanel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 280px;
+        background-color: var(--bg-surface);
+        border-left: 1px solid var(--border-morphic);
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-sizing: border-box;
+    }
+
+    .drawer-open .ProMobileDrawerPanel {
+        transform: translateX(0);
+    }
+
+    .DrawerHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-morphic);
+    }
+
+    .DrawerHeader h3 {
+        font-family: var(--Font3), sans-serif;
+        font-size: 18px;
+        color: var(--text-core);
+        margin: 0;
+    }
+
+    .CloseDrawerBtn {
+        background: transparent;
+        border: none;
+        color: var(--text-core);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .DrawerBodyLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .DrawerLinkItem {
+        padding: 12px 16px;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-morphic);
+        color: var(--text-core);
+        text-decoration: none;
+        font-family: var(--Font3), sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+        display: block;
+    }
+}
+
+/* ==========================================================================
+   🌗 MOBILE SIDE DRAWER THEME TOGGLE SWITCH STYLES
+   ========================================================================== */
+
+.DrawerThemeToggleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+[data-theme="light-ocean"] .DrawerThemeToggleRow {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.ThemeLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.ThemeLabel i {
+    font-size: 18px;
+    color: var(--accent-blue-light);
+}
+
+/* Custom Switch Toggle Pill */
+.ProThemeSwitchToggle {
+    width: 48px;
+    height: 26px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-morphic);
+    border-radius: 30px;
+    padding: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.SwitchThumb {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ProThemeSwitchToggle.switch-active {
+    background-color: var(--accent-blue-light);
+    border-color: var(--accent-blue-light);
+}
+
+.ProThemeSwitchToggle.switch-active .SwitchThumb {
+    transform: translateX(22px);
 }
