@@ -63,10 +63,19 @@ const SignInUp = () => {
                     withCredentials: true,
                 }
             );
+
+            console.log("Login response:", response.data);
+
             toast.success(response.data.message);
-            navigate("/mainWebsite");
+
+            console.log("Before navigate");
+
+            window.location.href = "/mainWebsite";
+
+            console.log("After navigate");
 
         } catch (error) {
+            console.log(error);
             toast.error(error.response?.data?.message || "Something went wrong");
         }
     };

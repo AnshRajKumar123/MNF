@@ -5,6 +5,7 @@ import "../PagesCSS/TrackOrder.css";
 import { midnightTrackingData } from "../assets/assest";
 import api from "../config/axios";
 import axios from "axios";
+import { API_URL } from "../config/api";
 
 
 const TrackOrder = () => {
@@ -160,7 +161,7 @@ const TrackOrder = () => {
         try {
 
             const { data } = await axios.post(
-                "http://localhost:3000/payment/create-order",
+                `${API_URL}/payment/create-order`,
                 {
                     amount: order.totalAmount
                 },
@@ -186,7 +187,7 @@ const TrackOrder = () => {
                 handler: async function (response) {
 
                     const verify = await axios.post(
-                        "http://localhost:3000/payment/verify",
+                        `${API_URL}/payment/verify`,
                         {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
@@ -203,7 +204,7 @@ const TrackOrder = () => {
                     }
 
                     await axios.post(
-                        "http://localhost:3000/payment/pay-existing-order",
+                        `${API_URL}/payment/pay-existing-order`,
                         {
                             orderId: order._id
                         },
