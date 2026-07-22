@@ -377,7 +377,7 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                         <div className="ProPaymentHeaderInlineRow">
                             <button
                                 className="ProPaymentBackArrowBtn"
-                                onClick={() => setStep("delivery")}
+                                onClick={() => setStep("address")}
                             >
                                 <i className='bx bx-left-arrow-alt'></i>
                             </button>
