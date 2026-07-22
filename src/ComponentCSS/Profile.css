@@ -25,6 +25,7 @@
     align-items: center;
     box-shadow: 0 15px 35px var(--shadow-premium);
     height: fit-content;
+    box-sizing: border-box;
 }
 
 .ProUserLogoBadge {
@@ -90,6 +91,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(58, 134, 200, 0.2);
+    text-align: center;
 }
 
 .ProUploadImageCTA:hover {
@@ -126,6 +128,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    box-sizing: border-box;
 }
 
 .ProLabelInputGridRow {
@@ -189,6 +192,7 @@
 .ProCountrySelectBox {
     width: 130px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .ProFormattedPhoneLabelText {
@@ -276,7 +280,42 @@
     box-shadow: none;
 }
 
-/* --- SECURITY ACTION VALIDATION SHAKE & GLOW TRIGGERS --- */
+.ProReadOnlyField {
+    background: rgba(0, 0, 0, 0.2) !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.ProLogoutBtn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #e53935;
+    color: #fff;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.2);
+}
+
+.ProLogoutBtn:hover {
+    background: #c62828;
+    transform: translateY(-2px);
+}
+
+.ProLogoutBtn i {
+    font-size: 20px;
+}
+
+/* Validation Animations */
 .ProFieldShakeAnimation {
     animation: proFieldShakeEffect 0.35s ease;
     border-color: #ff4d4d !important;
@@ -317,11 +356,16 @@
     }
 }
 
-/* --- RESPONSIVE ADJUSTMENT VIEWPORTS --- */
+/* ==========================================================================
+   📱 RESPONSIVE ADJUSTMENT VIEWPORTS
+   ========================================================================== */
+
 @media (max-width: 992px) {
     .ProUserProfileContainer {
         flex-direction: column;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
+        margin: 20px auto 7rem auto;
+        gap: 24px;
     }
 
     .ProUserAvatarCard,
@@ -331,48 +375,58 @@
 }
 
 @media (max-width: 600px) {
+    .ProUserProfileContainer {
+        padding: 0 1rem;
+    }
 
-    .ProLabelInputGridRow,
-    .ProGenderSelectTrackContainer {
-        grid-template-columns: 1fr;
-        flex-direction: column;
+    .ProUserAvatarCard {
+        padding: 2rem 1.2rem;
+    }
+
+    .ProUserLogoBadge {
+        height: 140px;
+        width: 140px;
+    }
+
+    .ProUserLogoBadge span {
+        font-size: 3rem;
     }
 
     .ProUserDetailsFormBlock {
-        padding: 1.5rem;
+        padding: 1.5rem 1.2rem;
     }
-}
 
-.ProReadOnlyField {
-    background: #f5f5f5;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
+    .ProLabelInputGridRow {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
 
-.ProLogoutBtn {
-    width: 100%;
-    margin-top: 15px;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: #e53935;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
+    .ProPhoneFlexRow {
+        flex-direction: row;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
+    .ProCountrySelectBox {
+        width: 110px;
+        padding: 12px 8px;
+        font-size: 13px;
+    }
 
-.ProLogoutBtn:hover {
-    background: #c62828;
-    transform: translateY(-2px);
-}
+    .ProGenderSelectTrackContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
 
-.ProLogoutBtn i {
-    font-size: 20px;
+    .ProGenderOptionItemCard {
+        padding: 10px 6px;
+    }
+
+    .ProGenderTextSpan {
+        font-size: 12px;
+    }
+
+    .ProUploadImageCTA {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

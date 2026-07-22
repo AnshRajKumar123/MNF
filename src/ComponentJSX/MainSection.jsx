@@ -33,7 +33,7 @@ const MainSection = () => {
 
                 <div className="NextToBT">
                     <Navbar onOpenMobileDrawer={toggleDrawer} />
-
+                    
                     <Routes>
                         <Route index element={<HomeSect />} />
                         <Route path='menu' element={<MenuSect />} />
@@ -62,13 +62,19 @@ const MainSection = () => {
                             <i className={theme === "dark-blue" ? 'bx bx-moon' : 'bx bx-sun'}></i>
                             {theme === "dark-blue" ? "Dark Oceanic Mode" : "Light Ocean Mode"}
                         </span>
-
+                        
                         <button className={`ProThemeSwitchToggle ${theme === "light-ocean" ? "switch-active" : ""}`} onClick={toggleTheme}>
                             <span className="SwitchThumb"></span>
                         </button>
                     </div>
 
                     <div className="DrawerBodyLinks">
+                        {/* 👤 MOBILE ONLY: PROFILE BUTTON */}
+                        <Link to="/profile" className="DrawerLinkItem ProfileDrawerCTA" onClick={toggleDrawer}>
+                            <i className="bx bx-user-circle"></i> My Account Profile
+                        </Link>
+
+                        {/* DESKTOP ASSETS LINKS */}
                         {midnightFoodData.navMenuOptions.map((opt, idx) => (
                             opt.action ? (
                                 <button key={idx} className="DrawerLinkItem" onClick={() => {

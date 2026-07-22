@@ -212,7 +212,7 @@ const Profile = () => {
             const response = await axios.put(
                 `${API_URL}/auth/profile`,
                 {
-                    phone: profile.phone,
+                    phone: profile.phone, 
                     country: profile.country,
                     dial: profile.dial,
                     building: profile.building,

@@ -451,3 +451,17 @@
 .ProThemeSwitchToggle.switch-active .SwitchThumb {
     transform: translateX(22px);
 }
+
+.ProfileDrawerCTA {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(58, 134, 200, 0.12) !important;
+    border-color: var(--accent-blue-light) !important;
+    color: var(--accent-blue-light) !important;
+    font-weight: 800 !important;
+}
+
+.ProfileDrawerCTA i {
+    font-size: 18px;
+}
