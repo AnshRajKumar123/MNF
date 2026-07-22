@@ -698,21 +698,95 @@
     }
 }
 
-.PayOnlineBtn{
-    width:100%;
-    margin-top:20px;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#0f9d58;
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+/* ==========================================================================
+   🌟 UNIFIED ACTION BUTTON DOCK STYLES
+   ========================================================================== */
+
+.ProActionControlsDock {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-sizing: border-box;
 }
 
-.PayOnlineBtn:hover{
-    transform:translateY(-2px);
-    opacity:.9;
+/* Base button properties */
+.ProActionCTA {
+    flex: 1;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+.ProActionCTA i {
+    font-size: 18px;
+}
+
+/* --- 1. PAY ONLINE NOW CTA --- */
+.PayOnlineBtn {
+    background-color: #10b981;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+}
+
+.PayOnlineBtn:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
+}
+
+/* --- 2. DOWNLOAD INVOICE CTA --- */
+.DownloadInvoiceBtn {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.25);
+}
+
+.DownloadInvoiceBtn:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 78, 152, 0.35);
+}
+
+/* --- 3. TERMINATE & CANCEL ORDER CTA --- */
+.ProCancelOrderTriggerCTA {
+    background-color: rgba(255, 77, 77, 0.08);
+    border: 1px solid rgba(255, 77, 77, 0.25);
+    color: #ff4d4d;
+}
+
+.ProCancelOrderTriggerCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(255, 77, 77, 0.3);
+}
+
+/* Active Press States */
+.ProActionCTA:active {
+    transform: scale(0.98);
+}
+
+/* Mobile Responsive Wrap */
+@media (max-width: 650px) {
+    .ProActionControlsDock {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .ProActionCTA {
+        width: 100%;
+        padding: 14px 18px;
+        font-size: 14px;
+    }
 }

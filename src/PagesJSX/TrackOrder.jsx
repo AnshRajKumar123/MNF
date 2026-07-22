@@ -434,7 +434,7 @@ const TrackOrder = () => {
 
                 </div>
 
-                {/* ================= BOTTOM TELEMETRY STATUS DECKS ================= */}
+                {/* ================= BOTTOM TELEMETRY STATUS DECKS & ACTION DOCK ================= */}
                 <div className="ProTrackingBottomStatusSection">
 
                     {/* RIDER TELEMETRY CARD */}
@@ -472,7 +472,7 @@ const TrackOrder = () => {
                     {/* DELIVERED SUCCESS BANNER */}
                     {order.orderStatus === "Delivered" && (
                         <div className="ProBentoCard DeliverySuccessAlertCard">
-                            <div className="SuccessIconShield">
+                            <div className="SuccessBadgeShieldIcon">
                                 <i className="bx bx-badge-check"></i>
                             </div>
                             <div className="SuccessTextCluster">
@@ -498,30 +498,32 @@ const TrackOrder = () => {
                         </div>
                     )}
 
-                    {/* CANCEL ACTION TRIGGER BUTTON */}
-                    {order.orderStatus === "On Process" && (
-                        <button className="ProCancelOrderTriggerCTA" onClick={cancelOrder}>
-                            Terminate & Cancel Order <i className='bx bx-block'></i>
-                        </button>
-                    )}
+                    {/* ================= UNIFIED ACTION BUTTON DOCK ================= */}
+                    <div className="ProActionControlsDock">
 
-                    {
-                        order.paymentMethod === "COD" &&
-                        order.paymentStatus === "Pending" && (
-
-                            <button
-                                className="PayOnlineBtn"
-                                onClick={payOnlineNow}
-                            >
-                                Pay Online Now
+                        {order.orderStatus !== "Cancelled" && order.paymentMethod === "COD" && order.paymentStatus === "Pending" && (
+                            <button className="ProActionCTA PayOnlineBtn" onClick={payOnlineNow}>
+                                <i className='bx bx-credit-card-front'></i> Pay Online Now
                             </button>
+                        )}
 
-                        )
-                    }
+                        {order.orderStatus !== "Cancelled" && (
+                            <button
+                                className="ProActionCTA DownloadInvoiceBtn"
+                                onClick={downloadInvoice}
+                            >
+                                <i className='bx bx-download'></i>
+                                Download Invoice PDF
+                            </button>
+                        )}
 
-                    <button onClick={downloadInvoice}>
-                        Download Invoice
-                    </button>
+                        {order.orderStatus === "On Process" && (
+                            <button className="ProActionCTA ProCancelOrderTriggerCTA" onClick={cancelOrder}>
+                                <i className='bx bx-block'></i> Terminate Order
+                            </button>
+                        )}
+
+                    </div>
 
                 </div>
 
