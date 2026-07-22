@@ -790,3 +790,15 @@
         font-size: 14px;
     }
 }
+
+.CountdownDigitalDisplay.Cancelled {
+    color: #ff4d4d;
+}
+
+.CountdownDigitalDisplay.Delivered {
+    color: #2ecc71;
+}
+
+.CountdownDigitalDisplay.OnProcess {
+    color: var(--accent-blue-light);
+}

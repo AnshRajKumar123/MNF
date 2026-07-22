@@ -46,9 +46,19 @@ const TrackOrder = () => {
     useEffect(() => {
         if (!order) return;
 
+        // Stop timer for completed orders
+        if (
+            order.orderStatus === "Delivered" ||
+            order.orderStatus === "Cancelled"
+        ) {
+            setTimeLeft(0);
+            return;
+        }
+
         const timer = setInterval(() => {
             const now = Date.now();
             const delivery = new Date(order.estimatedDelivery).getTime();
+
             setTimeLeft(Math.max(0, delivery - now));
         }, 1000);
 
@@ -59,23 +69,36 @@ const TrackOrder = () => {
     useEffect(() => {
         if (!order) return;
 
+        if (order.orderStatus === "Delivered") {
+            setProgress(100);
+            return;
+        }
+
+        if (order.orderStatus === "Cancelled") {
+            setProgress(0);
+            return;
+        }
+
         const timer = setInterval(() => {
+
             const created = new Date(order.createdAt).getTime();
             const delivery = new Date(order.estimatedDelivery).getTime();
             const now = Date.now();
 
             const total = delivery - created;
             const elapsed = now - created;
-            const percent = Math.min(100, Math.max(0, (elapsed / total) * 100));
 
-            if (order.orderStatus === "Delivered") {
-                setProgress(100);
-            } else {
-                setProgress(percent);
-            }
+            const percent = Math.min(
+                100,
+                Math.max(0, (elapsed / total) * 100)
+            );
+
+            setProgress(percent);
+
         }, 1000);
 
         return () => clearInterval(timer);
+
     }, [order]);
 
     // 🎯 Active Step Node Evaluator
@@ -273,8 +296,8 @@ const TrackOrder = () => {
                                 <span>Time-to-Destination</span>
                             </div>
 
-                            <h1 className="CountdownDigitalDisplay">
-                                {order.orderStatus === "Delivered" ? "DELIVERED" : formatTime(timeLeft)}
+                            <h1 className={`CountdownDigitalDisplay ${order.orderStatus}`}>
+                                {order.orderStatus === "Delivered" ? "DELIVERED" : order.orderStatus === "Cancelled" ? "CANCELLED" : formatTime(timeLeft)}
                             </h1>
 
                             <div className="TargetDeliveryMetaRow">
