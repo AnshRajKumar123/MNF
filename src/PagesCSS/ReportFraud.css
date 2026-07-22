@@ -8,6 +8,7 @@
     min-height: 100vh;
     box-sizing: border-box;
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
 
 .ProFraudSectionLayout {
@@ -27,6 +28,7 @@
     font-weight: 800;
     color: var(--text-core);
     letter-spacing: -0.5px;
+    margin: 0;
 }
 
 .ProFraudGridLayoutCore {
@@ -51,6 +53,7 @@
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: var(--text-muted);
+    margin: 0;
 }
 
 .ProFraudRadioOptionsGridDeck {
@@ -69,6 +72,7 @@
     border: 1px solid var(--border-morphic);
     border-radius: 8px;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 .ProRadioSlotLabelItem:hover {
@@ -77,9 +81,10 @@
 
 .ProRadioSlotLabelItem input[type="radio"] {
     accent-color: var(--accent-blue-light);
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .ProRadioSlotLabelItem span {
@@ -101,15 +106,18 @@
 .ProFormWarningDisclaimerText {
     font-size: 12.5px;
     line-height: 1.5;
-    color: rgba(255, 77, 77, 0.65);
+    color: rgba(255, 77, 77, 0.75);
     font-weight: 600;
     display: flex;
+    align-items: flex-start;
     gap: 6px;
     margin: 4px 0 0 0;
 }
 
 .ProFormWarningDisclaimerText i {
     font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 /* Custom forensic PDF boxes icons styles mapping */
@@ -160,7 +168,7 @@
     font-weight: 700;
     text-decoration: none;
     font-size: 14px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
     margin-top: 1.5rem;
@@ -171,9 +179,14 @@
     transform: translateX(3px);
 }
 
+/* ==========================================================================
+   📱 MOBILE & TABLET RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
 @media (max-width: 1024px) {
     .ProFraudSectionLayout {
-        padding: 0 2rem;
+        padding: 0 1.5rem;
+        margin: 20px auto 7rem auto;
     }
 
     .ProFraudGridLayoutCore {
@@ -183,7 +196,35 @@
 }
 
 @media (max-width: 650px) {
+    .ProFraudSectionLayout {
+        padding: 0 1rem;
+    }
+
+    .ProFraudHeaderDeckPanel h1 {
+        font-size: 1.8rem;
+    }
+
+    .ProHelpTerminalForm {
+        padding: 1.5rem 1.2rem;
+        border-radius: 14px;
+    }
+
+    .ProHelpInputGridFields {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
     .ProFraudRadioOptionsGridDeck {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .ProRadioSlotLabelItem {
+        padding: 10px 12px;
+    }
+
+    .ProFraudSubmitCTA {
+        padding: 14px;
+        font-size: 14px;
     }
 }

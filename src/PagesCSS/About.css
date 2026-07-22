@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
 
 .ProTaglineSectionText {
@@ -58,6 +59,7 @@
     overflow: hidden;
     box-shadow: 0 20px 45px var(--shadow-premium);
     border: 1px solid var(--border-morphic);
+    box-sizing: border-box;
 }
 
 .BannerGlacialOverlay {
@@ -101,6 +103,7 @@
     grid-template-columns: 1.2fr 0.8fr;
     gap: 4rem;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .JourneyInfoTextColumn h2 {
@@ -179,6 +182,7 @@
     border-radius: 16px;
     padding: 2.5rem 2rem;
     transition: border-color 0.25s ease;
+    box-sizing: border-box;
 }
 
 .ValueIconCapFrame img {
@@ -252,6 +256,7 @@
     align-items: center;
     cursor: pointer;
     box-shadow: 0 15px 35px var(--shadow-premium);
+    box-sizing: border-box;
 }
 
 .MemberAvatarShieldFrame {
@@ -343,6 +348,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    text-decoration: none;
     transition: transform 0.2s ease;
 }
 
@@ -383,13 +389,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: 100000 !important;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .TeamModal {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-morphic);
-    width: 90%;
+    width: 100%;
     max-width: 420px;
     padding: 2.5rem 2rem;
     border-radius: 16px;
@@ -397,6 +405,7 @@
     position: relative;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     animation: scaleModalUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
 }
 
 @keyframes scaleModalUp {
@@ -512,16 +521,29 @@
     transform: translateY(-2px);
 }
 
-/* --- RESPONSIVE CONTRACTIONS --- */
+/* ==========================================================================
+   📱 MOBILE & TABLET RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
 @media (max-width: 1024px) {
     .ProAboutBanner {
-        width: calc(100% - 4rem);
+        width: calc(100% - 3rem);
+        height: 360px;
+    }
+
+    .BannerTypographyContent h1 {
+        font-size: 2.4rem;
     }
 
     .ProAboutJourney {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         padding: 0 2rem;
+        margin: 3.5rem auto;
+    }
+
+    .JourneyImageWrapper img {
+        height: 300px;
     }
 
     .MissionBentoMatrixGrid,
@@ -533,11 +555,92 @@
     .ProAboutMission,
     .ProAboutTeamDeck,
     .ProAboutCtaStation {
-        padding: 4rem 2rem;
+        padding: 3rem 1.5rem;
     }
 
     .BackgroundGraphicLeft,
     .BackgroundGraphicRight {
         display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .ProAboutBanner {
+        width: calc(100% - 2rem);
+        height: 260px;
+        margin-top: 20px;
+        border-radius: 16px;
+    }
+
+    .BannerTypographyContent {
+        padding: 0 1rem;
+    }
+
+    .BannerTypographyContent h1 {
+        font-size: 1.8rem;
+    }
+
+    .BannerTypographyContent p {
+        font-size: 13.5px;
+        margin-top: 0.5rem;
+    }
+
+    .ProAboutJourney {
+        padding: 0 1.2rem;
+        margin: 2.5rem auto;
+        gap: 1.8rem;
+    }
+
+    .JourneyInfoTextColumn h2,
+    .ProAboutMission h2,
+    .ProAboutTeamDeck h2,
+    .AboutCtaBoxContainer h2 {
+        font-size: 1.6rem;
+    }
+
+    .JourneyImageWrapper img {
+        height: 220px;
+    }
+
+    .ProAboutMission,
+    .ProAboutTeamDeck,
+    .ProAboutCtaStation {
+        padding: 2.5rem 1.2rem;
+        margin: 0 auto;
+    }
+
+    .MissionMainSubtitleText,
+    .TeamMainSubtitleText {
+        margin-bottom: 2rem;
+        font-size: 13px;
+    }
+
+    .MissionValueCardUnit {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .ProTeamMemberProfileCard {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .MemberAvatarShieldFrame {
+        width: 100px;
+        height: 100px;
+    }
+
+    .AboutCtaBoxContainer {
+        padding: 2.5rem 1.2rem;
+        border-radius: 16px;
+    }
+
+    .AboutCtaBoxContainer p {
+        font-size: 13px;
+    }
+
+    .CtaTerminalRedirectBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+        box-sizing: border-box;
     }
 }

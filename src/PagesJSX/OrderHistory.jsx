@@ -58,7 +58,7 @@ const OrderHistory = () => {
         }
     };
 
-    // 📊 Filter Logic & Dynamic Order Counts Calculation
+    // 📊 Filter Logic & Dynamic Order Counts
     const getFilteredOrders = () => {
         if (activeFilter === "All") return orders;
         return orders.filter((order) => {
@@ -164,78 +164,72 @@ const OrderHistory = () => {
 
                             return (
                                 <div className="ProOrderBentoCard" key={order._id}>
-                                    
-                                    {/* Left Image Shield */}
-                                    <div className="OrderImageShieldFrame">
-                                        <img
-                                            src={primaryProduct?.image}
-                                            alt={primaryProduct?.name}
-                                            loading="lazy"
-                                        />
-                                        {hasMultipleItems && (
-                                            <span className="PlusMoreBadge">
-                                                +{order.items.length - 1} More
-                                            </span>
-                                        )}
-                                    </div>
 
-                                    {/* Middle Content Metadata */}
-                                    <div className="OrderMetaBodyDetails">
-                                        <div className="OrderTitleHeaderRow">
-                                            <h2 className="OrderTitleText">
-                                                {primaryProduct?.name || "Dispatch Items"}
-                                            </h2>
-                                            <span className="OrderNodeIdPill">#{order._id}</span>
-                                        </div>
-
-                                        {/* Structured Key Meta Pills Row */}
-                                        <div className="MetaPillsFlexRow">
-                                            <span className="MetaPill">
-                                                <i className='bx bx-shopping-bag'></i> {order.items.length} Items
-                                            </span>
-                                            <span className="MetaPill HighlightAmount">
-                                                ₹{order.totalAmount}
-                                            </span>
-                                            <span className="MetaPill">
-                                                <i className='bx bx-time-five'></i>{" "}
-                                                {new Date(order.createdAt).toLocaleDateString("en-IN", {
-                                                    day: "numeric",
-                                                    month: "short",
-                                                    year: "numeric",
-                                                })}{" "}
-                                                •{" "}
-                                                {new Date(order.createdAt).toLocaleTimeString("en-IN", {
-                                                    hour: "2-digit",
-                                                    minute: "2-digit",
-                                                })}
-                                            </span>
-                                        </div>
-
-                                        <div className="MetaPillsFlexRow SecondaryMetaRow">
-                                            <span className="SubMetaItem">
-                                                <i className='bx bx-cycling'></i> {order.deliveryType} Delivery
-                                            </span>
-                                            <span className="SubMetaItem">
-                                                <i className='bx bx-credit-card-alt'></i> {order.paymentMethod} ({order.paymentStatus})
-                                            </span>
-                                            {order.couponCode && (
-                                                <span className="SubMetaItem CouponTag">
-                                                    <i className='bx bx-purchase-tag-alt'></i> {order.couponCode}
+                                    {/* 📦 TOP CLUSTER: IMAGE + MAIN METADATA */}
+                                    <div className="OrderTopInfoCluster">
+                                        <div className="OrderImageShieldFrame">
+                                            <img
+                                                src={primaryProduct?.image}
+                                                alt={primaryProduct?.name}
+                                                loading="lazy"
+                                            />
+                                            {hasMultipleItems && (
+                                                <span className="PlusMoreBadge">
+                                                    +{order.items.length - 1} More
                                                 </span>
                                             )}
                                         </div>
+
+                                        <div className="OrderMetaBodyDetails">
+                                            <div className="OrderTitleHeaderRow">
+                                                <h2 className="OrderTitleText">
+                                                    {primaryProduct?.name || "Dispatch Items"}
+                                                </h2>
+                                                <span className="OrderNodeIdPill">#{order._id.slice(-6).toUpperCase()}</span>
+                                            </div>
+
+                                            {/* Structured Key Meta Pills Row */}
+                                            <div className="MetaPillsFlexRow">
+                                                <span className="MetaPill HighlightAmount">
+                                                    ₹{order.totalAmount}
+                                                </span>
+                                                <span className="MetaPill">
+                                                    <i className='bx bx-shopping-bag'></i> {order.items.length} Items
+                                                </span>
+                                                <span className="MetaPill">
+                                                    <i className='bx bx-time-five'></i>{" "}
+                                                    {new Date(order.createdAt).toLocaleDateString("en-IN", {
+                                                        day: "numeric",
+                                                        month: "short",
+                                                    })}
+                                                </span>
+                                            </div>
+
+                                            <div className="MetaPillsFlexRow SecondaryMetaRow">
+                                                <span className="SubMetaItem">
+                                                    <i className='bx bx-cycling'></i> {order.deliveryType} Delivery
+                                                </span>
+                                                <span className="SubMetaItem">
+                                                    <i className='bx bx-credit-card-alt'></i> {order.paymentMethod}
+                                                </span>
+                                                {order.couponCode && (
+                                                    <span className="SubMetaItem CouponTag">
+                                                        <i className='bx bx-purchase-tag-alt'></i> {order.couponCode}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    {/* Right Side Status & Actions */}
+                                    {/* 🛠️ BOTTOM DOCK: STATUS BADGE + ACTION BUTTONS */}
                                     <div className="OrderRightActionDock">
                                         <span
-                                            className={`ProOrderStatusBadge ${
-                                                order.orderStatus === "Delivered"
+                                            className={`ProOrderStatusBadge ${order.orderStatus === "Delivered"
                                                     ? "Delivered"
                                                     : order.orderStatus === "Cancelled"
-                                                    ? "Cancelled"
-                                                    : "OnProcess"
-                                            }`}
+                                                        ? "Cancelled"
+                                                        : "OnProcess"
+                                                }`}
                                         >
                                             <span className="StatusPulseDot"></span>
                                             {order.orderStatus}

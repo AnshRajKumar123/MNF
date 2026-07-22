@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 2.2rem;
+    gap: 2rem;
 }
 
 /* ==========================================================================
@@ -111,14 +111,14 @@
 }
 
 /* ==========================================================================
-   HEADER CONTROL BAR
+   HEADER CONTROL BAR & FILTER TABS DOCK
    ========================================================================== */
 
 .ProHistoryHeaderBar {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
     border-bottom: 1px solid var(--border-morphic);
 }
 
@@ -137,6 +137,80 @@
     margin: 0;
 }
 
+.ProHistoryDashboardTabsRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    box-sizing: border-box;
+}
+
+.ProHistoryDashboardTabsRow::-webkit-scrollbar {
+    display: none;
+}
+
+.DashboardTabBtn {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    box-shadow: 0 4px 15px var(--shadow-premium);
+}
+
+.DashboardTabBtn i {
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.TabCountBadge {
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+[data-theme="light-ocean"] .TabCountBadge {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.DashboardTabBtn:hover {
+    color: var(--text-core);
+    border-color: rgba(58, 134, 200, 0.3);
+    transform: translateY(-1px);
+}
+
+.DashboardTabBtn.tab-active {
+    background-color: var(--accent-blue-light);
+    border-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.3);
+}
+
+.DashboardTabBtn.tab-active i {
+    color: #ffffff;
+}
+
+.DashboardTabBtn.tab-active .TabCountBadge {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
 /* ==========================================================================
    ORDER BENTO CARDS GRID STACK
    ========================================================================== */
@@ -144,7 +218,7 @@
 .ProOrderGridStack {
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.5rem;
     width: 100%;
 }
 
@@ -152,25 +226,33 @@
     background-color: var(--bg-surface);
     border: 1px solid var(--border-morphic);
     border-radius: 20px;
-    padding: 1.8rem;
+    padding: 1.5rem;
     display: flex;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.2rem;
     box-shadow: 0 15px 35px var(--shadow-premium);
     box-sizing: border-box;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
 .ProOrderBentoCard:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: rgba(58, 134, 200, 0.35);
+}
+
+/* TOP CLUSTER */
+.OrderTopInfoCluster {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
 }
 
 /* LEFT IMAGE SHIELD FRAME */
 .OrderImageShieldFrame {
-    width: 110px;
-    height: 110px;
-    border-radius: 14px;
+    width: 85px;
+    height: 85px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
@@ -182,11 +264,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.ProOrderBentoCard:hover .OrderImageShieldFrame img {
-    transform: scale(1.06);
 }
 
 .PlusMoreBadge {
@@ -197,11 +274,10 @@
     background: rgba(10, 15, 30, 0.85);
     backdrop-filter: blur(4px);
     color: var(--accent-blue-light);
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 800;
     text-align: center;
-    padding: 3px 0;
-    letter-spacing: 0.5px;
+    padding: 2px 0;
 }
 
 /* MIDDLE CONTENT METADATA */
@@ -209,22 +285,27 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
+    min-width: 0;
 }
 
 .OrderTitleHeaderRow {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .OrderTitleText {
     font-family: var(--Font3), sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 800;
     color: var(--text-core);
     margin: 0;
     letter-spacing: -0.2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .OrderNodeIdPill {
@@ -233,37 +314,30 @@
     font-weight: 700;
     color: var(--text-muted);
     background-color: rgba(0, 0, 0, 0.12);
-    padding: 3px 8px;
+    padding: 2px 8px;
     border-radius: 6px;
     border: 1px solid var(--border-morphic);
-}
-
-[data-theme="light-ocean"] .OrderNodeIdPill {
-    background-color: rgba(0, 0, 0, 0.02);
+    flex-shrink: 0;
 }
 
 .MetaPillsFlexRow {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
 .MetaPill {
-    font-size: 12.5px;
+    font-size: 11.5px;
     font-weight: 600;
     color: var(--text-muted);
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 5px 12px;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 3px 10px;
     border-radius: 20px;
     border: 1px solid var(--border-morphic);
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-}
-
-[data-theme="light-ocean"] .MetaPill {
-    background-color: rgba(0, 0, 0, 0.02);
+    gap: 4px;
 }
 
 .MetaPill.HighlightAmount {
@@ -272,12 +346,8 @@
     font-family: var(--Font3), sans-serif;
 }
 
-.SecondaryMetaRow {
-    margin-top: 2px;
-}
-
 .SubMetaItem {
-    font-size: 12.5px;
+    font-size: 11.5px;
     color: var(--text-muted);
     display: inline-flex;
     align-items: center;
@@ -292,39 +362,42 @@
 /* RIGHT ACTION DOCK */
 .OrderRightActionDock {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-morphic);
+    width: 100%;
 }
 
 /* STATUS BADGE INDICATORS */
 .ProOrderStatusBadge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
+    gap: 6px;
+    padding: 6px 12px;
     border-radius: 30px;
     font-family: var(--Font3), sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
     border: 1px solid var(--border-morphic);
 }
 
 .StatusPulseDot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     display: inline-block;
 }
 
-.ProOrderStatusBadge.OnProcess,
-.ProOrderStatusBadge.OnProcess .StatusPulseDot {
+.ProOrderStatusBadge.OnProcess {
     background-color: var(--accent-blue-light);
     color: #ffffff;
-    box-shadow: 0 0 10px rgba(58, 134, 200, 0.3);
+}
+
+.ProOrderStatusBadge.OnProcess .StatusPulseDot {
+    background-color: #ffffff;
 }
 
 .ProOrderStatusBadge.Delivered {
@@ -351,32 +424,27 @@
 .ProHistoryActionsGroup {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .HistoryActionBtn {
-    padding: 10px 16px;
+    padding: 8px 14px;
     border-radius: 8px;
     border: none;
     font-family: var(--Font3), sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    gap: 5px;
+    transition: all 0.2s ease;
 }
 
 .HistoryActionBtn.TrackBtn {
     background-color: var(--accent-blue-light);
     color: #ffffff;
-}
-
-.HistoryActionBtn.TrackBtn:hover {
-    background-color: var(--accent-blue-dark);
-    transform: translateY(-2px);
 }
 
 .HistoryActionBtn.InvoiceBtn {
@@ -385,150 +453,48 @@
     color: #2ecc71;
 }
 
-.HistoryActionBtn.InvoiceBtn:hover {
-    background-color: #2ecc71;
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
 .HistoryActionBtn.DeleteBtn {
     background-color: rgba(255, 77, 77, 0.08);
     border: 1px solid rgba(255, 77, 77, 0.2);
     color: #ff4d4d;
 }
 
-.HistoryActionBtn.DeleteBtn:hover {
-    background-color: #ff4d4d;
-    color: #ffffff;
-    transform: translateY(-2px);
-}
-
 /* ==========================================================================
-   RESPONSIVE LAYOUT CONSTRAINTS
+   📱 MOBILE RESPONSIVE OVERRIDES
    ========================================================================== */
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+    .ProHistorySectionLayout {
+        padding: 0 1.2rem;
+        margin: 20px auto 7rem auto;
+    }
+
+    .ProHistoryHeaderBar h1 {
+        font-size: 1.8rem;
+    }
+
     .ProOrderBentoCard {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.2rem;
+        padding: 1.2rem;
     }
 
     .OrderImageShieldFrame {
-        width: 100%;
-        height: 180px;
-    }
-
-    .OrderRightActionDock {
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 1rem;
-        border-top: 1px solid var(--border-morphic);
-    }
-}
-
-@media (max-width: 600px) {
-    .ProHistorySectionLayout {
-        padding: 0 1.5rem;
+        width: 75px;
+        height: 75px;
     }
 
     .OrderRightActionDock {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 10px;
     }
 
     .ProHistoryActionsGroup {
         width: 100%;
-        flex-direction: column;
     }
 
     .HistoryActionBtn {
-        width: 100%;
+        flex: 1;
         justify-content: center;
-        box-sizing: border-box;
+        height: 38px;
     }
-}
-
-/* ==========================================================================
-   🎛️ DASHBOARD FILTER TABS STYLES
-   ========================================================================== */
-
-.ProHistoryDashboardTabsRow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    box-sizing: border-box;
-}
-
-.ProHistoryDashboardTabsRow::-webkit-scrollbar {
-    display: none;
-}
-
-.DashboardTabBtn {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-morphic);
-    border-radius: 12px;
-    padding: 10px 20px;
-    font-family: var(--Font3), sans-serif;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--text-muted);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    white-space: nowrap;
-    box-shadow: 0 4px 15px var(--shadow-premium);
-}
-
-.DashboardTabBtn i {
-    font-size: 16px;
-    color: var(--text-muted);
-    transition: color 0.25s ease;
-}
-
-.TabCountBadge {
-    background-color: rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--border-morphic);
-    color: var(--text-muted);
-    font-size: 11px;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 20px;
-    transition: all 0.25s ease;
-}
-
-[data-theme="light-ocean"] .TabCountBadge {
-    background-color: rgba(0, 0, 0, 0.04);
-}
-
-.DashboardTabBtn:hover {
-    color: var(--text-core);
-    border-color: rgba(58, 134, 200, 0.3);
-    transform: translateY(-1px);
-}
-
-/* ACTIVE TAB HIGHLIGHT STATE */
-.DashboardTabBtn.tab-active {
-    background-color: var(--accent-blue-light);
-    border-color: var(--accent-blue-light);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.3);
-}
-
-.DashboardTabBtn.tab-active i {
-    color: #ffffff;
-}
-
-.DashboardTabBtn.tab-active .TabCountBadge {
-    background-color: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ffffff;
 }
