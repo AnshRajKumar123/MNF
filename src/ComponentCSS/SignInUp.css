@@ -51,7 +51,7 @@
 .ProAuthFormBlock {
     width: 50%;
     height: 100%;
-    padding: 3rem;
+    padding: 2.5rem 3rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@
     justify-content: center;
     text-align: center;
     background-color: var(--bg-surface);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in-out;
     z-index: 2;
 }
 
@@ -75,25 +75,29 @@
 }
 
 /* Layout Triggers During Toggle State Shifts */
-.AuthFormHiddenState .FirstSignUpSection {
+.PanelStateShiftActive .FirstSignUpSection {
     transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .PanelStateShiftActive .SecondSignUpSection {
     transform: translateX(100%);
+    opacity: 1;
+    pointer-events: all;
 }
 
-/* --- BRANDING & TEXT METRICS LINES --- */
+/* --- BRANDING & TEXT METRICS --- */
 .AuthFormHeaderBrand {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 1.2rem;
+    gap: 10px;
+    margin-bottom: 1rem;
 }
 
 .AuthBrandLogoImage {
-    height: 50px;
+    height: 48px;
     width: auto;
     object-fit: contain;
     filter: hue-rotate(85deg) brightness(1.1);
@@ -105,7 +109,7 @@
 
 .AuthFormHeaderBrand h1 {
     font-family: var(--Font3), sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 800;
     color: var(--text-core);
     letter-spacing: -0.5px;
@@ -118,7 +122,7 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .SocialIconCell {
@@ -146,7 +150,14 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--text-muted);
-    margin: 0 0 1.2rem 0;
+    margin: 0 0 1rem 0;
+}
+
+.FormClass {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Form Input Configurations */
@@ -155,7 +166,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .ProAuthFieldInputRow {
@@ -185,23 +196,22 @@
 }
 
 .AuthForgotSecretAction {
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     color: var(--text-muted);
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.2rem 0;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
 .AuthForgotSecretAction:hover {
     color: var(--accent-blue-light);
-    color: #102A6B;
 }
 
 .ProAuthSubmitCTA {
     border: none;
-    font-size: 14px;
-    padding: 12px 40px;
+    font-size: 13.5px;
+    padding: 12px 36px;
     border-radius: 8px;
     text-transform: uppercase;
     font-family: var(--Font3), sans-serif;
@@ -221,7 +231,7 @@
     transform: translateY(-1.5px);
 }
 
-/* --- THE RUNTIME SLIDING CONSOLE PANEL CONTAINER --- */
+/* --- DESKTOP SLIDING CONSOLE PANEL CONTAINER --- */
 .ProAuthSlidingConsolePanel {
     position: absolute;
     top: 0;
@@ -254,7 +264,7 @@
 
 .ConsoleStateNodeAnimate h1 {
     font-family: var(--Font3), sans-serif;
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 800;
     letter-spacing: -0.5px;
     margin: 0 0 10px 0;
@@ -262,14 +272,14 @@
 }
 
 .ConsoleStateNodeAnimate p {
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.75);
     margin: 0 0 2rem 0;
 }
 
 .ConsolePanelTriggerBtn {
-    padding: 11px 44px;
+    padding: 11px 40px;
     background: transparent;
     border-radius: 8px;
     color: #ffffff;
@@ -289,8 +299,9 @@
     transform: translateY(-1px);
 }
 
-.FormClass {
-    width: 80%;
+/* Mobile Toggle Switch Footer (Hidden on Desktop) */
+.MobileAuthToggleFooter {
+    display: none;
 }
 
 /* --- ABSOLUTE GRAPHIC VECTOR BADGES --- */
@@ -327,41 +338,73 @@
     transform: rotate(15deg);
 }
 
-/* Hidden Form Handlers */
-.AuthFormHiddenState {
-    opacity: 0 !important;
-    pointer-events: none;
-    z-index: 1;
-}
+/* ==========================================================================
+   📱 MOBILE RESPONSIVE OVERRIDES (MAX-WIDTH: 768PX)
+   ========================================================================== */
 
-/* --- BREAKPOINT CONTRACTS RESPONSIVE RESPONSIVE --- */
 @media (max-width: 768px) {
+    .ProAuthOverlayWrapper {
+        padding: 1.5rem 1rem;
+    }
+
     .ProAuthBentoContainer {
-        max-width: 440px;
+        width: 100%;
+        max-width: 420px;
         height: auto;
+        min-height: 480px;
         flex-direction: column;
+        border-radius: 20px;
+        overflow: hidden;
     }
 
     .ProAuthFormBlock {
-        width: 100%;
-        padding: 2.5rem 1.5rem;
+        width: 100% !important;
+        height: auto;
+        padding: 2.2rem 1.5rem;
+        position: relative !important;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
     }
 
+    /* Completely hide the sliding side-panel on mobile */
     .ProAuthSlidingConsolePanel {
-        display: none;
-        /* Safely hides sliding slider panel logic layouts on mobile footprints */
+        display: none !important;
     }
 
-    .SecondSignUpSection {
-        position: static;
-        transform: none;
-    }
-
-    .PanelStateShiftActive .FirstSignUpSection {
-        display: none;
-    }
-
+    /* Explicitly hide inactive state form on mobile */
     .AuthFormHiddenState {
-        display: none;
+        display: none !important;
+    }
+
+    /* Display mobile toggle footer CTA */
+    .MobileAuthToggleFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-morphic);
+        width: 100%;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+
+    .MobileAuthToggleFooter button {
+        background: transparent;
+        border: none;
+        color: var(--accent-blue-light);
+        font-family: var(--Font3), sans-serif;
+        font-size: 13.5px;
+        font-weight: 800;
+        cursor: pointer;
+        padding: 2px 4px;
+        text-decoration: underline;
+    }
+
+    .ProAuthSubmitCTA {
+        width: 100%;
+        justify-content: center;
     }
 }

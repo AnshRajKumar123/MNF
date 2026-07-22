@@ -45,6 +45,7 @@ const SignInUp = () => {
             );
 
             toast.success(response.data.message);
+            setIsSignUp(false); // Auto-switch to sign-in after successful registration
 
         } catch (error) {
             toast.error(error.response?.data?.message || "Something went wrong");
@@ -64,7 +65,6 @@ const SignInUp = () => {
             );
 
             toast.success(response.data.message);
-            // console.log(response.data);
             navigate("/mainWebsite");
 
         } catch (error) {
@@ -72,13 +72,11 @@ const SignInUp = () => {
         }
     };
 
-
-
     return (
         <div className="ProAuthOverlayWrapper">
             <div className={`ProAuthBentoContainer ${isSignUp ? "PanelStateShiftActive" : ""}`}>
 
-                {/* ================= LEFT / RIGHT LAYER: SIGN IN FORM ================= */}
+                {/* ================= SIGN IN FORM ================= */}
                 <div className={`ProAuthFormBlock FirstSignUpSection ${isSignUp ? "AuthFormHiddenState" : ""}`}>
                     <div className="AuthFormHeaderBrand">
                         <img src={ResturantIG.WebLogo} className="AuthBrandLogoImage" alt="MNF Logo" />
@@ -109,9 +107,17 @@ const SignInUp = () => {
                             Sign In <i className='bx bx-log-in-circle'></i>
                         </button>
                     </form>
+
+                    {/* 📱 MOBILE ONLY: TOGGLE TO SIGN UP */}
+                    <div className="MobileAuthToggleFooter">
+                        <span>Don't have an account?</span>
+                        <button type="button" onClick={() => setIsSignUp(true)}>
+                            Sign Up
+                        </button>
+                    </div>
                 </div>
 
-                {/* ================= LEFT / RIGHT LAYER: SIGN UP FORM ================= */}
+                {/* ================= SIGN UP FORM ================= */}
                 <div className={`ProAuthFormBlock SecondSignUpSection ${isSignUp ? "" : "AuthFormHiddenState"}`}>
                     <div className="AuthFormHeaderBrand">
                         <img src={ResturantIG.WebLogo} className="AuthBrandLogoImage" alt="MNF Logo" />
@@ -143,9 +149,17 @@ const SignInUp = () => {
                             Sign Up <i className="bx bx-user-plus"></i>
                         </button>
                     </form>
+
+                    {/* 📱 MOBILE ONLY: TOGGLE TO SIGN IN */}
+                    <div className="MobileAuthToggleFooter">
+                        <span>Already have an account?</span>
+                        <button type="button" onClick={() => setIsSignUp(false)}>
+                            Sign In
+                        </button>
+                    </div>
                 </div>
 
-                {/* ================= SLIDING CONSOLE CONTENT SIDEBAR ================= */}
+                {/* ================= SLIDING CONSOLE CONTENT SIDEBAR (DESKTOP) ================= */}
                 <div className="ProAuthSlidingConsolePanel">
                     <div className="MorphicPanelGraphicsAnchor">
                         <div className="MorphicAssetVector AbsoluteBurgerAsset"><img src={ResturantIG.AbsoluteBurg} alt="" /></div>
