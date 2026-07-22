@@ -7,6 +7,7 @@ import api from "../config/axios";
 const OrderHistory = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [activeFilter, setActiveFilter] = useState("All");
 
     useEffect(() => {
         fetchOrders();
@@ -57,6 +58,24 @@ const OrderHistory = () => {
         }
     };
 
+    // 📊 Filter Logic & Dynamic Order Counts Calculation
+    const getFilteredOrders = () => {
+        if (activeFilter === "All") return orders;
+        return orders.filter((order) => {
+            if (activeFilter === "On Process") {
+                return order.orderStatus === "On Process" || order.orderStatus === "Processing";
+            }
+            return order.orderStatus === activeFilter;
+        });
+    };
+
+    const countAll = orders.length;
+    const countOnProcess = orders.filter((o) => o.orderStatus === "On Process" || o.orderStatus === "Processing").length;
+    const countDelivered = orders.filter((o) => o.orderStatus === "Delivered").length;
+    const countCancelled = orders.filter((o) => o.orderStatus === "Cancelled").length;
+
+    const filteredOrders = getFilteredOrders();
+
     if (loading) {
         return (
             <div className="ProHistoryOuterSuite">
@@ -86,27 +105,66 @@ const OrderHistory = () => {
                     </div>
                 </header>
 
-                {/* Empty State vs Orders List */}
-                {orders.length === 0 ? (
+                {/* 🎛️ DASHBOARD FILTER TABS BAR */}
+                <div className="ProHistoryDashboardTabsRow">
+                    <button
+                        className={`DashboardTabBtn ${activeFilter === "All" ? "tab-active" : ""}`}
+                        onClick={() => setActiveFilter("All")}
+                    >
+                        <i className='bx bx-layer'></i> All
+                        <span className="TabCountBadge">{countAll}</span>
+                    </button>
+
+                    <button
+                        className={`DashboardTabBtn ${activeFilter === "On Process" ? "tab-active" : ""}`}
+                        onClick={() => setActiveFilter("On Process")}
+                    >
+                        <i className='bx bx-loader-circle'></i> On Process
+                        <span className="TabCountBadge">{countOnProcess}</span>
+                    </button>
+
+                    <button
+                        className={`DashboardTabBtn ${activeFilter === "Delivered" ? "tab-active" : ""}`}
+                        onClick={() => setActiveFilter("Delivered")}
+                    >
+                        <i className='bx bx-check-circle'></i> Delivered
+                        <span className="TabCountBadge">{countDelivered}</span>
+                    </button>
+
+                    <button
+                        className={`DashboardTabBtn ${activeFilter === "Cancelled" ? "tab-active" : ""}`}
+                        onClick={() => setActiveFilter("Cancelled")}
+                    >
+                        <i className='bx bx-x-circle'></i> Cancelled
+                        <span className="TabCountBadge">{countCancelled}</span>
+                    </button>
+                </div>
+
+                {/* Empty State vs Filtered Orders List */}
+                {filteredOrders.length === 0 ? (
                     <div className="ProEmptyOrdersBentoCard">
                         <div className="EmptyIconShield">
                             <i className='bx bx-receipt'></i>
                         </div>
                         <h2>No Dispatches Found</h2>
-                        <p>Place your first order to populate your history ledger.</p>
+                        <p>
+                            {orders.length === 0
+                                ? "Place your first order to populate your history ledger."
+                                : `No orders found matching the "${activeFilter}" status.`}
+                        </p>
                         <Link to="/mainWebsite" className="ProEmptyExploreCTA">
                             Explore Menu <i className='bx bx-right-arrow-alt'></i>
                         </Link>
                     </div>
                 ) : (
                     <div className="ProOrderGridStack">
-                        {orders.map((order) => {
+                        {filteredOrders.map((order) => {
                             const primaryProduct = order.items[0]?.product;
                             const hasMultipleItems = order.items.length > 1;
 
                             return (
                                 <div className="ProOrderBentoCard" key={order._id}>
-
+                                    
                                     {/* Left Image Shield */}
                                     <div className="OrderImageShieldFrame">
                                         <img
@@ -171,12 +229,13 @@ const OrderHistory = () => {
                                     {/* Right Side Status & Actions */}
                                     <div className="OrderRightActionDock">
                                         <span
-                                            className={`ProOrderStatusBadge ${order.orderStatus === "Delivered"
+                                            className={`ProOrderStatusBadge ${
+                                                order.orderStatus === "Delivered"
                                                     ? "Delivered"
                                                     : order.orderStatus === "Cancelled"
-                                                        ? "Cancelled"
-                                                        : "OnProcess"
-                                                }`}
+                                                    ? "Cancelled"
+                                                    : "OnProcess"
+                                            }`}
                                         >
                                             <span className="StatusPulseDot"></span>
                                             {order.orderStatus}

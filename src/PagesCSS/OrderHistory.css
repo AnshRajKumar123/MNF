@@ -451,3 +451,84 @@
         box-sizing: border-box;
     }
 }
+
+/* ==========================================================================
+   🎛️ DASHBOARD FILTER TABS STYLES
+   ========================================================================== */
+
+.ProHistoryDashboardTabsRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+}
+
+.ProHistoryDashboardTabsRow::-webkit-scrollbar {
+    display: none;
+}
+
+.DashboardTabBtn {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    box-shadow: 0 4px 15px var(--shadow-premium);
+}
+
+.DashboardTabBtn i {
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+}
+
+.TabCountBadge {
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+}
+
+[data-theme="light-ocean"] .TabCountBadge {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.DashboardTabBtn:hover {
+    color: var(--text-core);
+    border-color: rgba(58, 134, 200, 0.3);
+    transform: translateY(-1px);
+}
+
+/* ACTIVE TAB HIGHLIGHT STATE */
+.DashboardTabBtn.tab-active {
+    background-color: var(--accent-blue-light);
+    border-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.3);
+}
+
+.DashboardTabBtn.tab-active i {
+    color: #ffffff;
+}
+
+.DashboardTabBtn.tab-active .TabCountBadge {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
