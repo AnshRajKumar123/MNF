@@ -1,113 +1,87 @@
+import React from "react";
+
 const UserOrderHistory = ({ orders }) => {
-
     const getStatusClass = (status) => {
-
         switch (status) {
             case "Pending":
+            case "On Process":
                 return "StatusPending";
-
             case "Preparing":
                 return "StatusPreparing";
-
             case "Out for Delivery":
+            case "Out For Delivery":
                 return "StatusDelivery";
-
             case "Delivered":
                 return "StatusDelivered";
-
             case "Cancelled":
                 return "StatusCancelled";
-
             default:
                 return "";
         }
-
     };
 
-    if (!orders.length) {
+    if (!orders || !orders.length) {
         return (
             <div className="UserOrderHistory">
-
                 <h3>
-                    <i className="bx bx-package"></i>
-                    Order History
+                    <i className="bx bx-receipt"></i> Order Dispatches History
                 </h3>
-
-                <p className="NoOrders">
-                    This user hasn't placed any orders yet.
-                </p>
-
+                <div className="NoOrdersBox">
+                    <i className="bx bx-package"></i>
+                    <p>This user has not placed any food dispatch orders yet.</p>
+                </div>
             </div>
         );
     }
 
     return (
-
         <div className="UserOrderHistory">
-
             <h3>
-                <i className="bx bx-package"></i>
-                Order History
+                <i className="bx bx-receipt"></i> Order Dispatches History ({orders.length})
             </h3>
 
             {orders.map((order) => (
-
-                <div
-                    key={order._id}
-                    className="OrderCard"
-                >
-
+                <div key={order._id} className="OrderCard">
                     <div className="OrderHeader">
-
                         <div>
-
-                            <h4>
-                                Order #{order._id.slice(-8)}
-                            </h4>
-
-                            <small>
-                                {new Date(order.createdAt).toLocaleString()}
-                            </small>
-
+                            <h4>Order #{order._id.slice(-8).toUpperCase()}</h4>
+                            <small>{new Date(order.createdAt).toLocaleString("en-IN")}</small>
                         </div>
 
-                        <span
-                            className={`OrderStatus ${getStatusClass(order.orderStatus)}`}
-                        >
+                        <span className={`OrderStatus ${getStatusClass(order.orderStatus)}`}>
+                            <span className="StatusPulseDot"></span>
                             {order.orderStatus}
                         </span>
-
                     </div>
 
                     <div className="OrderDetails">
-
                         <div className="OrderInfoBox">
                             <span>Subtotal</span>
-                            <p>₹{order.subtotal}</p>
+                            <p>₹{order.subtotal || order.totalAmount}</p>
                         </div>
 
                         <div className="OrderInfoBox">
                             <span>Discount</span>
-                            <p>- ₹{order.discount}</p>
+                            <p className="DiscountText">- ₹{order.discount || 0}</p>
                         </div>
 
                         <div className="OrderInfoBox">
-                            <span>Delivery Charge</span>
-                            <p>₹{order.deliveryCharge}</p>
+                            <span>Delivery Fee</span>
+                            <p>₹{order.deliveryCharge || 0}</p>
                         </div>
 
                         <div className="OrderInfoBox">
-                            <span>Tip</span>
-                            <p>₹{order.tip}</p>
+                            <span>Rider Tip</span>
+                            <p>₹{order.tip || 0}</p>
                         </div>
 
                         <div className="OrderInfoBox">
-                            <span>Total</span>
-                            <p>₹{order.totalAmount}</p>
+                            <span>Total Billed</span>
+                            <p className="TotalAmountVal">₹{order.totalAmount}</p>
                         </div>
 
                         <div className="OrderInfoBox">
-                            <span>Payment</span>
+                            <span>Payment Method</span>
                             <p>{order.paymentMethod}</p>
                         </div>
 
@@ -117,148 +91,49 @@ const UserOrderHistory = ({ orders }) => {
                         </div>
 
                         <div className="OrderInfoBox">
-                            <span>Coupon</span>
+                            <span>Coupon Used</span>
                             <p>{order.couponCode || "None"}</p>
                         </div>
-
                     </div>
 
+                    {/* ORDERED DISHES ITEM ROW */}
                     <div className="OrderItems">
+                        <h5>Dishes Ordered ({order.items?.length || 0})</h5>
 
-                        <h5>Ordered Items</h5>
-
-                        {order.items.map((item, index) => {
-
+                        {order.items?.map((item, index) => {
                             const product = item.product;
-
                             const backendURL = import.meta.env.VITE_API_URL;
-
                             const image = product?.image
                                 ? `${backendURL}/${product.image.replace(/^\/+/, "")}`
-                                : "https://placehold.co/80x80?text=Food";
+                                : "https://via.placeholder.com/80?text=Dish";
 
                             return (
-
-                                <div
-                                    key={index}
-                                    className="OrderItem"
-                                >
-
+                                <div key={index} className="OrderItem">
                                     <img
                                         src={image}
                                         alt={product?.name}
+                                        onError={(e) => {
+                                            e.target.src = "https://via.placeholder.com/80?text=Dish";
+                                        }}
                                     />
 
                                     <div className="ItemInfo">
-
-                                        <h6>
-                                            {product?.name || "Deleted Product"}
-                                        </h6>
-
-                                        <span>
-                                            Category : {product?.category || "-"}
-                                        </span>
-
+                                        <h6>{product?.name || "Deleted Dish"}</h6>
+                                        <span>Category: {product?.category || "Standard"}</span>
                                     </div>
 
                                     <div className="ItemMeta">
-
-                                        <span>
-                                            Qty : {item.quantity}
-                                        </span>
-
-                                        <span>
-                                            ₹{item.price}
-                                        </span>
-
+                                        <span>Quantity: {item.quantity}</span>
+                                        <span className="ItemPrice">₹{item.price * item.quantity}</span>
                                     </div>
-
                                 </div>
-
                             );
-
                         })}
-
                     </div>
-
-                    <div className="DeliverySection">
-
-                        <h5>Delivery Information</h5>
-
-                        <div className="DeliveryGrid">
-
-                            <div className="DeliveryCard">
-                                <span>Delivery Type</span>
-                                <p>{order.deliveryType}</p>
-                            </div>
-
-                            <div className="DeliveryCard">
-                                <span>Delivery Time</span>
-                                <p>{order.deliveryMinutes} min</p>
-                            </div>
-
-                            <div className="DeliveryCard">
-                                <span>Estimated Delivery</span>
-                                <p>
-                                    {new Date(order.estimatedDelivery).toLocaleString()}
-                                </p>
-                            </div>
-
-                            <div className="DeliveryCard">
-                                <span>Completed At</span>
-                                <p>
-                                    {order.completedAt
-                                        ? new Date(order.completedAt).toLocaleString()
-                                        : "-"}
-                                </p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div className="OrderExtraInfo">
-
-                        <div className="ExtraCard">
-                            <span>Delivery Type</span>
-                            <p>{order.deliveryType || "Standard"}</p>
-                        </div>
-
-                        <div className="ExtraCard">
-                            <span>Delivery Time</span>
-                            <p>{order.deliveryTime || "-"}</p>
-                        </div>
-
-                        <div className="ExtraCard">
-                            <span>Coupon</span>
-                            <p>{order.couponCode || "None"}</p>
-                        </div>
-
-                        <div className="ExtraCard">
-                            <span>Discount</span>
-                            <p>₹{order.discount || 0}</p>
-                        </div>
-
-                        <div className="ExtraCard">
-                            <span>Delivery Charge</span>
-                            <p>₹{order.deliveryCharge || 0}</p>
-                        </div>
-
-                        <div className="ExtraCard">
-                            <span>Tip</span>
-                            <p>₹{order.tip || 0}</p>
-                        </div>
-
-                    </div>
-
                 </div>
-
             ))}
-
         </div>
-
     );
-
 };
 
 export default UserOrderHistory;

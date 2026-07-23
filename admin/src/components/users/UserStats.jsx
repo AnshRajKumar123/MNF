@@ -1,73 +1,65 @@
-const UserStats = ({
-    totalOrders,
-    totalSpent,
-    user,
-}) => {
+import React from "react";
 
-    const joinedDate = new Date(user.createdAt).toLocaleDateString();
+const UserStats = ({ totalOrders, totalSpent, user }) => {
+    const joinedDate = user?.createdAt
+        ? new Date(user.createdAt).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+          })
+        : "N/A";
 
-    const updatedDate = new Date(user.updatedAt).toLocaleDateString();
+    const updatedDate = user?.updatedAt
+        ? new Date(user.updatedAt).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+          })
+        : "N/A";
 
     return (
-
         <div className="UserStatsGrid">
-
             <div className="StatCard">
-
                 <div className="StatIcon OrdersIcon">
                     <i className="bx bx-package"></i>
                 </div>
-
                 <div className="StatContent">
                     <span>Total Orders</span>
-                    <h2>{totalOrders}</h2>
+                    <h2>{totalOrders || 0}</h2>
                 </div>
-
             </div>
 
             <div className="StatCard">
-
                 <div className="StatIcon RevenueIcon">
-                    <i className="bx bx-rupee"></i>
+                    <i className="bx bx-wallet"></i>
                 </div>
-
                 <div className="StatContent">
-                    <span>Total Spending</span>
-                    <h2>₹{totalSpent.toFixed(2)}</h2>
+                    <span>Total Expenditure</span>
+                    <h2>₹{(totalSpent || 0).toLocaleString("en-IN", { minimumFractionDigits: 2 })}</h2>
                 </div>
-
             </div>
 
             <div className="StatCard">
-
                 <div className="StatIcon JoinIcon">
                     <i className="bx bx-calendar"></i>
                 </div>
-
                 <div className="StatContent">
-                    <span>Joined</span>
+                    <span>Registration Date</span>
                     <h2>{joinedDate}</h2>
                 </div>
-
             </div>
 
             <div className="StatCard">
-
                 <div className="StatIcon UpdateIcon">
                     <i className="bx bx-history"></i>
                 </div>
-
                 <div className="StatContent">
-                    <span>Last Updated</span>
+                    <span>Last Profile Activity</span>
                     <h2>{updatedDate}</h2>
                 </div>
-
             </div>
-
         </div>
-
     );
-
 };
 
 export default UserStats;

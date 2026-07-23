@@ -4,84 +4,38 @@ import UserStats from "./UserStats";
 import UserAddress from "./UserAddress";
 import UserOrderHistory from "./UserOrderHistory";
 
-const UserDetailsModal = ({
-    open,
-    onClose,
-    data,
-}) => {
-
+const UserDetailsModal = ({ open, onClose, data }) => {
     if (!open || !data) return null;
 
     const { user, orders, totalOrders, totalSpent } = data;
 
-    const backendURL = import.meta.env.VITE_API_URL;
-
-    const imageUrl = user.image
-        ? `${backendURL}/${user.image.replace(/^\/+/, "")}`
-        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            user.fullName
-        )}`;
-
-    const getStatusClass = (status) => {
-        switch (status) {
-            case "On Process":
-                return "StatusPending";
-
-            case "Preparing":
-                return "StatusPreparing";
-
-            case "Out For Delivery":
-                return "StatusDelivery";
-
-            case "Delivered":
-                return "StatusDelivered";
-
-            case "Cancelled":
-                return "StatusCancelled";
-
-            default:
-                return "";
-        }
-    };
-
     return (
-        <div className="ModalOverlay">
-
-            <div className="UserDetailsModal">
-
+        <div className="ModalOverlay" onClick={onClose}>
+            <div className="UserDetailsModal" onClick={(e) => e.stopPropagation()}>
                 <div className="ModalHeader">
+                    <div className="ModalHeaderTitle">
+                        <i className="bx bx-id-card HeaderIcon"></i>
+                        <h2>User Inspection Profile</h2>
+                    </div>
 
-                    <h2>User Details</h2>
-
-                    <button
-                        className="CloseModalBtn"
-                        onClick={onClose}
-                    >
-                        ✕
+                    <button className="CloseModalBtn" onClick={onClose}>
+                        <i className="bx bx-x"></i>
                     </button>
-
                 </div>
 
-                <UserProfileHeader user={user} />
-
-                <UserStats user={user} totalOrders={totalOrders} totalSpent={totalSpent} />
-
-                <UserAddress user={user} />
-
-                <UserOrderHistory orders={orders} />
+                <div className="ModalBodyScroll">
+                    <UserProfileHeader user={user} />
+                    <UserStats user={user} totalOrders={totalOrders} totalSpent={totalSpent} />
+                    <UserAddress user={user} />
+                    <UserOrderHistory orders={orders} />
+                </div>
 
                 <div className="ModalFooter">
-
-                    <Button
-                        onClick={onClose}
-                    >
-                        Close
-                    </Button>
-
+                    <button className="CloseProfileBtn" onClick={onClose}>
+                        Close Inspection
+                    </button>
                 </div>
-
             </div>
-
         </div>
     );
 };
