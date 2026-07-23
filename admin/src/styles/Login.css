@@ -178,8 +178,8 @@
 
 .TogglePasswordBtn {
     position: absolute;
-    right: 12px;
-    top: 50%;
+    right: 22px;
+    top: 40%;
     transform: translateY(-50%);
     background: transparent;
     border: none;
