@@ -1,5 +1,6 @@
-const CouponStats = ({ stats }) => {
+import React from "react";
 
+const CouponStats = ({ stats }) => {
     const cards = [
         {
             title: "Total Coupons",
@@ -8,9 +9,9 @@ const CouponStats = ({ stats }) => {
             className: "TotalCouponCard",
         },
         {
-            title: "Active",
+            title: "Active Campaigns",
             value: stats?.active || 0,
-            icon: "bx bx-check-circle",
+            icon: "bx bx-check-shield",
             className: "ActiveCouponCard",
         },
         {
@@ -20,7 +21,7 @@ const CouponStats = ({ stats }) => {
             className: "ExpiredCouponCard",
         },
         {
-            title: "Disabled",
+            title: "Disabled Nodes",
             value: stats?.disabled || 0,
             icon: "bx bx-block",
             className: "DisabledCouponCard",
@@ -29,30 +30,18 @@ const CouponStats = ({ stats }) => {
 
     return (
         <div className="CouponStatsGrid">
-
             {cards.map((card) => (
-
-                <div
-                    key={card.title}
-                    className={`CouponStatCard ${card.className}`}
-                >
-
+                <div key={card.title} className={`CouponStatCard ${card.className}`}>
                     <div className="CouponStatIcon">
                         <i className={card.icon}></i>
                     </div>
 
                     <div className="CouponStatContent">
-
                         <span>{card.title}</span>
-
                         <h2>{card.value}</h2>
-
                     </div>
-
                 </div>
-
             ))}
-
         </div>
     );
 };
