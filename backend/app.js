@@ -18,6 +18,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
 
 const adminRoutes = require("./routes/adminRoutes");
+const adminCouponRoutes = require("./routes/adminCouponRoutes");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -53,5 +54,6 @@ app.use("/payment", paymentRoutes);
 app.use("/invoice", invoiceRoutes);
 
 app.use("/admin", adminRoutes);
+app.use("/admin/coupons", adminCouponRoutes);
 
 module.exports = app;
