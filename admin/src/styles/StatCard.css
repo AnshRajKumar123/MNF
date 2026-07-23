@@ -1,0 +1,28 @@
+.StatCard{
+    background:#111827;
+    border:1px solid #1F2937;
+    border-radius:16px;
+    padding:20px;
+    color:white;
+}
+
+.StatTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.StatTop span{
+    color:#94A3B8;
+}
+
+.StatTop i{
+    font-size:26px;
+    color:#2563EB;
+}
+
+.StatCard h2{
+    font-size:34px;
+    font-weight:700;
+}

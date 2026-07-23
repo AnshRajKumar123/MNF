@@ -22,6 +22,7 @@ function App() {
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/users" element={<Users />} />
                     <Route path="/coupons" element={<Coupons />} />
+                    {/* <Route path="/settings" element={<Settings />} */}
                 </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
