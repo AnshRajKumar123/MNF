@@ -10,21 +10,35 @@ const AnotherNav = () => {
     const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
     const navigate = useNavigate();
 
-    // 🌊 Oceanic Theme Runtime Toggle Synchronization State Machine Engine
-    const [isLightOcean, setIsLightOcean] = useState(() => {
-        const savedTheme = localStorage.getItem('MNF_OceanTheme');
-        return savedTheme === 'light-ocean';
+    // 🌊 Default Theme: White/Light Ocean
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('MNF_OceanTheme') || 'light-ocean';
     });
 
     useEffect(() => {
-        if (isLightOcean) {
+        if (theme === 'light-ocean') {
             document.documentElement.setAttribute('data-theme', 'light-ocean');
-            localStorage.setItem('MNF_OceanTheme', 'light-ocean');
         } else {
             document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('MNF_OceanTheme', 'dark-blue');
         }
-    }, [isLightOcean]);
+        localStorage.setItem('MNF_OceanTheme', theme);
+    }, [theme]);
+
+    useEffect(() => {
+        const handleSync = () => {
+            const current = localStorage.getItem("MNF_OceanTheme") || "light-ocean";
+            setTheme(current);
+        };
+        window.addEventListener("mnfThemeChanged", handleSync);
+        return () => window.removeEventListener("mnfThemeChanged", handleSync);
+    }, []);
+
+    const toggleTheme = () => {
+        const nextTheme = theme === "light-ocean" ? "dark-blue" : "light-ocean";
+        setTheme(nextTheme);
+        localStorage.setItem("MNF_OceanTheme", nextTheme);
+        window.dispatchEvent(new Event("mnfThemeChanged"));
+    };
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -85,12 +99,12 @@ const AnotherNav = () => {
                                     )
                                 ))}
 
-                                <div className="DropdownThemeToggleRow" onClick={() => setIsLightOcean(!isLightOcean)}>
+                                <div className="DropdownThemeToggleRow" onClick={toggleTheme}>
                                     <div className="DropdownToggleLabelHub">
-                                        <i className={isLightOcean ? 'bx bx-sun' : 'bx bx-moon'}></i>
+                                        <i className={theme === 'light-ocean' ? 'bx bx-sun' : 'bx bx-moon'}></i>
                                         <span>{midnightFoodData.asideSettings.toggleLabel}</span>
                                     </div>
-                                    <div className={`ProDropdownSwitchTrack ${isLightOcean ? 'switch-on' : ''}`}>
+                                    <div className={`ProDropdownSwitchTrack ${theme === 'light-ocean' ? 'switch-on' : ''}`}>
                                         <span className="ProDropdownSwitchThumb"></span>
                                     </div>
                                 </div>
@@ -137,29 +151,29 @@ const AnotherNav = () => {
                     </div>
 
                     {/* 🌗 THEME TOGGLE BUTTON ROW */}
-                    <div className="DrawerThemeToggleRow" onClick={() => setIsLightOcean(!isLightOcean)}>
+                    <div className="DrawerThemeToggleRow" onClick={toggleTheme}>
                         <span className="ThemeLabel">
-                            <i className={isLightOcean ? 'bx bx-sun' : 'bx bx-moon'}></i>
-                            {isLightOcean ? "Light Ocean Mode" : "Dark Oceanic Mode"}
+                            <i className={theme === 'light-ocean' ? 'bx bx-sun' : 'bx bx-moon'}></i>
+                            {theme === 'light-ocean' ? "Light Ocean Mode" : "Dark Oceanic Mode"}
                         </span>
 
-                        <div className={`ProThemeSwitchToggle ${isLightOcean ? "switch-active" : ""}`}>
+                        <div className={`ProThemeSwitchToggle ${theme === 'light-ocean' ? "switch-active" : ""}`}>
                             <span className="SwitchThumb"></span>
                         </div>
                     </div>
 
                     <div className="DrawerBodyLinks">
-                        {/* 🏠 HOME LINK */}
+                        {/* HOME LINK */}
                         <Link to={midnightFoodData.navigation.home} className="DrawerLinkItem" onClick={toggleDrawer}>
                             <i className="bx bx-home-alt-2"></i> Home
                         </Link>
 
-                        {/* 🍕 MENU LINK */}
+                        {/* MENU LINK */}
                         <Link to={midnightFoodData.navigation.menu} className="DrawerLinkItem" onClick={toggleDrawer}>
                             <i className="bx bx-restaurant"></i> Menu
                         </Link>
 
-                        {/* 🛒 CART LINK */}
+                        {/* CART LINK */}
                         <Link to={midnightFoodData.navigation.cart} className="DrawerLinkItem" onClick={toggleDrawer}>
                             <i className="bx bx-shopping-bag"></i> Cart
                         </Link>
@@ -181,7 +195,7 @@ const AnotherNav = () => {
                             )
                         ))}
 
-                        {/* 👤 PROFILE LINK */}
+                        {/* PROFILE LINK */}
                         <Link to="/profile" className="DrawerLinkItem ProfileDrawerCTA" onClick={toggleDrawer}>
                             <i className="bx bx-user-circle"></i> My Account Profile
                         </Link>

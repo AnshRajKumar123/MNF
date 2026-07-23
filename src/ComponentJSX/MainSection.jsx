@@ -11,15 +11,36 @@ import { midnightFoodData } from '../assets/assest';
 
 const MainSection = () => {
     const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
-    const [theme, setTheme] = useState(() => localStorage.getItem("mnfTheme") || "dark-blue");
+
+    // 🌊 SINGLE SOURCE OF TRUTH: Default to "light-ocean" (White Theme)
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem("MNF_OceanTheme") || "light-ocean";
+    });
 
     useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("mnfTheme", theme);
+        if (theme === "light-ocean") {
+            document.documentElement.setAttribute("data-theme", "light-ocean");
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+        }
+        localStorage.setItem("MNF_OceanTheme", theme);
     }, [theme]);
 
+    // Listen for theme updates triggered from other components
+    useEffect(() => {
+        const handleSync = () => {
+            const current = localStorage.getItem("MNF_OceanTheme") || "light-ocean";
+            setTheme(current);
+        };
+        window.addEventListener("mnfThemeChanged", handleSync);
+        return () => window.removeEventListener("mnfThemeChanged", handleSync);
+    }, []);
+
     const toggleTheme = () => {
-        setTheme(prev => (prev === "dark-blue" ? "light-ocean" : "dark-blue"));
+        const nextTheme = theme === "light-ocean" ? "dark-blue" : "light-ocean";
+        setTheme(nextTheme);
+        localStorage.setItem("MNF_OceanTheme", nextTheme);
+        window.dispatchEvent(new Event("mnfThemeChanged"));
     };
 
     const toggleDrawer = () => {
@@ -33,7 +54,7 @@ const MainSection = () => {
 
                 <div className="NextToBT">
                     <Navbar onOpenMobileDrawer={toggleDrawer} />
-                    
+
                     <Routes>
                         <Route index element={<HomeSect />} />
                         <Route path='menu' element={<MenuSect />} />
@@ -57,13 +78,13 @@ const MainSection = () => {
                     </div>
 
                     {/* 🌗 THEME TOGGLE BUTTON ROW */}
-                    <div className="DrawerThemeToggleRow">
+                    <div className="DrawerThemeToggleRow" onClick={toggleTheme}>
                         <span className="ThemeLabel">
-                            <i className={theme === "dark-blue" ? 'bx bx-moon' : 'bx bx-sun'}></i>
-                            {theme === "dark-blue" ? "Dark Oceanic Mode" : "Light Ocean Mode"}
+                            <i className={theme === "light-ocean" ? 'bx bx-sun' : 'bx bx-moon'}></i>
+                            {theme === "light-ocean" ? "Light Ocean Mode" : "Dark Oceanic Mode"}
                         </span>
-                        
-                        <button className={`ProThemeSwitchToggle ${theme === "light-ocean" ? "switch-active" : ""}`} onClick={toggleTheme}>
+
+                        <button className={`ProThemeSwitchToggle ${theme === "light-ocean" ? "switch-active" : ""}`}>
                             <span className="SwitchThumb"></span>
                         </button>
                     </div>

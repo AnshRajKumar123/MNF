@@ -9,53 +9,53 @@ const AsideBar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
 
-    // 🌊 Oceanic Theme Runtime Toggle State Machine Engine
-    const [isLightOcean, setIsLightOcean] = useState(() => {
-        const savedTheme = localStorage.getItem('MNF_OceanTheme');
-        return savedTheme === 'light-ocean';
+    // 🌊 Default Theme: White/Light Ocean
+    const [theme, setTheme] = useState(() => {
+        return localStorage.getItem('MNF_OceanTheme') || 'light-ocean';
     });
 
     useEffect(() => {
-        if (isLightOcean) {
+        if (theme === 'light-ocean') {
             document.documentElement.setAttribute('data-theme', 'light-ocean');
-            localStorage.setItem('MNF_OceanTheme', 'light-ocean');
         } else {
             document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('MNF_OceanTheme', 'dark-blue');
         }
-    }, [isLightOcean]);
+        localStorage.setItem('MNF_OceanTheme', theme);
+    }, [theme]);
+
+    useEffect(() => {
+        const handleSync = () => {
+            const current = localStorage.getItem("MNF_OceanTheme") || "light-ocean";
+            setTheme(current);
+        };
+        window.addEventListener("mnfThemeChanged", handleSync);
+        return () => window.removeEventListener("mnfThemeChanged", handleSync);
+    }, []);
+
+    const toggleTheme = () => {
+        const nextTheme = theme === "light-ocean" ? "dark-blue" : "light-ocean";
+        setTheme(nextTheme);
+        localStorage.setItem("MNF_OceanTheme", nextTheme);
+        window.dispatchEvent(new Event("mnfThemeChanged"));
+    };
 
     const updateCartCount = async () => {
-
         try {
-
             const { data } = await api.get("/cart");
-
             const totalItems = data.cart.reduce(
                 (total, item) => total + item.quantity,
                 0
             );
-
             setCartCount(totalItems);
-
         } catch (error) {
-
             console.log(error);
-
         }
-
     };
 
     useEffect(() => {
-
         updateCartCount();
-
         window.addEventListener("cartUpdated", updateCartCount);
-
-        return () => {
-            window.removeEventListener("cartUpdated", updateCartCount);
-        };
-
+        return () => window.removeEventListener("cartUpdated", updateCartCount);
     }, []);
 
     return (
@@ -101,13 +101,13 @@ const AsideBar = () => {
                             <Link key={idx} to={link.path}>{link.label}</Link>
                         ))}
 
-                        {/* ⚡ High-End Integrated Interactive Switch Module Row */}
-                        <div className="ThemeToggleRowModule" onClick={() => setIsLightOcean(!isLightOcean)}>
+                        {/* ⚡ Theme Switch Toggle Row */}
+                        <div className="ThemeToggleRowModule" onClick={toggleTheme}>
                             <div className="ToggleTextLabelHub">
-                                <i className={isLightOcean ? 'bx bx-sun' : 'bx bx-moon'}></i>
+                                <i className={theme === 'light-ocean' ? 'bx bx-sun' : 'bx bx-moon'}></i>
                                 <span>{midnightFoodData.asideSettings.toggleLabel}</span>
                             </div>
-                            <div className={`ProSwitchTrack ${isLightOcean ? 'switch-on' : ''}`}>
+                            <div className={`ProSwitchTrack ${theme === 'light-ocean' ? 'switch-on' : ''}`}>
                                 <span className="ProSwitchThumb"></span>
                             </div>
                         </div>
