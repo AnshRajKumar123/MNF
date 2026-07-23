@@ -16,6 +16,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const orderRoute = require("./routes/orderRoute");
 const paymentRoutes = require("./routes/paymentRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
+const couponRoutes = require("./routes/couponRoutes");
 
 const adminRoutes = require("./routes/adminRoutes");
 const adminCouponRoutes = require("./routes/adminCouponRoutes");
@@ -52,6 +53,7 @@ app.use("/cart", cartRoutes);
 app.use("/order", orderRoute);
 app.use("/payment", paymentRoutes);
 app.use("/invoice", invoiceRoutes);
+app.use("/coupon", couponRoutes);
 
 app.use("/admin", adminRoutes);
 app.use("/admin/coupons", adminCouponRoutes);

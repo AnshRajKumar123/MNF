@@ -1,5 +1,7 @@
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
+const { validateCoupon } = require("../utils/couponHelper");
+const Coupon = require("../models/couponModel");
 
 const placeOrder = async (req, res) => {
 
@@ -36,11 +38,20 @@ const placeOrder = async (req, res) => {
         );
 
         let discount = 0;
+        let couponCode = "";
+        let validatedCoupon = null;
 
-        if (coupon) {
-            discount = Math.round(
-                foodTotal * (coupon.percent / 100)
+        if (coupon?._id) {
+
+            const result = await validateCoupon(
+                coupon._id,
+                foodTotal
             );
+
+            validatedCoupon = result.coupon;
+            discount = result.discount;
+            couponCode = validatedCoupon.code;
+
         }
 
         let deliveryMinutes = 20;
@@ -115,11 +126,24 @@ const placeOrder = async (req, res) => {
             deliveryMinutes,
             deliveryCharge,
             discount,
-            couponCode: coupon?.title || "",
+            couponCode,
             tip,
             estimatedDelivery,
             rider,
         });
+
+        if (validatedCoupon) {
+
+            await Coupon.findByIdAndUpdate(
+                validatedCoupon._id,
+                {
+                    $inc: {
+                        usedCount: 1,
+                    },
+                }
+            );
+
+        }
 
         await Cart.deleteMany({ user: req.user.id });
 

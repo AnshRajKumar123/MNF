@@ -47,7 +47,6 @@ const Cart = () => {
         localStorage.setItem("instruction", text);
     };
 
-    const couponsList = { "MIDNIGHT50": 50, "FOOD20": 20, "PIZZA10": 10 };
     const FREE_SHIPPING_LIMIT = 500;
     const SHIPPING_COST = 40;
 
@@ -99,18 +98,39 @@ const Cart = () => {
         }
     };
 
-    const handleApplyCoupon = () => {
-        const code = coupon.trim().toUpperCase();
+    const handleApplyCoupon = async () => {
 
-        if (couponsList[code]) {
-            setAppliedCoupon({
-                title: code,
-                percent: couponsList[code]
+        try {
+
+            if (!coupon.trim()) {
+
+                return alert("Please enter a coupon code.");
+
+            }
+
+            const res = await api.post("/coupon/apply", {
+
+                code: coupon,
+
+                subtotal,
+
             });
-        } else {
+
+            setAppliedCoupon(res.data.coupon);
+
+            setCoupon("");
+
+        } catch (error) {
+
             setAppliedCoupon(null);
-            alert("Invalid coupon code");
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to apply coupon."
+            );
+
         }
+
     };
 
     const subtotal = cartItems.reduce(
@@ -118,7 +138,9 @@ const Cart = () => {
         0
     );
     const shipping = subtotal >= FREE_SHIPPING_LIMIT || subtotal === 0 ? 0 : SHIPPING_COST;
-    const discountAmount = appliedCoupon ? Math.round(subtotal * (appliedCoupon.percent / 100)) : 0;
+    const discountAmount = appliedCoupon
+        ? appliedCoupon.discount
+        : 0;
     console.log("deliveryType:", deliveryType);
     console.log("deliveryOptions:", deliveryOptions);
     console.log("selected option:", deliveryOptions[deliveryType]);
@@ -134,6 +156,13 @@ const Cart = () => {
             setTimeout(() => setShowFreePopup(false), 2500);
         }
     }, [subtotal, cartItems.length]);
+
+
+    useEffect(() => {
+
+        setAppliedCoupon(null);
+
+    }, [cartItems]);
 
     return (
         <div className="ProCartContainer">
@@ -298,7 +327,17 @@ const Cart = () => {
 
                     {appliedCoupon && (
                         <div className="ProSummaryRowItem CouponDiscountHighlightRow">
-                            <span>Token '{appliedCoupon.title}' ({appliedCoupon.percent}%)</span>
+                            {/* <span>Coupon "{appliedCoupon.code}"</span> */}
+
+                            <span>
+                                {appliedCoupon.code}
+                                {" "}
+                                (
+                                {appliedCoupon.type === "percentage"
+                                    ? `${appliedCoupon.value}%`
+                                    : `₹${appliedCoupon.value}`}
+                                )
+                            </span>
                             <strong>-₹{discountAmount}</strong>
                         </div>
                     )}
@@ -362,6 +401,7 @@ const Cart = () => {
                     appliedCoupon={appliedCoupon}
                     tip={tip}
                     deliveryType={deliveryType}
+                    appliedCoupon={appliedCoupon}
                     finalTotal={finalTotal}
                     clearCartData={() => {
                         setAppliedCoupon(null);
