@@ -2,9 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
-const authMiddleware = require("../middleware/authMiddleware");
+const adminAuthMiddleware = require("../middleware/adminAuthMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
 const upload = require("../middleware/uploadMiddleware");
+
+const {
+    adminLogin,
+    adminLogout,
+} = require("../controllers/adminLoginController");
 
 const {
     getAdminProfile,
@@ -18,7 +23,7 @@ const {
     getProducts,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
 } = require("../controllers/adminProductController");
 
 const {
@@ -26,30 +31,44 @@ const {
     updateOrderStatus,
 } = require("../controllers/adminOrderController");
 
+
+// ============================
+// Public Routes
+// ============================
+
+router.post("/login", adminLogin);
+
+router.post("/logout", adminLogout);
+
+
+// ============================
+// Protected Admin Routes
+// ============================
+
 router.get(
     "/profile",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     getAdminProfile
 );
 
 router.get(
     "/dashboard",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     getDashboard
 );
 
 router.get(
     "/products",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     getProducts
 );
 
 router.post(
     "/products",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     upload.single("image"),
     addProduct
@@ -57,7 +76,7 @@ router.post(
 
 router.put(
     "/products/:id",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     upload.single("image"),
     updateProduct
@@ -65,21 +84,21 @@ router.put(
 
 router.delete(
     "/products/:id",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     deleteProduct
 );
 
 router.get(
     "/orders",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     getAllOrders
 );
 
 router.put(
     "/orders/:id/status",
-    authMiddleware,
+    adminAuthMiddleware,
     adminMiddleware,
     updateOrderStatus
 );

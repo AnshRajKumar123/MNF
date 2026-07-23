@@ -93,9 +93,9 @@ const loginUser = async (req, res) => {
             }
         );
 
-        res.cookie("token", token, {
+        res.cookie("userToken", token, {
             httpOnly: true,
-            secure: false,      // change to true when using HTTPS
+            secure: false,
             sameSite: "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
@@ -141,7 +141,7 @@ const getProfile = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-    res.clearCookie("token");
+    res.clearCookie("userToken");
 
     return res.status(200).json({
         success: true,

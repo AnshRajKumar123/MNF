@@ -1,14 +1,22 @@
 import api from "../config/axios";
 
+// ============================
+// Admin Login
+// ============================
+
 export const loginAdmin = async (loginData) => {
 
     const response = await api.post(
-        "/auth/login",
+        "/admin/login",
         loginData
     );
 
     return response.data;
 };
+
+// ============================
+// Admin Profile
+// ============================
 
 export const getAdminProfile = async () => {
 
@@ -19,10 +27,14 @@ export const getAdminProfile = async () => {
     return response.data;
 };
 
+// ============================
+// Admin Logout
+// ============================
+
 export const logoutAdmin = async () => {
 
     const response = await api.post(
-        "/auth/logout"
+        "/admin/logout"
     );
 
     return response.data;
