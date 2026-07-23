@@ -379,3 +379,40 @@
     }
 
 }
+
+.DeleteModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.DeleteModal {
+    width: 420px;
+    max-width: 92%;
+    background: #1c2434;
+    border-radius: 18px;
+    padding: 35px;
+    text-align: center;
+}
+
+.DeleteIcon {
+    font-size: 70px;
+    color: #ef4444;
+    margin-bottom: 15px;
+}
+
+.DeleteModal p {
+    color: #94a3b8;
+    margin: 15px 0 25px;
+    line-height: 1.6;
+}
+
+.DeleteModalButtons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}

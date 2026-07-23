@@ -1,6 +1,8 @@
 const CouponTable = ({
     coupons,
-    onEdit
+    onEdit,
+    onDelete,
+    onToggle
 }) => {
 
     const getStatus = (coupon) => {
@@ -150,12 +152,21 @@ const CouponTable = ({
 
                                         <button
                                             className="CouponActionBtn ToggleBtn"
+                                            onClick={() => onToggle(coupon)}
+                                            title={coupon.active ? "Disable Coupon" : "Enable Coupon"}
                                         >
-                                            <i className="bx bx-refresh"></i>
+                                            <i
+                                                className={
+                                                    coupon.active
+                                                        ? "bx bx-toggle-right"
+                                                        : "bx bx-toggle-left"
+                                                }
+                                            ></i>
                                         </button>
 
                                         <button
                                             className="CouponActionBtn DeleteBtn"
+                                            onClick={() => onDelete(coupon)}
                                         >
                                             <i className="bx bx-trash"></i>
                                         </button>

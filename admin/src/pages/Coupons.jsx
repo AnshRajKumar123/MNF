@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getCoupons, createCoupon, updateCoupon, } from "../services/couponService";
+import { getCoupons, createCoupon, updateCoupon, deleteCoupon, toggleCoupon } from "../services/couponService";
 import CouponStats from "../components/coupons/CouponStats";
 import CouponFilters from "../components/coupons/CouponFilters";
 import CouponTable from "../components/coupons/CouponTable";
 import CouponFormModal from "../components/coupons/CouponFormModal";
+import DeleteConfirmModal from "../components/coupons/DeleteConfirmModal";
 import "../styles/Coupons.css";
 
 const Coupons = () => {
@@ -20,6 +21,10 @@ const Coupons = () => {
     const [showModal, setShowModal] = useState(false);
 
     const [selectedCoupon, setSelectedCoupon] = useState(null);
+
+    const [deleteModal, setDeleteModal] = useState(false);
+
+    const [deleteCouponId, setDeleteCouponId] = useState(null);
 
     const loadCoupons = async () => {
 
@@ -84,6 +89,49 @@ const Coupons = () => {
 
     };
 
+    const handleDeleteCoupon = async () => {
+
+        try {
+
+            await deleteCoupon(deleteCouponId);
+
+            setDeleteModal(false);
+
+            setDeleteCouponId(null);
+
+            loadCoupons();
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(error.response?.data?.message);
+
+        }
+
+    };
+
+    const handleToggleCoupon = async (coupon) => {
+
+    try {
+
+        await toggleCoupon(coupon._id);
+
+        loadCoupons();
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert(
+            error.response?.data?.message ||
+            "Unable to update coupon."
+        );
+
+    }
+
+};
+
     useEffect(() => {
 
         loadCoupons();
@@ -140,6 +188,14 @@ const Coupons = () => {
                     setShowModal(true);
 
                 }}
+                onDelete={(coupon) => {
+
+                    setDeleteCouponId(coupon._id);
+
+                    setDeleteModal(true);
+
+                }}
+                onToggle={handleToggleCoupon}
             />
 
             <CouponFormModal
@@ -147,6 +203,20 @@ const Coupons = () => {
                 initialData={selectedCoupon}
                 onClose={() => { setShowModal(false); setSelectedCoupon(null); }}
                 onSubmit={handleSubmitCoupon}
+            />
+
+            <DeleteConfirmModal
+                open={deleteModal}
+                title="Delete Coupon"
+                message="This coupon will be permanently removed."
+                onCancel={() => {
+
+                    setDeleteModal(false);
+
+                    setDeleteCouponId(null);
+
+                }}
+                onConfirm={handleDeleteCoupon}
             />
         </div>
 
