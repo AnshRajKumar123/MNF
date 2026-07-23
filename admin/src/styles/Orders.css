@@ -66,3 +66,18 @@
 .StatusSelect:focus {
     border-color: #ff6b35;
 }
+
+.ViewBtn{
+    padding:8px 18px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.ViewBtn:hover{
+    background:#2563eb;
+}

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { getOrders, updateOrderStatus } from "../services/orderService";
 import "../styles/Orders.css";
+import OrderDetailsModal from "../components/orders/OrderDetailsModal";
 
 const Orders = () => {
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
     const loadOrders = async () => {
         try {
             const data = await getOrders();
@@ -25,7 +28,9 @@ const Orders = () => {
 
         try {
 
-            await updateOrderStatus(id, status);
+            await updateOrderStatus(id, {
+                orderStatus: status,
+            });
 
             loadOrders();
 
@@ -55,6 +60,7 @@ const Orders = () => {
                             <th>Payment</th>
                             <th>Status</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -81,7 +87,7 @@ const Orders = () => {
                                 <td>
                                     <select
                                         className="StatusSelect"
-                                        value={order.status}
+                                        value={order.orderStatus}
                                         onChange={(e) =>
                                             handleStatusChange(order._id, e.target.value)
                                         }
@@ -97,6 +103,19 @@ const Orders = () => {
                                 <td>
                                     {new Date(order.createdAt).toLocaleDateString()}
                                 </td>
+                                <td>
+                                    <td>
+                                        <button
+                                            className="ViewBtn"
+                                            onClick={() => {
+                                                setSelectedOrder(order);
+                                                setOpenModal(true);
+                                            }}
+                                        >
+                                            View
+                                        </button>
+                                    </td>
+                                </td>
 
                             </tr>
 
@@ -106,6 +125,12 @@ const Orders = () => {
 
                 </table>
             )}
+
+            <OrderDetailsModal
+                isOpen={openModal}
+                onClose={() => setOpenModal(false)}
+                order={selectedOrder}
+            />
 
         </div>
     )

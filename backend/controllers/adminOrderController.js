@@ -30,7 +30,7 @@ const updateOrderStatus = async (req, res) => {
     try {
 
         const { id } = req.params;
-        const { status } = req.body;
+        const { orderStatus } = req.body;
 
         const validStatus = [
             "Pending",
@@ -40,7 +40,7 @@ const updateOrderStatus = async (req, res) => {
             "Cancelled",
         ];
 
-        if (!validStatus.includes(status)) {
+        if (!validStatus.includes(orderStatus)) {
             return res.status(400).json({
                 success: false,
                 message: "Invalid status",
@@ -49,7 +49,7 @@ const updateOrderStatus = async (req, res) => {
 
         const order = await Order.findByIdAndUpdate(
             id,
-            { status },
+            { orderStatus },
             { new: true }
         );
 

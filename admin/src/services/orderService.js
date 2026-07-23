@@ -5,13 +5,11 @@ export const getOrders = async () => {
     return response.data;
 };
 
-export const updateOrderStatus = async (id, status) => {
-
+export const updateOrderStatus = async (id, data) => {
     const response = await api.put(
         `/admin/orders/${id}/status`,
-        { status }
+        data
     );
 
     return response.data;
-
 };
