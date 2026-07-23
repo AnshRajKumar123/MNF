@@ -1,3 +1,61 @@
+.ProductsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.ProductsActions {
+    display: flex;
+    gap: 15px;
+}
+
+.SearchInput {
+    width: 260px;
+    height: 45px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 10px;
+    background: #1F2937;
+    color: white;
+    outline: none;
+}
+
+.SearchInput::placeholder {
+    color: #94A3B8;
+}
+
+.AddProductBtn {
+    border: none;
+    padding: 0 22px;
+    border-radius: 10px;
+    background: #2563EB;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.AddProductBtn:hover {
+    background: #1D4ED8;
+}
+
+.Status {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.Active {
+    background: #166534;
+    color: #DCFCE7;
+}
+
+.Inactive {
+    background: #991B1B;
+    color: #FEE2E2;
+}
+
 .ProductsPage {
     width: 100%;
 }

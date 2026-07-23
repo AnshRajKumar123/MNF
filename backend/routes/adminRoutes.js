@@ -4,6 +4,7 @@ const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
+const upload = require("../middleware/uploadMiddleware");
 
 const {
     getAdminProfile,
@@ -15,6 +16,7 @@ const {
 
 const {
     getProducts,
+    addProduct,
 } = require("../controllers/adminProductController");
 
 router.get(
@@ -36,6 +38,14 @@ router.get(
     authMiddleware,
     adminMiddleware,
     getProducts
+);
+
+router.post(
+    "/products",
+    authMiddleware,
+    adminMiddleware,
+    upload.single("image"),
+    addProduct
 );
 
 module.exports = router;
