@@ -1,0 +1,31 @@
+.LoginPage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        linear-gradient(135deg,
+            #0F172A,
+            #1E293B);
+    padding: 30px;
+}
+
+.LoginPage .AdminCard {
+    width: 420px;
+}
+
+.LoginHeader {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.LoginHeader h1 {
+    font-size: 32px;
+    color: white;
+}
+
+.LoginHeader p {
+    margin-top: 8px;
+    color: #94A3B8;
+}

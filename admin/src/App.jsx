@@ -12,35 +12,20 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminLayout from "./components/layout/AdminLayout";
 
 function App() {
-
     return (
-
         <Routes>
-
             <Route path="/" element={<Login />} />
-
             <Route element={<ProtectedRoute />}>
-
                 <Route element={<AdminLayout />}>
-
                     <Route path="/dashboard" element={<Dashboard />} />
-
                     <Route path="/products" element={<Products />} />
-
                     <Route path="/orders" element={<Orders />} />
-
                     <Route path="/users" element={<Users />} />
-
                     <Route path="/coupons" element={<Coupons />} />
-
                 </Route>
-
             </Route>
-
             <Route path="*" element={<NotFound />} />
-
         </Routes>
-
     );
 
 }

@@ -1,0 +1,32 @@
+.Sidebar {
+    width: 260px;
+    background: #111827;
+    border-right: 1px solid #1F2937;
+    padding: 30px 20px;
+}
+
+.Logo {
+    color: white;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.Sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Sidebar nav a {
+    text-decoration: none;
+    color: #94A3B8;
+    padding: 14px 18px;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.Sidebar nav a:hover,
+.Sidebar nav a.active {
+    background: #2563EB;
+    color: white;
+}

@@ -17,6 +17,8 @@ const orderRoute = require("./routes/orderRoute");
 const paymentRoutes = require("./routes/paymentRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
 
+const adminRoutes = require("./routes/adminRoutes");
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
@@ -29,7 +31,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors({
-    origin: "http://10.59.92.183:5173",
+    origin: [
+        "http://10.59.92.183:5173", // Customer App
+        "http://10.59.92.183:5174", // Admin App
+    ],
     credentials: true,
 }));
 
@@ -46,5 +51,7 @@ app.use("/cart", cartRoutes);
 app.use("/order", orderRoute);
 app.use("/payment", paymentRoutes);
 app.use("/invoice", invoiceRoutes);
+
+app.use("/admin", adminRoutes);
 
 module.exports = app;

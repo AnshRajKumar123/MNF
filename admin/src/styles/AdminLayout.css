@@ -1,0 +1,16 @@
+.AdminLayout {
+    display: flex;
+    min-height: 100vh;
+    background: #0F172A;
+}
+
+.AdminContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminMain {
+    flex: 1;
+    padding: 30px;
+}
