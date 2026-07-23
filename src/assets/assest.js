@@ -1,4 +1,5 @@
 import WebLogo from './img/WebLogo.png'
+import WebLogo2 from './img/WebLogo2.png'
 import GooglePlay from './img/GooglePlay.avif'
 import IOS from './img/IOS.avif'
 import HeroVideo from './img/HeroVid.mp4'
@@ -31,6 +32,7 @@ import MidNightQR from './img/MidNightQR.png'
 
 export const ResturantIG = {
     WebLogo,
+    WebLogo2,
     HeroVideo,
     GooglePlay,
     IOS,

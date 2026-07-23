@@ -62,7 +62,7 @@ const AsideBar = () => {
         <aside className="ProOceanicAside">
             <Link to='/'>
                 <button className="Weblogo">
-                    <img src={ResturantIG.WebLogo} alt="Website Logo" />
+                    <img src={ResturantIG.WebLogo2} alt="Website Logo" />
                 </button>
             </Link>
 
