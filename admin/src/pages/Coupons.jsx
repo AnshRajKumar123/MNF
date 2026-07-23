@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCoupons } from "../services/couponService";
+import { getCoupons, createCoupon, updateCoupon, } from "../services/couponService";
+import CouponStats from "../components/coupons/CouponStats";
+import CouponFilters from "../components/coupons/CouponFilters";
+import CouponTable from "../components/coupons/CouponTable";
+import CouponFormModal from "../components/coupons/CouponFormModal";
 import "../styles/Coupons.css";
 
 const Coupons = () => {
@@ -13,9 +17,15 @@ const Coupons = () => {
 
     const [status, setStatus] = useState("all");
 
+    const [showModal, setShowModal] = useState(false);
+
+    const [selectedCoupon, setSelectedCoupon] = useState(null);
+
     const loadCoupons = async () => {
 
         try {
+
+            setLoading(true);
 
             const data = await getCoupons({
                 search,
@@ -33,6 +43,42 @@ const Coupons = () => {
         } finally {
 
             setLoading(false);
+
+        }
+
+    };
+
+    const handleSubmitCoupon = async (formData) => {
+
+        try {
+
+            if (selectedCoupon) {
+
+                await updateCoupon(
+                    selectedCoupon._id,
+                    formData
+                );
+
+            } else {
+
+                await createCoupon(formData);
+
+            }
+
+            setShowModal(false);
+
+            setSelectedCoupon(null);
+
+            loadCoupons();
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert(
+                error?.response?.data?.message ||
+                "Something went wrong."
+            );
 
         }
 
@@ -70,14 +116,38 @@ const Coupons = () => {
 
                 </div>
 
-                <button className="CreateCouponButton">
-                    <i className="bx bx-plus"></i>
-
-                    Create Coupon
-                </button>
-
             </div>
 
+            <CouponStats stats={stats} />
+
+            <CouponFilters
+                search={search}
+                setSearch={setSearch}
+                status={status}
+                setStatus={setStatus}
+                onCreate={() => {
+                    setSelectedCoupon(null);
+                    setShowModal(true);
+                }}
+            />
+
+            <CouponTable
+                coupons={coupons}
+                onEdit={(coupon) => {
+
+                    setSelectedCoupon(coupon);
+
+                    setShowModal(true);
+
+                }}
+            />
+
+            <CouponFormModal
+                open={showModal}
+                initialData={selectedCoupon}
+                onClose={() => { setShowModal(false); setSelectedCoupon(null); }}
+                onSubmit={handleSubmitCoupon}
+            />
         </div>
 
     );

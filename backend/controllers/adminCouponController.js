@@ -64,7 +64,6 @@ const getCoupons = async (req, res) => {
 
         const query = {};
 
-        // Search by coupon code
         if (search.trim()) {
             query.code = {
                 $regex: search.trim(),
@@ -72,7 +71,6 @@ const getCoupons = async (req, res) => {
             };
         }
 
-        // Active / Disabled filter
         if (status === "active") {
             query.active = true;
             query.expiresAt = { $gte: new Date() };
@@ -93,14 +91,37 @@ const getCoupons = async (req, res) => {
         const totalCoupons = await Coupon.countDocuments(query);
 
         const coupons = await Coupon.find(query)
-            .sort({
-                createdAt: -1,
-            })
+            .sort({ createdAt: -1 })
             .skip((currentPage - 1) * pageLimit)
             .limit(pageLimit);
 
+        // Dashboard Statistics
+        const total = await Coupon.countDocuments();
+
+        const active = await Coupon.countDocuments({
+            active: true,
+            expiresAt: { $gte: new Date() },
+        });
+
+        const expired = await Coupon.countDocuments({
+            active: true,
+            expiresAt: { $lt: new Date() },
+        });
+
+        const disabled = await Coupon.countDocuments({
+            active: false,
+        });
+
         return res.status(200).json({
             success: true,
+
+            stats: {
+                total,
+                active,
+                expired,
+                disabled,
+            },
+
             coupons,
 
             pagination: {
