@@ -1,27 +1,58 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/productService";
+import { getProducts, deleteProduct } from "../services/productService";
 import "../styles/Products.css";
+import ProductModal from "../components/products/ProductModal";
 
 const Products = () => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const loadProducts = async () => {
+        try {
+            const data = await getProducts();
+            setProducts(data.products);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const loadProducts = async () => {
-            try {
-                const data = await getProducts();
-                setProducts(data.products);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false);
-            }
-        };
         loadProducts();
     }, []);
+
+
     if (loading) {
         return <h2>Loading...</h2>;
     }
+
+    const handleDelete = async (id, name) => {
+
+        const confirmDelete = window.confirm(
+            `Are you sure you want to delete "${name}"?`
+        );
+
+        if (!confirmDelete) return;
+
+        try {
+
+            await deleteProduct(id);
+
+            loadProducts();
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert("Failed to delete product");
+
+        }
+
+    };
     return (
         <div className="ProductsPage">
 
@@ -37,7 +68,16 @@ const Products = () => {
                         className="SearchInput"
                     />
 
-                    <button className="AddProductBtn">
+                    <button
+                        className="AddProductBtn"
+                        onClick={() => {
+
+                            setSelectedProduct(null);
+
+                            setOpenModal(true);
+
+                        }}
+                    >
                         + Add Product
                     </button>
 
@@ -102,11 +142,23 @@ const Products = () => {
 
                                 <td>
 
-                                    <button className="ActionBtn EditBtn">
+                                    <button
+                                        className="ActionBtn EditBtn"
+                                        onClick={() => {
+
+                                            setSelectedProduct(product);
+
+                                            setOpenModal(true);
+
+                                        }}
+                                    >
                                         Edit
                                     </button>
 
-                                    <button className="ActionBtn DeleteBtn">
+                                    <button
+                                        className="ActionBtn DeleteBtn"
+                                        onClick={() => handleDelete(product._id, product.name)}
+                                    >
                                         Delete
                                     </button>
 
@@ -121,6 +173,12 @@ const Products = () => {
                 </tbody>
 
             </table>
+            <ProductModal
+                isOpen={openModal}
+                onClose={() => setOpenModal(false)}
+                onSuccess={loadProducts}
+                product={selectedProduct}
+            />
 
         </div>
     );

@@ -24,5 +24,20 @@ export const addProduct = async (formData) => {
     );
 
     return response.data;
+};
+
+export const updateProduct = async (id, formData) => {
+
+    const response = await api.put(
+        `/admin/products/${id}`,
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+
+    return response.data;
 
 };

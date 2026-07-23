@@ -17,7 +17,13 @@ const {
 const {
     getProducts,
     addProduct,
+    updateProduct,
+    deleteProduct
 } = require("../controllers/adminProductController");
+
+const {
+    getAllOrders,
+} = require("../controllers/adminOrderController");
 
 router.get(
     "/profile",
@@ -46,6 +52,28 @@ router.post(
     adminMiddleware,
     upload.single("image"),
     addProduct
+);
+
+router.put(
+    "/products/:id",
+    authMiddleware,
+    adminMiddleware,
+    upload.single("image"),
+    updateProduct
+);
+
+router.delete(
+    "/products/:id",
+    authMiddleware,
+    adminMiddleware,
+    deleteProduct
+);
+
+router.get(
+    "/orders",
+    authMiddleware,
+    adminMiddleware,
+    getAllOrders
 );
 
 module.exports = router;
