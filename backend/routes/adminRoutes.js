@@ -31,6 +31,11 @@ const {
     updateOrderStatus,
 } = require("../controllers/adminOrderController");
 
+const {
+    getAllUsers,
+    getSingleUser,
+} = require("../controllers/adminUserController");
+
 
 // ============================
 // Public Routes
@@ -101,6 +106,20 @@ router.put(
     adminAuthMiddleware,
     adminMiddleware,
     updateOrderStatus
+);
+
+router.get(
+    "/users",
+    adminAuthMiddleware,
+    adminMiddleware,
+    getAllUsers
+);
+
+router.get(
+    "/users/:id",
+    adminAuthMiddleware,
+    adminMiddleware,
+    getSingleUser
 );
 
 module.exports = router;
