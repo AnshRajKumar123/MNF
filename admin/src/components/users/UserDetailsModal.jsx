@@ -1,4 +1,8 @@
 import Button from "../ui/Button";
+import UserProfileHeader from "./UserProfileHeader";
+import UserStats from "./UserStats";
+import UserAddress from "./UserAddress";
+import UserOrderHistory from "./UserOrderHistory";
 
 const UserDetailsModal = ({
     open,
@@ -15,13 +19,13 @@ const UserDetailsModal = ({
     const imageUrl = user.image
         ? `${backendURL}/${user.image.replace(/^\/+/, "")}`
         : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-              user.fullName
-          )}`;
+            user.fullName
+        )}`;
 
     const getStatusClass = (status) => {
         switch (status) {
-            case "Delivered":
-                return "StatusDelivered";
+            case "On Process":
+                return "StatusPending";
 
             case "Preparing":
                 return "StatusPreparing";
@@ -29,11 +33,14 @@ const UserDetailsModal = ({
             case "Out For Delivery":
                 return "StatusDelivery";
 
+            case "Delivered":
+                return "StatusDelivered";
+
             case "Cancelled":
                 return "StatusCancelled";
 
             default:
-                return "StatusPending";
+                return "";
         }
     };
 
@@ -55,123 +62,13 @@ const UserDetailsModal = ({
 
                 </div>
 
-                <div className="UserInfo">
+                <UserProfileHeader user={user} />
 
-                    <img
-                        src={imageUrl}
-                        alt={user.fullName}
-                        className="UserAvatarLarge"
-                    />
+                <UserStats user={user} totalOrders={totalOrders} totalSpent={totalSpent} />
 
-                    <h2>{user.fullName}</h2>
+                <UserAddress user={user} />
 
-                    <p>{user.email}</p>
-
-                </div>
-
-                <div className="UserStats">
-
-                    <div>
-                        <span>Total Orders</span>
-                        <h2>{totalOrders}</h2>
-                    </div>
-
-                    <div>
-                        <span>Total Spent</span>
-                        <h2>₹{totalSpent.toFixed(2)}</h2>
-                    </div>
-
-                    <div>
-                        <span>Joined</span>
-                        <h2>
-                            {new Date(user.createdAt).toLocaleDateString()}
-                        </h2>
-                    </div>
-
-                </div>
-
-                <h3 className="OrderHistoryTitle">
-                    Order History
-                </h3>
-
-                <div className="OrderHistory">
-
-                    {orders.length === 0 ? (
-
-                        <p>No orders found.</p>
-
-                    ) : (
-
-                        orders.map((order) => (
-
-                            <div
-                                key={order._id}
-                                className="OrderCard"
-                            >
-
-                                <div className="OrderTop">
-
-                                    <div>
-                                        <h4>
-                                            Order #{order._id.slice(-8)}
-                                        </h4>
-
-                                        <small>
-                                            {new Date(
-                                                order.createdAt
-                                            ).toLocaleString()}
-                                        </small>
-                                    </div>
-
-                                    <span
-                                        className={`OrderStatus ${getStatusClass(
-                                            order.orderStatus
-                                        )}`}
-                                    >
-                                        {order.orderStatus}
-                                    </span>
-
-                                </div>
-
-                                <div className="OrderGrid">
-
-                                    <div>
-                                        <span>Total</span>
-                                        <strong>
-                                            ₹{order.totalAmount}
-                                        </strong>
-                                    </div>
-
-                                    <div>
-                                        <span>Payment</span>
-                                        <strong>
-                                            {order.paymentMethod}
-                                        </strong>
-                                    </div>
-
-                                    <div>
-                                        <span>Payment Status</span>
-                                        <strong>
-                                            {order.paymentStatus}
-                                        </strong>
-                                    </div>
-
-                                    <div>
-                                        <span>Items</span>
-                                        <strong>
-                                            {order.items.length}
-                                        </strong>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        ))
-
-                    )}
-
-                </div>
+                <UserOrderHistory orders={orders} />
 
                 <div className="ModalFooter">
 

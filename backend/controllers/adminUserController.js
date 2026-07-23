@@ -64,7 +64,14 @@ const getSingleUser = async (req, res) => {
 
         const orders = await Order.find({
             user: id,
-        }).sort({ createdAt: -1 });
+        })
+            .populate({
+                path: "items.product",
+                select: "name image price category",
+            })
+            .sort({
+                createdAt: -1,
+            });
 
         const totalOrders = orders.length;
 
