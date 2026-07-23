@@ -1,0 +1,76 @@
+.ProductsPage {
+    width: 100%;
+}
+
+.ProductsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.ProductsHeader h1 {
+    color: #fff;
+    font-size: 36px;
+}
+
+.ProductTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111827;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.ProductTable thead {
+    background: #1F2937;
+}
+
+.ProductTable th {
+    color: #fff;
+    padding: 18px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.ProductTable td {
+    color: #E5E7EB;
+    padding: 18px;
+    border-top: 1px solid #1F2937;
+}
+
+.ProductTable tbody tr:hover {
+    background: #172033;
+}
+
+.ProductImage {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.ActionBtn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    margin-right: 8px;
+}
+
+.EditBtn {
+    background: #2563EB;
+}
+
+.DeleteBtn {
+    background: #DC2626;
+}
+
+.EditBtn:hover {
+    background: #1D4ED8;
+}
+
+.DeleteBtn:hover {
+    background: #B91C1C;
+}

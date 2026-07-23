@@ -13,6 +13,10 @@ const {
     getDashboard,
 } = require("../controllers/adminDashboardController");
 
+const {
+    getProducts,
+} = require("../controllers/adminProductController");
+
 router.get(
     "/profile",
     authMiddleware,
@@ -25,6 +29,13 @@ router.get(
     authMiddleware,
     adminMiddleware,
     getDashboard
+);
+
+router.get(
+    "/products",
+    authMiddleware,
+    adminMiddleware,
+    getProducts
 );
 
 module.exports = router;
