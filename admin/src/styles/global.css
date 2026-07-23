@@ -1,3 +1,40 @@
+/* ==========================================================================
+   🌐 MNF ENTERPRISE ADMIN CONSOLE — GLOBAL DESIGN SYSTEM
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Color Palette */
+    --admin-bg-primary: #090d16;
+    --admin-bg-surface: #111726;
+    --admin-bg-surface-hover: #182033;
+    --admin-bg-glass: rgba(17, 23, 38, 0.85);
+
+    /* Accent & Action Colors */
+    --admin-accent-primary: #6366f1;
+    /* Tech Indigo */
+    --admin-accent-hover: #4f46e5;
+    --admin-accent-glow: rgba(99, 102, 241, 0.25);
+
+    --admin-emerald: #10b981;
+    --admin-rose: #f43f5e;
+    --admin-amber: #f59e0b;
+
+    /* Text & Typography */
+    --admin-text-main: #f8fafc;
+    --admin-text-muted: #94a3b8;
+    --admin-text-dim: #64748b;
+
+    /* Borders & Shadows */
+    --admin-border-light: rgba(255, 255, 255, 0.07);
+    --admin-border-focus: rgba(99, 102, 241, 0.4);
+    --admin-shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+
+    /* Font Stack */
+    --admin-font-main: 'Plus Jakarta Sans', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +42,11 @@
 }
 
 body {
-    font-family: Inter, sans-serif;
-    background: #0d1117;
-    color: white;
+    font-family: var(--admin-font-main);
+    background-color: var(--admin-bg-primary);
+    color: var(--admin-text-main);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -16,10 +55,13 @@ a {
 }
 
 button,
-input {
+input,
+select,
+textarea {
     border: none;
     outline: none;
     font-family: inherit;
+    background: transparent;
 }
 
 img {
@@ -27,11 +69,21 @@ img {
     max-width: 100%;
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--admin-bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #2c6cff;
-    border-radius: 20px;
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--admin-accent-primary);
 }

@@ -1,134 +1,378 @@
+/* ==========================================================================
+   🌟 EXECUTIVE PRODUCTS CATALOG TABLE & HEADER STYLES
+   ========================================================================== */
+
+.ProductsPage {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.ProductsLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.ProductsLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ProductsLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Header Section */
 .ProductsHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.HeaderTitleGroup h1 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
 }
 
 .ProductsActions {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Search Box */
+.SearchInputWrapper {
+    display: flex;
+    align-items: center;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 0 14px;
+    width: 280px;
+    height: 44px;
+    transition: border-color 0.25s ease;
+}
+
+.SearchInputWrapper:focus-within {
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.SearchIcon {
+    font-size: 18px;
+    color: var(--admin-text-dim, #64748b);
+    margin-right: 8px;
 }
 
 .SearchInput {
-    width: 260px;
-    height: 45px;
-    padding: 0 16px;
-    border: none;
-    border-radius: 10px;
-    background: #1F2937;
-    color: white;
-    outline: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13.5px;
 }
 
 .SearchInput::placeholder {
-    color: #94A3B8;
+    color: var(--admin-text-dim, #64748b);
 }
 
+/* Add Button */
 .AddProductBtn {
-    border: none;
-    padding: 0 22px;
-    border-radius: 10px;
-    background: #2563EB;
-    color: white;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.25s ease;
+}
+
+.AddProductBtn i {
+    font-size: 18px;
 }
 
 .AddProductBtn:hover {
-    background: #1D4ED8;
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
 }
 
-.Status {
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.Active {
-    background: #166534;
-    color: #DCFCE7;
-}
-
-.Inactive {
-    background: #991B1B;
-    color: #FEE2E2;
-}
-
-.ProductsPage {
+/* Data Table Container */
+.TableContainer {
     width: 100%;
-}
-
-.ProductsHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.ProductsHeader h1 {
-    color: #fff;
-    font-size: 36px;
+    overflow-x: auto;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
 .ProductTable {
     width: 100%;
     border-collapse: collapse;
-    background: #111827;
-    border-radius: 15px;
-    overflow: hidden;
+    text-align: left;
 }
 
 .ProductTable thead {
-    background: #1F2937;
+    background: var(--admin-bg-primary, #090d16);
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
 .ProductTable th {
-    color: #fff;
-    padding: 18px;
-    text-align: left;
-    font-size: 15px;
+    color: var(--admin-text-dim, #64748b);
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .ProductTable td {
-    color: #E5E7EB;
-    padding: 18px;
-    border-top: 1px solid #1F2937;
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 16px 20px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    vertical-align: middle;
+}
+
+.ProductTable tbody tr {
+    transition: background 0.2s ease;
 }
 
 .ProductTable tbody tr:hover {
-    background: #172033;
+    background: var(--admin-bg-surface-hover, #182033);
+}
+
+/* Cell Elements */
+.ProductImageFrame {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background-color: var(--admin-bg-primary, #090d16);
 }
 
 .ProductImage {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+}
+
+.ProductNameCell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-width: 220px;
+}
+
+.ProductNameText {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ProductDescSnippet {
+    font-size: 12px;
+    color: var(--admin-text-dim, #64748b);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.CategoryTagPill {
+    font-size: 12px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.FoodTypeBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.FoodTypeBadge.Veg {
+    background-color: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #10b981;
+}
+
+.FoodTypeBadge.Veg .DotIndicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+}
+
+.FoodTypeBadge.NonVeg {
+    background-color: rgba(244, 63, 94, 0.08);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
+}
+
+.FoodTypeBadge.NonVeg .DotIndicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #f43f5e;
+}
+
+.PriceTag {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.Status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.PulseStatusDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.Active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.Active .PulseStatusDot {
+    background-color: #10b981;
+    box-shadow: 0 0 6px #10b981;
+}
+
+.Inactive {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.Inactive .PulseStatusDot {
+    background-color: #f43f5e;
+}
+
+.TextRight {
+    text-align: right !important;
+}
+
+.ActionButtonsRow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .ActionBtn {
-    border: none;
     padding: 8px 14px;
     border-radius: 8px;
     cursor: pointer;
-    color: white;
-    margin-right: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
 }
 
 .EditBtn {
-    background: #2563EB;
-}
-
-.DeleteBtn {
-    background: #DC2626;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: var(--admin-accent-primary, #6366f1);
 }
 
 .EditBtn:hover {
-    background: #1D4ED8;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+}
+
+.DeleteBtn {
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
 }
 
 .DeleteBtn:hover {
-    background: #B91C1C;
+    background: #f43f5e;
+    color: #ffffff;
+}
+
+.EmptyTableMessage {
+    text-align: center;
+    padding: 3rem !important;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.EmptyTableMessage i {
+    font-size: 40px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ProductsPage {
+        padding: 1rem;
+    }
+
+    .SearchInputWrapper {
+        width: 100%;
+    }
+
+    .ProductsActions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .AddProductBtn {
+        width: 100%;
+        justify-content: center;
+    }
 }

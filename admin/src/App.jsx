@@ -7,6 +7,7 @@ import Orders from "./pages/Orders";
 import Users from "./pages/Users";
 import Coupons from "./pages/Coupons";
 import NotFound from "./pages/NotFound";
+import 'boxicons/css/boxicons.min.css';
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminLayout from "./components/layout/AdminLayout";

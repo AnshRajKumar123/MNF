@@ -1,31 +1,259 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ADMIN LOGIN GATEWAY STYLES
+   ========================================================================== */
+
 .LoginPage {
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:
-        linear-gradient(135deg,
-            #0F172A,
-            #1E293B);
-    padding: 30px;
+    background-color: var(--admin-bg-primary, #090d16);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.LoginPage .AdminCard {
-    width: 420px;
+/* Ambient Backdrop Glow Orbs */
+.LoginGlowSphere {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 1;
 }
 
+.GlowTopLeft {
+    top: -80px;
+    left: -80px;
+    background: rgba(99, 102, 241, 0.22);
+}
+
+.GlowBottomRight {
+    bottom: -80px;
+    right: -80px;
+    background: rgba(16, 185, 129, 0.15);
+}
+
+/* FIX: Target whatever root div the Card component generates and enforce size */
+.LoginPage>div:not(.LoginGlowSphere),
+.LoginPage .AdminCard,
+.LoginPage .AdminLoginCard,
+.LoginPage .Card {
+    width: 100% !important;
+    max-width: 440px !important;
+    background: var(--admin-bg-surface, #111726) !important;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.08)) !important;
+    border-radius: 22px !important;
+    padding: 2.5rem 2.2rem !important;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7) !important;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    animation: loginCardPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes loginCardPop {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header Section */
 .LoginHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 2rem;
+}
+
+.LoginLogoBadge {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--admin-accent-primary, #6366f1), #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 28px;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+    margin-bottom: 1.2rem;
+}
+
+.SecurityNodePill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: var(--admin-emerald, #10b981);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--admin-emerald, #10b981);
+    box-shadow: 0 0 8px var(--admin-emerald, #10b981);
 }
 
 .LoginHeader h1 {
-    font-size: 32px;
-    color: white;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
 }
 
 .LoginHeader p {
-    margin-top: 8px;
-    color: #94A3B8;
+    font-size: 13px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Form Controls */
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.InputGroupSlot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FieldLabel {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.PasswordInputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Override UI Input Custom Styles */
+.LoginForm input {
+    width: 100%;
+    height: 46px;
+    background-color: var(--admin-bg-primary, #090d16) !important;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.08)) !important;
+    border-radius: 12px !important;
+    padding: 0 14px 0 42px !important;
+    color: var(--admin-text-main, #f8fafc) !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+}
+
+.LoginForm input:focus {
+    border-color: var(--admin-accent-primary, #6366f1) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2) !important;
+}
+
+.TogglePasswordBtn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--admin-text-dim, #64748b);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: color 0.2s ease;
+    z-index: 5;
+}
+
+.TogglePasswordBtn:hover {
+    color: var(--admin-text-main, #f8fafc);
+}
+
+/* Submit Button */
+.AdminLoginSubmitBtn,
+.LoginForm button[type="submit"] {
+    width: 100%;
+    height: 48px;
+    margin-top: 10px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1) !important;
+    color: #ffffff !important;
+    font-size: 14.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+}
+
+.AdminLoginSubmitBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
+}
+
+/* Card Footer Info */
+.LoginCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.08));
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 600;
+}
+
+.LoginCardFooter span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.LoginCardFooter i {
+    font-size: 14px;
+    color: var(--admin-emerald, #10b981);
+}
+
+@media (max-width: 480px) {
+
+    .LoginPage>div:not(.LoginGlowSphere),
+    .LoginPage .AdminLoginCard,
+    .LoginPage .Card {
+        padding: 1.8rem 1.4rem !important;
+    }
 }

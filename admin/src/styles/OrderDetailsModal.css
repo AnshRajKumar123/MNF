@@ -1,121 +1,203 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ORDER DETAILS MODAL STYLES
+   ========================================================================== */
+
 .OrderOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .65);
-    backdrop-filter: blur(6px);
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
-    padding: 30px;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
 .OrderModal {
-    width: 900px;
-    max-width: 100%;
-    max-height: 90vh;
+    width: 100%;
+    max-width: 880px;
+    max-height: 88vh;
     overflow-y: auto;
-    background: #121826;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, .08);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    background: var(--admin-bg-surface, #111726);
+    border-radius: 20px;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    animation: ModalOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
+}
+
+@keyframes ModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .OrderHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.HeaderTitleGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.HeaderIcon {
+    font-size: 24px;
+    color: var(--admin-accent-primary, #6366f1);
 }
 
 .OrderHeader h2 {
-    color: #fff;
-    font-size: 28px;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 18px;
+    font-weight: 800;
     margin: 0;
 }
 
 .CloseBtn {
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 50%;
-    background: #1e293b;
-    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
     cursor: pointer;
-    font-size: 18px;
-    transition: .3s;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .CloseBtn:hover {
-    background: #ef4444;
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
 }
 
+/* Modal Bento Grid Layout */
 .OrderContent {
-    padding: 30px;
+    padding: 24px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.Card {
-    background: #1a2234;
-    border: 1px solid rgba(255, 255, 255, .06);
-    border-radius: 14px;
-    padding: 20px;
-}
-
-.Card h3 {
-    margin-bottom: 18px;
-    color: #fff;
-    font-size: 18px;
-}
-
-.Card p {
-    color: #cbd5e1;
-    margin: 8px 0;
-    line-height: 1.6;
-}
-
-.Customer {
-    display: flex;
-    align-items: center;
     gap: 18px;
 }
 
-.Customer img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+.Card {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-sizing: border-box;
+}
+
+.FullWidthCard {
+    grid-column: 1 / -1;
+}
+
+.Card h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 14.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.Card h3 i {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.MetaTextGroup p {
+    color: var(--admin-text-muted, #94a3b8);
+    margin: 8px 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.MetaTextGroup strong {
+    color: var(--admin-text-main, #f8fafc);
+}
+
+/* Customer Block */
+.Customer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.Customer img,
+.DefaultAvatarShield {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
     object-fit: cover;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
-.Customer h4 {
-    color: #fff;
+.DefaultAvatarShield {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.CustomerMeta h4 {
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 4px 0;
+    font-size: 15px;
+}
+
+.CustomerMeta p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12.5px;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.Customer p {
-    margin-top: 6px;
+/* Items List Stack */
+.ItemsListStack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .ItemRow {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .05);
-}
-
-.ItemRow:last-child {
-    border: none;
+    gap: 14px;
+    padding: 10px 12px;
+    background: var(--admin-bg-surface, #111726);
+    border-radius: 12px;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
 .ItemRow img {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .ItemInfo {
@@ -123,79 +205,98 @@
 }
 
 .ItemInfo h4 {
-    color: #fff;
-    margin-bottom: 5px;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 3px 0;
+    font-size: 14px;
 }
 
 .ItemInfo small {
-    color: #94a3b8;
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12px;
 }
 
-.ItemRow span {
-    color: #fff;
-    font-weight: 700;
+.ItemPriceTotal {
+    color: var(--admin-text-main, #f8fafc);
+    font-weight: 800;
+    font-size: 14.5px;
+}
+
+/* Price Summary Breakdown */
+.PriceBreakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .PriceRow {
     display: flex;
     justify-content: space-between;
-    margin: 12px 0;
-    color: #cbd5e1;
+    font-size: 13px;
+    color: var(--admin-text-muted, #94a3b8);
 }
 
-.Total {
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
+.DiscountRow {
+    color: #10b981;
 }
 
-hr {
+.DividerLine {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, .08);
-    margin: 18px 0;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    margin: 6px 0;
 }
 
-@media(max-width:900px) {
+.TotalRow {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
 
+.TotalVal {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+/* Order Status Badge Indicators */
+.OrderStatusBadge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+    font-size: 11.5px;
+    font-weight: 800;
+    display: inline-block;
+}
+
+.OrderStatusBadge.Pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.OrderStatusBadge.Preparing {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.OrderStatusBadge.OutforDelivery {
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+    border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.OrderStatusBadge.Delivered {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.OrderStatusBadge.Cancelled {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+@media (max-width: 768px) {
     .OrderContent {
         grid-template-columns: 1fr;
     }
-
-    .OrderModal {
-        width: 100%;
-    }
-
-}
-
-.OrderStatus {
-    padding: 6px 12px;
-    border-radius: 20px;
-    margin-left: 10px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.OrderStatus.Pending {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-.OrderStatus.Preparing {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-.OrderStatus.OutforDelivery {
-    background: #cffafe;
-    color: #155e75;
-}
-
-.OrderStatus.Delivered {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.OrderStatus.Cancelled {
-    background: #fee2e2;
-    color: #b91c1c;
 }

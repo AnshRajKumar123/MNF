@@ -1,259 +1,137 @@
 import "../../styles/OrderDetailsModal.css";
 
-const OrderDetailsModal = ({
-    isOpen,
-    onClose,
-    order,
-}) => {
-
+const OrderDetailsModal = ({ isOpen, onClose, order }) => {
     if (!isOpen || !order) return null;
 
+    const statusClass = order.orderStatus.replace(/\s+/g, "");
+
     return (
+        <div className="OrderOverlay" onClick={onClose}>
+            <div className="OrderModal" onClick={(e) => e.stopPropagation()}>
 
-        <div className="OrderOverlay">
-
-            <div className="OrderModal">
-
+                {/* HEADER */}
                 <div className="OrderHeader">
-
-                    <h2>
-                        🍽 Order #{order._id.slice(-6)}
-                    </h2>
-
-                    <button
-                        className="CloseBtn"
-                        onClick={onClose}
-                    >
-                        ✕
+                    <div className="HeaderTitleGroup">
+                        <i className="bx bx-receipt HeaderIcon"></i>
+                        <h2>Order Specification #{order._id.slice(-6).toUpperCase()}</h2>
+                    </div>
+                    <button className="CloseBtn" onClick={onClose}>
+                        <i className="bx bx-x"></i>
                     </button>
-
                 </div>
 
+                {/* MODAL BENTO GRID CONTENT */}
                 <div className="OrderContent">
 
-                    {/* Customer */}
-
-                    <div className="Card">
-
-                        <h3>👤 Customer</h3>
-
+                    {/* CUSTOMER CARD */}
+                    <div className="Card CustomerCard">
+                        <h3><i className="bx bx-user-circle"></i> Customer Profile</h3>
                         <div className="Customer">
-
-                            <img
-                                src={`http://10.59.92.183:3000${order.address.image}`}
-                                alt=""
-                            />
-
-                            <div>
-
-                                <h4>{order.address.name}</h4>
-
-                                <p>{order.address.phone}</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    {/* Address */}
-
-                    <div className="Card">
-
-                        <h3>📍 Delivery Address</h3>
-
-                        <p>
-                            <strong>Building :</strong>{" "}
-                            {order.address.building}
-                        </p>
-
-                        <p>
-                            <strong>Address :</strong>{" "}
-                            {order.address.address}
-                        </p>
-
-                        <p>
-                            <strong>Pincode :</strong>{" "}
-                            {order.address.pincode}
-                        </p>
-
-                    </div>
-
-                    {/* Items */}
-
-                    <div className="Card">
-
-                        <h3>🍔 Ordered Items</h3>
-
-                        {order.items.map((item) => (
-
-                            <div
-                                className="ItemRow"
-                                key={item._id}
-                            >
-
+                            {order.address?.image ? (
                                 <img
-                                    src={`http://10.59.92.183:3000${item.product.image}`}
-                                    alt=""
+                                    src={`http://10.59.92.183:3000${order.address.image}`}
+                                    alt={order.address?.name}
+                                    onError={(e) => {
+                                        e.target.src = "https://via.placeholder.com/70?text=Avatar";
+                                    }}
                                 />
-
-                                <div className="ItemInfo">
-
-                                    <h4>{item.product.name}</h4>
-
-                                    <small>
-                                        Qty : {item.quantity}
-                                    </small>
-
+                            ) : (
+                                <div className="DefaultAvatarShield">
+                                    {order.address?.name ? order.address.name.charAt(0).toUpperCase() : "C"}
                                 </div>
+                            )}
 
-                                <span>
-                                    ₹{item.product.price * item.quantity}
-                                </span>
-
+                            <div className="CustomerMeta">
+                                <h4>{order.address?.name || "Guest Customer"}</h4>
+                                <p><i className="bx bx-phone"></i> {order.address?.phone || "N/A"}</p>
                             </div>
-
-                        ))}
-
+                        </div>
                     </div>
 
-                    {/* Summary */}
-
+                    {/* DELIVERY ADDRESS CARD */}
                     <div className="Card">
-
-                        <h3>💰 Payment Summary</h3>
-
-                        <div className="PriceRow">
-
-                            <span>Subtotal</span>
-
-                            <span>
-                                ₹{order.subtotal}
-                            </span>
-
+                        <h3><i className="bx bx-map-pin"></i> Delivery Address</h3>
+                        <div className="MetaTextGroup">
+                            <p><strong>Building / House:</strong> {order.address?.building || "N/A"}</p>
+                            <p><strong>Street Address:</strong> {order.address?.address || "N/A"}</p>
+                            <p><strong>Pincode:</strong> {order.address?.pincode || "N/A"}</p>
                         </div>
-
-                        <div className="PriceRow">
-
-                            <span>Delivery</span>
-
-                            <span>
-                                ₹{order.deliveryCharge}
-                            </span>
-
-                        </div>
-
-                        <div className="PriceRow">
-
-                            <span>Tip</span>
-
-                            <span>
-                                ₹{order.tip}
-                            </span>
-
-                        </div>
-
-                        <div className="PriceRow">
-
-                            <span>Discount</span>
-
-                            <span>
-                                ₹{order.discount}
-                            </span>
-
-                        </div>
-
-                        <hr />
-
-                        <div className="PriceRow Total">
-
-                            <span>Total</span>
-
-                            <span>
-                                ₹{order.totalAmount}
-                            </span>
-
-                        </div>
-
                     </div>
 
-                    {/* Payment */}
-
-                    <div className="Card">
-
-                        <h3>💳 Payment</h3>
-
-                        <p>
-                            <strong>Method :</strong>{" "}
-                            {order.paymentMethod}
-                        </p>
-
-                        <p>
-                            <strong>Status :</strong>{" "}
-                            {order.paymentStatus}
-                        </p>
-
+                    {/* ORDERED DISHES ITEM LIST */}
+                    <div className="Card FullWidthCard">
+                        <h3><i className="bx bx-dish"></i> Ordered Dishes ({order.items?.length || 0})</h3>
+                        <div className="ItemsListStack">
+                            {order.items?.map((item, index) => (
+                                <div className="ItemRow" key={item._id || index}>
+                                    <img
+                                        src={`http://10.59.92.183:3000${item.product?.image}`}
+                                        alt={item.product?.name}
+                                        onError={(e) => {
+                                            e.target.src = "https://via.placeholder.com/60?text=Dish";
+                                        }}
+                                    />
+                                    <div className="ItemInfo">
+                                        <h4>{item.product?.name || "Unknown Dish"}</h4>
+                                        <small>Quantity: {item.quantity} × ₹{item.product?.price}</small>
+                                    </div>
+                                    <span className="ItemPriceTotal">
+                                        ₹{(item.product?.price || 0) * (item.quantity || 1)}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Delivery */}
-
+                    {/* FINANCIAL BILL BREAKDOWN */}
                     <div className="Card">
-
-                        <h3>🚚 Delivery</h3>
-
-                        <p>
-                            <strong>Type :</strong>{" "}
-                            {order.deliveryType}
-                        </p>
-
-                        <p>
-                            <strong>Time :</strong>{" "}
-                            {order.deliveryMinutes} min
-                        </p>
-
-                        <p>
-                            <strong>Estimated :</strong>{" "}
-                            {new Date(
-                                order.estimatedDelivery
-                            ).toLocaleString()}
-                        </p>
-
+                        <h3><i className="bx bx-wallet"></i> Payment Summary</h3>
+                        <div className="PriceBreakdown">
+                            <div className="PriceRow">
+                                <span>Subtotal</span>
+                                <span>₹{order.subtotal || order.totalAmount}</span>
+                            </div>
+                            <div className="PriceRow">
+                                <span>Delivery Fee</span>
+                                <span>₹{order.deliveryCharge || 0}</span>
+                            </div>
+                            <div className="PriceRow">
+                                <span>Rider Tip</span>
+                                <span>₹{order.tip || 0}</span>
+                            </div>
+                            <div className="PriceRow DiscountRow">
+                                <span>Discount</span>
+                                <span>-₹{order.discount || 0}</span>
+                            </div>
+                            <hr className="DividerLine" />
+                            <div className="PriceRow TotalRow">
+                                <span>Total Amount</span>
+                                <span className="TotalVal">₹{order.totalAmount}</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Order */}
-
+                    {/* DISPATCH STATUS & TIME PARAMETERS */}
                     <div className="Card">
-
-                        <h3>📦 Order</h3>
-
-                        <p>
-                            <strong>Status :</strong>
-
-                            <span className={`OrderStatus ${order.orderStatus.replace(/\s+/g, "")}`}>
-                                {order.orderStatus}
-                            </span>
-                        </p>
-
-                        <p>
-                            <strong>Coupon :</strong>{" "}
-                            {order.couponCode || "None"}
-                        </p>
-
-                        <p>
-                            <strong>Created :</strong>{" "}
-                            {new Date(order.createdAt).toLocaleString()}
-                        </p>
-
+                        <h3><i className="bx bx-info-circle"></i> Dispatch Parameters</h3>
+                        <div className="MetaTextGroup">
+                            <p>
+                                <strong>Status:</strong>
+                                <span className={`OrderStatusBadge ${statusClass}`}>
+                                    {order.orderStatus}
+                                </span>
+                            </p>
+                            <p><strong>Payment Method:</strong> {order.paymentMethod} ({order.paymentStatus})</p>
+                            <p><strong>Delivery Type:</strong> {order.deliveryType || "Standard"}</p>
+                            <p><strong>Coupon Applied:</strong> {order.couponCode || "None"}</p>
+                            <p><strong>Ordered Date:</strong> {new Date(order.createdAt).toLocaleString("en-IN")}</p>
+                        </div>
                     </div>
 
                 </div>
-
             </div>
-
         </div>
-
     );
-
 };
 
 export default OrderDetailsModal;

@@ -1,83 +1,431 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ORDERS MANAGEMENT SHEET
+   ========================================================================== */
+
 .OrdersPage {
-    padding: 30px;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.OrdersLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.OrdersLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.OrdersLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Header Section */
+.OrdersHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.HeaderTitleGroup h1 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+.OrdersFilterActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Status Filter Tabs */
+.StatusFilterPills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.FilterPill {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-dim, #64748b);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.FilterPill:hover {
+    color: var(--admin-text-main, #f8fafc);
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+.FilterPill.active {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    border-color: var(--admin-accent-primary, #6366f1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Search Box */
+.SearchInputWrapper {
+    display: flex;
+    align-items: center;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 0 14px;
+    width: 280px;
+    height: 42px;
+    transition: border-color 0.25s ease;
+}
+
+.SearchInputWrapper:focus-within {
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.SearchIcon {
+    font-size: 18px;
+    color: var(--admin-text-dim, #64748b);
+    margin-right: 8px;
+}
+
+.SearchInput {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13px;
+}
+
+/* Data Table Container */
+.TableContainer {
+    width: 100%;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    overflow: visible !important;
+    /* 👈 Changed from overflow-x: auto so dropdowns float over rows */
 }
 
 .OrdersTable {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.OrdersTable th,
-.OrdersTable td {
-    padding: 15px;
-    border-bottom: 1px solid #2d2d2d;
     text-align: left;
 }
 
-.OrdersTable th {
-    background: #1d1d1d;
+.OrdersTable thead {
+    background: var(--admin-bg-primary, #090d16);
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
-.Status {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
+.OrdersTable th {
+    color: var(--admin-text-dim, #64748b);
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.OrdersTable td {
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 16px 20px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    vertical-align: middle;
+    position: relative;
+    /* 👈 Allows floating dropdown positioning */
+}
+
+.OrdersTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+.OrdersTable tbody tr:hover {
+    background: var(--admin-bg-surface-hover, #182033);
+}
+
+/* Cell Specific Styles */
+.OrderIdBadge {
+    font-family: monospace;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--admin-accent-primary, #6366f1);
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.CustomerCell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.CustomerName {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.CustomerItemsCount {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.OrderAmount {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.PaymentMethodTag {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--admin-text-muted, #94a3b8);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ==========================================================================
+   🎛️ CUSTOM STATUS DROPDOWN STYLES
+   ========================================================================== */
+
+.CustomStatusDropdown {
+    position: relative;
+    width: 175px;
+    z-index: 90;
+    /* 👈 Higher z-index for active row */
+}
+
+.CustomStatusDropdown:focus-within,
+.CustomStatusDropdown:hover {
+    z-index: 99;
+}
+
+.StatusDropdownTrigger {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.StatusDropdownTrigger:hover {
+    border-color: var(--admin-border-focus, rgba(99, 102, 241, 0.4));
+}
+
+.TriggerLabel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.StatusEmoji {
+    font-size: 11px;
+}
+
+.DropChevron {
+    font-size: 16px;
+    color: var(--admin-text-dim, #64748b);
+    transition: transform 0.25s ease;
+}
+
+.DropChevron.rotate {
+    transform: rotate(180deg);
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+/* Status Specific Trigger Color Themes */
+.StatusDropdownTrigger.Pending {
+    border-color: rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.06);
+    color: #f59e0b;
+}
+
+.StatusDropdownTrigger.Preparing {
+    border-color: rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.06);
+    color: #6366f1;
+}
+
+.StatusDropdownTrigger.OutforDelivery {
+    border-color: rgba(6, 182, 212, 0.35);
+    background: rgba(6, 182, 212, 0.06);
+    color: #06b6d4;
+}
+
+.StatusDropdownTrigger.Delivered {
+    border-color: rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.06);
+    color: #10b981;
+}
+
+.StatusDropdownTrigger.Cancelled {
+    border-color: rgba(244, 63, 94, 0.35);
+    background: rgba(244, 63, 94, 0.06);
+    color: #f43f5e;
+}
+
+.StatusDropdownMenu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 190px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.15));
+    border-radius: 12px;
+    padding: 6px;
+    list-style: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+    z-index: 999999 !important;
+    animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.StatusOptionItem {
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-text-muted, #94a3b8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.StatusOptionItem:hover {
+    background: var(--admin-bg-surface-hover, #182033);
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.StatusOptionItem.selected {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.CheckIcon {
+    margin-left: auto;
+    font-size: 16px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.DateText {
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
     font-weight: 600;
 }
 
-.Status.Pending {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.Status.Preparing {
-    background: #d1ecf1;
-    color: #0c5460;
-}
-
-.Status.Out\ for\ Delivery {
-    background: #cce5ff;
-    color: #004085;
-}
-
-.Status.Delivered {
-    background: #d4edda;
-    color: #155724;
-}
-
-.Status.Cancelled {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.StatusSelect {
-    width: 170px;
-    padding: 8px 12px;
-    border: 1px solid #333;
+/* Inspect View CTA Button */
+.ViewBtn {
+    padding: 8px 16px;
+    border: 1px solid rgba(99, 102, 241, 0.25);
     border-radius: 8px;
-    background: #1f1f1f;
-    color: #fff;
-    font-size: 14px;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--admin-accent-primary, #6366f1);
     cursor: pointer;
-    outline: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
 }
 
-.StatusSelect:focus {
-    border-color: #ff6b35;
+.ViewBtn:hover {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-.ViewBtn{
-    padding:8px 18px;
-    border:none;
-    border-radius:8px;
-    background:#3b82f6;
-    color:#fff;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
+.TextRight {
+    text-align: right !important;
 }
 
-.ViewBtn:hover{
-    background:#2563eb;
+.EmptyTableMessage {
+    text-align: center;
+    padding: 3rem !important;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.EmptyTableMessage i {
+    font-size: 40px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .OrdersPage {
+        padding: 1rem;
+    }
+
+    .OrdersFilterActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .SearchInputWrapper {
+        width: 100%;
+    }
 }

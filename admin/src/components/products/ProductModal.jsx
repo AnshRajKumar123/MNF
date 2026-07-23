@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import "../../styles/ProductModal.css";
-import { addProduct, updateProduct, } from "../../services/productService";
+import { addProduct, updateProduct } from "../../services/productService";
 
 const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
-
     const [form, setForm] = useState({
         name: "",
         category: "",
@@ -13,31 +12,63 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
         isAvailable: true,
     });
 
-    useEffect(() => {
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState("");
 
-        if (!product) return;
+    useEffect(() => {
+        if (!product) {
+            setForm({
+                name: "",
+                category: "",
+                price: "",
+                description: "",
+                foodType: "veg",
+                isAvailable: true,
+            });
+            setImage(null);
+            setPreview("");
+            return;
+        }
 
         setForm({
-            name: product.name,
-            category: product.category,
-            price: product.price,
-            description: product.description,
-            foodType: product.foodType,
-            isAvailable: product.isAvailable,
+            name: product.name || "",
+            category: product.category || "",
+            price: product.price || "",
+            description: product.description || "",
+            foodType: product.foodType || "veg",
+            isAvailable: product.isAvailable ?? true,
         });
 
-        setPreview(
-            `http://10.59.92.183:3000${product.image}`
-        );
-
+        if (product.image) {
+            setPreview(`http://10.59.92.183:3000${product.image}`);
+        } else {
+            setPreview("");
+        }
     }, [product]);
 
-    const handleSubmit = async () => {
+    if (!isOpen) return null;
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setForm((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
+    };
+
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setImage(file);
+        setPreview(URL.createObjectURL(file));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         try {
-
             const formData = new FormData();
-
             formData.append("name", form.name);
             formData.append("category", form.category);
             formData.append("price", form.price);
@@ -50,16 +81,9 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
             }
 
             if (product) {
-
-                await updateProduct(
-                    product._id,
-                    formData
-                );
-
+                await updateProduct(product._id, formData);
             } else {
-
                 await addProduct(formData);
-
             }
 
             setForm({
@@ -73,154 +97,149 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
 
             setImage(null);
             setPreview("");
-
             onSuccess();
-
             onClose();
-
         } catch (error) {
-
-            console.log(error);
-
+            console.error("Product submit error:", error);
+            alert("Failed to save product.");
         }
-
-    };
-
-    const [image, setImage] = useState(null);
-    const [preview, setPreview] = useState("");
-
-    if (!isOpen) return null;
-
-    const handleChange = (e) => {
-
-        const { name, value } = e.target;
-
-        setForm(prev => ({
-            ...prev,
-            [name]: value,
-        }));
-
-    };
-
-    const handleImage = (e) => {
-
-        const file = e.target.files[0];
-
-        if (!file) return;
-
-        setImage(file);
-        setPreview(URL.createObjectURL(file));
-
     };
 
     return (
+        <div className="ModalOverlay" onClick={onClose}>
+            <div className="ProductModal" onClick={(e) => e.stopPropagation()}>
 
-        <div className="ModalOverlay">
-
-            <div className="ProductModal">
-
+                {/* MODAL HEADER */}
                 <div className="ModalHeader">
-
-                    <h2>
-                        {product ? "Edit Product" : "Add Product"}
-                    </h2>
-
-                    <button
-                        className="CloseBtn"
-                        onClick={onClose}
-                    >
-                        ✕
+                    <div className="HeaderLabelGroup">
+                        <i className="bx bx-dish HeaderIcon"></i>
+                        <h2>{product ? "Edit Dish Specifications" : "Add New Catalog Dish"}</h2>
+                    </div>
+                    <button className="CloseBtn" onClick={onClose}>
+                        <i className="bx bx-x"></i>
                     </button>
-
                 </div>
 
-                <div className="ModalBody">
+                {/* MODAL BODY FORM */}
+                <form onSubmit={handleSubmit} className="ModalBody">
 
-                    <input
-                        name="name"
-                        placeholder="Product Name"
-                        value={form.name}
-                        onChange={handleChange}
-                    />
-
-                    <input
-                        name="category"
-                        placeholder="Category"
-                        value={form.category}
-                        onChange={handleChange}
-                    />
-
-                    <input
-                        type="number"
-                        name="price"
-                        placeholder="Price"
-                        value={form.price}
-                        onChange={handleChange}
-                    />
-
-                    <textarea
-                        rows="4"
-                        name="description"
-                        placeholder="Description"
-                        value={form.description}
-                        onChange={handleChange}
-                    />
-
-                    <select
-                        name="foodType"
-                        value={form.foodType}
-                        onChange={handleChange}
-                    >
-                        <option value="veg">Veg</option>
-                        <option value="non-veg">Non Veg</option>
-                    </select>
-
-                    <label className="UploadBox">
-
-                        Select Image
-
-                        <input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={handleImage}
-                        />
-
-                    </label>
-
-                    {
-
-                        preview && (
-
-                            <img
-                                src={preview}
-                                alt=""
-                                className="PreviewImage"
+                    <div className="FormRowTwoColumns">
+                        <div className="FormFieldSlot">
+                            <label>Dish Name</label>
+                            <input
+                                name="name"
+                                type="text"
+                                placeholder="e.g. Paneer Butter Masala"
+                                value={form.name}
+                                onChange={handleChange}
+                                required
                             />
+                        </div>
 
-                        )
+                        <div className="FormFieldSlot">
+                            <label>Category</label>
+                            <input
+                                name="category"
+                                type="text"
+                                placeholder="e.g. Main Course, Snacks"
+                                value={form.category}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </div>
 
-                    }
+                    <div className="FormRowTwoColumns">
+                        <div className="FormFieldSlot">
+                            <label>Price (₹)</label>
+                            <input
+                                type="number"
+                                name="price"
+                                placeholder="e.g. 280"
+                                value={form.price}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                </div>
+                        <div className="FormFieldSlot">
+                            <label>Food Classification</label>
+                            <select
+                                name="foodType"
+                                value={form.foodType}
+                                onChange={handleChange}
+                            >
+                                <option value="veg">🟢 Veg</option>
+                                <option value="non-veg">🔴 Non-Veg</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div className="ModalFooter">
+                    <div className="FormFieldSlot">
+                        <label>Availability Toggle</label>
+                        <select
+                            name="isAvailable"
+                            value={form.isAvailable}
+                            onChange={(e) =>
+                                setForm((prev) => ({
+                                    ...prev,
+                                    isAvailable: e.target.value === "true",
+                                }))
+                            }
+                        >
+                            <option value="true">Available (In Stock)</option>
+                            <option value="false">Unavailable (Out of Stock)</option>
+                        </select>
+                    </div>
 
-                    <button
-                        className="SaveBtn"
-                        onClick={handleSubmit}
-                    >
-                        {product ? "Update Product" : "Save Product"}
-                    </button>
+                    <div className="FormFieldSlot">
+                        <label>Dish Description Narrative</label>
+                        <textarea
+                            rows="3"
+                            name="description"
+                            placeholder="Describe flavors, key ingredients, and preparation style..."
+                            value={form.description}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                </div>
+                    {/* UPLOAD FRAME & PREVIEW */}
+                    <div className="FormFieldSlot">
+                        <label>Dish Display Image</label>
+                        <div className="UploadContainer">
+                            <label className="UploadBox">
+                                <i className="bx bx-cloud-upload UploadIcon"></i>
+                                <span>{image ? image.name : "Click or drop file to upload product asset"}</span>
+                                <input
+                                    type="file"
+                                    hidden
+                                    accept="image/*"
+                                    onChange={handleImage}
+                                />
+                            </label>
 
+                            {preview && (
+                                <div className="PreviewImageFrame">
+                                    <img src={preview} alt="Dish Preview" />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* FOOTER ACTIONS */}
+                    <div className="ModalFooter">
+                        <button type="button" className="CancelBtn" onClick={onClose}>
+                            Cancel
+                        </button>
+                        <button type="submit" className="SaveBtn">
+                            {product ? "Update Product Parameters" : "Publish Product to Menu"}
+                        </button>
+                    </div>
+
+                </form>
             </div>
-
         </div>
-
     );
-
 };
 
 export default ProductModal;

@@ -1,28 +1,72 @@
-.StatCard{
-    background:#111827;
-    border:1px solid #1F2937;
-    border-radius:16px;
-    padding:20px;
-    color:white;
+/* ==========================================================================
+   🌟 EXECUTIVE STAT CARD COMPONENT STYLES
+   ========================================================================== */
+
+.StatCard {
+    background-color: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    padding: 22px 24px;
+    color: var(--admin-text-main, #f8fafc);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
-.StatTop{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+.StatCard:hover {
+    transform: translateY(-4px);
+    border-color: var(--admin-border-focus, rgba(99, 102, 241, 0.4));
 }
 
-.StatTop span{
-    color:#94A3B8;
+.StatTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
-.StatTop i{
-    font-size:26px;
-    color:#2563EB;
+.StatTop span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
-.StatCard h2{
-    font-size:34px;
-    font-weight:700;
+.StatIconShield {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.StatTop i {
+    font-size: 22px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.StatCard h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+}
+
+/* Subtle Bottom Glow Accent */
+.StatCardGlowLine {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--admin-accent-primary, #6366f1) 0%, transparent 100%);
+    opacity: 0.5;
 }

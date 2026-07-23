@@ -1,16 +1,302 @@
-.Dashboard{
-    display:flex;
-    flex-direction:column;
-    gap:30px;
+/* ==========================================================================
+   🌟 EXECUTIVE ADMIN DASHBOARD STYLES
+   ========================================================================== */
+
+.Dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.StatsGrid{
+/* Loading State */
+.AdminDashboardLoading {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    display:grid;
+.LoadingPulseSpinner {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
+.AdminDashboardLoading h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
 
-    gap:20px;
+.AdminDashboardLoading p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
 
+/* Banner Section */
+.DashboardHeroBanner {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(17, 23, 38, 0.9) 100%);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.LiveStatusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--admin-emerald, #10b981);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.8px;
+}
+
+.PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--admin-emerald, #10b981);
+    box-shadow: 0 0 8px var(--admin-emerald, #10b981);
+}
+
+.BannerTextCluster h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
+}
+
+.BannerTextCluster p {
+    font-size: 14px;
+    color: var(--admin-text-muted, #94a3b8);
+    margin: 0;
+}
+
+.QuickActionDeck {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ActionPillBtn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.ActionPillBtn.PrimaryBtn {
+    background-color: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.ActionPillBtn.PrimaryBtn:hover {
+    background-color: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
+}
+
+.ActionPillBtn.SecondaryBtn {
+    background-color: var(--admin-bg-surface-hover, #182033);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ActionPillBtn.SecondaryBtn:hover {
+    border-color: var(--admin-accent-primary, #6366f1);
+    transform: translateY(-2px);
+}
+
+/* Stats Grid */
+.StatsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Bento Grid Panels */
+.DashboardBentoSection {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.DashboardBentoCard {
+    background-color: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    padding: 1.8rem;
+    box-sizing: border-box;
+}
+
+.BentoCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.BentoCardHeader h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.BentoCardHeader h3 i {
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 18px;
+}
+
+.TelemetryTag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+}
+
+/* Pipeline Metric Units */
+.PipelineMetricRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem 0;
+}
+
+.PipelineUnit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.MetricLabel {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.MetricVal {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.warning-text {
+    color: #f59e0b;
+}
+
+.info-text {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.success-text {
+    color: var(--admin-emerald, #10b981);
+}
+
+.PipelineDivider {
+    width: 1px;
+    height: 45px;
+    background-color: var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+/* Health Item List */
+.HealthMetricList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.HealthItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13.5px;
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 10px 12px;
+    background-color: var(--admin-bg-primary, #090d16);
+    border-radius: 10px;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.StatusTag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.StatusTag.Operational {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--admin-emerald, #10b981);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1100px) {
+    .DashboardBentoSection {
+        grid-template-columns: 1fr;
+    }
+
+    .DashboardHeroBanner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    .QuickActionDeck {
+        width: 100%;
+    }
+
+    .ActionPillBtn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .Dashboard {
+        padding: 1rem;
+    }
+
+    .BannerTextCluster h1 {
+        font-size: 1.5rem;
+    }
+
+    .PipelineMetricRow {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .PipelineDivider {
+        width: 100%;
+        height: 1px;
+    }
 }
