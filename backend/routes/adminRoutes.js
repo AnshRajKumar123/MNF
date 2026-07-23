@@ -23,6 +23,7 @@ const {
 
 const {
     getAllOrders,
+    updateOrderStatus,
 } = require("../controllers/adminOrderController");
 
 router.get(
@@ -74,6 +75,13 @@ router.get(
     authMiddleware,
     adminMiddleware,
     getAllOrders
+);
+
+router.put(
+    "/orders/:id/status",
+    authMiddleware,
+    adminMiddleware,
+    updateOrderStatus
 );
 
 module.exports = router;
