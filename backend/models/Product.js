@@ -84,6 +84,26 @@ const productSchema = new mongoose.Schema({
         default: 0,
     },
 
+    stock: {
+        type: Number,
+        default: 0
+    },
+
+    lowStockLimit: {
+        type: Number,
+        default: 10
+    },
+
+    trackInventory: {
+        type: Boolean,
+        default: true
+    },
+
+    soldCount: {
+        type: Number,
+        default: 0
+    },
+
 }, {
     timestamps: true,
 });

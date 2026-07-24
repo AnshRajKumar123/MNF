@@ -1,0 +1,379 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ADMIN SETTINGS CONSOLE STYLES
+   ========================================================================== */
+
+.SettingsPage {
+    width: 100%;
+    padding: 2rem;
+    padding-bottom: 7rem;
+    /* Extra space for sticky footer bar */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.SettingsLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.SettingsLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.SettingsLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Header Section */
+.SettingsPageHeader .HeaderTitleGroup h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.SettingsPageHeader .HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+/* Settings Bento Grid */
+.SettingsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.SettingsCard {
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    box-sizing: border-box;
+}
+
+.FullWidthCard {
+    grid-column: 1 / -1;
+}
+
+.SettingsCardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.SettingsCardHeader h2 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.HeaderIcon {
+    font-size: 22px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.CardSubtitle {
+    font-size: 12px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Forms & Inputs */
+.SettingsGrid {
+    display: grid;
+    gap: 14px;
+}
+
+.TwoColumns {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.InputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FullColumn {
+    grid-column: 1 / -1;
+}
+
+.InputGroup label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.InputGroup input,
+.InputGroup textarea {
+    width: 100%;
+    background: var(--admin-bg-primary, #090d16);
+    color: var(--admin-text-main, #f8fafc);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+}
+
+.InputGroup input:focus,
+.InputGroup textarea:focus {
+    border-color: var(--admin-accent-primary, #6366f1);
+    outline: none;
+}
+
+.InputGroup textarea {
+    resize: none;
+}
+
+/* Custom Interactive Switch Toggles */
+.ToggleGroupStack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ToggleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.ToggleRow:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.ToggleLabelBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ToggleTitle {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ToggleDesc {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.CustomSwitchTrack {
+    width: 44px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.1));
+    border-radius: 30px;
+    padding: 2px;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.SwitchThumb {
+    width: 18px;
+    height: 18px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.CustomSwitchTrack.switch-active {
+    background-color: var(--admin-accent-primary, #6366f1);
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.CustomSwitchTrack.switch-active .SwitchThumb {
+    transform: translateX(20px);
+}
+
+/* Appearance Color Swatch */
+.AppearancePickerRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 14px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 14px;
+}
+
+.ColorPreviewUnit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ColorSwatchShield {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.ColorMeta {
+    display: flex;
+    flex-direction: column;
+}
+
+.ColorLabel {
+    font-size: 11px;
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 700;
+}
+
+.HexCode {
+    font-size: 14px;
+    color: var(--admin-text-main, #f8fafc);
+    font-family: monospace;
+}
+
+.ColorInputSlot input[type="color"] {
+    width: 50px;
+    height: 40px;
+    padding: 2px;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 8px;
+}
+
+/* Floating Save Actions Dock */
+.SettingsSaveDock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 340px);
+    max-width: 900px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.15));
+    border-radius: 18px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.SaveDockInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.SaveDockInfo i {
+    font-size: 18px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.SaveSettingsBtn {
+    padding: 12px 26px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+    transition: all 0.25s ease;
+}
+
+.SaveSettingsBtn:hover:not(:disabled) {
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
+}
+
+.SaveSettingsBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive Constraints */
+@media (max-width: 1024px) {
+    .SettingsContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .SettingsSaveDock {
+        width: calc(100% - 2rem);
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .SettingsPage {
+        padding: 1rem;
+    }
+
+    .TwoColumns {
+        grid-template-columns: 1fr;
+    }
+
+    .SaveDockInfo {
+        display: none;
+    }
+
+    .SettingsSaveDock {
+        justify-content: center;
+    }
+
+    .SaveSettingsBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
