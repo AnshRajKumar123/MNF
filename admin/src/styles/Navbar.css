@@ -158,46 +158,51 @@
     margin: 0 4px;
 }
 
-/* Profile Badge */
+/* ==========================================================================
+   🌟 NAVBAR PROFILE AVATAR & LOGO STYLES
+   ========================================================================== */
+
 .AdminProfileHub {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 6px 14px 6px 8px;
-    background-color: var(--admin-bg-primary);
-    border: 1px solid var(--admin-border-light);
-    border-radius: 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    gap: 10px;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
 }
 
 .AdminProfileHub:hover {
-    border-color: var(--admin-accent-primary);
+    background: var(--admin-bg-surface-hover, rgba(255, 255, 255, 0.05));
 }
 
 .AdminAvatarFrame {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--admin-accent-primary), #8b5cf6);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 15px;
     position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    overflow: visible;
+}
+
+.AdminLogoImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    background-color: var(--admin-bg-surface, #111726);
 }
 
 .UserOnlineDot {
     position: absolute;
     bottom: -2px;
     right: -2px;
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background-color: var(--admin-emerald);
-    border: 2px solid var(--admin-bg-surface);
+    background-color: var(--admin-emerald, #10b981);
+    border: 2px solid var(--admin-bg-primary, #090d16);
+    box-shadow: 0 0 6px var(--admin-emerald, #10b981);
 }
 
 .AdminMetaText {
@@ -206,21 +211,22 @@
 }
 
 .AdminName {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--admin-text-main);
-    line-height: 1.1;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+    line-height: 1.2;
 }
 
 .AdminRoleTag {
-    font-size: 10.5px;
+    font-size: 11px;
+    color: var(--admin-text-dim, #64748b);
     font-weight: 600;
-    color: var(--admin-accent-primary);
 }
 
 .ProfileDropChevron {
-    font-size: 18px;
-    color: var(--admin-text-dim);
+    font-size: 16px;
+    color: var(--admin-text-dim, #64748b);
+    margin-left: 2px;
 }
 
 /* ==========================================================================
