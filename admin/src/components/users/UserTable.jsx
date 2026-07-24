@@ -9,7 +9,7 @@ const UserTable = ({ users, onView }) => {
             <table className="AdminTable">
                 <thead>
                     <tr>
-                        <th>Customer</th>
+                        <th>Users</th>
                         <th>Email Node</th>
                         <th>Total Orders</th>
                         <th>Total Spent</th>
@@ -52,7 +52,7 @@ const UserTable = ({ users, onView }) => {
                                                 <strong className="UserTableName">
                                                     {user.fullName || "Unnamed Customer"}
                                                 </strong>
-                                                <span className="UserTableRole">Customer</span>
+                                                <span className="UserTableRole">{user.isAdmin ? "Administrator" : "Customer"}</span>
                                             </div>
                                         </div>
                                     </td>
