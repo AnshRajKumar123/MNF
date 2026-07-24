@@ -1,6 +1,7 @@
 import React from 'react';
 import '../ComponentCSS/SingleProduct.css';
 import api from "../config/axios";
+import { API_URL } from "../config/api";
 
 const SingleProduct = ({ product }) => {
     if (!product) return null;
@@ -44,7 +45,10 @@ const SingleProduct = ({ product }) => {
             {/* Top Overflow Circular Asset Shield */}
             <div className="DiskImageAnchorFrame">
                 <div className="DiskAmbientGlowBackdrop"></div>
-                <img src={product.image} alt={product.name} />
+                <img
+                    src={`${API_URL}${product.image}`}
+                    alt={product.name}
+                />
                 <span className="DiskFloatingCategoryTag">{product.category}</span>
             </div>
 
