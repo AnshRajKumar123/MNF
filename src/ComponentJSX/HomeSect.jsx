@@ -4,6 +4,7 @@ import { ResturantIG, midnightHomeData } from '../assets/assest';
 import SingleProduct from './SingleProduct';
 import Toast from './Toast';
 import api from "../config/axios";
+import { API_URL } from "../config/api";
 
 const HomeSect = () => {
     const [activeSection, setActiveSection] = useState('onprocess');
@@ -13,6 +14,7 @@ const HomeSect = () => {
     const [orders, setOrders] = useState([]);
     const [products, setProducts] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [banners, setBanners] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -25,6 +27,19 @@ const HomeSect = () => {
         };
 
         fetchProducts();
+    }, []);
+
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const res = await api.get("/banner");
+                setBanners(res.data.banners);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchBanners();
     }, []);
 
     const [showOrderDetail, setShowOrderDetail] = useState(() => {
@@ -131,6 +146,24 @@ const HomeSect = () => {
         }
     };
 
+    const activeBanners = banners
+        .filter((banner) => {
+            const now = new Date();
+
+            if (!banner.active) return false;
+
+            if (banner.startDate && new Date(banner.startDate) > now) {
+                return false;
+            }
+
+            if (banner.endDate && new Date(banner.endDate) < now) {
+                return false;
+            }
+
+            return true;
+        })
+        .sort((a, b) => a.priority - b.priority);
+
     return (
         <div className="ProHomeLayoutWrapper">
             {toastMsg && <div className="ProHomeCustomToast">{toastMsg}</div>}
@@ -141,24 +174,82 @@ const HomeSect = () => {
                 <div className={`ProMainBoxSev ${(showOrderDetail || selectedProduct) ? 'PanelActiveSplit' : ''}`}>
 
                     {/* CORE HERO COMMERCIAL BILLBOARD */}
-                    <div className="ProHeroicBanner">
-                        <div className="ProSwastikAbso">
-                            <img src={ResturantIG.SwastikImg} alt="" />
-                        </div>
-                        <div className="ProBurgerBannerSect">
-                            <img src={ResturantIG.AbsoluteBurg} alt="" />
-                        </div>
+                    {activeBanners.length > 0 ? (
+                        activeBanners.slice(0, 1).map((banner) => (
+                            <div className="ProHeroicBanner" key={banner._id}>
 
-                        <div className="ProAboutInfoBanner">
-                            <span>{midnightHomeData.heroBanner.tagline}</span>
-                            <h1>{midnightHomeData.heroBanner.title}</h1>
-                            <p className="PromoHighlightText">{midnightHomeData.heroBanner.percentage}</p>
-                            <div className="PromoActionInlineRow">
-                                <span className="PromoDisclaimerText">{midnightHomeData.heroBanner.disclaimer}</span>
-                                <button className="PromoClaimBtn">{midnightHomeData.heroBanner.ctaText}</button>
+                                <div className="ProSwastikAbso">
+                                    <img src={ResturantIG.SwastikImg} alt="" />
+                                </div>
+
+                                <div className="ProBurgerBannerSect">
+                                    <img
+                                        src={`${API_URL}${banner.image}`}
+                                        alt={banner.title}
+                                    />
+                                </div>
+
+                                <div className="ProAboutInfoBanner">
+
+                                    {banner.subtitle && (
+                                        <span>{banner.subtitle}</span>
+                                    )}
+
+                                    <h1>{banner.title}</h1>
+
+                                    <div className="PromoActionInlineRow">
+
+                                        <button
+                                            className="PromoClaimBtn"
+                                            onClick={() => window.location.href = banner.buttonLink}
+                                        >
+                                            {banner.buttonText}
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
                             </div>
+                        ))
+                    ) : (
+
+                        // Fallback Banner
+                        <div className="ProHeroicBanner">
+
+                            <div className="ProSwastikAbso">
+                                <img src={ResturantIG.SwastikImg} alt="" />
+                            </div>
+
+                            <div className="ProBurgerBannerSect">
+                                <img src={ResturantIG.AbsoluteBurg} alt="" />
+                            </div>
+
+                            <div className="ProAboutInfoBanner">
+                                <span>{midnightHomeData.heroBanner.tagline}</span>
+
+                                <h1>{midnightHomeData.heroBanner.title}</h1>
+
+                                <p className="PromoHighlightText">
+                                    {midnightHomeData.heroBanner.percentage}
+                                </p>
+
+                                <div className="PromoActionInlineRow">
+
+                                    <span className="PromoDisclaimerText">
+                                        {midnightHomeData.heroBanner.disclaimer}
+                                    </span>
+
+                                    <button className="PromoClaimBtn">
+                                        {midnightHomeData.heroBanner.ctaText}
+                                    </button>
+
+                                </div>
+
+                            </div>
+
                         </div>
-                    </div>
+                    )}
 
                     {/* CATALOG PRODUCT GRID */}
                     <div className="ProAllProductSection">
