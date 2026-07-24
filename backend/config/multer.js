@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const adminSettingsController = require("../controllers/adminSettingsController");
 
 const createUploader = (folderName) => {
 

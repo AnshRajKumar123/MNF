@@ -59,7 +59,7 @@ const Navbar = ({ onOpenMobileDrawer }) => {
         <nav className="ProOceanicNavbar">
             {/* BRAND LOGO */}
             <Link to='/' className="WebNavLogo">
-                <h1>{settings?.websiteName}</h1>
+                <h1>{settings?.restaurantName || "MidNight Food"}</h1>
             </Link>
 
             {/* DESKTOP SEARCH BAR */}

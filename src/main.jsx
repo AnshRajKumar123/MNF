@@ -4,7 +4,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { SettingsProvider } from "./context/SettingsContext.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <SettingsProvider>
             <App />

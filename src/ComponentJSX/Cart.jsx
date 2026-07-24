@@ -3,6 +3,7 @@ import '../ComponentCSS/Cart.css';
 import { ResturantIG, midnightCartData } from '../assets/assest';
 import CheckoutPopup from "../ComponentJSX/CheckoutPopup";
 import api from "../config/axios";
+import { useSettings } from "../context/SettingsContext";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -10,11 +11,24 @@ const Cart = () => {
     const [appliedCoupon, setAppliedCoupon] = useState(null);
     const [showFreePopup, setShowFreePopup] = useState(false);
     const [showCheckout, setShowCheckout] = useState(false);
+    const { settings } = useSettings();
 
     const deliveryOptions = {
-        express: { label: "Express Transport", price: 49, time: "15-20 mins" },
-        standard: { label: "Standard Fleet", price: 0, time: "20-25 mins" },
-        economy: { label: "Eco Saver Link", price: 0, time: "25-30 mins" }
+        express: {
+            label: "Express Transport",
+            price: settings?.delivery?.expressCharge ?? 50,
+            time: "15-20 mins"
+        },
+        standard: {
+            label: "Standard Fleet",
+            price: settings?.delivery?.baseCharge ?? 10,
+            time: "20-25 mins"
+        },
+        economy: {
+            label: "Eco Saver Link",
+            price: 0,
+            time: "25-30 mins"
+        }
     };
 
     const [activeTab, setActiveTab] = useState("delivery");
@@ -47,8 +61,11 @@ const Cart = () => {
         localStorage.setItem("instruction", text);
     };
 
-    const FREE_SHIPPING_LIMIT = 500;
-    const SHIPPING_COST = 40;
+    const FREE_SHIPPING_LIMIT =
+        settings?.delivery?.freeDeliveryAbove ?? 500;
+
+    const SHIPPING_COST =
+        settings?.delivery?.baseCharge ?? 40;
 
     useEffect(() => {
 
@@ -141,9 +158,6 @@ const Cart = () => {
     const discountAmount = appliedCoupon
         ? appliedCoupon.discount
         : 0;
-    console.log("deliveryType:", deliveryType);
-    console.log("deliveryOptions:", deliveryOptions);
-    console.log("selected option:", deliveryOptions[deliveryType]);
     const deliveryCharge = deliveryOptions[deliveryType].price;
     const finalTotal = subtotal - discountAmount + shipping + deliveryCharge + tip;
 

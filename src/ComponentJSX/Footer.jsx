@@ -2,14 +2,18 @@ import React from 'react';
 import '../ComponentCSS/Footer.css';
 import { ResturantIG, midnightFoodData, midnightFooterData } from '../assets/assest';
 import { Link } from 'react-router-dom';
+import { useSettings } from "../context/SettingsContext";
 
 const Footer = () => {
+
+    const { settings } = useSettings();
+
     return (
         <footer className="ProOceanicFooter">
             <div className="ProFooterTopRow">
                 <div className="WebLogoFooter">
                     <img src={ResturantIG.WebLogo} alt="Corporate Logo" />
-                    <h1>{midnightFoodData.branding.title}</h1>
+                    <h1>{settings?.restaurantName || "MidNight Food"}</h1>
                 </div>
             </div>
 
