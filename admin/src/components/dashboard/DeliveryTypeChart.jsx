@@ -1,3 +1,4 @@
+import React from "react";
 import {
     ResponsiveContainer,
     PieChart,
@@ -7,67 +8,53 @@ import {
     Legend,
 } from "recharts";
 
-const COLORS = [
-    "#0ea5e9",
-    "#22c55e",
-    "#f59e0b",
-];
+const COLORS = ["#06b6d4", "#10b981", "#f59e0b"];
 
 const DeliveryTypeChart = ({ data }) => {
-
     return (
-
         <div className="DashboardBentoCard">
-
             <div className="BentoCardHeader">
-
                 <h3>
-
                     <i className="bx bxs-truck"></i>
-
-                    Delivery Types
-
+                    Delivery Dispatch Types
                 </h3>
-
             </div>
 
-            <ResponsiveContainer
-                width="100%"
-                height={320}
-            >
-
+            <ResponsiveContainer width="100%" height={280}>
                 <PieChart>
-
                     <Pie
                         data={data}
                         dataKey="total"
                         nameKey="_id"
-                        outerRadius={110}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={95}
+                        paddingAngle={4}
                     >
-
                         {data.map((entry, index) => (
-
                             <Cell
                                 key={index}
                                 fill={COLORS[index % COLORS.length]}
+                                stroke="transparent"
                             />
-
                         ))}
-
                     </Pie>
 
-                    <Tooltip />
+                    <Tooltip
+                        contentStyle={{
+                            backgroundColor: "#111726",
+                            borderColor: "rgba(255, 255, 255, 0.1)",
+                            borderRadius: "12px",
+                            color: "#f8fafc",
+                        }}
+                    />
 
-                    <Legend />
-
+                    <Legend verticalAlign="bottom" height={36} />
                 </PieChart>
-
             </ResponsiveContainer>
-
         </div>
-
     );
-
 };
 
 export default DeliveryTypeChart;

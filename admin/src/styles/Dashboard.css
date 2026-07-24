@@ -5,7 +5,7 @@
 .Dashboard {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.8rem;
     padding: 2rem;
     width: 100%;
     box-sizing: border-box;
@@ -39,7 +39,7 @@
     color: var(--admin-text-dim, #64748b);
 }
 
-/* Banner Section */
+/* Hero Banner */
 .DashboardHeroBanner {
     width: 100%;
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(17, 23, 38, 0.9) 100%);
@@ -138,20 +138,14 @@
     width: 100%;
 }
 
-/* Bento Grid Panels */
-.DashboardBentoSection {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 1.5rem;
-    width: 100%;
-}
-
+/* Bento Cards Structure */
 .DashboardBentoCard {
     background-color: var(--admin-bg-surface, #111726);
     border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
     border-radius: 18px;
     padding: 1.8rem;
     box-sizing: border-box;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
 }
 
 .BentoCardHeader {
@@ -164,12 +158,13 @@
 }
 
 .BentoCardHeader h3 {
-    font-size: 16px;
+    font-size: 15.5px;
     font-weight: 800;
     color: var(--admin-text-main, #f8fafc);
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
 }
 
 .BentoCardHeader h3 i {
@@ -184,12 +179,12 @@
     text-transform: uppercase;
 }
 
-/* Pipeline Metric Units */
+/* Dispatch Pipeline Row */
 .PipelineMetricRow {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 .PipelineUnit {
@@ -228,7 +223,200 @@
     background-color: var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
-/* Health Item List */
+/* Charts Grid Row Layout */
+.DashboardChartsRow {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Bottom Grid Section: Recent Orders & Health */
+.DashboardBottomGrid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Top Products Leaderboard */
+.TopProductsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.TopProductRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background-color: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+}
+
+.ProductRank {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--admin-text-dim, #64748b);
+    width: 28px;
+}
+
+.Rank-1 {
+    color: #f59e0b;
+}
+
+.Rank-2 {
+    color: #94a3b8;
+}
+
+.Rank-3 {
+    color: #b45309;
+}
+
+.TopProductImgFrame {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.TopProductImgFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProductInfo {
+    flex: 1;
+}
+
+.ProductInfo h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 2px 0;
+}
+
+.ProductInfo span {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.SellsTag {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.SellsTag strong {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.SellsTag small {
+    font-size: 10.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Recent Orders Table */
+.RecentOrdersTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.RecentOrdersTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.RecentOrdersTable th {
+    padding: 12px 14px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.RecentOrdersTable td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--admin-text-muted, #94a3b8);
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.05));
+    vertical-align: middle;
+}
+
+.RecentOrderId {
+    font-family: monospace;
+    font-weight: 800;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.RecentCustomerName {
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.RecentAmount {
+    color: var(--admin-text-main, #f8fafc);
+    font-weight: 800;
+}
+
+.PaymentStatusText {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.RecentStatusBadge {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.RecentStatusBadge.Delivered {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.RecentStatusBadge.Cancelled {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+}
+
+.RecentStatusBadge.Transit {
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+}
+
+.RecentStatusBadge.Pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.RelativeTimeText {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.TextRight {
+    text-align: right !important;
+}
+
+.EmptyText {
+    color: var(--admin-text-dim, #64748b);
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 13px;
+}
+
+/* System Health Widgets */
 .HealthMetricList {
     display: flex;
     flex-direction: column;
@@ -239,11 +427,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--admin-text-muted, #94a3b8);
-    padding: 10px 12px;
+    padding: 10px 14px;
     background-color: var(--admin-bg-primary, #090d16);
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
@@ -261,7 +449,9 @@
 
 /* Responsive Media Queries */
 @media (max-width: 1100px) {
-    .DashboardBentoSection {
+
+    .DashboardChartsRow,
+    .DashboardBottomGrid {
         grid-template-columns: 1fr;
     }
 
@@ -299,105 +489,4 @@
         width: 100%;
         height: 1px;
     }
-}
-
-.DashboardCharts {
-    margin-top: 40px;
-}
-
-.RevenueChartCard {
-    width: 100%;
-    min-height: 420px;
-}
-
-.TopProductsList {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.TopProductRow {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-}
-
-.TopProductRow img {
-
-    width: 55px;
-
-    height: 55px;
-
-    border-radius: 12px;
-
-    object-fit: cover;
-
-}
-
-.ProductInfo {
-
-    flex: 1;
-
-}
-
-.ProductRank {
-
-    font-weight: 700;
-
-    width: 35px;
-
-}
-
-.DashboardCharts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 24px;
-}
-
-@media (max-width:900px) {
-
-    .DashboardCharts {
-
-        grid-template-columns: 1fr;
-
-    }
-
-}
-
-.RecentOrdersTable {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-}
-
-.RecentOrdersTable th,
-.RecentOrdersTable td {
-
-    padding: 16px;
-
-    text-align: left;
-
-    border-bottom: 1px solid #eee;
-
-}
-
-.RecentOrdersTable th {
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-}
-
-.RecentOrdersTable td {
-
-    font-size: 14px;
-
 }
