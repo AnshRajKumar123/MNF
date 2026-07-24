@@ -4,12 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { midnightFoodData } from '../assets/assest';
 import axios from "axios";
 import { API_URL } from "../config/api";
+import { useSettings } from "../context/SettingsContext";
 
 const Navbar = ({ onOpenMobileDrawer }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const searchRef = useRef(null);
     const navigate = useNavigate();
     const [userProfile, setUserProfile] = useState(null);
+    const { settings } = useSettings();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -57,7 +59,7 @@ const Navbar = ({ onOpenMobileDrawer }) => {
         <nav className="ProOceanicNavbar">
             {/* BRAND LOGO */}
             <Link to='/' className="WebNavLogo">
-                <h1>{midnightFoodData.branding.title}</h1>
+                <h1>{settings?.websiteName}</h1>
             </Link>
 
             {/* DESKTOP SEARCH BAR */}
