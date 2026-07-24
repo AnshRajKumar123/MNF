@@ -173,81 +173,94 @@ const HomeSect = () => {
                 {/* LEFT CONSOLE DECK PANEL */}
                 <div className={`ProMainBoxSev ${(showOrderDetail || selectedProduct) ? 'PanelActiveSplit' : ''}`}>
 
+
                     {/* CORE HERO COMMERCIAL BILLBOARD */}
                     {activeBanners.length > 0 ? (
-                        activeBanners.slice(0, 1).map((banner) => (
-                            <div className="ProHeroicBanner" key={banner._id}>
+                        activeBanners.slice(0, 1).map((banner) => {
+                            // Safe URL formatting to ensure slash between API_URL and banner.image
+                            const bannerImgUrl = banner.image
+                                ? `${API_URL}/${banner.image.replace(/^\/+/, "")}`
+                                : ResturantIG?.AbsoluteBurg;
 
-                                <div className="ProSwastikAbso">
-                                    <img src={ResturantIG.SwastikImg} alt="" />
-                                </div>
+                            return (
+                                <div className="ProHeroicBanner" key={banner._id}>
+                                    {/* Background Pattern Effects */}
+                                    <div className="BannerGlowOrb"></div>
+                                    <div className="BannerPatternBg"></div>
 
-                                <div className="ProBurgerBannerSect">
-                                    <img
-                                        src={`${API_URL}${banner.image}`}
-                                        alt={banner.title}
-                                    />
-                                </div>
+                                    {/* LEFT CONTENT AREA */}
+                                    <div className="ProAboutInfoBanner">
+                                        {banner.subtitle && (
+                                            <span className="PromoTagPill">
+                                                <i className="bx bx-sparkles"></i> {banner.subtitle}
+                                            </span>
+                                        )}
 
-                                <div className="ProAboutInfoBanner">
+                                        <h1 className="BannerHeroTitle">{banner.title}</h1>
 
-                                    {banner.subtitle && (
-                                        <span>{banner.subtitle}</span>
-                                    )}
-
-                                    <h1>{banner.title}</h1>
-
-                                    <div className="PromoActionInlineRow">
-
-                                        <button
-                                            className="PromoClaimBtn"
-                                            onClick={() => window.location.href = banner.buttonLink}
-                                        >
-                                            {banner.buttonText}
-                                        </button>
-
+                                        <div className="PromoActionInlineRow">
+                                            <button
+                                                className="PromoClaimBtn"
+                                                onClick={() => window.location.href = banner.buttonLink || "/menu"}
+                                            >
+                                                <span>{banner.buttonText || "Explore Offers"}</span>
+                                                <i className="bx bx-right-arrow-alt"></i>
+                                            </button>
+                                        </div>
                                     </div>
 
+                                    {/* RIGHT IMAGE DISPLAY AREA */}
+                                    <div className="ProBurgerBannerSect">
+                                        <div className="BannerImageFrame">
+                                            <img
+                                                src={bannerImgUrl}
+                                                alt={banner.title || "Promotional Banner"}
+                                                onError={(e) => {
+                                                    e.target.onerror = null; // Prevent infinite error loops
+                                                    if (ResturantIG?.AbsoluteBurg) {
+                                                        e.target.src = ResturantIG.AbsoluteBurg;
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                        ))
+                            );
+                        })
                     ) : (
-
-                        // Fallback Banner
+                        /* Fallback Default Banner */
                         <div className="ProHeroicBanner">
-
-                            <div className="ProSwastikAbso">
-                                <img src={ResturantIG.SwastikImg} alt="" />
-                            </div>
-
-                            <div className="ProBurgerBannerSect">
-                                <img src={ResturantIG.AbsoluteBurg} alt="" />
-                            </div>
+                            <div className="BannerGlowOrb"></div>
+                            <div className="BannerPatternBg"></div>
 
                             <div className="ProAboutInfoBanner">
-                                <span>{midnightHomeData.heroBanner.tagline}</span>
+                                <span className="PromoTagPill">
+                                    <i className="bx bx-sparkles"></i> {midnightHomeData.heroBanner.tagline}
+                                </span>
 
-                                <h1>{midnightHomeData.heroBanner.title}</h1>
+                                <h1 className="BannerHeroTitle">{midnightHomeData.heroBanner.title}</h1>
 
                                 <p className="PromoHighlightText">
                                     {midnightHomeData.heroBanner.percentage}
                                 </p>
 
                                 <div className="PromoActionInlineRow">
+                                    <button className="PromoClaimBtn">
+                                        <span>{midnightHomeData.heroBanner.ctaText}</span>
+                                        <i className="bx bx-right-arrow-alt"></i>
+                                    </button>
 
                                     <span className="PromoDisclaimerText">
                                         {midnightHomeData.heroBanner.disclaimer}
                                     </span>
-
-                                    <button className="PromoClaimBtn">
-                                        {midnightHomeData.heroBanner.ctaText}
-                                    </button>
-
                                 </div>
-
                             </div>
 
+                            <div className="ProBurgerBannerSect">
+                                <div className="BannerImageFrame">
+                                    <img src={ResturantIG.AbsoluteBurg} alt="Special Midnight Offer" />
+                                </div>
+                            </div>
                         </div>
                     )}
 
