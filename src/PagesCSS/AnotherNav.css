@@ -28,15 +28,9 @@
 
 .ProOceanicNavbar .MidnightBrandLogo,
 .ProOceanicAnotherNav .WebNavLogo img {
-    height: 40px;
+    height: 50px;
     object-fit: contain;
     transition: filter 0.3s ease;
-    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
-}
-
-[data-theme="light-ocean"] .ProOceanicNavbar .MidnightBrandLogo,
-[data-theme="light-ocean"] .ProOceanicAnotherNav .WebNavLogo img {
-    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
 }
 
 .ProOceanicAnotherNav .WebNavLogo h1 {

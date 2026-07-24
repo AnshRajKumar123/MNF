@@ -30,11 +30,6 @@
     width: auto;
     object-fit: contain;
     transition: filter 0.3s ease;
-    filter: hue-rotate(85deg) brightness(1.1) contrast(1.05);
-}
-
-[data-theme="light-ocean"] .WebLogoFooter img {
-    filter: hue-rotate(95deg) brightness(0.9) contrast(1.1);
 }
 
 .WebLogoFooter h1 {

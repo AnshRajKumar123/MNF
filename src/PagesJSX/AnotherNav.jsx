@@ -4,13 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
 import axios from "axios";
 import { API_URL } from "../config/api";
+import { useSettings } from "../context/SettingsContext";
 
 const AnotherNav = () => {
     const [userProfile, setUserProfile] = useState(null);
     const [isSideDrawerOpen, setIsSideDrawerOpen] = useState(false);
     const navigate = useNavigate();
-
-    // 🌊 Default Theme: White/Light Ocean
+    const { settings } = useSettings();
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem('MNF_OceanTheme') || 'light-ocean';
     });
@@ -71,8 +71,19 @@ const AnotherNav = () => {
             <section className='ProOceanicAnotherNav'>
                 {/* BRAND LOGO */}
                 <Link to='/' className="WebNavLogo">
-                    <img src={ResturantIG.WebLogo} alt="Corporate Logo" />
-                    <h1>{midnightFoodData.branding.title}</h1>
+                    {settings?.restaurantLogo ? (
+                        <img
+                            src={`${API_URL}${settings.restaurantLogo}`}
+                            alt={settings?.restaurantName}
+                        />
+                    ) : (
+                        <img
+                            src={ResturantIG.WebLogo}
+                            alt="Corporate Logo"
+                        />
+                    )}
+
+                    <h1>{settings?.restaurantName || "MidNight Food"}</h1>
                 </Link>
 
                 {/* DESKTOP LINKS & DROPDOWN */}

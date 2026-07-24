@@ -1,8 +1,9 @@
 import React from 'react';
 import '../ComponentCSS/Footer.css';
-import { ResturantIG, midnightFoodData, midnightFooterData } from '../assets/assest';
+import { ResturantIG, midnightFooterData } from '../assets/assest';
 import { Link } from 'react-router-dom';
 import { useSettings } from "../context/SettingsContext";
+import { API_URL } from "../config/api";
 
 const Footer = () => {
 
@@ -12,7 +13,18 @@ const Footer = () => {
         <footer className="ProOceanicFooter">
             <div className="ProFooterTopRow">
                 <div className="WebLogoFooter">
-                    <img src={ResturantIG.WebLogo} alt="Corporate Logo" />
+                    {settings?.restaurantLogo ? (
+                        <img
+                            src={`${API_URL}${settings.restaurantLogo}`}
+                            alt={settings?.restaurantName}
+                        />
+                    ) : (
+                        <img
+                            src={ResturantIG.WebLogo}
+                            alt="Corporate Logo"
+                        />
+                    )}
+
                     <h1>{settings?.restaurantName || "MidNight Food"}</h1>
                 </div>
             </div>

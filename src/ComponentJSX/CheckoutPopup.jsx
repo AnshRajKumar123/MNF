@@ -3,9 +3,11 @@ import "../ComponentCSS/CheckoutPopup.css";
 import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../assets/assest";
 import api from "../config/axios";
 import { API_URL } from "../config/api";
+import { useSettings } from "../context/SettingsContext";
 
 const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTotal, clearCartData }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
+    const { settings } = useSettings();
 
     const [addresses, setAddresses] = useState([]);
     const [selectedAddress, setSelectedAddress] = useState(null);
@@ -200,7 +202,7 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
 
                 currency: data.order.currency,
 
-                name: "MidNight Food",
+                name: settings?.restaurantName || "MidNight Food",
 
                 description: "Food Order",
 
@@ -269,7 +271,7 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                 },
 
                 theme: {
-                    color: "#ff6b35",
+                    color: settings?.appearance?.primaryColor || "#ff6b35",
                 },
 
             };
@@ -385,58 +387,98 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                         </div>
 
                         {/* UPI OPTION LAYER */}
-                        <div className="ProPaymentMethodGroupBento">
-                            <label className="ProPaymentGroupTitleLabel">
-                                <input type="radio" checked={selectedPayment === "UPI" || selectedPayment === "Google Pay" || selectedPayment === "PhonePe" || selectedPayment === "Paytm"} onChange={() => setSelectedPayment("UPI")} />
-                                {midnightCheckoutData.paymentMethods.upi}
-                            </label>
-                            {(selectedPayment === "UPI" || selectedPayment === "Google Pay" || selectedPayment === "PhonePe" || selectedPayment === "Paytm") && (
-                                <div className="ProPaymentSubOptionsListStack">
-                                    <button className={selectedPayment === "Google Pay" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("Google Pay")}><i className='bx bx-mobile-vibration'></i> Google Pay</button>
-                                    <button className={selectedPayment === "PhonePe" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("PhonePe")}><i className='bx bx-wallet'></i> PhonePe</button>
-                                    <button className={selectedPayment === "Paytm" ? "sub-payment-node-active" : ""} onClick={() => setSelectedPayment("Paytm")}><i className='bx bx-money'></i> Paytm</button>
-                                </div>
-                            )}
-                        </div>
+                        {settings?.payment?.razorpayEnabled && (
+
+                            <div className="ProPaymentMethodGroupBento">
+                                <label className="ProPaymentGroupTitleLabel">
+                                    <input
+                                        type="radio"
+                                        checked={
+                                            selectedPayment === "UPI" ||
+                                            selectedPayment === "Google Pay" ||
+                                            selectedPayment === "PhonePe" ||
+                                            selectedPayment === "Paytm"
+                                        }
+                                        onChange={() => setSelectedPayment("UPI")}
+                                    />
+                                    {midnightCheckoutData.paymentMethods.upi}
+                                </label>
+
+                                {(selectedPayment === "UPI" ||
+                                    selectedPayment === "Google Pay" ||
+                                    selectedPayment === "PhonePe" ||
+                                    selectedPayment === "Paytm") && (
+                                        <div className="ProPaymentSubOptionsListStack">
+                                            <button
+                                                className={selectedPayment === "Google Pay" ? "sub-payment-node-active" : ""}
+                                                onClick={() => setSelectedPayment("Google Pay")}
+                                            >
+                                                <i className='bx bx-mobile-vibration'></i> Google Pay
+                                            </button>
+
+                                            <button
+                                                className={selectedPayment === "PhonePe" ? "sub-payment-node-active" : ""}
+                                                onClick={() => setSelectedPayment("PhonePe")}
+                                            >
+                                                <i className='bx bx-wallet'></i> PhonePe
+                                            </button>
+
+                                            <button
+                                                className={selectedPayment === "Paytm" ? "sub-payment-node-active" : ""}
+                                                onClick={() => setSelectedPayment("Paytm")}
+                                            >
+                                                <i className='bx bx-money'></i> Paytm
+                                            </button>
+                                        </div>
+                                    )}
+                            </div>
+
+                        )}
 
                         {/* CARD OPTION LAYER */}
-                        <div className="ProPaymentMethodGroupBento">
-                            <label className="ProPaymentGroupTitleLabel">
-                                <input type="radio" checked={selectedPayment === "CARD"} onChange={() => setSelectedPayment("CARD")} />
-                                {midnightCheckoutData.paymentMethods.card}
-                            </label>
-                            {selectedPayment === "CARD" && (
-                                <div className="ProPaymentSubOptionsListStack CardInputsGroupModifier">
-                                    <input className="ProCardInlineInputField" placeholder="Card Number Matrix Signature" />
-                                    <div className="ProCardInputsFlexInlineRow">
-                                        <input className="ProCardInlineInputField" placeholder="Expiry (MM/YY)" />
-                                        <input className="ProCardInlineInputField" placeholder="CVV" />
+                        {settings?.payment?.razorpayEnabled && (
+                            <div className="ProPaymentMethodGroupBento">
+                                <label className="ProPaymentGroupTitleLabel">
+                                    <input type="radio" checked={selectedPayment === "CARD"} onChange={() => setSelectedPayment("CARD")} />
+                                    {midnightCheckoutData.paymentMethods.card}
+                                </label>
+                                {selectedPayment === "CARD" && (
+                                    <div className="ProPaymentSubOptionsListStack CardInputsGroupModifier">
+                                        <input className="ProCardInlineInputField" placeholder="Card Number Matrix Signature" />
+                                        <div className="ProCardInputsFlexInlineRow">
+                                            <input className="ProCardInlineInputField" placeholder="Expiry (MM/YY)" />
+                                            <input className="ProCardInlineInputField" placeholder="CVV" />
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
+                                )}
+                            </div>
+                        )}
 
                         {/* WALLETS OPTION LAYER */}
-                        <div className="ProPaymentMethodGroupBento">
-                            <label className="ProPaymentGroupTitleLabel">
-                                <input type="radio" checked={selectedPayment === "WALLET"} onChange={() => setSelectedPayment("WALLET")} />
-                                {midnightCheckoutData.paymentMethods.wallet}
-                            </label>
-                            {selectedPayment === "WALLET" && (
-                                <div className="ProPaymentSubOptionsListStack">
-                                    <button onClick={() => setSelectedPayment("Amazon Pay")}>Amazon Pay</button>
-                                    <button onClick={() => setSelectedPayment("Mobikwik")}>Mobikwik</button>
-                                </div>
-                            )}
-                        </div>
+                        {settings?.payment?.razorpayEnabled && (
+                            <div className="ProPaymentMethodGroupBento">
+                                <label className="ProPaymentGroupTitleLabel">
+                                    <input type="radio" checked={selectedPayment === "WALLET"} onChange={() => setSelectedPayment("WALLET")} />
+                                    {midnightCheckoutData.paymentMethods.wallet}
+                                </label>
+                                {selectedPayment === "WALLET" && (
+                                    <div className="ProPaymentSubOptionsListStack">
+                                        <button onClick={() => setSelectedPayment("Amazon Pay")}>Amazon Pay</button>
+                                        <button onClick={() => setSelectedPayment("Mobikwik")}>Mobikwik</button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                         {/* COD OPTION LAYER */}
-                        <div className="ProPaymentMethodGroupBento">
-                            <label className="ProPaymentGroupTitleLabel">
-                                <input type="radio" checked={selectedPayment === "COD"} onChange={() => setSelectedPayment("COD")} />
-                                {midnightCheckoutData.paymentMethods.cod}
-                            </label>
-                        </div>
+                        {settings?.payment?.codEnabled && (
+                            <div className="ProPaymentMethodGroupBento">
+                                <label className="ProPaymentGroupTitleLabel">
+                                    <input type="radio" checked={selectedPayment === "COD"} onChange={() => setSelectedPayment("COD")} />
+                                    {midnightCheckoutData.paymentMethods.cod}
+                                </label>
+                            </div>
+                        )}
 
                         <button className="ProPayNowAuthorizationCTA" onClick={completePayment}>
                             {midnightCheckoutData.actions.payNow} <i className='bx bx-shield-quarter'></i>

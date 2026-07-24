@@ -17,18 +17,18 @@ const Cart = () => {
         express: {
             label: "Express Transport",
             price: settings?.delivery?.expressCharge ?? 50,
-            time: "15-20 mins"
+            time: settings?.delivery?.expressTime || "15-20 mins",
         },
         standard: {
             label: "Standard Fleet",
             price: settings?.delivery?.baseCharge ?? 10,
-            time: "20-25 mins"
+            time: settings?.delivery?.standardTime || "20-25 mins",
         },
         economy: {
             label: "Eco Saver Link",
             price: 0,
-            time: "25-30 mins"
-        }
+            time: settings?.delivery?.economyTime || "25-30 mins",
+        },
     };
 
     const [activeTab, setActiveTab] = useState("delivery");
@@ -165,7 +165,9 @@ const Cart = () => {
     const amountLeftForFree = Math.max(FREE_SHIPPING_LIMIT - subtotal, 0);
 
     useEffect(() => {
-        if (subtotal >= 500 && cartItems.length > 0) {
+        if (subtotal >= (settings?.delivery?.freeDeliveryAbove ?? 500) &&
+            cartItems.length > 0
+        ) {
             setShowFreePopup(true);
             setTimeout(() => setShowFreePopup(false), 2500);
         }
