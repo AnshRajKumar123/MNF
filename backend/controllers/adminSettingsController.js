@@ -62,6 +62,23 @@ exports.updateSettings = async (req, res) => {
                 `/uploads/settings/${req.file.filename}`;
         }
 
+        // ⭐ ADD THIS BLOCK HERE
+        if (req.body.delivery) {
+            req.body.delivery = JSON.parse(req.body.delivery);
+        }
+
+        if (req.body.payment) {
+            req.body.payment = JSON.parse(req.body.payment);
+        }
+
+        if (req.body.notifications) {
+            req.body.notifications = JSON.parse(req.body.notifications);
+        }
+
+        if (req.body.appearance) {
+            req.body.appearance = JSON.parse(req.body.appearance);
+        }
+
         Object.assign(settings, req.body);
 
         await settings.save();
@@ -73,8 +90,12 @@ exports.updateSettings = async (req, res) => {
 
     } catch (error) {
 
+        console.error("========== ERROR ==========");
+        console.error(error);
+        console.error(error.stack);
+
         res.status(500).json({
-            message: error.message
+            message: error.message,
         });
 
     }

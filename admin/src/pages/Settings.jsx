@@ -30,13 +30,16 @@ const Settings = () => {
     }, []);
 
     const handleSave = async () => {
+
+        console.log("restaurantLogo:", settings.restaurantLogo);
+        console.log("instanceof File:", settings.restaurantLogo instanceof File);
+
         try {
             setSaving(true);
             await updateSettings(settings);
             toast.success("Settings updated successfully!");
         } catch (error) {
-            console.error("Failed to update settings:", error);
-            toast.error(error.response?.data?.message || "Failed to save configuration.");
+            console.error(error);
         } finally {
             setSaving(false);
         }

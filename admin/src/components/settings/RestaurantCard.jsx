@@ -23,7 +23,7 @@ const RestaurantCard = ({ settings, setSettings }) => {
             restaurantLogoPreview: URL.createObjectURL(file),
         });
 
-    };
+};
 
     return (
         <div className="SettingsCard FullWidthCard">
