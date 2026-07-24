@@ -39,3 +39,24 @@ export const logoutAdmin = async () => {
 
     return response.data;
 };
+
+export const verifyAdminLogin = async (data) => {
+
+    const response = await api.post(
+        "/admin/verify-2fa-login",
+        data
+    );
+
+    return response.data;
+
+};
+
+export const disableTwoFactor = async () => {
+
+    const response = await api.put(
+        "/admin/profile/2fa/disable"
+    );
+
+    return response.data;
+
+};

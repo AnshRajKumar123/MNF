@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Card from "../components/ui/Card";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
-import { loginAdmin, getAdminProfile } from "../services/authService";
+import { loginAdmin, getAdminProfile, verifyAdminLogin } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
 
@@ -12,6 +12,9 @@ const Login = () => {
     const navigate = useNavigate();
     const { setAdmin } = useAuth();
     const [loading, setLoading] = useState(false);
+    const [requiresTwoFactor, setRequiresTwoFactor] = useState(false);
+    const [adminId, setAdminId] = useState("");
+    const [verificationCode, setVerificationCode] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
     const [loginData, setLoginData] = useState({
@@ -35,11 +38,24 @@ const Login = () => {
         }
 
         try {
-            setLoading(true);
-            await loginAdmin(loginData);
+            const response = await loginAdmin(loginData);
+
+            if (response.requiresTwoFactor) {
+
+                setRequiresTwoFactor(true);
+                setAdminId(response.adminId);
+
+                toast.success("Enter your authentication code.");
+
+                return;
+            }
+
             const data = await getAdminProfile();
+
             setAdmin(data.admin);
+
             toast.success("Authentication successful! Welcome Back.");
+
             navigate("/dashboard");
         } catch (error) {
             toast.error(
@@ -48,6 +64,47 @@ const Login = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleVerify2FA = async (e) => {
+
+        e.preventDefault();
+
+        if (!verificationCode) {
+            toast.error("Enter verification code.");
+            return;
+        }
+
+        try {
+
+            setLoading(true);
+
+            await verifyAdminLogin({
+                adminId,
+                token: verificationCode,
+            });
+
+            const data = await getAdminProfile();
+
+            setAdmin(data.admin);
+
+            toast.success("Login successful.");
+
+            navigate("/dashboard");
+
+        } catch (error) {
+
+            toast.error(
+                error.response?.data?.message ||
+                "Verification failed."
+            );
+
+        } finally {
+
+            setLoading(false);
+
+        }
+
     };
 
     return (
@@ -72,49 +129,100 @@ const Login = () => {
                 </div>
 
                 {/* LOGIN FORM */}
-                <form onSubmit={handleSubmit} className="LoginForm">
-                    <div className="InputGroupSlot">
-                        <label className="FieldLabel">Admin Email Node</label>
-                        <Input
-                            icon="bx bx-envelope"
-                            placeholder="admin@midnightfood.com"
-                            name="email"
-                            type="email"
-                            value={loginData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+                <form onSubmit={
+                    requiresTwoFactor
+                        ? handleVerify2FA
+                        : handleSubmit
+                } className="LoginForm">
+                    {!requiresTwoFactor ? (
 
-                    <div className="InputGroupSlot">
-                        <label className="FieldLabel">Security Keypass</label>
-                        <div className="PasswordInputWrapper">
+                        <>
+                            <div className="InputGroupSlot">
+
+                                <label className="FieldLabel">
+                                    Admin Email Node
+                                </label>
+
+                                <Input
+                                    icon="bx bx-envelope"
+                                    placeholder="admin@midnightfood.com"
+                                    name="email"
+                                    type="email"
+                                    value={loginData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+
+                            </div>
+
+                            <div className="InputGroupSlot">
+
+                                <label className="FieldLabel">
+                                    Security Keypass
+                                </label>
+
+                                <div className="PasswordInputWrapper">
+
+                                    <Input
+                                        icon="bx bx-lock-alt"
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="••••••••"
+                                        name="password"
+                                        value={loginData.password}
+                                        onChange={handleChange}
+                                        required
+                                    />
+
+                                    <button
+                                        type="button"
+                                        className="TogglePasswordBtn"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        <i className={`bx ${showPassword ? "bx-show" : "bx-hide"}`}></i>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </>
+
+                    ) : (
+
+                        <div className="InputGroupSlot">
+
+                            <label className="FieldLabel">
+                                Authentication Code
+                            </label>
+
                             <Input
-                                icon="bx bx-lock-alt"
-                                type={showPassword ? "text" : "password"}
-                                placeholder="••••••••••••"
-                                name="password"
-                                value={loginData.password}
-                                onChange={handleChange}
-                                required
+                                icon="bx bx-shield"
+                                placeholder="123456"
+                                value={verificationCode}
+                                onChange={(e) =>
+                                    setVerificationCode(e.target.value)
+                                }
+                                maxLength={6}
                             />
-                            <button
-                                type="button"
-                                className="TogglePasswordBtn"
-                                onClick={() => setShowPassword(!showPassword)}
-                                tabIndex="-1"
-                            >
-                                <i className={`bx ${showPassword ? "bx-show" : "bx-hide"}`}></i>
-                            </button>
+
+                            <small>
+                                Open your Authenticator app and enter the current 6-digit code.
+                            </small>
+
                         </div>
-                    </div>
+
+                    )}
 
                     <Button
                         type="submit"
                         loading={loading}
                         className="AdminLoginSubmitBtn"
                     >
-                        {loading ? "Authenticating..." : "Access Control Terminal"}
+                        {loading
+                            ? "Please wait..."
+                            : requiresTwoFactor
+                                ? "Verify Code"
+                                : "Access Control Terminal"}
                     </Button>
                 </form>
 

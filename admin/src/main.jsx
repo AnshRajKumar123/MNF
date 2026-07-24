@@ -12,7 +12,7 @@ import "./styles/global.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
         <BrowserRouter>
-            <Toaster position="top-center" />
+            <Toaster position="top-center" reverseOrder={false} />
             <App />
         </BrowserRouter>
     </AuthProvider>

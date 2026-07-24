@@ -13,6 +13,7 @@ import 'boxicons/css/boxicons.min.css';
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminLayout from "./components/layout/AdminLayout";
+import Profile from "./pages/Profile";
 
 function App() {
     return (
@@ -27,6 +28,9 @@ function App() {
                     <Route path="/coupons" element={<Coupons />} />
                     <Route path="/banners" element={<Banners />} />
                     <Route path="/settings" element={<Settings />} />
+
+
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

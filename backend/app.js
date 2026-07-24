@@ -26,7 +26,7 @@ const adminAnalyticsRoutes = require("./routes/adminAnalyticsRoutes");
 const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
 const adminInventoryRoutes = require("./routes/adminInventoryRoutes");
 const adminBannerRoutes = require("./routes/adminBannerRoutes");
-
+const adminProfileRoutes = require("./routes/adminProfileRoutes");
 
 
 var indexRouter = require("./routes/index");
@@ -71,5 +71,6 @@ app.use("/admin/analytics", adminAnalyticsRoutes);
 app.use("/admin/settings", adminSettingsRoutes);
 app.use("/admin/inventory", adminInventoryRoutes);
 app.use("/admin/banners", adminBannerRoutes);
+app.use("/admin/profile", adminProfileRoutes);
 
 module.exports = app;

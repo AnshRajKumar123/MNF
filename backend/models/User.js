@@ -64,6 +64,16 @@ const userSchema = new mongoose.Schema(
         isAdmin: {
             type: Boolean,
             default: false,
+        },
+
+        twoFactorEnabled: {
+            type: Boolean,
+            default: false
+        },
+
+        twoFactorSecret: {
+            type: String,
+            default: ""
         }
     },
     {

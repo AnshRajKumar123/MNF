@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "../../styles/Navbar.css";
 
 const Navbar = ({ onToggleSidebar }) => {
@@ -68,10 +68,10 @@ const Navbar = ({ onToggleSidebar }) => {
                         <span className="AvatarInitial">A</span>
                         <span className="UserOnlineDot"></span>
                     </div>
-                    <div className="AdminMetaText">
+                    <NavLink to='/profile' className="AdminMetaText">
                         <span className="AdminName">Ansh (Admin)</span>
                         <span className="AdminRoleTag">Super Admin</span>
-                    </div>
+                    </NavLink>
                     <i className="bx bx-chevron-down ProfileDropChevron"></i>
                 </div>
             </div>
