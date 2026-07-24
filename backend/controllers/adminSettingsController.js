@@ -31,6 +31,9 @@ exports.updateSettings = async (req, res) => {
 
     try {
 
+        console.log("BODY:", req.body);
+        console.log("FILE:", req.file);
+
         let settings = await Settings.findOne();
 
         if (!settings) {

@@ -3,10 +3,13 @@ import '../ComponentCSS/AsideBar.css';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
 import { Link, useLocation } from 'react-router-dom';
 import api from "../config/axios";
+import { API_URL } from "../config/api";
+import { useSettings } from "../context/SettingsContext";
 
 const AsideBar = () => {
     const [cartCount, setCartCount] = useState(0);
     const location = useLocation();
+    const { settings } = useSettings();
     const currentPath = location.pathname;
 
     // 🌊 Default Theme: White/Light Ocean
@@ -62,7 +65,13 @@ const AsideBar = () => {
         <aside className="ProOceanicAside">
             <Link to='/'>
                 <button className="Weblogo">
-                    <img src={ResturantIG.WebLogo2} alt="Website Logo" />
+                    {settings?.restaurantLogo && (
+                        <img
+                            src={`${API_URL}${settings.restaurantLogo}`}
+                            alt={settings?.restaurantName}
+                            className="RestaurantLogo"
+                        />
+                    )}
                 </button>
             </Link>
 
