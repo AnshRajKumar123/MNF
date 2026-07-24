@@ -1,843 +1,617 @@
-/* ===========================
-   Banner Modal
-=========================== */
+/* ==========================================================================
+   🌟 EXECUTIVE BANNER MANAGEMENT STYLES
+   ========================================================================== */
 
-.ModalOverlay {
-
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, .75);
-    backdrop-filter: blur(8px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 999;
-}
-
-.BannerModal {
-
-    width: 650px;
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: #171d30;
-
-    border: 1px solid rgba(255, 255, 255, .08);
-
-    border-radius: 22px;
-
-    padding: 30px;
-
+.BannerPage {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-
-    gap: 18px;
-
-    animation: ModalOpen .25s ease;
+    gap: 1.8rem;
 }
 
-@keyframes ModalOpen {
-
-    from {
-
-        opacity: 0;
-        transform: scale(.95);
-
-    }
-
-    to {
-
-        opacity: 1;
-        transform: scale(1);
-
-    }
-
-}
-
-.ModalHeader h2 {
-
-    color: #fff;
-    font-size: 28px;
-    margin-bottom: 6px;
-
-}
-
-.ModalHeader p {
-
-    color: #8f98b3;
-    font-size: 15px;
-
-}
-
-.BannerModal input,
-.BannerModal textarea {
-
+/* Loading State */
+.BannersLoadingState {
     width: 100%;
-
-    background: #0f1323;
-
-    border: 1px solid #2d3554;
-
-    border-radius: 12px;
-
-    padding: 14px 16px;
-
-    color: #fff;
-
-    font-size: 15px;
-
-    transition: .25s;
-
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.BannerModal input:focus {
-
-    outline: none;
-
-    border-color: #6366f1;
-
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
-
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
 }
 
-.BannerModal label {
-
-    color: #b6bfd8;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
+.BannersLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
 }
 
-/* ===========================
-   Image Preview
-=========================== */
-
-.BannerPreview {
-
-    width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
+.BannersLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
 }
 
-.BannerPreview img {
-
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-
-    border-radius: 16px;
-}
-
-/* ===========================
-   Switch
-=========================== */
-
-.StatusRow {
-
+/* Header Section */
+.PageHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 1.2rem;
 }
 
-.Switch {
-
-    position: relative;
-
-    width: 58px;
-    height: 30px;
+.HeaderTitleGroup h1 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
 }
 
-.Switch input {
-
-    display: none;
-
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
 }
 
-.Slider {
-
-    position: absolute;
-    inset: 0;
-
-    background: #444;
-
-    border-radius: 999px;
-
-    transition: .3s;
-
+/* Primary Create Button */
+.PrimaryBtn {
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 700;
     cursor: pointer;
-
-}
-
-.Slider::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 24px;
-    height: 24px;
-
-    left: 3px;
-    top: 3px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    transition: .3s;
-
-}
-
-.Switch input:checked+.Slider {
-
-    background: #22c55e;
-
-}
-
-.Switch input:checked+.Slider::before {
-
-    transform: translateX(28px);
-
-}
-
-/* ===========================
-   Buttons
-=========================== */
-
-.ModalActions {
-
     display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-
-    margin-top: 10px;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.25s ease;
 }
 
-.PrimaryModalBtn {
-
-    background: #6366f1;
-    color: white;
-
-    border: none;
-
-    border-radius: 12px;
-
-    padding: 13px 24px;
-
-    cursor: pointer;
-
-    font-weight: 600;
-
-    transition: .25s;
-
+.PrimaryBtn i {
+    font-size: 18px;
 }
 
-.PrimaryModalBtn:hover {
-
-    background: #4f46e5;
-
+.PrimaryBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
 }
 
-.SecondaryModalBtn {
-
-    background: #2b3352;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 12px;
-
-    padding: 13px 24px;
-
-    cursor: pointer;
-
-}
-
-.SecondaryModalBtn:hover {
-
-    background: #3b466e;
-
-}
-
-/* ===========================
-   Scrollbar
-=========================== */
-
-.BannerModal::-webkit-scrollbar {
-
-    width: 6px;
-
-}
-
-.BannerModal::-webkit-scrollbar-thumb {
-
-    background: #444d73;
-
-    border-radius: 20px;
-
-}
-
-/* ===========================
-   Mobile
-=========================== */
-
-@media(max-width:700px) {
-
-    .BannerModal {
-
-        width: 95%;
-        padding: 22px;
-
-    }
-
-    .BannerPreview img {
-
-        height: 180px;
-
-    }
-
-}
-
-/* ===========================
-   Banner Card
-=========================== */
-
+/* Banner Bento Grid */
 .BannerGrid {
-
     display: grid;
-
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-
-    gap: 24px;
-
-    margin-top: 30px;
-
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .BannerCard {
-
-    background: #171d30;
-
-    border: 1px solid rgba(255, 255, 255, .08);
-
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
     border-radius: 20px;
-
     overflow: hidden;
-
-    transition: all .3s ease;
-
     display: flex;
-
     flex-direction: column;
-
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
 .BannerCard:hover {
-
-    transform: translateY(-6px);
-
-    border-color: #6366f1;
-
-    box-shadow: 0 20px 45px rgba(0, 0, 0, .35);
-
+    transform: translateY(-5px);
+    border-color: var(--admin-border-focus, rgba(99, 102, 241, 0.4));
 }
 
-/* ===========================
-   Banner Image
-=========================== */
-
-.BannerCard img {
-
+/* Banner Image & Overlay Badges */
+.BannerImageWrapper {
+    position: relative;
     width: 100%;
+    height: 190px;
+    background: var(--admin-bg-primary, #090d16);
+    overflow: hidden;
+}
 
-    height: 220px;
-
+.BannerImageWrapper img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-
+    transition: transform 0.3s ease;
 }
 
-/* ===========================
-   Banner Content
-=========================== */
-
-.BannerContent {
-
-    padding: 22px;
-
+.BannerCard:hover .BannerImageWrapper img {
+    transform: scale(1.03);
 }
 
-.BannerContent h3 {
-
-    color: #fff;
-
-    font-size: 22px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-
+.BannerOverlayBadge {
+    position: absolute;
+    z-index: 5;
 }
 
-.BannerContent p {
-
-    color: #9ca3af;
-
-    line-height: 1.6;
-
-    margin-bottom: 16px;
-
-}
-
-.BannerContent span {
-
-    display: inline-flex;
-
+.PriorityBadge {
+    top: 12px;
+    left: 12px;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
     align-items: center;
-
-    gap: 6px;
-
-    background: rgba(99, 102, 241, .15);
-
-    color: #818cf8;
-
-    padding: 6px 14px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
+    gap: 4px;
 }
 
-/* ===========================
-   Status
-=========================== */
+.StatusBadgeSlot {
+    top: 12px;
+    right: 12px;
+}
 
-.BannerStatus {
+.ActiveBadge,
+.InactiveBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+}
 
-    padding: 0 22px 18px;
-
+.PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
 }
 
 .ActiveBadge {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
 
-    display: inline-block;
-
-    background: rgba(34, 197, 94, .18);
-
-    color: #22c55e;
-
-    padding: 8px 18px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
+.ActiveBadge .PulseDot {
+    background-color: #10b981;
+    box-shadow: 0 0 6px #10b981;
 }
 
 .InactiveBadge {
-
-    display: inline-block;
-
-    background: rgba(239, 68, 68, .18);
-
-    color: #ef4444;
-
-    padding: 8px 18px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    color: #f43f5e;
 }
 
-/* ===========================
-   Actions
-=========================== */
+.InactiveBadge .PulseDot {
+    background-color: #f43f5e;
+}
 
-.BannerActions {
-
+/* Banner Content */
+.BannerContent {
+    padding: 18px 20px;
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
 
-    gap: 12px;
+.BannerContent h3 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
 
-    padding: 20px 22px 24px;
+.BannerContent p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
+.BannerMetaDeck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.CtaTag,
+.DateTag {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.CtaTag i,
+.DateTag i {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+/* Banner Actions */
+.BannerActions {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px 18px 20px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
 }
 
 .EditBtn,
 .DeleteBtn {
-
     flex: 1;
-
-    height: 46px;
-
+    height: 38px;
+    border-radius: 10px;
     border: none;
-
-    border-radius: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
     cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    transition: .25s;
-
+    font-size: 12.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
 }
 
 .EditBtn {
-
-    background: #4f46e5;
-
-    color: white;
-
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: var(--admin-accent-primary, #6366f1);
 }
 
 .EditBtn:hover {
-
-    background: #4338ca;
-
-    transform: translateY(-2px);
-
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
 }
 
 .DeleteBtn {
-
-    background: #ef4444;
-
-    color: white;
-
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
 }
 
 .DeleteBtn:hover {
-
-    background: #dc2626;
-
-    transform: translateY(-2px);
-
-}
-
-/* ===========================
-   Mobile
-=========================== */
-
-@media (max-width:768px) {
-
-    .BannerGrid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    .BannerCard img {
-
-        height: 180px;
-
-    }
-
-    .BannerActions {
-
-        flex-direction: column;
-
-    }
-
-}
-
-/* ==========================================
-   Banner Page
-========================================== */
-
-.BannerPage {
-
-    padding: 32px;
-
-    min-height: 100vh;
-
-    animation: FadeIn .35s ease;
-
-}
-
-@keyframes FadeIn {
-
-    from {
-
-        opacity: 0;
-        transform: translateY(12px);
-
-    }
-
-    to {
-
-        opacity: 1;
-        transform: translateY(0);
-
-    }
-
-}
-
-/* ==========================================
-   Header
-========================================== */
-
-.PageHeader {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 32px;
-
-    gap: 20px;
-
-}
-
-.PageHeader h1 {
-
+    background: #f43f5e;
     color: #ffffff;
-
-    font-size: 34px;
-
-    font-weight: 700;
-
-    letter-spacing: .5px;
-
 }
 
-/* ==========================================
-   Add Banner Button
-========================================== */
-
-.PrimaryBtn {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    padding: 14px 26px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    cursor: pointer;
-
-    background: linear-gradient(135deg,
-            #6366f1,
-            #4f46e5);
-
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    transition: .25s;
-
-    box-shadow:
-        0 10px 30px rgba(99, 102, 241, .35);
-
-}
-
-.PrimaryBtn:hover {
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 18px 40px rgba(99, 102, 241, .45);
-
-}
-
-.PrimaryBtn:active {
-
-    transform: scale(.97);
-
-}
-
-/* ==========================================
-   Grid
-========================================== */
-
-.BannerGrid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(360px, 1fr));
-
-    gap: 28px;
-
-}
-
-/* ==========================================
-   Loading
-========================================== */
-
-.LoadingWrapper {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    min-height: 65vh;
-
-}
-
-.LoadingWrapper h2 {
-
-    color: #9ca3af;
-
-    font-size: 24px;
-
-}
-
-/* ==========================================
-   Empty State
-========================================== */
-
+/* Empty Banner Placeholder */
 .EmptyBanner {
-
-    grid-column: 1/-1;
-
+    grid-column: 1 / -1;
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     padding: 80px 20px;
-
-    border-radius: 22px;
-
-    border: 2px dashed rgba(255, 255, 255, .08);
-
-    background: #171d30;
-
+    border-radius: 20px;
+    border: 2px dashed var(--admin-border-light, rgba(255, 255, 255, 0.1));
+    background: var(--admin-bg-surface, #111726);
+    text-align: center;
 }
 
-.EmptyBanner i {
-
-    font-size: 90px;
-
-    color: #6366f1;
-
-    margin-bottom: 20px;
-
+.EmptyBanner .bigIcons {
+    font-size: 64px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
 }
 
 .EmptyBanner h2 {
-
-    color: white;
-
-    margin-bottom: 10px;
-
-    font-size: 28px;
-
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 6px 0;
 }
 
 .EmptyBanner p {
-
-    color: #9ca3af;
-
-    font-size: 16px;
-
+    color: var(--admin-text-dim, #64748b);
+    font-size: 13.5px;
+    max-width: 420px;
+    margin: 0;
 }
 
-/* ==========================================
-   Responsive
-========================================== */
-
-@media (max-width:992px) {
-
-    .PageHeader {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-    }
-
-    .PrimaryBtn {
-
-        width: 100%;
-
-    }
-
+/* Modal Window Styles */
+.ModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
 }
 
-@media (max-width:768px) {
+.BannerModal {
+    width: 100%;
+    max-width: 680px;
+    max-height: 88vh;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    animation: ModalOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 
+@keyframes ModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.HeaderTitleBlock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.HeaderIcon {
+    font-size: 26px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ModalHeader h2 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 2px 0;
+}
+
+.ModalHeader p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12px;
+    margin: 0;
+}
+
+.CloseBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.CloseBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+
+.ModalFormBody {
+    padding: 24px 26px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ModalFormGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.FormFieldSlot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FullColumn {
+    grid-column: 1 / -1;
+}
+
+.FormFieldSlot label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.FormFieldSlot input,
+.FormFieldSlot textarea {
+    width: 100%;
+    background: var(--admin-bg-primary, #090d16);
+    color: var(--admin-text-main, #f8fafc);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.FormFieldSlot input:focus {
+    border-color: var(--admin-accent-primary, #6366f1);
+    outline: none;
+}
+
+/* Status Toggle Box */
+.StatusToggleBox {
+    height: 44px;
+    padding: 0 14px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.CustomSwitchTrack {
+    width: 40px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.1));
+    border-radius: 30px;
+    padding: 2px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.SwitchThumb {
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.CustomSwitchTrack.switch-active {
+    background-color: var(--admin-accent-primary, #6366f1);
+}
+
+.CustomSwitchTrack.switch-active .SwitchThumb {
+    transform: translateX(18px);
+}
+
+/* Upload Dropzone */
+.BannerUploadDropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.UploadBoxLabel {
+    width: 100%;
+    height: 70px;
+    border: 2px dashed rgba(99, 102, 241, 0.4);
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.UploadBoxLabel:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.UploadIcon {
+    font-size: 24px;
+}
+
+.BannerPreviewFrame {
+    width: 100%;
+    height: 160px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.1));
+}
+
+.BannerPreviewFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ModalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.PrimaryModalBtn,
+.SecondaryModalBtn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.PrimaryModalBtn {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.PrimaryModalBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+}
+
+.SecondaryModalBtn {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+}
+
+@media (max-width: 600px) {
     .BannerPage {
-
-        padding: 20px;
-
+        padding: 1rem;
     }
 
-    .PageHeader h1 {
-
-        font-size: 28px;
-
-    }
-
-    .BannerGrid {
-
+    .ModalFormGrid {
         grid-template-columns: 1fr;
-
     }
-
-}
-
-@media (max-width:480px) {
-
-    .BannerPage {
-
-        padding: 16px;
-
-    }
-
-    .PageHeader h1 {
-
-        font-size: 24px;
-
-    }
-
-    .PrimaryBtn {
-
-        padding: 12px 18px;
-
-        font-size: 14px;
-
-    }
-
 }
