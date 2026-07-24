@@ -1,25 +1,41 @@
 import React, { useState, useEffect } from "react";
 import StatCard from "../components/dashboard/StatCard";
-import { getDashboard } from "../services/dashboardService";
+import { getDashboardAnalytics } from "../services/analyticsService";
+import RevenueChart from "../components/dashboard/RevenueChart";
+import TopProducts from "../components/dashboard/TopProducts";
+import PaymentMethodChart from "../components/dashboard/PaymentMethodChart";
+import DeliveryTypeChart from "../components/dashboard/DeliveryTypeChart";
+import RecentOrders from "../components/dashboard/RecentOrders";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
-    const [dashboard, setDashboard] = useState(null);
+    const [analytics, setAnalytics] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const loadDashboard = async () => {
+
+        const fetchAnalytics = async () => {
+
             try {
-                const data = await getDashboard();
-                setDashboard(data);
+
+                const data = await getDashboardAnalytics();
+
+                setAnalytics(data);
+
             } catch (error) {
-                console.error("Dashboard data load error:", error);
+
+                console.log(error);
+
             } finally {
+
                 setLoading(false);
+
             }
+
         };
 
-        loadDashboard();
+        fetchAnalytics();
+
     }, []);
 
     if (loading) {
@@ -67,25 +83,25 @@ const Dashboard = () => {
             <div className="StatsGrid">
                 <StatCard
                     title="Revenue"
-                    value={`₹${(dashboard?.totalRevenue || 0).toLocaleString("en-IN")}`}
+                    value={`₹${(analytics?.revenue.total || 0).toLocaleString("en-IN")}`}
                     icon="bx bx-wallet"
                 />
 
                 <StatCard
                     title="Orders"
-                    value={dashboard?.totalOrders || 0}
+                    value={analytics?.orders.total || 0}
                     icon="bx bx-cart"
                 />
 
                 <StatCard
                     title="Users"
-                    value={dashboard?.totalUsers || 0}
+                    value={analytics?.users.total || 0}
                     icon="bx bx-user"
                 />
 
                 <StatCard
                     title="Products"
-                    value={dashboard?.totalProducts || 0}
+                    value={analytics?.products.total || 0}
                     icon="bx bx-package"
                 />
             </div>
@@ -100,27 +116,57 @@ const Dashboard = () => {
                     </div>
 
                     <div className="PipelineMetricRow">
+
                         <div className="PipelineUnit">
-                            <span className="MetricLabel">Pending Orders</span>
-                            <strong className="MetricVal warning-text">
-                                {dashboard?.pendingOrders || 0}
-                            </strong>
-                        </div>
-                        <div className="PipelineDivider"></div>
-                        <div className="PipelineUnit">
-                            <span className="MetricLabel">In-Transit</span>
-                            <strong className="MetricVal info-text">
-                                {dashboard?.activeOrders || 0}
-                            </strong>
-                        </div>
-                        <div className="PipelineDivider"></div>
-                        <div className="PipelineUnit">
-                            <span className="MetricLabel">Completed Today</span>
+                            <span className="MetricLabel">Today's Revenue</span>
                             <strong className="MetricVal success-text">
-                                {dashboard?.completedToday || 0}
+                                ₹{(analytics?.revenue?.today || 0).toLocaleString("en-IN")}
                             </strong>
                         </div>
+
+                        <div className="PipelineDivider"></div>
+
+                        <div className="PipelineUnit">
+                            <span className="MetricLabel">Today's Orders</span>
+                            <strong className="MetricVal info-text">
+                                {analytics?.orders?.today || 0}
+                            </strong>
+                        </div>
+
+                        <div className="PipelineDivider"></div>
+
+                        <div className="PipelineUnit">
+                            <span className="MetricLabel">Active Coupons</span>
+                            <strong className="MetricVal warning-text">
+                                {analytics?.coupons?.active || 0}
+                            </strong>
+                        </div>
+
                     </div>
+                </div>
+
+                <div className="DashboardCharts">
+
+                    <RevenueChart
+                        data={analytics?.revenueChart || []}
+                    />
+
+                    <PaymentMethodChart
+                        data={analytics?.paymentMethods || []}
+                    />
+
+                </div>
+
+                <div className="DashboardCharts">
+
+                    <DeliveryTypeChart
+                        data={analytics?.deliveryTypes || []}
+                    />
+
+                    <TopProducts
+                        products={analytics?.topProducts || []}
+                    />
+
                 </div>
 
                 {/* SYSTEM HEALTH WIDGET */}
@@ -144,6 +190,9 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
+                <RecentOrders
+                    orders={analytics?.recentOrders || []}
+                />
             </div>
 
         </div>

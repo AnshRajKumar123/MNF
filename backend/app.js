@@ -20,6 +20,7 @@ const couponRoutes = require("./routes/couponRoutes");
 
 const adminRoutes = require("./routes/adminRoutes");
 const adminCouponRoutes = require("./routes/adminCouponRoutes");
+const adminAnalyticsRoutes = require("./routes/adminAnalyticsRoutes");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -57,5 +58,6 @@ app.use("/coupon", couponRoutes);
 
 app.use("/admin", adminRoutes);
 app.use("/admin/coupons", adminCouponRoutes);
+app.use("/admin/analytics", adminAnalyticsRoutes);
 
 module.exports = app;
