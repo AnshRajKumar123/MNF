@@ -8,6 +8,7 @@ import Users from "./pages/Users";
 import Coupons from "./pages/Coupons";
 import NotFound from "./pages/NotFound";
 import Settings from './pages/Settings'
+import Banners from "./pages/Banners";
 import 'boxicons/css/boxicons.min.css';
 
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/users" element={<Users />} />
                     <Route path="/coupons" element={<Coupons />} />
+                    <Route path="/banners" element={<Banners />} />
                     <Route path="/settings" element={<Settings />} />
                 </Route>
             </Route>

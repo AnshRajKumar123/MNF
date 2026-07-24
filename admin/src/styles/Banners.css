@@ -1,0 +1,843 @@
+/* ===========================
+   Banner Modal
+=========================== */
+
+.ModalOverlay {
+
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.BannerModal {
+
+    width: 650px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #171d30;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    border-radius: 22px;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    animation: ModalOpen .25s ease;
+}
+
+@keyframes ModalOpen {
+
+    from {
+
+        opacity: 0;
+        transform: scale(.95);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: scale(1);
+
+    }
+
+}
+
+.ModalHeader h2 {
+
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 6px;
+
+}
+
+.ModalHeader p {
+
+    color: #8f98b3;
+    font-size: 15px;
+
+}
+
+.BannerModal input,
+.BannerModal textarea {
+
+    width: 100%;
+
+    background: #0f1323;
+
+    border: 1px solid #2d3554;
+
+    border-radius: 12px;
+
+    padding: 14px 16px;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    transition: .25s;
+
+}
+
+.BannerModal input:focus {
+
+    outline: none;
+
+    border-color: #6366f1;
+
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, .15);
+
+}
+
+.BannerModal label {
+
+    color: #b6bfd8;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+/* ===========================
+   Image Preview
+=========================== */
+
+.BannerPreview {
+
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.BannerPreview img {
+
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+
+    border-radius: 16px;
+}
+
+/* ===========================
+   Switch
+=========================== */
+
+.StatusRow {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+.Switch {
+
+    position: relative;
+
+    width: 58px;
+    height: 30px;
+}
+
+.Switch input {
+
+    display: none;
+
+}
+
+.Slider {
+
+    position: absolute;
+    inset: 0;
+
+    background: #444;
+
+    border-radius: 999px;
+
+    transition: .3s;
+
+    cursor: pointer;
+
+}
+
+.Slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: .3s;
+
+}
+
+.Switch input:checked+.Slider {
+
+    background: #22c55e;
+
+}
+
+.Switch input:checked+.Slider::before {
+
+    transform: translateX(28px);
+
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.ModalActions {
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.PrimaryModalBtn {
+
+    background: #6366f1;
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 13px 24px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+.PrimaryModalBtn:hover {
+
+    background: #4f46e5;
+
+}
+
+.SecondaryModalBtn {
+
+    background: #2b3352;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 13px 24px;
+
+    cursor: pointer;
+
+}
+
+.SecondaryModalBtn:hover {
+
+    background: #3b466e;
+
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+.BannerModal::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+.BannerModal::-webkit-scrollbar-thumb {
+
+    background: #444d73;
+
+    border-radius: 20px;
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:700px) {
+
+    .BannerModal {
+
+        width: 95%;
+        padding: 22px;
+
+    }
+
+    .BannerPreview img {
+
+        height: 180px;
+
+    }
+
+}
+
+/* ===========================
+   Banner Card
+=========================== */
+
+.BannerGrid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+
+    gap: 24px;
+
+    margin-top: 30px;
+
+}
+
+.BannerCard {
+
+    background: #171d30;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition: all .3s ease;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.BannerCard:hover {
+
+    transform: translateY(-6px);
+
+    border-color: #6366f1;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, .35);
+
+}
+
+/* ===========================
+   Banner Image
+=========================== */
+
+.BannerCard img {
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+}
+
+/* ===========================
+   Banner Content
+=========================== */
+
+.BannerContent {
+
+    padding: 22px;
+
+}
+
+.BannerContent h3 {
+
+    color: #fff;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+.BannerContent p {
+
+    color: #9ca3af;
+
+    line-height: 1.6;
+
+    margin-bottom: 16px;
+
+}
+
+.BannerContent span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    background: rgba(99, 102, 241, .15);
+
+    color: #818cf8;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+/* ===========================
+   Status
+=========================== */
+
+.BannerStatus {
+
+    padding: 0 22px 18px;
+
+}
+
+.ActiveBadge {
+
+    display: inline-block;
+
+    background: rgba(34, 197, 94, .18);
+
+    color: #22c55e;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+.InactiveBadge {
+
+    display: inline-block;
+
+    background: rgba(239, 68, 68, .18);
+
+    color: #ef4444;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+/* ===========================
+   Actions
+=========================== */
+
+.BannerActions {
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 20px 22px 24px;
+
+}
+
+.EditBtn,
+.DeleteBtn {
+
+    flex: 1;
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+.EditBtn {
+
+    background: #4f46e5;
+
+    color: white;
+
+}
+
+.EditBtn:hover {
+
+    background: #4338ca;
+
+    transform: translateY(-2px);
+
+}
+
+.DeleteBtn {
+
+    background: #ef4444;
+
+    color: white;
+
+}
+
+.DeleteBtn:hover {
+
+    background: #dc2626;
+
+    transform: translateY(-2px);
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px) {
+
+    .BannerGrid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .BannerCard img {
+
+        height: 180px;
+
+    }
+
+    .BannerActions {
+
+        flex-direction: column;
+
+    }
+
+}
+
+/* ==========================================
+   Banner Page
+========================================== */
+
+.BannerPage {
+
+    padding: 32px;
+
+    min-height: 100vh;
+
+    animation: FadeIn .35s ease;
+
+}
+
+@keyframes FadeIn {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(12px);
+
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.PageHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 32px;
+
+    gap: 20px;
+
+}
+
+.PageHeader h1 {
+
+    color: #ffffff;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+
+}
+
+/* ==========================================
+   Add Banner Button
+========================================== */
+
+.PrimaryBtn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 26px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    background: linear-gradient(135deg,
+            #6366f1,
+            #4f46e5);
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+    box-shadow:
+        0 10px 30px rgba(99, 102, 241, .35);
+
+}
+
+.PrimaryBtn:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(99, 102, 241, .45);
+
+}
+
+.PrimaryBtn:active {
+
+    transform: scale(.97);
+
+}
+
+/* ==========================================
+   Grid
+========================================== */
+
+.BannerGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(360px, 1fr));
+
+    gap: 28px;
+
+}
+
+/* ==========================================
+   Loading
+========================================== */
+
+.LoadingWrapper {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 65vh;
+
+}
+
+.LoadingWrapper h2 {
+
+    color: #9ca3af;
+
+    font-size: 24px;
+
+}
+
+/* ==========================================
+   Empty State
+========================================== */
+
+.EmptyBanner {
+
+    grid-column: 1/-1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 80px 20px;
+
+    border-radius: 22px;
+
+    border: 2px dashed rgba(255, 255, 255, .08);
+
+    background: #171d30;
+
+}
+
+.EmptyBanner i {
+
+    font-size: 90px;
+
+    color: #6366f1;
+
+    margin-bottom: 20px;
+
+}
+
+.EmptyBanner h2 {
+
+    color: white;
+
+    margin-bottom: 10px;
+
+    font-size: 28px;
+
+}
+
+.EmptyBanner p {
+
+    color: #9ca3af;
+
+    font-size: 16px;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:992px) {
+
+    .PageHeader {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .PrimaryBtn {
+
+        width: 100%;
+
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .BannerPage {
+
+        padding: 20px;
+
+    }
+
+    .PageHeader h1 {
+
+        font-size: 28px;
+
+    }
+
+    .BannerGrid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+@media (max-width:480px) {
+
+    .BannerPage {
+
+        padding: 16px;
+
+    }
+
+    .PageHeader h1 {
+
+        font-size: 24px;
+
+    }
+
+    .PrimaryBtn {
+
+        padding: 12px 18px;
+
+        font-size: 14px;
+
+    }
+
+}

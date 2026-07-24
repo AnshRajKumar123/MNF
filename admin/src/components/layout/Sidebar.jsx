@@ -10,6 +10,7 @@ const Sidebar = ({ isMobileOpen, closeMobileSidebar }) => {
         { path: "/orders", label: "Orders", icon: "bx-receipt" },
         { path: "/users", label: "Users", icon: "bx-user-check" },
         { path: "/coupons", label: "Coupons", icon: "bx-purchase-tag-alt" },
+        { path: "/banners", label: "Banners", icon: "bx bx-images" },
         { path: "/settings", label: "Settings", icon: "bx-cog" },
     ];
 

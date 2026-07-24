@@ -57,7 +57,7 @@ const addProduct = async (req, res) => {
             price,
             description,
             foodType,
-            image: `/uploads/${req.file.filename}`,
+            image: `/uploads/products/${req.file.filename}`,
         });
 
         return res.status(201).json({
@@ -114,7 +114,7 @@ const updateProduct = async (req, res) => {
         product.isAvailable = isAvailable;
 
         if (req.file) {
-            product.image = `/uploads/${req.file.filename}`;
+            product.image = `/uploads/products/${req.file.filename}`;
         }
 
         await product.save();
