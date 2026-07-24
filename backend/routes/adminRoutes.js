@@ -4,7 +4,7 @@ const router = express.Router();
 
 const adminAuthMiddleware = require("../middleware/adminAuthMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
-const createUploader = require("../middleware/multer");
+const createUploader = require("../config/multer");
 
 const upload = createUploader("products");
 
