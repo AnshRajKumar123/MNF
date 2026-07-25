@@ -17,6 +17,7 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./ComponentJSX/ProtectedRoute";
 import NotFound from './PagesJSX/NotFound'
 import OrderHistory from "./PagesJSX/OrderHistory";
+import ForgotPassword from "./PagesJSX/ForgotPassword";
 
 const App = () => {
     return (
@@ -40,6 +41,7 @@ const App = () => {
                     <Route path="/help-success" element={<HelpSuccess />} />
                     <Route path="/track-order/:orderId" element={<TrackOrder />} />
                     <Route path="/order-history" element={<OrderHistory />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
 
                 </Route>
 

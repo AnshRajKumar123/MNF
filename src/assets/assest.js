@@ -460,7 +460,7 @@ export const midnightAuthData = {
     signIn: {
         title: "Sign In",
         tagline: "Or use your authenticated account signature",
-        forgotText: "Forgot Authentication Secret?"
+        forgotText: "Forgot Authentication Password?"
     },
     signUp: {
         title: "Create Account",

@@ -109,7 +109,7 @@ const SignInUp = () => {
                             </div>
                         </div>
 
-                        <p className="AuthForgotSecretAction">{midnightAuthData.signIn.forgotText}</p>
+                        <Link to="/forgot-password" className="AuthForgotSecretAction">{midnightAuthData.signIn.forgotText}</Link>
 
                         <button type="submit" className="ProAuthSubmitCTA">
                             Sign In <i className='bx bx-log-in-circle'></i>
