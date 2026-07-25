@@ -11,7 +11,8 @@ const {
     getProfile,
     updateProfile,
     uploadProfileImage,
-    removeProfileImage
+    removeProfileImage,
+    forgotPassword,
 } = require("../controllers/authController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -35,6 +36,11 @@ router.delete(
     "/remove-profile-image",
     authMiddleware,
     removeProfileImage
+);
+
+router.post(
+    "/forgot-password",
+    forgotPassword
 );
 
 module.exports = router;

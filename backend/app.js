@@ -72,5 +72,6 @@ app.use("/admin/settings", adminSettingsRoutes);
 app.use("/admin/inventory", adminInventoryRoutes);
 app.use("/admin/banners", adminBannerRoutes);
 app.use("/admin/profile", adminProfileRoutes);
+require("./services/emailService");
 
 module.exports = app;

@@ -10,4 +10,25 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-module.exports = transporter;
+// TEMPORARY - verify connection
+transporter.verify((error, success) => {
+    if (error) {
+        console.log("❌ Email configuration error:");
+        console.log(error);
+    } else {
+        console.log("✅ Email server is ready.");
+    }
+});
+
+const sendEmail = async ({ to, subject, html }) => {
+    await transporter.sendMail({
+        from: `"MidNight Food" <${process.env.EMAIL_USER}>`,
+        to,
+        subject,
+        html,
+    });
+};
+
+module.exports = {
+    sendEmail,
+};

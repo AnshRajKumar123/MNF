@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
+const { sendEmail } = require("../services/emailService");
 
 const registerUser = async (req, res) => {
     try {
@@ -270,6 +272,102 @@ const removeProfileImage = async (req, res) => {
 
 };
 
+const forgotPassword = async (req, res) => {
+
+    try {
+
+        const { email, role } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email is required."
+            });
+        }
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "No account found with this email."
+            });
+        }
+
+        // Prevent using the wrong portal
+        if (role === "admin" && !user.isAdmin) {
+            return res.status(403).json({
+                success: false,
+                message: "This email is not registered as an admin."
+            });
+        }
+
+        if (role === "customer" && user.isAdmin) {
+            return res.status(403).json({
+                success: false,
+                message: "Please use the admin portal."
+            });
+        }
+
+        // Generate secure token
+        const resetToken = crypto.randomBytes(32).toString("hex");
+
+        // Hash token before saving
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(resetToken)
+            .digest("hex");
+
+        user.resetPasswordToken = hashedToken;
+        user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+
+        await user.save();
+
+        const baseUrl =
+            role === "admin"
+                ? process.env.ADMIN_FRONTEND_URL
+                : process.env.FRONTEND_URL;
+
+        const resetLink = `${baseUrl}/reset-password/${resetToken}`;
+
+        await sendEmail({
+            to: user.email,
+            subject: "Reset Your MidNight Food Password",
+            html: `
+                <h2>Password Reset Request</h2>
+
+                <p>Hello ${user.fullName},</p>
+
+                <p>You requested to reset your password.</p>
+
+                <p>
+                    <a href="${resetLink}">
+                        Reset Password
+                    </a>
+                </p>
+
+                <p>This link will expire in 15 minutes.</p>
+
+                <p>If you didn't request this, please ignore this email.</p>
+            `
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset email sent successfully."
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     registerUser,
     loginUser,
@@ -277,5 +375,6 @@ module.exports = {
     logoutUser,
     updateProfile,
     uploadProfileImage,
-    removeProfileImage
+    removeProfileImage,
+    forgotPassword
 };
