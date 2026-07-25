@@ -74,7 +74,17 @@ const userSchema = new mongoose.Schema(
         twoFactorSecret: {
             type: String,
             default: ""
-        }
+        },
+
+        resetPasswordToken: {
+            type: String,
+            default: "",
+        },
+
+        resetPasswordExpires: {
+            type: Date,
+            default: null,
+        },
     },
     {
         timestamps: true,
