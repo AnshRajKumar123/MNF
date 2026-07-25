@@ -13,6 +13,8 @@ const {
     uploadProfileImage,
     removeProfileImage,
     forgotPassword,
+    resetPassword,
+    validateResetToken,
 } = require("../controllers/authController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -41,6 +43,16 @@ router.delete(
 router.post(
     "/forgot-password",
     forgotPassword
+);
+
+router.post(
+    "/reset-password/:token",
+    resetPassword
+);
+
+router.get(
+    "/reset-password/:token",
+    validateResetToken
 );
 
 module.exports = router;

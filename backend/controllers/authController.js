@@ -368,6 +368,123 @@ const forgotPassword = async (req, res) => {
 
 };
 
+const resetPassword = async (req, res) => {
+
+    try {
+
+        const { token } = req.params;
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({
+                success: false,
+                message: "Password is required."
+            });
+        }
+
+        // Hash the token received from the URL
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+
+        const user = await User.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: {
+                $gt: new Date()
+            }
+        });
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid or expired reset link."
+            });
+        }
+
+        // Prevent resetting an admin password from the customer endpoint
+        if (user.isAdmin) {
+            return res.status(403).json({
+                success: false,
+                message: "Please use the admin reset password page."
+            });
+        }
+
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        user.password = hashedPassword;
+
+        // Clear reset fields
+        user.resetPasswordToken = "";
+        user.resetPasswordExpires = null;
+
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully."
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
+const validateResetToken = async (req, res) => {
+
+    try {
+
+        const { token } = req.params;
+
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+
+        const user = await User.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: {
+                $gt: new Date()
+            }
+        });
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Reset link is invalid or has expired."
+            });
+        }
+
+        if (user.isAdmin) {
+            return res.status(403).json({
+                success: false,
+                message: "Please use the admin reset password page."
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Reset link is valid."
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     registerUser,
     loginUser,
@@ -376,5 +493,7 @@ module.exports = {
     updateProfile,
     uploadProfileImage,
     removeProfileImage,
-    forgotPassword
+    forgotPassword,
+    resetPassword,
+    validateResetToken
 };
