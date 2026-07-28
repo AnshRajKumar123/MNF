@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-
-import Card from "../../admin/src/components/ui/Card";
-import Input from "../../admin/src/components/ui/Input";
-import Button from "../../admin/src/components/ui/Button";
-
-import { forgotPassword } from "../services/";
-
+import { forgotPassword } from "../services/authService";
 import "../PagesCSS/ForgotPassword.css";
 
 const ForgotPassword = () => {
@@ -50,10 +44,9 @@ const ForgotPassword = () => {
     };
 
     return (
-
         <div className="ForgotPasswordPage">
 
-            <Card className="ForgotPasswordCard">
+            <div className="ForgotPasswordCard">
 
                 <div className="ForgotPasswordHeader">
 
@@ -64,8 +57,8 @@ const ForgotPassword = () => {
                     <h1>Forgot Password</h1>
 
                     <p>
-                        Enter the email address associated with your account.
-                        We'll send you a secure password reset link.
+                        Enter your registered email address.
+                        We'll send you a password reset link.
                     </p>
 
                 </div>
@@ -75,39 +68,37 @@ const ForgotPassword = () => {
                     onSubmit={handleSubmit}
                 >
 
-                    <Input
-                        icon="bx bx-envelope"
+                    <input
                         type="email"
+                        className="ForgotInput"
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
-                    <Button
+                    <button
                         type="submit"
-                        loading={loading}
+                        className="ForgotButton"
+                        disabled={loading}
                     >
-                        {loading
-                            ? "Sending..."
-                            : "Send Reset Link"}
-                    </Button>
+                        {loading ? "Sending..." : "Send Reset Link"}
+                    </button>
 
                 </form>
 
                 <div className="ForgotFooter">
 
-                    <Link to="/login">
+                    <Link to="/SignInUp">
                         <i className="bx bx-arrow-back"></i>
                         Back to Login
                     </Link>
 
                 </div>
 
-            </Card>
+            </div>
 
         </div>
-
     );
 
 };

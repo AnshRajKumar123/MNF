@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../ComponentCSS/SignInUp.css";
 import { ResturantIG, midnightAuthData } from "../assets/assest";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { API_URL } from "../config/api";
