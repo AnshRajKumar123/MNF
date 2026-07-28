@@ -121,7 +121,7 @@ const updateProduct = async (req, res) => {
             const oldImagePath = path.join(
                 __dirname,
                 "..",
-                product.image
+                product.image.replace(/^\/+/, "")
             );
 
             console.log("Resolved Path:", oldImagePath);
