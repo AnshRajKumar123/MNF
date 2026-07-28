@@ -115,24 +115,29 @@ const updateProduct = async (req, res) => {
 
         if (req.file) {
 
-            // Delete old image
-            if (product.image) {
+            console.log("========== PRODUCT IMAGE UPDATE ==========");
+            console.log("Old DB Image:", product.image);
 
-                const oldImagePath = path.join(
-                    __dirname,
-                    "../public",
-                    product.image
-                );
+            const oldImagePath = path.join(
+                __dirname,
+                "..",
+                product.image
+            );
 
-                if (fs.existsSync(oldImagePath)) {
-                    fs.unlinkSync(oldImagePath);
-                }
+            console.log("Resolved Path:", oldImagePath);
+            console.log("File Exists:", fs.existsSync(oldImagePath));
 
+            if (product.image && fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+                console.log("✅ Old image deleted");
+            } else {
+                console.log("❌ Old image NOT deleted");
             }
 
-            // Save new image
             product.image = `/uploads/products/${req.file.filename}`;
 
+            console.log("New Image:", product.image);
+            console.log("========================================");
         }
 
         await product.save();
