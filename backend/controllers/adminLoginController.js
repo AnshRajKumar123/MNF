@@ -2,6 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const speakeasy = require("speakeasy");
+const crypto = require("crypto");
+const { sendEmail } = require("../services/emailService");
 
 const adminLogin = async (req, res) => {
     try {
@@ -171,8 +173,178 @@ const adminLogout = (req, res) => {
 
 };
 
+const forgotPassword = async (req, res) => {
+
+    try {
+
+        const { email } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user || !user.isAdmin) {
+            return res.status(404).json({
+                success: false,
+                message: "Admin account not found."
+            });
+        }
+
+        const resetToken = crypto.randomBytes(32).toString("hex");
+
+        user.resetPasswordToken = crypto
+            .createHash("sha256")
+            .update(resetToken)
+            .digest("hex");
+
+        user.resetPasswordExpires = new Date(
+            Date.now() + 15 * 60 * 1000
+        );
+
+        await user.save({
+            validateBeforeSave: false,
+        });
+
+        const resetUrl =
+            `${process.env.ADMIN_FRONTEND_URL}/reset-password/${resetToken}`;
+
+        const html = `
+            <h2>Admin Password Reset</h2>
+
+            <p>You requested to reset your admin account password.</p>
+
+            <p>
+                <a href="${resetUrl}">
+                    Reset Password
+                </a>
+            </p>
+
+            <p>This link expires in 15 minutes.</p>
+        `;
+
+        await sendEmail({
+            to: user.email,
+            subject: "Admin Password Reset",
+            html,
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset link sent successfully.",
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
+const validateResetToken = async (req, res) => {
+
+    try {
+
+        const { token } = req.params;
+
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+
+        const user = await User.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: {
+                $gt: new Date()
+            }
+        });
+
+        if (!user || !user.isAdmin) {
+            return res.status(400).json({
+                success: false,
+                message: "Reset link is invalid or has expired."
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Reset link is valid."
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
+
+const resetPassword = async (req, res) => {
+
+    try {
+
+        const { token } = req.params;
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({
+                success: false,
+                message: "Password is required."
+            });
+        }
+
+        const hashedToken = crypto
+            .createHash("sha256")
+            .update(token)
+            .digest("hex");
+
+        const user = await User.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: {
+                $gt: new Date()
+            }
+        });
+
+        if (!user || !user.isAdmin) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid or expired reset link."
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        user.password = hashedPassword;
+        user.resetPasswordToken = "";
+        user.resetPasswordExpires = null;
+
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully."
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     adminLogin,
     verifyTwoFactorLogin,
     adminLogout,
+    forgotPassword,
+    validateResetToken,
+    resetPassword
 };

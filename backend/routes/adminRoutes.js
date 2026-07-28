@@ -8,7 +8,15 @@ const createUploader = require("../config/multer");
 
 const upload = createUploader("products");
 
-const { adminLogin, verifyTwoFactorLogin, adminLogout, } = require("../controllers/adminLoginController");
+const {
+    adminLogin,
+    verifyTwoFactorLogin,
+    adminLogout,
+    forgotPassword,
+    validateResetToken,
+    resetPassword
+} = require("../controllers/adminLoginController");
+
 const { getAdminProfile, } = require("../controllers/adminController");
 const { getDashboard, } = require("../controllers/adminDashboardController");
 const { getProducts, addProduct, updateProduct, deleteProduct, } = require("../controllers/adminProductController");
@@ -23,6 +31,10 @@ const { getAllUsers, getSingleUser, } = require("../controllers/adminUserControl
 router.post("/login", adminLogin);
 router.post("/verify-2fa-login", verifyTwoFactorLogin);
 router.post("/logout", adminLogout);
+
+router.post("/forgot-password", forgotPassword);
+router.get("/reset-password/:token", validateResetToken);
+router.post("/reset-password/:token", resetPassword);
 
 
 // ============================
