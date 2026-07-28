@@ -114,30 +114,17 @@ const updateProduct = async (req, res) => {
         product.isAvailable = isAvailable;
 
         if (req.file) {
-
-            console.log("========== PRODUCT IMAGE UPDATE ==========");
-            console.log("Old DB Image:", product.image);
-
             const oldImagePath = path.join(
                 __dirname,
                 "..",
                 product.image.replace(/^\/+/, "")
             );
 
-            console.log("Resolved Path:", oldImagePath);
-            console.log("File Exists:", fs.existsSync(oldImagePath));
-
             if (product.image && fs.existsSync(oldImagePath)) {
                 fs.unlinkSync(oldImagePath);
-                console.log("✅ Old image deleted");
-            } else {
-                console.log("❌ Old image NOT deleted");
             }
 
             product.image = `/uploads/products/${req.file.filename}`;
-
-            console.log("New Image:", product.image);
-            console.log("========================================");
         }
 
         await product.save();
@@ -177,14 +164,13 @@ const deleteProduct = async (req, res) => {
 
             const imagePath = path.join(
                 __dirname,
-                "../public",
-                product.image
+                "..",
+                product.image.replace(/^\/+/, "")
             );
 
             if (fs.existsSync(imagePath)) {
                 fs.unlinkSync(imagePath);
             }
-
         }
 
         await Product.findByIdAndDelete(id);
