@@ -15,12 +15,23 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminLayout from "./components/layout/AdminLayout";
 import Profile from "./pages/Profile";
 
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 function App() {
     return (
         <Routes>
+
             <Route path="/" element={<Login />} />
+
+            {/* Public Routes */}
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+
             <Route element={<ProtectedRoute />}>
+
                 <Route element={<AdminLayout />}>
+
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/orders" element={<Orders />} />
@@ -28,12 +39,14 @@ function App() {
                     <Route path="/coupons" element={<Coupons />} />
                     <Route path="/banners" element={<Banners />} />
                     <Route path="/settings" element={<Settings />} />
-
-
                     <Route path="/profile" element={<Profile />} />
+
                 </Route>
+
             </Route>
+
             <Route path="*" element={<NotFound />} />
+
         </Routes>
     );
 

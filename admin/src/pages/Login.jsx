@@ -7,6 +7,7 @@ import Button from "../components/ui/Button";
 import { loginAdmin, getAdminProfile, verifyAdminLogin } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -172,6 +173,12 @@ const Login = () => {
                                         onChange={handleChange}
                                         required
                                     />
+
+                                    <div className="ForgotPasswordLink">
+                                        <Link to="/forgot-password">
+                                            Forgot Password?
+                                        </Link>
+                                    </div>
 
                                     <button
                                         type="button"

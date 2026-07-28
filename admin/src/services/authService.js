@@ -60,3 +60,47 @@ export const disableTwoFactor = async () => {
     return response.data;
 
 };
+
+// ===========================
+// Admin Forgot Password
+// ===========================
+
+export const forgotPassword = async (email) => {
+
+    const response = await api.post(
+        "/admin/forgot-password",
+        { email }
+    );
+
+    return response.data;
+
+};
+
+// ===========================
+// Validate Reset Token
+// ===========================
+
+export const validateResetToken = async (token) => {
+
+    const response = await api.get(
+        `/admin/reset-password/${token}`
+    );
+
+    return response.data;
+
+};
+
+// ===========================
+// Reset Password
+// ===========================
+
+export const resetPassword = async (token, password) => {
+
+    const response = await api.post(
+        `/admin/reset-password/${token}`,
+        { password }
+    );
+
+    return response.data;
+
+};
