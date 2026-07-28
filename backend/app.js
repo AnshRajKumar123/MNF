@@ -42,10 +42,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors({
     origin: [
-        "http://10.59.92.183:5173",
-        "http://10.59.92.183:5174",
-        "https://midnightfood.vercel.app",
-        "https://mnf-admin.vercel.app"
+        process.env.FRONTEND_URL,
+        process.env.ADMIN_FRONTEND_URL,
     ],
     credentials: true,
 }));
