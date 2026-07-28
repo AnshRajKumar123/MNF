@@ -114,7 +114,25 @@ const updateProduct = async (req, res) => {
         product.isAvailable = isAvailable;
 
         if (req.file) {
+
+            // Delete old image
+            if (product.image) {
+
+                const oldImagePath = path.join(
+                    __dirname,
+                    "../public",
+                    product.image
+                );
+
+                if (fs.existsSync(oldImagePath)) {
+                    fs.unlinkSync(oldImagePath);
+                }
+
+            }
+
+            // Save new image
             product.image = `/uploads/products/${req.file.filename}`;
+
         }
 
         await product.save();
