@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config/api";
 
 const Profile = () => {
-    
+
     const [profile, setProfile] = useState({
         name: "",
         phone: "",
@@ -212,7 +212,7 @@ const Profile = () => {
             const response = await axios.put(
                 `${API_URL}/auth/profile`,
                 {
-                    phone: profile.phone, 
+                    phone: profile.phone,
                     country: profile.country,
                     dial: profile.dial,
                     building: profile.building,
@@ -244,6 +244,13 @@ const Profile = () => {
         setShakeField("");
     };
 
+    const profileImage =
+        profile.image && profile.image.startsWith("http")
+            ? profile.image
+            : profile.image
+                ? `${API_URL}${profile.image}`
+                : "";
+
     return (
         <>
             <AnotherNav />
@@ -257,7 +264,7 @@ const Profile = () => {
                     <div className="ProUserLogoBadge">
                         {profile.image ? (
                             <img
-                                src={`${API_URL}${profile.image}`}
+                                src={profileImage}
                                 alt="User Profile Avatar"
                             />
                         ) : (
