@@ -70,7 +70,7 @@ const adminLogin = async (req, res) => {
             sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
-        
+
         return res.status(200).json({
             success: true,
             message: "Admin login successful.",
@@ -137,8 +137,8 @@ const verifyTwoFactorLogin = async (req, res) => {
 
         res.cookie("adminToken", jwtToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -164,7 +164,11 @@ const verifyTwoFactorLogin = async (req, res) => {
 
 const adminLogout = (req, res) => {
 
-    res.clearCookie("adminToken");
+    res.clearCookie("adminToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     return res.status(200).json({
         success: true,
