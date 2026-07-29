@@ -26,7 +26,13 @@ const GuestRoute = ({ children }) => {
 
     }, []);
 
-    if (loading) return null;
+    if (loading) {
+        return (
+            <h1 style={{ color: "white", textAlign: "center", marginTop: "100px" }}>
+                Loading...
+            </h1>
+        );
+    }
 
     return loggedIn
         ? <Navigate to="/mainWebsite" replace />
