@@ -61,7 +61,11 @@ const Profile = () => {
             });
 
             if (data.admin.image) {
-                setPreview(`${API_URL}/${data.admin.image.replace(/^\/+/, "")}`);
+                if (data.admin.image.startsWith("http")) {
+                    setPreview(data.admin.image);
+                } else {
+                    setPreview(`${API_URL}/${data.admin.image.replace(/^\/+/, "")}`);
+                }
             } else {
                 setPreview("");
             }

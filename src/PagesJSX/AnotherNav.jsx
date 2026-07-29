@@ -66,6 +66,13 @@ const AnotherNav = () => {
         setIsSideDrawerOpen(prev => !prev);
     };
 
+    const navbarProfileImage =
+        userProfile?.image && userProfile.image.startsWith("http")
+            ? userProfile.image
+            : userProfile?.image
+                ? `${API_URL}${userProfile.image}`
+                : "";
+
     return (
         <>
             <section className='ProOceanicAnotherNav'>
@@ -127,7 +134,7 @@ const AnotherNav = () => {
                         <button className="NaviAccount NaviAdd">
                             {userProfile?.image ? (
                                 <img
-                                    src={`${API_URL}${userProfile.image}`}
+                                    src={navbarProfileImage}
                                     className="NavProfileImg"
                                     alt="Profile"
                                 />

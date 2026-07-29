@@ -55,6 +55,13 @@ const Navbar = ({ onOpenMobileDrawer }) => {
         if (e.key === 'Enter') handleSearch();
     };
 
+    const navbarProfileImage =
+        userProfile?.image && userProfile.image.startsWith("http")
+            ? userProfile.image
+            : userProfile?.image
+                ? `${API_URL}${userProfile.image}`
+                : "";
+
     return (
         <nav className="ProOceanicNavbar">
             {/* BRAND LOGO */}
@@ -109,7 +116,7 @@ const Navbar = ({ onOpenMobileDrawer }) => {
                     <button className="NaviAccount NaviAdd">
                         {userProfile?.image ? (
                             <img
-                                src={`${API_URL}${userProfile.image}`}
+                                src={navbarProfileImage}
                                 className="NavProfileImg"
                                 alt="Profile"
                             />

@@ -26,11 +26,15 @@ const Navbar = ({ onToggleSidebar }) => {
     const currentMeta = getPageTitle(location.pathname);
 
     // Format admin image URL safely
+    const defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        admin?.fullName || "Admin"
+    )}&background=6366f1&color=fff`;
+
     const adminLogoUrl = admin?.image
-        ? `${API_URL}/${admin.image.replace(/^\/+/, "")}`
-        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            admin?.fullName || "Admin"
-        )}&background=6366f1&color=fff`;
+        ? (admin.image.startsWith("http")
+            ? admin.image
+            : `${API_URL}/${admin.image.replace(/^\/+/, "")}`)
+        : defaultAvatar;
 
     return (
         <header className="AdminNavbar">
@@ -81,9 +85,7 @@ const Navbar = ({ onToggleSidebar }) => {
                             alt={admin?.fullName || "Admin Logo"}
                             className="AdminLogoImg"
                             onError={(e) => {
-                                e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                    admin?.fullName || "Admin"
-                                )}&background=6366f1&color=fff`;
+                                e.target.src = defaultAvatar;
                             }}
                         />
                         <span className="UserOnlineDot"></span>
