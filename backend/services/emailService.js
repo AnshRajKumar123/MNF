@@ -1,12 +1,14 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.EMAIL_HOST,
+    port: Number(process.env.EMAIL_PORT),
+    secure: process.env.EMAIL_PORT == 465, // false for port 587
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
-    family: 4,
+    connectionTimeout: 10000, // 10 seconds timeout
 });
 
 transporter.verify((err) => {
@@ -18,7 +20,7 @@ transporter.verify((err) => {
 });
 
 const sendEmail = async ({ to, subject, html }) => {
-    await transporter.sendMail({
+    return await transporter.sendMail({
         from: `"MidNight Food" <${process.env.EMAIL_USER}>`,
         to,
         subject,
