@@ -19,6 +19,7 @@ const invoiceRoutes = require("./routes/invoiceRoutes");
 const couponRoutes = require("./routes/couponRoutes");
 const settingsRoutes = require("./routes/settingsRoutes");
 const bannerRoutes = require("./routes/bannerRoutes");
+const { sendEmail } = require("./services/emailService");
 
 const adminRoutes = require("./routes/adminRoutes");
 const adminCouponRoutes = require("./routes/adminCouponRoutes");
