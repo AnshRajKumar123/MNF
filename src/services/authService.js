@@ -5,7 +5,7 @@ export const forgotPassword = async (email) => {
 
     const { data } = await api.post(
         "/auth/forgot-password",
-        { email }
+        { email, role: "customer"}
     );
 
     return data;

@@ -69,7 +69,7 @@ export const forgotPassword = async (email) => {
 
     const response = await api.post(
         "/admin/forgot-password",
-        { email }
+        { email, role: "admin" }
     );
 
     return response.data;
