@@ -8,22 +8,34 @@ const GuestRoute = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-
         const check = async () => {
+            console.log("1. Starting profile request");
 
             try {
-                await api.get("/auth/profile");
+                const res = await api.get("/auth/profile");
+
+                console.log("2. Success");
+                console.log(res.data);
+
                 setLoggedIn(true);
-            } catch {
+            } catch (err) {
+                console.log("3. Error");
+                console.log(err);
+
+                if (err.response) {
+                    console.log(err.response.status);
+                    console.log(err.response.data);
+                }
+
                 setLoggedIn(false);
             } finally {
+                console.log("4. Finally");
+
                 setLoading(false);
             }
-
         };
 
         check();
-
     }, []);
 
     if (loading) {
