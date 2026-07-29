@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const cloudinary = require("../config/cloudinary");
 const { sendEmail } = require("../services/emailService");
 
 const registerUser = async (req, res) => {
@@ -196,23 +197,14 @@ const uploadProfileImage = async (req, res) => {
 
         const user = await User.findById(req.user.id);
 
-        // Delete old image if it exists
-        if (user.image) {
-
-            const oldImagePath = path.join(
-                __dirname,
-                "..",
-                user.image
-            );
-
-            if (fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath);
-            }
+        // Delete previous image from Cloudinary
+        if (user.imagePublicId) {
+            await cloudinary.uploader.destroy(user.imagePublicId);
         }
 
-        const imagePath = `/uploads/profile/${req.file.filename}`;
-
-        user.image = imagePath;
+        // Save new image details
+        user.image = req.file.path;
+        user.imagePublicId = req.file.filename;
 
         await user.save();
 

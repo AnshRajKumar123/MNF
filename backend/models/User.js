@@ -61,6 +61,11 @@ const userSchema = new mongoose.Schema(
             default: "",
         },
 
+        imagePublicId: {
+            type: String,
+            default: "",
+        },
+
         isAdmin: {
             type: Boolean,
             default: false,
