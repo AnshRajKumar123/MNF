@@ -1,13 +1,20 @@
 const multer = require("multer");
 const path = require("path");
-const adminSettingsController = require("../controllers/adminSettingsController");
+const fs = require("fs");
 
 const createUploader = (folderName) => {
+
+    const uploadPath = path.join(__dirname, "..", "uploads", folderName);
+
+    // Create folder if it doesn't exist
+    if (!fs.existsSync(uploadPath)) {
+        fs.mkdirSync(uploadPath, { recursive: true });
+    }
 
     const storage = multer.diskStorage({
 
         destination: (req, file, cb) => {
-            cb(null, `uploads/${folderName}`);
+            cb(null, uploadPath);
         },
 
         filename: (req, file, cb) => {
