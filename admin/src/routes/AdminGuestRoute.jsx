@@ -1,4 +1,4 @@
- import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../config/axios";
 
@@ -24,7 +24,11 @@ const AdminGuestRoute = ({ children }) => {
     }, []);
 
     if (loading) {
-        return null;
+        return (
+            <h1 style={{ color: "white", textAlign: "center", marginTop: "100px" }}>
+                Loading...
+            </h1>
+        );
     }
 
     return loggedIn
