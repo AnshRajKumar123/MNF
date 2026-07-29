@@ -222,9 +222,12 @@ const uploadProfileImage = async (req, res) => {
 
     } catch (error) {
 
-        console.error("UPLOAD ERROR");
-        console.error(error);
-        console.error(error.stack);
+        console.log("========== CLOUDINARY ERROR ==========");
+
+        console.dir(error, { depth: null });
+
+        console.log("message:", error.message);
+        console.log("stack:", error.stack);
 
         return res.status(500).json({
             success: false,
