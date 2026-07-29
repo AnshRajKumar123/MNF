@@ -29,7 +29,7 @@ const App = () => {
             <Routes>
 
                 <Route path='/' element={<HeroSect />} />
-                <Route path="/signInUp" element={<GuestRoute><SignInUp /></GuestRoute>} />
+                <Route path="/SignInUp" element={<GuestRoute><SignInUp /></GuestRoute>} />
 
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
