@@ -30,7 +30,24 @@ router.put("/profile", authMiddleware, updateProfile);
 router.post(
     "/upload-profile-image",
     authMiddleware,
-    uploadProfile.single("image"),
+    (req, res, next) => {
+
+        uploadProfile.single("image")(req, res, function (err) {
+
+            if (err) {
+                console.log("========== MULTER ERROR ==========");
+                console.dir(err, { depth: null });
+
+                return res.status(500).json({
+                    success: false,
+                    message: err.message,
+                });
+            }
+
+            next();
+        });
+
+    },
     uploadProfileImage
 );
 
