@@ -144,7 +144,12 @@ const getProfile = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-    res.clearCookie("userToken");
+
+    res.clearCookie("userToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     return res.status(200).json({
         success: true,
@@ -189,6 +194,7 @@ const uploadProfileImage = async (req, res) => {
     try {
 
         if (!req.file) {
+            console.log(req.file);
             return res.status(400).json({
                 success: false,
                 message: "Please select an image.",
