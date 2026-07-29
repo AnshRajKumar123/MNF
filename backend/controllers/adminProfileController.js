@@ -1,6 +1,4 @@
 const User = require("../models/User");
-const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcryptjs");
 const speakeasy = require("speakeasy");
 const QRCode = require("qrcode");
@@ -35,61 +33,50 @@ const getProfile = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
-
     try {
 
         const admin = await User.findById(req.user.id);
 
         if (!admin) {
             return res.status(404).json({
+                success: false,
                 message: "Admin not found."
             });
         }
 
-        if (req.body.fullName)
+        if (req.body.fullName) {
             admin.fullName = req.body.fullName;
+        }
 
-        if (req.body.phone)
+        if (req.body.phone) {
             admin.phone = req.body.phone;
+        }
 
+        // Cloudinary upload
         if (req.file) {
-
-            if (admin.image) {
-
-                const oldImage = path.join(
-                    __dirname,
-                    "..",
-                    admin.image
-                );
-
-                if (fs.existsSync(oldImage)) {
-                    fs.unlinkSync(oldImage);
-                }
-
-            }
-
-            admin.image = `/uploads/admin/${req.file.filename}`;
-
+            admin.image = req.file.path;
         }
 
         await admin.save();
 
-        res.json({
+        return res.status(200).json({
             success: true,
             message: "Profile updated successfully.",
-            admin
+            admin,
         });
 
     } catch (error) {
 
-        console.log(error);
+        console.error("UPDATE PROFILE ERROR");
+        console.error(error);
+        console.error(error.stack);
 
-        res.status(500).json({
-            message: error.message
+        return res.status(500).json({
+            success: false,
+            message: error.message,
         });
 
     }
-
 };
 
 const changePassword = async (req, res) => {
