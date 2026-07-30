@@ -66,8 +66,7 @@ const Profile = () => {
 
     const handleLogout = async () => {
         try {
-
-            const response = await axios.post(
+            await axios.post(
                 `${API_URL}/auth/logout`,
                 {},
                 {
@@ -75,18 +74,11 @@ const Profile = () => {
                 }
             );
 
-            showToast(response.data.message);
+            localStorage.removeItem("mnfUserLoggedIn");
 
-            setTimeout(() => {
-                navigate("/SignInUp");
-            }, 1000);
-
+            navigate("/");
         } catch (error) {
-
-            showToast(
-                error.response?.data?.message || "Something went wrong"
-            );
-
+            console.error(error);
         }
     };
 

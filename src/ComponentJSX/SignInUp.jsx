@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../ComponentCSS/SignInUp.css";
 import { ResturantIG, midnightAuthData } from "../assets/assest";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +20,14 @@ const SignInUp = () => {
         email: "",
         password: "",
     });
+
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem("mnfUserLoggedIn") === "true";
+
+        if (isLoggedIn) {
+            navigate("/mainWebsite");
+        }
+    }, []);
 
     const handleSignInChange = (e) => {
         setSignInData({
@@ -64,15 +72,9 @@ const SignInUp = () => {
                 }
             );
 
-            console.log("Login response:", response.data);
-
             toast.success(response.data.message);
-
-            console.log("Before navigate");
-
+            localStorage.setItem("mnfUserLoggedIn", "true");
             window.location.href = "/mainWebsite";
-
-            console.log("After navigate");
 
         } catch (error) {
             console.log(error);

@@ -13,8 +13,9 @@ const HeroSect = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        const isLoggedIn = localStorage.getItem("mnfUserLoggedIn");
-        if (isLoggedIn === "true") {
+        const isLoggedIn = localStorage.getItem("mnfUserLoggedIn") === "true";
+
+        if (isLoggedIn) {
             navigate("/mainWebsite");
         } else {
             navigate("/SignInUp");
