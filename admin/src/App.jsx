@@ -17,13 +17,11 @@ import Profile from "./pages/Profile";
 
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-// import AdminGuestRoute from "./routes/AdminGuestRoute";
 
 function App() {
     return (
         <Routes>
 
-            {/* <Route path="/" element={<AdminGuestRoute><Login /></AdminGuestRoute>} /> */}
             <Route path="/" element={<Login />} />
 
             {/* Public Routes */}
