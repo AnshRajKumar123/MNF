@@ -76,7 +76,7 @@ const Profile = () => {
 
             localStorage.removeItem("mnfUserLoggedIn");
 
-            navigate("/");
+            navigate("/SignInUp");
         } catch (error) {
             console.error(error);
         }
