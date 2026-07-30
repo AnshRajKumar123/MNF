@@ -19,7 +19,7 @@ import NotFound from './PagesJSX/NotFound'
 import OrderHistory from "./PagesJSX/OrderHistory";
 import ForgotPassword from "./PagesJSX/ForgotPassword";
 import ResetPassword from "./PagesJSX/ResetPassword";
-import GuestRoute from './ComponentJSX/GuestRoute'
+// import GuestRoute from './ComponentJSX/GuestRoute'
 
 const App = () => {
     return (
@@ -29,7 +29,9 @@ const App = () => {
             <Routes>
 
                 <Route path='/' element={<HeroSect />} />
-                <Route path="/SignInUp" element={<GuestRoute><SignInUp /></GuestRoute>} />
+                {/* <Route path="/SignInUp" element={<GuestRoute><SignInUp /></GuestRoute>} /> */}
+                <Route path="/SignInUp" element={<SignInUp />} />
+
 
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/reset-password/:token" element={<ResetPassword />} />
