@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Card from "../components/ui/Card";
@@ -22,6 +22,15 @@ const Login = () => {
         email: "",
         password: "",
     });
+
+    useEffect(() => {
+        const isAdminLoggedIn =
+            localStorage.getItem("mnfAdminLoggedIn") === "true";
+
+        if (isAdminLoggedIn) {
+            navigate("/dashboard", { replace: true });
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         setLoginData({
@@ -54,6 +63,7 @@ const Login = () => {
             const data = await getAdminProfile();
 
             setAdmin(data.admin);
+            localStorage.setItem("mnfAdminLoggedIn", "true");
 
             toast.success("Authentication successful! Welcome Back.");
 
@@ -88,6 +98,7 @@ const Login = () => {
             const data = await getAdminProfile();
 
             setAdmin(data.admin);
+            localStorage.setItem("mnfAdminLoggedIn", "true");
 
             toast.success("Login successful.");
 

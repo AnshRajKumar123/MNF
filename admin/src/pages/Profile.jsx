@@ -207,10 +207,13 @@ const Profile = () => {
         try {
             await logoutAdmin();
             setAdmin(null);
+            localStorage.removeItem("mnfAdminLoggedIn");
             toast.success("Logged out successfully.");
-            navigate("/login");
+            navigate("/", { replace: true });
         } catch (error) {
-            toast.error(error.response?.data?.message || "Logout failed.");
+            toast.error(
+                error.response?.data?.message || "Logout failed."
+            );
         }
     };
 
