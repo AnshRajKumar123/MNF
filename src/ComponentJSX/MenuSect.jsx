@@ -4,6 +4,7 @@ import HoriZontalScroll from './HoriZontalScroll';
 import SingleProduct from './SingleProduct';
 import { midnightMenuData } from '../assets/assest';
 import api from "../config/axios";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const MenuSect = () => {
     const [allProducts, setAllProducts] = useState([]);
@@ -45,7 +46,7 @@ const MenuSect = () => {
 
             } catch (error) {
 
-                console.log(error);
+                console.error(error);
 
             }
 
@@ -109,7 +110,7 @@ const MenuSect = () => {
 
         } catch (error) {
 
-            console.log(error);
+            console.error(error);
 
         }
 
@@ -142,7 +143,10 @@ const MenuSect = () => {
 
                     <div className="DrawerConsoleBody">
                         <div className="DrawerImageFrame">
-                            <img src={selectedProduct.image} alt={selectedProduct.name} />
+                            <img
+                                src={getImageUrl(selectedProduct.image)}
+                                alt={selectedProduct.name}
+                            />
                         </div>
 
                         <h2>{selectedProduct.name}</h2>
