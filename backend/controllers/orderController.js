@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const { validateCoupon } = require("../utils/couponHelper");
 const Coupon = require("../models/couponModel");
-const Settings = require("../models/Settings");
+const Settings = require("../models/settingsModel");
 
 const placeOrder = async (req, res) => {
 
