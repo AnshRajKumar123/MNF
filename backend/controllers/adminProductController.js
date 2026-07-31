@@ -1,7 +1,6 @@
 const Product = require("../models/Product");
 const slugify = require("slugify");
-const fs = require("fs");
-const path = require("path");
+const cloudinary = require("../config/cloudinary");
 
 const getProducts = async (req, res) => {
     try {
@@ -57,7 +56,8 @@ const addProduct = async (req, res) => {
             price,
             description,
             foodType,
-            image: `/uploads/products/${req.file.filename}`,
+            image: req.file.path,
+            imagePublicId: req.file.filename,
         });
 
         return res.status(201).json({
@@ -114,17 +114,12 @@ const updateProduct = async (req, res) => {
         product.isAvailable = isAvailable;
 
         if (req.file) {
-            const oldImagePath = path.join(
-                __dirname,
-                "..",
-                product.image.replace(/^\/+/, "")
-            );
-
-            if (product.image && fs.existsSync(oldImagePath)) {
-                fs.unlinkSync(oldImagePath);
+            if (product.imagePublicId) {
+                await cloudinary.uploader.destroy(product.imagePublicId);
             }
 
-            product.image = `/uploads/products/${req.file.filename}`;
+            product.image = req.file.path;
+            product.imagePublicId = req.file.filename;
         }
 
         await product.save();
@@ -160,17 +155,8 @@ const deleteProduct = async (req, res) => {
             });
         }
 
-        if (product.image) {
-
-            const imagePath = path.join(
-                __dirname,
-                "..",
-                product.image.replace(/^\/+/, "")
-            );
-
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
-            }
+        if (product.imagePublicId) {
+            await cloudinary.uploader.destroy(product.imagePublicId);
         }
 
         await Product.findByIdAndDelete(id);

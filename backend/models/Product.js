@@ -104,6 +104,11 @@ const productSchema = new mongoose.Schema({
         default: 0
     },
 
+    imagePublicId: {
+        type: String,
+        default: "",
+    }
+
 }, {
     timestamps: true,
 });

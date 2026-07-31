@@ -54,7 +54,13 @@ const updateProfile = async (req, res) => {
 
         // Cloudinary upload
         if (req.file) {
+
+            if (admin.imagePublicId) {
+                await cloudinary.uploader.destroy(admin.imagePublicId);
+            }
+
             admin.image = req.file.path;
+            admin.imagePublicId = req.file.filename;
         }
 
         await admin.save();
