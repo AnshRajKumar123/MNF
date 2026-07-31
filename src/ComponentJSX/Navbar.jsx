@@ -3,7 +3,7 @@ import '../ComponentCSS/Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { midnightFoodData } from '../assets/assest';
 import axios from "axios";
-import { API_URL } from "../config/api";
+import { getImageUrl } from "../utils/getImageUrl";
 import { useSettings } from "../context/SettingsContext";
 
 const Navbar = ({ onOpenMobileDrawer }) => {
@@ -55,12 +55,7 @@ const Navbar = ({ onOpenMobileDrawer }) => {
         if (e.key === 'Enter') handleSearch();
     };
 
-    const navbarProfileImage =
-        userProfile?.image && userProfile.image.startsWith("http")
-            ? userProfile.image
-            : userProfile?.image
-                ? `${API_URL}${userProfile.image}`
-                : "";
+    const navbarProfileImage = getImageUrl(userProfile?.image);
 
     return (
         <nav className="ProOceanicNavbar">

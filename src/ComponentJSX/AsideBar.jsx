@@ -3,7 +3,7 @@ import '../ComponentCSS/AsideBar.css';
 import { ResturantIG, midnightFoodData } from '../assets/assest';
 import { Link, useLocation } from 'react-router-dom';
 import api from "../config/axios";
-import { API_URL } from "../config/api";
+import { getImageUrl } from "../utils/getImageUrl";
 import { useSettings } from "../context/SettingsContext";
 
 const AsideBar = () => {
@@ -38,7 +38,6 @@ const AsideBar = () => {
     const toggleTheme = () => {
         const nextTheme = theme === "light-ocean" ? "dark-blue" : "light-ocean";
         setTheme(nextTheme);
-        localStorage.setItem("MNF_OceanTheme", nextTheme);
         window.dispatchEvent(new Event("mnfThemeChanged"));
     };
 
@@ -67,7 +66,7 @@ const AsideBar = () => {
                 <button className="Weblogo">
                     {settings?.restaurantLogo && (
                         <img
-                            src={`${API_URL}${settings.restaurantLogo}`}
+                            src={getImageUrl(settings.restaurantLogo)}
                             alt={settings?.restaurantName}
                             className="RestaurantLogo"
                         />
