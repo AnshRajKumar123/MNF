@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "../ui/Button";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const UserTable = ({ users, onView }) => {
-    const backendURL = import.meta.env.VITE_API_URL;
 
     return (
         <div className="TableWrapper">
@@ -28,11 +28,13 @@ const UserTable = ({ users, onView }) => {
                         </tr>
                     ) : (
                         users.map((user) => {
+                            const defaultImage = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                user.fullName || "User"
+                            )}&background=6366f1&color=fff`;
+
                             const imageUrl = user.image
-                                ? `${backendURL}${user.image}`
-                                : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                    user.fullName || "User"
-                                )}&background=6366f1&color=fff`;
+                                ? getImageUrl(user.image)
+                                : defaultImage;
 
                             return (
                                 <tr key={user._id}>
@@ -43,9 +45,7 @@ const UserTable = ({ users, onView }) => {
                                                 alt={user.fullName}
                                                 className="UserTableAvatar"
                                                 onError={(e) => {
-                                                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                                                        user.fullName || "User"
-                                                    )}&background=6366f1&color=fff`;
+                                                    e.target.src = defaultImage;
                                                 }}
                                             />
                                             <div className="UserTableMeta">
