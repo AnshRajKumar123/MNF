@@ -91,14 +91,23 @@ const Cart = () => {
 
     }, []);
 
-    const updateQuantity = (index, delta) => {
-        const updated = [...cartItems];
-        const newQty = updated[index].quantity + delta;
-        if (newQty <= 0) return;
-        updated[index].quantity = newQty;
-        setCartItems(updated);
-        localStorage.setItem("cartItems", JSON.stringify(updated));
-        window.dispatchEvent(new Event("cartUpdated"));
+    const updateQuantity = async (cartId, delta) => {
+        try {
+            const currentItem = cartItems.find(item => item._id === cartId);
+            if (!currentItem) return;
+            const newQuantity = currentItem.quantity + delta;
+            if (newQuantity < 1) return;
+            const res = await api.patch(
+                `/cart/update/${cartId}`,
+                {
+                    quantity: newQuantity,
+                }
+            );
+            setCartItems(res.data.cart);
+            window.dispatchEvent(new Event("cartUpdated"));
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const removeItem = async (cartId) => {
@@ -211,11 +220,11 @@ const Cart = () => {
 
                             {/* QUANTITY COUNTER NODE */}
                             <div className="ProCartQtyBox">
-                                <button className="ProQtyActionBtn" onClick={() => updateQuantity(index, -1)}>
+                                <button className="ProQtyActionBtn" onClick={() => updateQuantity(item._id, -1)}>
                                     <i className='bx bx-minus'></i>
                                 </button>
                                 <span className="ProQtyValueDisplay">{item.quantity}</span>
-                                <button className="ProQtyActionBtn" onClick={() => updateQuantity(index, 1)}>
+                                <button className="ProQtyActionBtn" onClick={() => updateQuantity(item._id, 1)}>
                                     <i className='bx bx-plus'></i>
                                 </button>
                             </div>
