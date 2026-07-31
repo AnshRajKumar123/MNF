@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 
+console.log("🚀 Using Brevo SMTP");
 const transporter = nodemailer.createTransport({
     host: "smtp-relay.brevo.com",
     port: 587,
@@ -9,6 +10,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASS,
     },
 });
+console.log(process.env.SMTP_USER);
 
 const sendEmail = async ({ to, subject, html }) => {
     try {
