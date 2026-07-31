@@ -158,23 +158,52 @@ const logoutUser = (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
+
     try {
 
-        const { phone, country, dial, building, address, pincode, gender, image, } = req.body;
+        const {
+            phone,
+            country,
+            dial,
+            building,
+            address,
+            pincode,
+            gender,
+        } = req.body;
+
+        const updateData = {
+            phone,
+            country,
+            dial,
+            building,
+            address,
+            pincode,
+            gender,
+        };
+
+        // Upload image if provided
+        if (req.file) {
+
+            const user = await User.findById(req.user.id);
+
+            // Delete previous Cloudinary image
+            if (user.imagePublicId) {
+                await cloudinary.uploader.destroy(user.imagePublicId);
+            }
+
+            updateData.image = req.file.path;
+            updateData.imagePublicId = req.file.filename;
+        }
 
         const updatedUser = await User.findByIdAndUpdate(
             req.user.id,
-            { phone, country, dial, building, address, pincode, gender, image, },
-
-            {
-                new: true,
-            }
+            updateData,
+            { new: true }
         ).select("-password");
 
-        // 3️⃣ Return the updated user
         return res.status(200).json({
             success: true,
-            message: "Profile updated successfully",
+            message: "Profile updated successfully.",
             user: updatedUser,
         });
 
@@ -188,6 +217,7 @@ const updateProfile = async (req, res) => {
         });
 
     }
+
 };
 
 const uploadProfileImage = async (req, res) => {

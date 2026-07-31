@@ -30,14 +30,16 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
     });
 
     const handleImageUpload = (e) => {
+
         const file = e.target.files[0];
+
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setNewAddress({ ...newAddress, image: reader.result });
-        };
-        reader.readAsDataURL(file);
+        setNewAddress((prev) => ({
+            ...prev,
+            image: file,
+        }));
+
     };
 
     useEffect(() => {
@@ -96,17 +98,35 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
 
         try {
 
-            await api.put("/auth/profile", {
-                phone: newAddress.phone,
-                building: newAddress.building,
-                address: newAddress.address,
-                pincode: newAddress.pincode,
-                image: newAddress.image,
-            });
+            const formData = new FormData();
+
+            formData.append("phone", newAddress.phone);
+            formData.append("building", newAddress.building);
+            formData.append("address", newAddress.address);
+            formData.append("pincode", newAddress.pincode);
+
+            if (newAddress.image) {
+                formData.append("image", newAddress.image);
+            }
+
+            const { data } = await api.put(
+                "/auth/profile",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
 
             const profileAddress = {
                 id: "profile",
-                ...newAddress,
+                name: data.user.fullName,
+                phone: data.user.phone,
+                building: data.user.building,
+                address: data.user.address,
+                pincode: data.user.pincode,
+                image: data.user.image,
             };
 
             setAddresses([profileAddress]);
@@ -314,7 +334,11 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                                                 <div className="ProAddrAvatarShield">
                                                     {addr.image ? (
                                                         <img
-                                                            src={addr.image ? `${API_URL}${addr.image}` : ""}
+                                                            src={
+                                                                addr.image.startsWith("http")
+                                                                    ? addr.image
+                                                                    : `${API_URL}${addr.image}`
+                                                            }
                                                             alt={addr.name}
                                                         />
                                                     ) : (
@@ -342,7 +366,7 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                             <div className="ProNewAddrFormFieldsStack">
                                 <label className="ProImageUploadContainerBox">
                                     {newAddress.image ? (
-                                        <img src={newAddress.image} className="ProPreviewImageElement" alt="" />
+                                        <img src={URL.createObjectURL(newAddress.image)} className="ProPreviewImageElement" alt="" />
                                     ) : (
                                         <div className="ProPlaceholderImgContent">
                                             <i className='bx bx-cloud-upload'></i>
