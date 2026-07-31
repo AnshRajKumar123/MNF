@@ -5,6 +5,7 @@ import { midnightFoodData } from '../assets/assest';
 import axios from "axios";
 import { getImageUrl } from "../utils/getImageUrl";
 import { useSettings } from "../context/SettingsContext";
+import { API_URL } from '../config/api';
 
 const Navbar = ({ onOpenMobileDrawer }) => {
     const [searchTerm, setSearchTerm] = useState('');
