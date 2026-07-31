@@ -1,7 +1,8 @@
 import React from "react";
-import { API_URL } from "../../config/api";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const TopProducts = ({ products }) => {
+    const defaultDishImage = "https://via.placeholder.com/55?text=Dish";
     return (
         <div className="DashboardBentoCard">
             <div className="BentoCardHeader">
@@ -23,10 +24,10 @@ const TopProducts = ({ products }) => {
 
                             <div className="TopProductImgFrame">
                                 <img
-                                    src={`${API_URL}${product.image}`}
+                                    src={product.image ? getImageUrl(product.image) : defaultDishImage}
                                     alt={product.name}
                                     onError={(e) => {
-                                        e.target.src = "https://via.placeholder.com/55?text=Dish";
+                                        e.target.src = defaultDishImage;
                                     }}
                                 />
                             </div>

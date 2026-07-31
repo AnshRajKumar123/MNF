@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts, deleteProduct } from "../services/productService";
 import "../styles/Products.css";
 import ProductModal from "../components/products/ProductModal";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -120,7 +121,11 @@ const Products = () => {
                                         <div className="ProductImageFrame">
                                             <img
                                                 className="ProductImage"
-                                                src={`http://10.59.92.183:3000${product.image}`}
+                                                src={
+                                                    product.image
+                                                        ? getImageUrl(product.image)
+                                                        : "https://via.placeholder.com/70?text=No+Image"
+                                                }
                                                 alt={product.name}
                                                 onError={(e) => {
                                                     e.target.src = "https://via.placeholder.com/70?text=No+Image";

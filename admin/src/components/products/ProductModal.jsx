@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../styles/ProductModal.css";
 import { addProduct, updateProduct } from "../../services/productService";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
     const [form, setForm] = useState({
@@ -40,7 +41,7 @@ const ProductModal = ({ isOpen, onClose, onSuccess, product }) => {
         });
 
         if (product.image) {
-            setPreview(`http://10.59.92.183:3000${product.image}`);
+            setPreview(getImageUrl(product.image));
         } else {
             setPreview("");
         }
