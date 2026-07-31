@@ -1,5 +1,5 @@
 import React from "react";
-import { getImageUrl } from "../utils/getImageUrl";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const UserProfileHeader = ({ user }) => {
 
