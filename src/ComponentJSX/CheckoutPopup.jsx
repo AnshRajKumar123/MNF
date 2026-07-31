@@ -4,6 +4,7 @@ import { ResturantIG, midnightCheckoutData, midnightOrderSuccessData } from "../
 import api from "../config/axios";
 import { API_URL } from "../config/api";
 import { useSettings } from "../context/SettingsContext";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTotal, clearCartData }) => {
     const [step, setStep] = useState("address"); // "address" | "payment" | "success"
@@ -334,11 +335,7 @@ const CheckoutPopup = ({ closePopup, appliedCoupon, deliveryType, tip, finalTota
                                                 <div className="ProAddrAvatarShield">
                                                     {addr.image ? (
                                                         <img
-                                                            src={
-                                                                addr.image.startsWith("http")
-                                                                    ? addr.image
-                                                                    : `${API_URL}${addr.image}`
-                                                            }
+                                                            src={getImageUrl(addr.image)}
                                                             alt={addr.name}
                                                         />
                                                     ) : (

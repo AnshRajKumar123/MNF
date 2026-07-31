@@ -7,6 +7,7 @@ import { logoutAdmin, disableTwoFactor } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Profile.css";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const Profile = () => {
     const [profile, setProfile] = useState(null);
@@ -60,15 +61,7 @@ const Profile = () => {
                 email: data.admin.email || "",
             });
 
-            if (data.admin.image) {
-                if (data.admin.image.startsWith("http")) {
-                    setPreview(data.admin.image);
-                } else {
-                    setPreview(`${API_URL}/${data.admin.image.replace(/^\/+/, "")}`);
-                }
-            } else {
-                setPreview("");
-            }
+            setPreview(getImageUrl(data.admin.image));
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to load profile.");
         } finally {

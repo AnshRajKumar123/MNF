@@ -3,10 +3,14 @@ import { getImageUrl } from "../utils/getImageUrl";
 
 const UserProfileHeader = ({ user }) => {
 
-    const imageUrl = user.image
+    const defaultImage = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        user?.fullName || "User"
+    )}&background=6366f1&color=fff`;
+
+    const imageUrl = user?.image
         ? getImageUrl(user.image)
         : defaultImage;
-        
+
     return (
         <div className="UserProfileHeader">
             <div className="UserProfileLeft">
@@ -15,9 +19,7 @@ const UserProfileHeader = ({ user }) => {
                     alt={user?.fullName}
                     className="UserProfileImage"
                     onError={(e) => {
-                        e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            user?.fullName || "User"
-                        )}&background=6366f1&color=fff`;
+                        e.target.src = defaultImage;
                     }}
                 />
             </div>

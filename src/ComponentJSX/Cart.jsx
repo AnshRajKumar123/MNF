@@ -4,6 +4,7 @@ import { ResturantIG, midnightCartData } from '../assets/assest';
 import CheckoutPopup from "../ComponentJSX/CheckoutPopup";
 import api from "../config/axios";
 import { useSettings } from "../context/SettingsContext";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -194,7 +195,7 @@ const Cart = () => {
                         <div key={index} className="ProCartItemCard">
                             <div className="ProItemInfoCluster">
                                 <div className="ProCartImageFrame">
-                                    <img src={item.product.image} alt={item.name} />
+                                    <img src={getImageUrl(item.product.image)} alt={item.product.name} />
                                 </div>
                                 <div className="ProItemTextMeta">
                                     <h2>{item.product.name}</h2>

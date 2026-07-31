@@ -6,6 +6,7 @@ import { midnightProfileData } from "../assets/assest";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config/api";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const Profile = () => {
 
@@ -235,13 +236,8 @@ const Profile = () => {
         setTimeout(() => setGlow(false), 1000);
         setShakeField("");
     };
-
-    const profileImage =
-        profile.image && profile.image.startsWith("http")
-            ? profile.image
-            : profile.image
-                ? `${API_URL}${profile.image}`
-                : "";
+    
+    const profileImage = getImageUrl(profile.image);
 
     return (
         <>
