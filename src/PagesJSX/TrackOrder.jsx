@@ -413,7 +413,16 @@ const TrackOrder = () => {
                                 )}
 
                                 <div className="CostRow">
-                                    <span>Delivery Charge</span>
+                                    <span>Shipping</span>
+                                    <strong>
+                                        {order.shippingCharge === 0
+                                            ? "FREE"
+                                            : `₹${order.shippingCharge}`}
+                                    </strong>
+                                </div>
+
+                                <div className="CostRow">
+                                    <span>Delivery Upgrade</span>
                                     <strong>
                                         {order.deliveryCharge === 0
                                             ? "FREE"

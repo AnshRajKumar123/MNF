@@ -15,22 +15,32 @@ const Cart = () => {
     const [showCheckout, setShowCheckout] = useState(false);
     const { settings } = useSettings();
 
+    const BASE_CHARGE =
+        settings?.delivery?.baseCharge ?? 40;
+
+    const EXPRESS_CHARGE =
+        settings?.delivery?.expressCharge ?? 80;
+
     const deliveryOptions = {
+
         express: {
             label: "Express Transport",
-            price: settings?.delivery?.expressCharge ?? 50,
+            price: EXPRESS_CHARGE,
             time: settings?.delivery?.expressTime || "15-20 mins",
         },
+
         standard: {
             label: "Standard Fleet",
-            price: settings?.delivery?.baseCharge ?? 10,
+            price: 0,
             time: settings?.delivery?.standardTime || "20-25 mins",
         },
+
         economy: {
             label: "Eco Saver Link",
             price: 0,
             time: settings?.delivery?.economyTime || "25-30 mins",
-        },
+        }
+
     };
 
     const [activeTab, setActiveTab] = useState("delivery");
