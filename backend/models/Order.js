@@ -92,6 +92,11 @@ const orderSchema = new mongoose.Schema(
             default: "On Process",
         },
 
+        shippingCharge: {
+            type: Number,
+            default: 0,
+        },
+
         deliveryType: {
             type: String,
             enum: ["express", "standard", "economy"],

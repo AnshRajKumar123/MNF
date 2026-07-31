@@ -2,6 +2,7 @@ const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const { validateCoupon } = require("../utils/couponHelper");
 const Coupon = require("../models/couponModel");
+const Settings = require("../models/Settings");
 
 const placeOrder = async (req, res) => {
 
@@ -10,14 +11,15 @@ const placeOrder = async (req, res) => {
         const {
             address,
             paymentMethod,
-            deliveryType,
+            deliveryType = "standard",
             coupon,
             tip = 0,
             paymentStatus,
         } = req.body;
 
-        const cart = await Cart.find({ user: req.user.id })
-            .populate("product");
+        const cart = await Cart.find({
+            user: req.user.id,
+        }).populate("product");
 
         if (cart.length === 0) {
             return res.status(400).json({
@@ -33,7 +35,8 @@ const placeOrder = async (req, res) => {
         }));
 
         const foodTotal = items.reduce(
-            (total, item) => total + item.price * item.quantity,
+            (total, item) =>
+                total + item.price * item.quantity,
             0
         );
 
@@ -54,36 +57,88 @@ const placeOrder = async (req, res) => {
 
         }
 
-        let deliveryMinutes = 20;
+        const settings = await Settings.findOne();
+
+        const deliverySettings =
+            settings?.delivery || {};
+
+        const BASE_CHARGE =
+            Number(deliverySettings.baseCharge) || 40;
+
+        const EXPRESS_CHARGE =
+            Number(deliverySettings.expressCharge) || 80;
+
+        const FREE_DELIVERY_ABOVE =
+            Number(
+                deliverySettings.freeDeliveryAbove
+            ) || 499;
+
+        let shippingCharge = 0;
         let deliveryCharge = 0;
+        let deliveryMinutes = 20;
 
         switch (deliveryType) {
 
             case "express":
+
+                shippingCharge =
+                    foodTotal >= FREE_DELIVERY_ABOVE
+                        ? 0
+                        : BASE_CHARGE;
+
+                deliveryCharge =
+                    EXPRESS_CHARGE;
+
                 deliveryMinutes = 15;
-                deliveryCharge = 49;
+
                 break;
 
             case "standard":
-                deliveryMinutes = 20;
+
+                shippingCharge =
+                    foodTotal >= FREE_DELIVERY_ABOVE
+                        ? 0
+                        : BASE_CHARGE;
+
                 deliveryCharge = 0;
+
+                deliveryMinutes = 20;
+
                 break;
 
             case "economy":
-                deliveryMinutes = 25;
+
+                shippingCharge = 0;
+
                 deliveryCharge = 0;
+
+                deliveryMinutes = 25;
+
                 break;
 
             default:
-                deliveryMinutes = 20;
+
+                shippingCharge =
+                    foodTotal >= FREE_DELIVERY_ABOVE
+                        ? 0
+                        : BASE_CHARGE;
+
                 deliveryCharge = 0;
+
+                deliveryMinutes = 20;
 
         }
 
-        const totalAmount = foodTotal - discount + deliveryCharge + tip;
+        const totalAmount =
+            foodTotal -
+            discount +
+            shippingCharge +
+            deliveryCharge +
+            Number(tip);
 
         const estimatedDelivery = new Date(
-            Date.now() + deliveryMinutes * 60 * 1000
+            Date.now() +
+            deliveryMinutes * 60 * 1000
         );
 
         const riders = [
@@ -107,29 +162,53 @@ const placeOrder = async (req, res) => {
                 phone: "9988776655",
                 vehicle: "HR26BF3321",
                 image: "https://cdn-icons-png.flaticon.com/512/3917/3917036.png",
-            }
+            },
 
         ];
 
         const rider =
-            riders[Math.floor(Math.random() * riders.length)];
+            riders[
+            Math.floor(
+                Math.random() *
+                riders.length
+            )
+            ];
 
         const order = await Order.create({
+
             user: req.user.id,
+
             items,
+
             subtotal: foodTotal,
-            totalAmount,
-            address,
-            paymentMethod,
-            paymentStatus: paymentStatus || "Pending",
-            deliveryType,
-            deliveryMinutes,
-            deliveryCharge,
+
             discount,
+
+            shippingCharge,
+
+            deliveryCharge,
+
+            totalAmount,
+
+            address,
+
+            paymentMethod,
+
+            paymentStatus:
+                paymentStatus || "Pending",
+
+            deliveryType,
+
+            deliveryMinutes,
+
+            tip: Number(tip),
+
             couponCode,
-            tip,
+
             estimatedDelivery,
+
             rider,
+
         });
 
         if (validatedCoupon) {
@@ -145,12 +224,19 @@ const placeOrder = async (req, res) => {
 
         }
 
-        await Cart.deleteMany({ user: req.user.id });
+        await Cart.deleteMany({
+            user: req.user.id,
+        });
 
         return res.status(201).json({
+
             success: true,
-            message: "Order placed successfully",
+
+            message:
+                "Order placed successfully",
+
             order,
+
         });
 
     } catch (error) {
@@ -158,8 +244,12 @@ const placeOrder = async (req, res) => {
         console.log(error);
 
         return res.status(500).json({
+
             success: false,
-            message: "Internal Server Error",
+
+            message:
+                "Internal Server Error",
+
         });
 
     }
@@ -186,7 +276,7 @@ const getOrder = async (req, res) => {
             success: true,
             order,
             serverTime: new Date(),
-        });;
+        });
 
     } catch (error) {
 
@@ -209,7 +299,9 @@ const myOrders = async (req, res) => {
             user: req.user.id,
         })
             .populate("items.product")
-            .sort({ createdAt: -1 });
+            .sort({
+                createdAt: -1,
+            });
 
         return res.status(200).json({
             success: true,
@@ -240,33 +332,31 @@ const cancelOrder = async (req, res) => {
 
         if (!order) {
             return res.status(404).json({
+                success: false,
                 message: "Order not found",
             });
         }
 
         if (order.orderStatus === "Delivered") {
             return res.status(400).json({
+                success: false,
                 message: "Delivered orders cannot be cancelled.",
             });
         }
 
         if (order.orderStatus === "Cancelled") {
             return res.status(400).json({
+                success: false,
                 message: "Order is already cancelled.",
             });
         }
 
-        await Order.updateOne(
-            { _id: order._id },
-            {
-                $set: {
-                    orderStatus: "Cancelled",
-                    cancelReason: "Cancelled by user",
-                },
-            }
-        );
+        order.orderStatus = "Cancelled";
+        order.cancelReason = "Cancelled by user";
 
-        res.json({
+        await order.save();
+
+        return res.status(200).json({
             success: true,
             message: "Order cancelled successfully.",
         });
@@ -275,7 +365,8 @@ const cancelOrder = async (req, res) => {
 
         console.log(error);
 
-        res.status(500).json({
+        return res.status(500).json({
+            success: false,
             message: "Server Error",
         });
 
@@ -294,13 +385,14 @@ const deleteOrder = async (req, res) => {
 
         if (!order) {
             return res.status(404).json({
+                success: false,
                 message: "Order not found",
             });
         }
 
         await order.deleteOne();
 
-        res.json({
+        return res.status(200).json({
             success: true,
             message: "Order removed successfully.",
         });
@@ -309,7 +401,8 @@ const deleteOrder = async (req, res) => {
 
         console.log(error);
 
-        res.status(500).json({
+        return res.status(500).json({
+            success: false,
             message: "Server Error",
         });
 
@@ -322,5 +415,5 @@ module.exports = {
     getOrder,
     myOrders,
     cancelOrder,
-    deleteOrder
+    deleteOrder,
 };
