@@ -44,7 +44,7 @@ const Coupons = () => {
             }
             setShowModal(false);
             setSelectedCoupon(null);
-            loadCoupons();
+            await loadCoupons();
         } catch (error) {
             console.error("Error submitting coupon:", error);
             alert(error?.response?.data?.message || "Failed to process coupon operation.");
@@ -56,7 +56,7 @@ const Coupons = () => {
             await deleteCoupon(deleteCouponId);
             setDeleteModal(false);
             setDeleteCouponId(null);
-            loadCoupons();
+            await loadCoupons();
         } catch (error) {
             console.error("Error deleting coupon:", error);
             alert(error?.response?.data?.message || "Failed to delete coupon.");
@@ -66,7 +66,7 @@ const Coupons = () => {
     const handleToggleCoupon = async (coupon) => {
         try {
             await toggleCoupon(coupon._id);
-            loadCoupons();
+            await loadCoupons();
         } catch (error) {
             console.error("Error toggling coupon:", error);
             alert(error?.response?.data?.message || "Unable to update coupon status.");

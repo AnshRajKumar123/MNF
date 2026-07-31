@@ -59,11 +59,13 @@ const CouponFormModal = ({ open, onClose, onSubmit, initialData = null }) => {
 
     if (!open) return null;
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+    const handleChange = ({ target }) => {
+        const { name, value } = target;
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -96,7 +98,12 @@ const CouponFormModal = ({ open, onClose, onSubmit, initialData = null }) => {
                                 name="code"
                                 placeholder="e.g. MIDNIGHT50"
                                 value={formData.code}
-                                onChange={handleChange}
+                                onChange={(e) =>
+                                    setFormData(prev => ({
+                                        ...prev,
+                                        code: e.target.value.toUpperCase(),
+                                    }))
+                                }
                                 required
                             />
                         </div>
@@ -194,6 +201,7 @@ const CouponFormModal = ({ open, onClose, onSubmit, initialData = null }) => {
                                 type="date"
                                 name="expiresAt"
                                 value={formData.expiresAt}
+                                min={new Date().toISOString().split("T")[0]}
                                 onChange={handleChange}
                                 required
                             />

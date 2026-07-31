@@ -9,7 +9,12 @@ const CouponTable = ({ coupons, onEdit, onDelete, onToggle }) => {
             };
         }
 
-        if (new Date(coupon.expiresAt) < new Date()) {
+        const isExpired =
+            coupon.expiresAt &&
+            new Date(coupon.expiresAt).getTime() < Date.now();
+
+
+        if (isExpired) {
             return {
                 text: "Expired",
                 className: "CouponExpired",
@@ -79,7 +84,7 @@ const CouponTable = ({ coupons, onEdit, onDelete, onToggle }) => {
                                 <td>
                                     <span className="UsagePill">
                                         {coupon.usedCount || 0}
-                                        {coupon.usageLimit > 0 ? ` / ${coupon.usageLimit}` : " (Unlimited)"}
+                                        {Number(coupon.usageLimit) > 0 ? ` / ${coupon.usageLimit}` : " (Unlimited)"}
                                     </span>
                                 </td>
 
