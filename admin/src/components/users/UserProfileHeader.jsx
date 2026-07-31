@@ -1,14 +1,12 @@
 import React from "react";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const UserProfileHeader = ({ user }) => {
-    const backendURL = import.meta.env.VITE_API_URL;
 
-    const imageUrl = user?.image
-        ? `${backendURL}/${user.image.replace(/^\/+/, "")}`
-        : `https://ui-avatars.com/api/?name=${encodeURIComponent(
-              user?.fullName || "User"
-          )}&background=6366f1&color=fff`;
-
+    const imageUrl = user.image
+        ? getImageUrl(user.image)
+        : defaultImage;
+        
     return (
         <div className="UserProfileHeader">
             <div className="UserProfileLeft">
