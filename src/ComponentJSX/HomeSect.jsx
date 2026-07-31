@@ -178,9 +178,7 @@ const HomeSect = () => {
                     {activeBanners.length > 0 ? (
                         activeBanners.slice(0, 1).map((banner) => {
                             // Safe URL formatting to ensure slash between API_URL and banner.image
-                            const bannerImgUrl = banner.image
-                                ? `${API_URL}/${banner.image.replace(/^\/+/, "")}`
-                                : ResturantIG?.AbsoluteBurg;
+                            const bannerImgUrl = getImageUrl(banner.image) || ResturantIG.AbsoluteBurg;
 
                             return (
                                 <div className="ProHeroicBanner" key={banner._id}>
@@ -290,7 +288,7 @@ const HomeSect = () => {
 
                         <div className="DrawerConsoleBody">
                             <div className="DrawerImageFrame">
-                                <img src={selectedProduct.image} alt="" />
+                                <img src={getImageUrl(selectedProduct.image)} alt="" />
                             </div>
                             <h2>{selectedProduct.name}</h2>
                             <span className="ProProductBadge">{selectedProduct.category}</span>
@@ -356,7 +354,7 @@ const HomeSect = () => {
                                             <div className="ProOrderHeaderCluster">
                                                 <div className="OrderImageCapFrame">
                                                     <img
-                                                        src={order.items[0]?.product?.image}
+                                                        src={getImageUrl(order.items[0]?.product?.image)}
                                                         alt=""
                                                     />
                                                 </div>
@@ -510,7 +508,7 @@ const HomeSect = () => {
                         <div className="ProOrderPopupItems">
                             {selectedOrder.items.map((item, index) => (
                                 <div key={index} className="ProPopupOrderItem">
-                                    <img src={item.product?.image} alt="" />
+                                    <img src={getImageUrl(item.product?.image)} alt="" />
                                     <div>
                                         <h4>{item.product?.name}</h4>
                                         <p>Qty : {item.quantity}</p>

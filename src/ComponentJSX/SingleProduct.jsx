@@ -1,7 +1,7 @@
 import React from 'react';
 import '../ComponentCSS/SingleProduct.css';
 import api from "../config/axios";
-import { API_URL } from "../config/api";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const SingleProduct = ({ product }) => {
     if (!product) return null;
@@ -46,7 +46,7 @@ const SingleProduct = ({ product }) => {
             <div className="DiskImageAnchorFrame">
                 <div className="DiskAmbientGlowBackdrop"></div>
                 <img
-                    src={`${API_URL}${product.image}`}
+                    src={getImageUrl(product.image)}
                     alt={product.name}
                 />
                 <span className="DiskFloatingCategoryTag">{product.category}</span>
