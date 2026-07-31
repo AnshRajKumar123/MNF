@@ -55,7 +55,7 @@ const RestaurantCard = ({ settings, setSettings }) => {
                             ) : settings.restaurantLogo ? (
 
                                 <img
-                                    src={`${API_URL}${settings.restaurantLogo}`}
+                                    src={getImageUrl(settings.restaurantLogo)}
                                     alt="Restaurant Logo"
                                 />
 
