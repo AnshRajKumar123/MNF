@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { API_URL } from "../../config/api";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const RestaurantCard = ({ settings, setSettings }) => {
     const handleChange = (e) => {
@@ -23,7 +23,7 @@ const RestaurantCard = ({ settings, setSettings }) => {
             restaurantLogoPreview: URL.createObjectURL(file),
         });
 
-};
+    };
 
     return (
         <div className="SettingsCard FullWidthCard">
@@ -48,7 +48,7 @@ const RestaurantCard = ({ settings, setSettings }) => {
                             {settings.restaurantLogoPreview ? (
 
                                 <img
-                                    src={settings.restaurantLogoPreview}
+                                    src={getImageUrl(settings.restaurantLogo)}
                                     alt="Restaurant Logo"
                                 />
 

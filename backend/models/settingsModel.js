@@ -12,6 +12,11 @@ const settingsSchema = new mongoose.Schema({
         default: ""
     },
 
+    restaurantLogoPublicId: {
+        type: String,
+        default: "",
+    },
+
     phone: {
         type: String,
         default: ""

@@ -1,6 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
+const cloudinary = require("../config/cloudinary");
 const Settings = require("../models/settingsModel");
 
 exports.getSettings = async (req, res) => {
@@ -40,26 +38,15 @@ exports.updateSettings = async (req, res) => {
             settings = await Settings.create({});
         }
 
-        // Upload new logo
         if (req.file) {
 
-            // Delete old logo
-            if (settings.restaurantLogo) {
-
-                const oldPath = path.join(
-                    __dirname,
-                    "..",
-                    settings.restaurantLogo
-                );
-
-                if (fs.existsSync(oldPath)) {
-                    fs.unlinkSync(oldPath);
-                }
-
+            // Delete previous Cloudinary logo
+            if (settings.restaurantLogoPublicId) {
+                await cloudinary.uploader.destroy(settings.restaurantLogoPublicId);
             }
 
-            req.body.restaurantLogo =
-                `/uploads/settings/${req.file.filename}`;
+            req.body.restaurantLogo = req.file.path;
+            req.body.restaurantLogoPublicId = req.file.filename;
         }
 
         // ⭐ ADD THIS BLOCK HERE
