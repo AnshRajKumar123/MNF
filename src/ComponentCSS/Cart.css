@@ -632,117 +632,283 @@
     }
 }
 
+/* ==========================================================================
+   🎉 FESTIVE COUPON SUCCESS POPUP STYLES
+   ========================================================================== */
+
 .CouponPopupOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .45);
-    backdrop-filter: blur(10px);
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    animation: fadeCoupon .25s ease;
+    z-index: 99999;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
+/* Ambient Glow Orbs */
+.PopupGlowOrb {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.OrbPrimary {
+    top: 20%;
+    left: 20%;
+    background: rgba(99, 102, 241, 0.25);
+}
+
+.OrbEmerald {
+    bottom: 20%;
+    right: 20%;
+    background: rgba(16, 185, 129, 0.25);
+}
+
+/* Main Popup Window */
 .CouponPopupCard {
-    width: 430px;
-    max-width: 92%;
-    background: var(--CardBackground);
-    border-radius: 24px;
-    padding: 35px;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, .25);
-    animation: popupScale .35s ease;
+    width: 100%;
+    max-width: 440px;
+    background: #111726;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    padding: 2.2rem 2rem;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    animation: popupSpring 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    box-sizing: border-box;
+}
+
+@keyframes popupSpring {
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Header & Celebration Badge */
+.CouponCelebrationHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
 }
 
 .CouponSuccessIcon {
-    width: 85px;
-    height: 85px;
-    margin: auto;
-    border-radius: 50%;
-    background: #18c964;
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-size: 42px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+    animation: bounceIcon 0.8s ease infinite alternate;
+}
+
+@keyframes bounceIcon {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-6px);
+    }
+}
+
+.SavingsTagPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
 }
 
 .CouponPopupCard h2 {
-    font-size: 26px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #f8fafc;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.5px;
 }
 
 .CouponPopupDescription {
-    color: #7b7b7b;
-    margin-bottom: 25px;
-    line-height: 1.6;
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
 }
 
-.CouponPopupInfo {
+/* ==========================================================================
+   🎫 VOUCHER TICKET CUTOUT CARD STYLES
+   ========================================================================== */
+
+.VoucherTicketCard {
+    width: 100%;
+    background: #090d16;
+    border: 1px dashed rgba(99, 102, 241, 0.4);
+    border-radius: 18px;
+    padding: 18px 20px;
+    position: relative;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    text-align: left;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.CouponInfoRow {
+/* Circular Ticket Notches on Sides */
+.TicketNotch {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 24px;
+    background: #111726;
+    border: 1px solid rgba(99, 102, 241, 0.4);
+}
+
+.NotchLeft {
+    left: -1px;
+    border-radius: 0 16px 16px 0;
+    border-left: none;
+}
+
+.NotchRight {
+    right: -1px;
+    border-radius: 16px 0 0 16px;
+    border-right: none;
+}
+
+.VoucherTopRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f7f8fb;
-    padding: 14px 18px;
-    border-radius: 14px;
+    gap: 10px;
 }
 
-.CouponInfoRow span {
-    color: #666;
+.VoucherCodeBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 800;
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.12);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(99, 102, 241, 0.25);
 }
 
-.CouponInfoRow strong {
-    color: #111;
+.VoucherRateTag {
+    font-size: 13px;
+    font-weight: 800;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.VoucherDescText {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.VoucherDivider {
+    width: 100%;
+    height: 1px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    margin: 2px 0;
+}
+
+.VoucherSavingsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.SavingsLabel {
+    font-size: 12px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .CouponSavedAmount {
-    color: #18c964 !important;
     font-size: 20px;
+    font-weight: 900;
+    color: #10b981;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
 }
 
+/* Main CTA Button */
 .CouponPopupBtn {
     width: 100%;
-    margin-top: 28px;
-    height: 54px;
-    border: none;
+    height: 50px;
+    margin-top: 1.5rem;
     border-radius: 14px;
-    font-size: 17px;
-    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff;
+    font-size: 14.5px;
+    font-weight: 800;
+    border: none;
     cursor: pointer;
-    color: white;
-    background: linear-gradient(135deg, #4f7cff, #2f5fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .CouponPopupBtn:hover {
     transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5);
 }
 
-@keyframes popupScale {
-    from {
-        opacity: 0;
-        transform: scale(.85);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.CouponPopupBtn i {
+    font-size: 20px;
+    transition: transform 0.2s ease;
 }
 
-@keyframes fadeCoupon {
-    from {
-        opacity: 0;
-    }
+.CouponPopupBtn:hover i {
+    transform: translateX(4px);
+}
 
-    to {
-        opacity: 1;
+@media (max-width: 480px) {
+    .CouponPopupCard {
+        padding: 1.8rem 1.4rem;
     }
 }

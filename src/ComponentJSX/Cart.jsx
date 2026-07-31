@@ -419,63 +419,68 @@ const Cart = () => {
             )}
 
             {showCouponPopup && appliedCoupon && (
-                <div className="CouponPopupOverlay">
+                <div className="CouponPopupOverlay" onClick={() => setShowCouponPopup(false)}>
+                    {/* Glow backdrop orbs */}
+                    <div className="PopupGlowOrb OrbPrimary"></div>
+                    <div className="PopupGlowOrb OrbEmerald"></div>
 
-                    <div className="CouponPopupCard">
-
-                        <div className="CouponSuccessIcon">
-                            <i className="bx bxs-badge-check"></i>
+                    <div className="CouponPopupCard" onClick={(e) => e.stopPropagation()}>
+                        {/* Top Confetti / Celebration Header */}
+                        <div className="CouponCelebrationHeader">
+                            <div className="CouponSuccessIcon">
+                                <i className="bx bxs-party"></i>
+                            </div>
+                            <span className="SavingsTagPill">
+                                <i className="bx bx-sparkles"></i> SAVINGS APPLIED
+                            </span>
                         </div>
 
-                        <h2>Coupon Applied Successfully</h2>
-
+                        <h2>Coupon Unlocked!</h2>
                         <p className="CouponPopupDescription">
-                            Your discount has been added to this order.
+                            Great choice! Your promotional discount has been applied to this order.
                         </p>
 
-                        <div className="CouponPopupInfo">
+                        {/* STYLIZED TICKET / VOUCHER CARD */}
+                        <div className="VoucherTicketCard">
+                            {/* Left Side Ticket Notch */}
+                            <div className="TicketNotch NotchLeft"></div>
+                            {/* Right Side Ticket Notch */}
+                            <div className="TicketNotch NotchRight"></div>
 
-                            <div className="CouponInfoRow">
-                                <span>Coupon</span>
-                                <strong>{appliedCoupon.code}</strong>
-                            </div>
+                            <div className="VoucherTopRow">
+                                <div className="VoucherCodeBadge">
+                                    <i className="bx bx-purchase-tag-alt"></i>
+                                    <span>{appliedCoupon.code}</span>
+                                </div>
 
-                            <div className="CouponInfoRow">
-                                <span>Discount</span>
-
-                                <strong>
+                                <div className="VoucherRateTag">
                                     {appliedCoupon.type === "percentage"
-                                        ? `${appliedCoupon.value}%`
-                                        : `₹${appliedCoupon.value}`}
-                                </strong>
+                                        ? `${appliedCoupon.value}% OFF`
+                                        : `₹${appliedCoupon.value} OFF`}
+                                </div>
                             </div>
 
-                            <div className="CouponInfoRow">
-                                <span>Description</span>
-                                <strong>
-                                    {appliedCoupon.description ||
-                                        "Special promotional discount"}
-                                </strong>
-                            </div>
+                            <p className="VoucherDescText">
+                                {appliedCoupon.description || "Special promotional discount applied at checkout."}
+                            </p>
 
-                            <div className="CouponInfoRow">
-                                <span>You Saved</span>
-                                <strong className="CouponSavedAmount">
-                                    ₹{discountAmount}
-                                </strong>
-                            </div>
+                            <div className="VoucherDivider"></div>
 
+                            <div className="VoucherSavingsRow">
+                                <span className="SavingsLabel">Total Instant Savings</span>
+                                <span className="CouponSavedAmount">₹{discountAmount}</span>
+                            </div>
                         </div>
 
+                        {/* Action CTA Button */}
                         <button
                             className="CouponPopupBtn"
                             onClick={() => setShowCouponPopup(false)}
                         >
-                            Awesome!
+                            <span>Awesome, Continue!</span>
+                            <i className="bx bx-right-arrow-alt"></i>
                         </button>
-
                     </div>
-
                 </div>
             )}
 
