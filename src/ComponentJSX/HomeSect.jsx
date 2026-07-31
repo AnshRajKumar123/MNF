@@ -4,7 +4,7 @@ import { ResturantIG, midnightHomeData } from '../assets/assest';
 import SingleProduct from './SingleProduct';
 import Toast from './Toast';
 import api from "../config/axios";
-import { API_URL } from "../config/api";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const HomeSect = () => {
     const [activeSection, setActiveSection] = useState('onprocess');
