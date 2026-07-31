@@ -96,13 +96,6 @@ const loginUser = async (req, res) => {
             }
         );
 
-        // res.cookie("userToken", token, {
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: "none",
-        //     maxAge: 7 * 24 * 60 * 60 * 1000,
-        // });
-
         const isProduction = process.env.NODE_ENV === "production";
 
         res.cookie("userToken", token, {
@@ -153,12 +146,6 @@ const getProfile = async (req, res) => {
 };
 
 const logoutUser = (req, res) => {
-
-    // res.clearCookie("userToken", {
-    //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: "none",
-    // });
 
     const isProduction = process.env.NODE_ENV === "production";
 
