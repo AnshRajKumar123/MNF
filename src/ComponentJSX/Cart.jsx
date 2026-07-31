@@ -10,6 +10,7 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [coupon, setCoupon] = useState("");
     const [appliedCoupon, setAppliedCoupon] = useState(null);
+    const [showCouponPopup, setShowCouponPopup] = useState(false);
     const [showFreePopup, setShowFreePopup] = useState(false);
     const [showCheckout, setShowCheckout] = useState(false);
     const { settings } = useSettings();
@@ -135,6 +136,11 @@ const Cart = () => {
             });
 
             setAppliedCoupon(res.data.coupon);
+            setShowCouponPopup(true);
+
+            setTimeout(() => {
+                setShowCouponPopup(false);
+            }, 3500);
 
             setCoupon("");
 
@@ -409,6 +415,67 @@ const Cart = () => {
                     <div className="ProGlacialToastBody">
                         <i className='bx bxs-party'></i> {midnightCartData.labels.freePopupText}
                     </div>
+                </div>
+            )}
+
+            {showCouponPopup && appliedCoupon && (
+                <div className="CouponPopupOverlay">
+
+                    <div className="CouponPopupCard">
+
+                        <div className="CouponSuccessIcon">
+                            <i className="bx bxs-badge-check"></i>
+                        </div>
+
+                        <h2>Coupon Applied Successfully</h2>
+
+                        <p className="CouponPopupDescription">
+                            Your discount has been added to this order.
+                        </p>
+
+                        <div className="CouponPopupInfo">
+
+                            <div className="CouponInfoRow">
+                                <span>Coupon</span>
+                                <strong>{appliedCoupon.code}</strong>
+                            </div>
+
+                            <div className="CouponInfoRow">
+                                <span>Discount</span>
+
+                                <strong>
+                                    {appliedCoupon.type === "percentage"
+                                        ? `${appliedCoupon.value}%`
+                                        : `₹${appliedCoupon.value}`}
+                                </strong>
+                            </div>
+
+                            <div className="CouponInfoRow">
+                                <span>Description</span>
+                                <strong>
+                                    {appliedCoupon.description ||
+                                        "Special promotional discount"}
+                                </strong>
+                            </div>
+
+                            <div className="CouponInfoRow">
+                                <span>You Saved</span>
+                                <strong className="CouponSavedAmount">
+                                    ₹{discountAmount}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <button
+                            className="CouponPopupBtn"
+                            onClick={() => setShowCouponPopup(false)}
+                        >
+                            Awesome!
+                        </button>
+
+                    </div>
+
                 </div>
             )}
 
