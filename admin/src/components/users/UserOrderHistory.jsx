@@ -1,4 +1,5 @@
 import React from "react";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const UserOrderHistory = ({ orders }) => {
     const getStatusClass = (status) => {
@@ -102,10 +103,11 @@ const UserOrderHistory = ({ orders }) => {
 
                         {order.items?.map((item, index) => {
                             const product = item.product;
-                            const backendURL = import.meta.env.VITE_API_URL;
+                            const defaultDishImage = "https://via.placeholder.com/80?text=Dish";
+
                             const image = product?.image
-                                ? `${backendURL}/${product.image.replace(/^\/+/, "")}`
-                                : "https://via.placeholder.com/80?text=Dish";
+                                ? getImageUrl(product.image)
+                                : defaultDishImage;
 
                             return (
                                 <div key={index} className="OrderItem">
@@ -113,7 +115,7 @@ const UserOrderHistory = ({ orders }) => {
                                         src={image}
                                         alt={product?.name}
                                         onError={(e) => {
-                                            e.target.src = "https://via.placeholder.com/80?text=Dish";
+                                            e.target.src = defaultDishImage;
                                         }}
                                     />
 
