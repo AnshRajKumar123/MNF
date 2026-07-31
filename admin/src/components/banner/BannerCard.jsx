@@ -1,5 +1,5 @@
 import React from "react";
-import { API_URL } from "../../config/api";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const BannerCard = ({ banner, onEdit, onDelete }) => {
     return (
@@ -7,13 +7,17 @@ const BannerCard = ({ banner, onEdit, onDelete }) => {
             {/* BANNER MEDIA CONTAINER */}
             <div className="BannerImageWrapper">
                 <img
-                    src={`${API_URL}${banner.image}`}
+                    src={
+                        banner.image
+                            ? getImageUrl(banner.image)
+                            : "https://via.placeholder.com/600x300?text=Banner+Graphic+Missing"
+                    }
                     alt={banner.title}
                     onError={(e) => {
                         e.target.src = "https://via.placeholder.com/600x300?text=Banner+Graphic+Missing";
                     }}
                 />
-                
+
                 {/* PRIORITY CHIP */}
                 <div className="BannerOverlayBadge PriorityBadge">
                     <i className="bx bx-layer"></i> Priority #{banner.priority || 0}
@@ -47,7 +51,10 @@ const BannerCard = ({ banner, onEdit, onDelete }) => {
                     )}
                     {banner.startDate && (
                         <span className="DateTag">
-                            <i className="bx bx-calendar"></i> {new Date(banner.startDate).toLocaleDateString("en-IN", { month: "short", day: "numeric" })} - {banner.endDate ? new Date(banner.endDate).toLocaleDateString("en-IN", { month: "short", day: "numeric" }) : "Indefinite"}
+                            <i className="bx bx-calendar"></i>
+                            {new Date(banner.startDate).toLocaleDateString("en-IN", { month: "short", day: "numeric" })}
+                            -
+                            {banner.endDate ? new Date(banner.endDate).toLocaleDateString("en-IN", { month: "short", day: "numeric" }) : "Indefinite"}
                         </span>
                     )}
                 </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL } from "../../config/api";
+import { getImageUrl } from "../../utils/getImageUrl";
 
 const initialState = {
     title: "",
@@ -27,7 +27,9 @@ const BannerModal = ({ open, onClose, onSubmit, editingBanner }) => {
             });
 
             setPreview(
-                editingBanner.image ? `${API_URL}${editingBanner.image}` : ""
+                editingBanner.image
+                    ? getImageUrl(editingBanner.image)
+                    : ""
             );
         } else {
             setForm(initialState);
@@ -39,10 +41,12 @@ const BannerModal = ({ open, onClose, onSubmit, editingBanner }) => {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setForm({
-            ...form,
-            [name]: type === "checkbox" ? checked : value,
-        });
+        setForm(prev => ({
+            ...prev,
+            [name]: type === "checkbox"
+                ? checked
+                : value,
+        }));
     };
 
     const submit = (e) => {
@@ -179,7 +183,10 @@ const BannerModal = ({ open, onClose, onSubmit, editingBanner }) => {
                                     onChange={(e) => {
                                         const file = e.target.files[0];
                                         if (!file) return;
-                                        setForm({ ...form, image: file });
+                                        setForm(prev => ({
+                                            ...prev,
+                                            image: file,
+                                        }));
                                         setPreview(URL.createObjectURL(file));
                                     }}
                                 />
