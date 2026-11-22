@@ -1,0 +1,646 @@
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD ENTERPRISE ABOUT SUITE ARCHITECTURE SHEET
+   ========================================================================== */
+
+.ProAboutSuiteWrapper {
+    width: 100%;
+    background-color: var(--bg-primary);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+}
+
+.ProTaglineSectionText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-blue-light);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* --- ADJUSTED TOGGLE LINK ACTION ROW EXTENSION INSIDE NAVBAR --- */
+.NavbarThemeToggleActionBtn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-muted);
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.NavbarThemeToggleActionBtn:hover {
+    color: var(--text-core);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* --- MODULE 1: PREMIUM HERO BILLBOARD PLATFORM --- */
+.ProAboutBanner {
+    height: 440px;
+    width: calc(100% - 8rem);
+    margin: 40px auto 0 auto;
+    background-image: url('/public/VegetablesAbout.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 20px 45px var(--shadow-premium);
+    border: 1px solid var(--border-morphic);
+    box-sizing: border-box;
+}
+
+.BannerGlacialOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10, 17, 40, 0.3) 0%, rgba(10, 17, 40, 0.85) 100%);
+    z-index: 1;
+}
+
+.BannerTypographyContent {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.BannerTypographyContent h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.BannerTypographyContent p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+}
+
+/* --- MODULE 2: HISTORY DOCK PANEL CHANNELS --- */
+.ProAboutJourney {
+    max-width: 1300px;
+    margin: 6rem auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.JourneyInfoTextColumn h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.JourneyInfoTextColumn p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+}
+
+.JourneyImageWrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 20px 45px var(--shadow-premium);
+}
+
+.JourneyImageWrapper img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- MODULE 3: SYSTEM VALUE BENTO MATRIX GRID --- */
+.ProAboutMission {
+    width: 100%;
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-morphic);
+    border-bottom: 1px solid var(--border-morphic);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ProAboutMission h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-top: 4px;
+}
+
+.MissionMainSubtitleText {
+    font-size: 15px;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 750px;
+    margin-top: 0.6rem;
+    line-height: 1.6;
+    margin-bottom: 3.5rem;
+}
+
+.MissionBentoMatrixGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1300px;
+}
+
+.MissionValueCardUnit {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+}
+
+.ValueIconCapFrame img {
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1.2rem;
+}
+
+.MissionValueCardUnit h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 0.6rem;
+}
+
+.MissionValueCardUnit p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.MissionValueCardUnit:hover {
+    border-color: var(--accent-blue-light);
+}
+
+/* --- MODULE 4: ARCHITECT TEAM CARDS DECK --- */
+.ProAboutTeamDeck {
+    max-width: 1300px;
+    margin: 6rem auto 3rem auto;
+    padding: 0 4rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProAboutTeamDeck h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+}
+
+.TeamMainSubtitleText {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 700px;
+    margin-top: 0.6rem;
+    line-height: 1.6;
+    margin-bottom: 3.5rem;
+}
+
+.TeamCardsMatrixGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    width: 100%;
+}
+
+.ProTeamMemberProfileCard {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    box-sizing: border-box;
+}
+
+.MemberAvatarShieldFrame {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border-morphic);
+    margin-bottom: 1.2rem;
+    transition: border-color 0.25s ease;
+}
+
+.MemberAvatarShieldFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProTeamMemberProfileCard h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-bottom: 4px;
+}
+
+.ProTeamMemberProfileCard span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+}
+
+.ProTeamMemberProfileCard:hover .MemberAvatarShieldFrame {
+    border-color: var(--accent-blue-light);
+}
+
+/* --- MODULE 5: BRAND MARKETING CTA PANEL --- */
+.ProAboutCtaStation {
+    width: 100%;
+    padding: 2rem 4rem 6rem 4rem;
+    box-sizing: border-box;
+}
+
+.AboutCtaBoxContainer {
+    max-width: 1220px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--accent-blue-dark) 0%, #102A6B 100%);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px var(--shadow-premium);
+}
+
+.CtaTypographyHub {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.AboutCtaBoxContainer h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.AboutCtaBoxContainer p {
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.8rem 0 1.8rem 0;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.CtaTerminalRedirectBtn {
+    background-color: #ffffff;
+    color: var(--text-core);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.CtaTerminalRedirectBtn:hover {
+    transform: translateY(-2px);
+}
+
+.BackgroundGraphicLeft {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    opacity: 0.12;
+    z-index: 1;
+}
+
+.BackgroundGraphicLeft img {
+    width: 110px;
+}
+
+.BackgroundGraphicRight {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.BackgroundGraphicRight img {
+    width: 150px;
+}
+
+/* --- COMPLIANCE DETAILS DIALOG MODALS --- */
+.TeamModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000 !important;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.TeamModal {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    animation: scaleModalUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
+}
+
+@keyframes scaleModalUp {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.CloseModal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-core);
+    border: none;
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CloseModal:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+.ModalImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid var(--accent-blue-light);
+}
+
+.TeamModal h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    color: var(--text-core);
+    margin-bottom: 4px;
+}
+
+.ModalRole {
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    margin-bottom: 12px;
+    font-size: 12.5px;
+    text-transform: uppercase;
+}
+
+.ModalBio {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.ModalSkills {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.ModalSkills span {
+    background: rgba(58, 134, 200, 0.05);
+    color: var(--accent-blue-light);
+    border: 1px solid var(--border-morphic);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.SocialLinks {
+    margin-top: 1.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.SocialLinks a {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.SocialLinks a i {
+    font-size: 18px;
+}
+
+.SocialLinks a:hover {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   📱 MOBILE & TABLET RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .ProAboutBanner {
+        width: calc(100% - 3rem);
+        height: 360px;
+    }
+
+    .BannerTypographyContent h1 {
+        font-size: 2.4rem;
+    }
+
+    .ProAboutJourney {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 0 2rem;
+        margin: 3.5rem auto;
+    }
+
+    .JourneyImageWrapper img {
+        height: 300px;
+    }
+
+    .MissionBentoMatrixGrid,
+    .TeamCardsMatrixGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .ProAboutMission,
+    .ProAboutTeamDeck,
+    .ProAboutCtaStation {
+        padding: 3rem 1.5rem;
+    }
+
+    .BackgroundGraphicLeft,
+    .BackgroundGraphicRight {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .ProAboutBanner {
+        width: calc(100% - 2rem);
+        height: 260px;
+        margin-top: 20px;
+        border-radius: 16px;
+    }
+
+    .BannerTypographyContent {
+        padding: 0 1rem;
+    }
+
+    .BannerTypographyContent h1 {
+        font-size: 1.8rem;
+    }
+
+    .BannerTypographyContent p {
+        font-size: 13.5px;
+        margin-top: 0.5rem;
+    }
+
+    .ProAboutJourney {
+        padding: 0 1.2rem;
+        margin: 2.5rem auto;
+        gap: 1.8rem;
+    }
+
+    .JourneyInfoTextColumn h2,
+    .ProAboutMission h2,
+    .ProAboutTeamDeck h2,
+    .AboutCtaBoxContainer h2 {
+        font-size: 1.6rem;
+    }
+
+    .JourneyImageWrapper img {
+        height: 220px;
+    }
+
+    .ProAboutMission,
+    .ProAboutTeamDeck,
+    .ProAboutCtaStation {
+        padding: 2.5rem 1.2rem;
+        margin: 0 auto;
+    }
+
+    .MissionMainSubtitleText,
+    .TeamMainSubtitleText {
+        margin-bottom: 2rem;
+        font-size: 13px;
+    }
+
+    .MissionValueCardUnit {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .ProTeamMemberProfileCard {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .MemberAvatarShieldFrame {
+        width: 100px;
+        height: 100px;
+    }
+
+    .AboutCtaBoxContainer {
+        padding: 2.5rem 1.2rem;
+        border-radius: 16px;
+    }
+
+    .AboutCtaBoxContainer p {
+        font-size: 13px;
+    }
+
+    .CtaTerminalRedirectBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+        box-sizing: border-box;
+    }
+}

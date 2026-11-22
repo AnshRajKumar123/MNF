@@ -1,0 +1,82 @@
+require("dotenv").config();
+const connectDB = require("./config/db");
+
+connectDB();
+
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+const cors = require("cors");
+const crypto = require("crypto");
+
+const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const orderRoute = require("./routes/orderRoute");
+const paymentRoutes = require("./routes/paymentRoutes");
+const invoiceRoutes = require("./routes/invoiceRoutes");
+const couponRoutes = require("./routes/couponRoutes");
+const settingsRoutes = require("./routes/settingsRoutes");
+const bannerRoutes = require("./routes/bannerRoutes");
+const { sendEmail } = require("./services/emailService");
+
+const adminRoutes = require("./routes/adminRoutes");
+const adminCouponRoutes = require("./routes/adminCouponRoutes");
+const adminAnalyticsRoutes = require("./routes/adminAnalyticsRoutes");
+const adminSettingsRoutes = require("./routes/adminSettingsRoutes");
+const adminInventoryRoutes = require("./routes/adminInventoryRoutes");
+const adminBannerRoutes = require("./routes/adminBannerRoutes");
+const adminProfileRoutes = require("./routes/adminProfileRoutes");
+
+
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+
+var app = express();
+
+app.use(logger("dev"));
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ extended: true, limit: "20mb" }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(cors({
+    origin: [
+        process.env.FRONTEND_URL,
+        process.env.ADMIN_FRONTEND_URL,
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://10.59.92.183:5173",
+        "http://10.59.92.183:5174",
+    ],
+    credentials: true,
+}));
+
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "uploads"))
+);
+
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/auth", authRoutes);
+app.use("/product", productRoutes);
+app.use("/cart", cartRoutes);
+app.use("/order", orderRoute);
+app.use("/payment", paymentRoutes);
+app.use("/invoice", invoiceRoutes);
+app.use("/coupon", couponRoutes);
+app.use("/settings", settingsRoutes);
+app.use("/banner", bannerRoutes);
+
+app.use("/admin", adminRoutes);
+app.use("/admin/coupons", adminCouponRoutes);
+app.use("/admin/analytics", adminAnalyticsRoutes);
+app.use("/admin/settings", adminSettingsRoutes);
+app.use("/admin/inventory", adminInventoryRoutes);
+app.use("/admin/banners", adminBannerRoutes);
+app.use("/admin/profile", adminProfileRoutes);
+require("./services/emailService");
+
+module.exports = app;

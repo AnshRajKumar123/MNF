@@ -1,0 +1,646 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ADMIN PROFILE & SECURITY MANAGEMENT SHEET
+   ========================================================================== */
+
+.ProfilePage {
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.ProfileLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+/* Header Section */
+.ProfileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.HeaderTitleGroup h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+.LogoutTopBtn {
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 12px;
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.LogoutTopBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
+}
+
+/* Layout Grid Container */
+.ProfileContainer {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    width: 100%;
+}
+
+/* LEFT SIDE: AVATAR CARD */
+.ProfileCard {
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProfileImageBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.ProfileImageBox img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--admin-accent-primary, #6366f1);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.UploadButton {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    color: var(--admin-text-main, #f8fafc);
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.UploadButton:hover {
+    border-color: var(--admin-accent-primary, #6366f1);
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ProfileCard h2 {
+    margin: 1.2rem 0 2px 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ProfileEmailText {
+    margin: 0;
+    color: var(--admin-text-dim, #64748b);
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.ProfileInfo {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.InfoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+}
+
+.InfoRow span {
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 600;
+}
+
+.InfoRow strong {
+    color: var(--admin-text-main, #f8fafc);
+    font-weight: 700;
+}
+
+.RolePill {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: var(--admin-accent-primary, #6366f1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.MonoId {
+    font-family: monospace;
+    color: var(--admin-accent-primary, #6366f1) !important;
+}
+
+/* RIGHT SIDE: FORMS & SECURITY */
+.ProfileRight {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ProfileFormCard,
+.SecuritySummaryCard,
+.TwoFactorCard {
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.CardHeaderTitle h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.CardHeaderTitle h3 i {
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 20px;
+}
+
+.FormGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.FormGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FullWidth {
+    grid-column: 1 / -1;
+}
+
+.FormGroup label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.FormGroup input {
+    height: 44px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 0 14px;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.FormGroup input:focus {
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.ReadOnlyInput {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.SaveButton {
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    align-self: flex-start;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.25s ease;
+}
+
+.SaveButton:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
+}
+
+/* SECURITY PASSKEY TRIGGER ROW */
+.SecurityActionRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.SecurityTextGroup h4 {
+    margin: 0 0 4px 0;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.SecurityTextGroup p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.OpenPasswordModalBtn {
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 12px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.OpenPasswordModalBtn i {
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 18px;
+}
+
+.OpenPasswordModalBtn:hover {
+    border-color: var(--admin-accent-primary, #6366f1);
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.OpenPasswordModalBtn:hover i {
+    color: #ffffff;
+}
+
+/* 2FA STYLES */
+.TwoFactorDesc {
+    font-size: 13px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+.TwoFactorStatus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    font-size: 13px;
+    color: var(--admin-text-muted, #94a3b8);
+}
+
+.StatusBadge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.StatusBadge.Active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.StatusBadge.Active .PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 6px #10b981;
+}
+
+.StatusBadge.Inactive {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.Enable2FABtn {
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.Disable2FAButton {
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 12px;
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+}
+
+.QRCodeBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 16px;
+    text-align: center;
+}
+
+.QRFrame {
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 12px;
+}
+
+.QRFrame img {
+    width: 180px;
+    height: 180px;
+    display: block;
+}
+
+.InstructionText {
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.VerifySlot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.VerifyInput {
+    flex: 1;
+    height: 44px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    border-radius: 12px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: var(--admin-text-main, #f8fafc);
+    outline: none;
+}
+
+/* 🔒 CHANGE PASSWORD MODAL POPUP */
+.PasswordModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.PasswordModal {
+    width: 100%;
+    max-width: 480px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.08));
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.HeaderTitleBlock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.HeaderIcon {
+    font-size: 24px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ModalHeader h2 {
+    font-size: 16.5px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 2px 0;
+}
+
+.ModalHeader p {
+    font-size: 12px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+.CloseModalBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CloseModalBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+
+.PasswordModalForm {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.PasswordInputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.PasswordInputWrapper input {
+    width: 100%;
+    padding-right: 48px;
+    box-sizing: border-box;
+}
+
+.PasswordToggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--admin-text-dim, #64748b);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PasswordToggle:hover {
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ModalFooterActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.CancelModalBtn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .ProfileContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .FormGrid {
+        grid-template-columns: 1fr;
+    }
+}

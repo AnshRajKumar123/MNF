@@ -1,0 +1,782 @@
+/* ==========================================================================
+   🌟 EXECUTIVE USER DIRECTORY & INSPECTION MODAL STYLES
+   ========================================================================== */
+
+.UsersPage {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.UsersLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.UsersLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.UsersLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Page Header */
+.PageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.HeaderTitleGroup h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+.PageHeaderActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.TotalCountPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-accent-primary, #6366f1);
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    padding: 10px 16px;
+    border-radius: 12px;
+}
+
+.SearchInputWrapper {
+    display: flex;
+    align-items: center;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 0 14px;
+    width: 280px;
+    height: 44px;
+    transition: border-color 0.25s ease;
+}
+
+.SearchInputWrapper:focus-within {
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.SearchIcon {
+    font-size: 18px;
+    color: var(--admin-text-dim, #64748b);
+    margin-right: 8px;
+}
+
+.SearchInputWrapper input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13.5px;
+}
+
+.SearchInputWrapper input::placeholder {
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* User Table */
+.TableWrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.AdminTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.AdminTable thead {
+    background: var(--admin-bg-primary, #090d16);
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.AdminTable th {
+    color: var(--admin-text-dim, #64748b);
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.AdminTable td {
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 16px 20px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    vertical-align: middle;
+}
+
+.AdminTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+.AdminTable tbody tr:hover {
+    background: var(--admin-bg-surface-hover, #182033);
+}
+
+.UserTableCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.UserTableAvatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.UserTableMeta {
+    display: flex;
+    flex-direction: column;
+}
+
+.UserTableName {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.UserTableRole {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.UserEmailText {
+    font-size: 13.5px;
+    color: var(--admin-text-muted, #94a3b8);
+}
+
+.OrdersBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-accent-primary, #6366f1);
+    background: rgba(99, 102, 241, 0.08);
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.SpendingText {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.DateText {
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.TextRight {
+    text-align: right !important;
+}
+
+.ViewUserBtn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.ViewUserBtn:hover {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Modal Overlay & Card */
+.ModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.UserDetailsModal {
+    width: 100%;
+    max-width: 880px;
+    max-height: 88vh;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: ModalOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
+}
+
+@keyframes ModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.ModalHeaderTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.HeaderIcon {
+    font-size: 24px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ModalHeader h2 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.CloseModalBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.CloseModalBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+
+.ModalBodyScroll {
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* User Profile Header Component */
+.UserProfileHeader {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(17, 23, 38, 0.9) 100%);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.UserProfileImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 2px solid var(--admin-accent-primary, #6366f1);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+}
+
+.UserProfileRight h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 4px 0;
+}
+
+.UserEmail {
+    margin: 0;
+    color: var(--admin-text-dim, #64748b);
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.UserBasicInfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.InfoItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.InfoItem i {
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 16px;
+}
+
+/* User Stats Grid */
+.UserStatsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.StatCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.StatIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.OrdersIcon {
+    background: #6366f1;
+}
+
+.RevenueIcon {
+    background: #10b981;
+}
+
+.JoinIcon {
+    background: #f59e0b;
+}
+
+.UpdateIcon {
+    background: #8b5cf6;
+}
+
+.StatContent span {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.StatContent h2 {
+    margin: 2px 0 0 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+/* Address Card */
+.UserAddressCard {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.SectionHeader h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 16px 0;
+}
+
+.SectionHeader i {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.AddressGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.AddressItem {
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.AddressItem span {
+    font-size: 11px;
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 800;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.AddressItem p {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 13.5px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.FullWidth {
+    grid-column: 1 / -1;
+}
+
+/* Order History Component */
+.UserOrderHistory h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 16px 0;
+}
+
+.NoOrdersBox {
+    text-align: center;
+    padding: 2rem;
+    background: var(--admin-bg-primary, #090d16);
+    border-radius: 16px;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-dim, #64748b);
+}
+
+.NoOrdersBox i {
+    font-size: 36px;
+    margin-bottom: 6px;
+}
+
+.OrderCard {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.OrderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.OrderHeader h4 {
+    margin: 0 0 2px 0;
+    font-size: 14.5px;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.OrderHeader small {
+    color: var(--admin-text-dim, #64748b);
+}
+
+.OrderStatus {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.StatusPulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.StatusPending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.StatusPending .StatusPulseDot {
+    background-color: #f59e0b;
+}
+
+.StatusPreparing {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.StatusPreparing .StatusPulseDot {
+    background-color: #6366f1;
+}
+
+.StatusDelivery {
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+    border: 1px solid rgba(6, 182, 212, 0.25);
+}
+
+.StatusDelivery .StatusPulseDot {
+    background-color: #06b6d4;
+}
+
+.StatusDelivered {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.StatusDelivered .StatusPulseDot {
+    background-color: #10b981;
+}
+
+.StatusCancelled {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+.StatusCancelled .StatusPulseDot {
+    background-color: #f43f5e;
+}
+
+.OrderDetails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.OrderInfoBox span {
+    font-size: 11px;
+    color: var(--admin-text-dim, #64748b);
+    font-weight: 700;
+}
+
+.OrderInfoBox p {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.DiscountText {
+    color: #10b981 !important;
+}
+
+.TotalAmountVal {
+    color: var(--admin-accent-primary, #6366f1) !important;
+    font-size: 15px !important;
+}
+
+/* Ordered Items Stack */
+.OrderItems {
+    margin-top: 14px;
+}
+
+.OrderItems h5 {
+    margin: 0 0 10px 0;
+    font-size: 12.5px;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.OrderItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    margin-bottom: 8px;
+}
+
+.OrderItem img {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.ItemInfo {
+    flex: 1;
+}
+
+.ItemInfo h6 {
+    margin: 0 0 2px 0;
+    font-size: 13.5px;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ItemInfo span {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.ItemMeta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+    color: var(--admin-text-muted, #94a3b8);
+}
+
+.ItemPrice {
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+/* Modal Footer */
+.ModalFooter {
+    padding: 16px 26px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.CloseProfileBtn {
+    padding: 10px 22px;
+    border-radius: 10px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s ease;
+}
+
+.CloseProfileBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+    .UserStatsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .OrderDetails {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .UsersPage {
+        padding: 1rem;
+    }
+
+    .UserProfileHeader {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .AddressGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .UserStatsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .OrderDetails {
+        grid-template-columns: 1fr;
+    }
+}

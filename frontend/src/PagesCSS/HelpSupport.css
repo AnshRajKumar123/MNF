@@ -1,0 +1,478 @@
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD COMPLIANCE & ACCENT CONTROL HELPDESK MODULE CSS
+   ========================================================================== */
+
+.ProHelpMainOuterSuite {
+    width: 100%;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+}
+
+.ProHelpSectionLayout {
+    width: 100%;
+    max-width: 1300px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* --- UPPER HEADER TRACK METADATA PANEL --- */
+.ProHelpHeaderDeckPanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.ProTaglineText {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-blue-light);
+    margin-bottom: 4px;
+}
+
+.ProHelpHeaderDeckPanel h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+/* --- GRID MASTER DISTRIBUTION MATRIX --- */
+.ProHelpGridLayoutCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    width: 100%;
+    align-items: start;
+}
+
+.ProHelpTerminalForm {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 45px var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+/* --- CUSTOM SELECT RECONSTRUCTION DOCK --- */
+.ProHelpDropdownContainer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 50;
+}
+
+.TerminalLabelField {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.ProHelpDropHeaderBox {
+    padding: 14px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.25s ease;
+}
+
+[data-theme="light-ocean"] .ProHelpDropHeaderBox {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.ProHelpDropHeaderBox:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.DropChevronIcon {
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.RotateIcon {
+    transform: rotate(180deg);
+    color: var(--accent-blue-light);
+}
+
+.DimTextNode {
+    color: var(--text-muted);
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.HighlightTextNode {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.ProHelpDropListStack {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 6px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    width: 100%;
+    list-style: none;
+    padding: 6px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.ProHelpDropItemCard {
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--text-core);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.ProHelpDropItemCard:hover {
+    background-color: rgba(58, 134, 200, 0.06);
+    color: var(--accent-blue-light);
+}
+
+/* --- SUGGESTED REFERENCE FAQ BLOCKS --- */
+.ProFAQBentoCardView {
+    background: rgba(58, 134, 200, 0.02);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-morphic);
+}
+
+.ProFAQBentoCardView h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ProFAQBentoCardView ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ProFaqListItemRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 13.5px;
+}
+
+.ProFaqListItemRow i {
+    color: var(--accent-blue-light);
+    font-size: 16px;
+}
+
+/* --- INPUT CONFIGURATION BLOCKS --- */
+.ProHelpInputGridFields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.ProHelpFieldSlotBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    position: relative;
+}
+
+.ProHelpFieldSlotBlock label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.ProHelpFieldSlotBlock input,
+.ProHelpFieldSlotBlock textarea {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text-core);
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+[data-theme="light-ocean"] .ProHelpFieldSlotBlock input,
+[data-theme="light-ocean"] .ProHelpFieldSlotBlock textarea {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.ProHelpFieldSlotBlock input:focus,
+.ProHelpFieldSlotBlock textarea:focus {
+    border-color: var(--accent-blue-light);
+}
+
+.TextareaFieldBlockModifier textarea {
+    height: 120px;
+    resize: none;
+}
+
+.ProCharCounterText {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* --- VALIDATION ASSET DRAG FRAMES --- */
+.ProUploadTerminalZone {
+    width: 100%;
+    border: 1px dashed var(--border-morphic);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: border-color 0.25s ease;
+}
+
+.ProUploadTerminalZone:hover {
+    border-color: var(--accent-blue-light);
+}
+
+.ZoneUploadPromptContent input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.ZoneUploadPromptIcon {
+    font-size: 36px;
+    color: var(--accent-blue-light);
+    margin-bottom: 6px;
+}
+
+.ZoneUploadPromptContent p {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.BrowseActionHighlight {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    text-decoration: underline;
+    margin-left: 4px;
+}
+
+.ZoneUploadPreviewState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.ZoneUploadPreviewState img {
+    max-height: 120px;
+    border-radius: 6px;
+    border: 1px solid var(--border-morphic);
+}
+
+.ZoneRemoveImageCTA {
+    background-color: rgba(255, 77, 77, 0.05);
+    border: 1px solid rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background 0.2s ease;
+}
+
+.ZoneRemoveImageCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+.ProHelpSubmitCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProHelpSubmitCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1.5px);
+}
+
+/* --- RIGHT SIDE AUXILIARY PANEL ASIDE --- */
+.ProHelpAsideConsole {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.AsideSystemBentoCard {
+    padding: 2.2rem 1.8rem;
+    background-color: var(--bg-surface);
+    border-radius: 16px;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    box-sizing: border-box;
+}
+
+.AsideSystemBentoCard h3 {
+    font-size: 18px;
+    font-family: var(--Font3), sans-serif;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    color: var(--text-core);
+    margin-top: 0;
+}
+
+.AsideSystemBentoCard p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.EmergencyRedBorderCard {
+    border-color: rgba(255, 77, 77, 0.15);
+}
+
+.EmergencyRedBorderCard h3 {
+    color: #ff4d4d;
+}
+
+.EmergencyRedBorderCard p {
+    margin-bottom: 1.5rem;
+}
+
+.EmergencyTriggerLink {
+    color: #ff4d4d;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease;
+}
+
+.EmergencyTriggerLink:hover {
+    transform: translateX(3px);
+}
+
+/* ==========================================================================
+   📱 MOBILE & TABLET RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .ProHelpSectionLayout {
+        padding: 0 1.5rem;
+        margin: 20px auto 7rem auto;
+    }
+
+    .ProHelpGridLayoutCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProHelpSectionLayout {
+        padding: 0 1rem;
+    }
+
+    .ProHelpHeaderDeckPanel h1 {
+        font-size: 1.8rem;
+    }
+
+    .ProHelpTerminalForm {
+        padding: 1.5rem 1.2rem;
+        border-radius: 14px;
+    }
+
+    .ProHelpInputGridFields {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .ProUploadTerminalZone {
+        padding: 18px 12px;
+    }
+
+    .ZoneUploadPromptIcon {
+        font-size: 30px;
+    }
+
+    .ZoneUploadPromptContent p {
+        font-size: 12.5px;
+    }
+
+    .ProHelpSubmitCTA {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .AsideSystemBentoCard {
+        padding: 1.5rem 1.2rem;
+        border-radius: 14px;
+    }
+}

@@ -1,0 +1,234 @@
+/* ==========================================================================
+   🌟 EXECUTIVE PRODUCT MODAL DIALOG STYLES
+   ========================================================================== */
+
+.ModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.ProductModal {
+    width: 100%;
+    max-width: 620px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    animation: ModalOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-sizing: border-box;
+}
+
+@keyframes ModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.HeaderLabelGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.HeaderIcon {
+    font-size: 24px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ModalHeader h2 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.CloseBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.CloseBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+
+.ModalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 26px;
+}
+
+.FormRowTwoColumns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.FormFieldSlot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FormFieldSlot label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.FormFieldSlot input,
+.FormFieldSlot textarea,
+.FormFieldSlot select {
+    width: 100%;
+    background: var(--admin-bg-primary, #090d16);
+    color: var(--admin-text-main, #f8fafc);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.FormFieldSlot input:focus,
+.FormFieldSlot textarea:focus,
+.FormFieldSlot select:focus {
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.FormFieldSlot textarea {
+    resize: none;
+}
+
+.UploadContainer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.UploadBox {
+    flex: 1;
+    height: 65px;
+    border: 2px dashed rgba(99, 102, 241, 0.4);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 0 10px;
+    text-align: center;
+    background: rgba(99, 102, 241, 0.04);
+    transition: all 0.25s ease;
+}
+
+.UploadIcon {
+    font-size: 22px;
+}
+
+.UploadBox:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.PreviewImageFrame {
+    width: 65px;
+    height: 65px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    flex-shrink: 0;
+}
+
+.PreviewImageFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ModalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 18px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.CancelBtn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.SaveBtn {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.25s ease;
+}
+
+.SaveBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .FormRowTwoColumns {
+        grid-template-columns: 1fr;
+    }
+}

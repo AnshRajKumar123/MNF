@@ -1,0 +1,492 @@
+/* ==========================================================================
+   🌟 EXECUTIVE ADMIN DASHBOARD STYLES
+   ========================================================================== */
+
+.Dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Loading State */
+.AdminDashboardLoading {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingPulseSpinner {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.AdminDashboardLoading h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.AdminDashboardLoading p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Hero Banner */
+.DashboardHeroBanner {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(17, 23, 38, 0.9) 100%);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.LiveStatusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--admin-emerald, #10b981);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.8px;
+}
+
+.PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--admin-emerald, #10b981);
+    box-shadow: 0 0 8px var(--admin-emerald, #10b981);
+}
+
+.BannerTextCluster h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
+}
+
+.BannerTextCluster p {
+    font-size: 14px;
+    color: var(--admin-text-muted, #94a3b8);
+    margin: 0;
+}
+
+.QuickActionDeck {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ActionPillBtn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.ActionPillBtn.PrimaryBtn {
+    background-color: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.ActionPillBtn.PrimaryBtn:hover {
+    background-color: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
+}
+
+.ActionPillBtn.SecondaryBtn {
+    background-color: var(--admin-bg-surface-hover, #182033);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.ActionPillBtn.SecondaryBtn:hover {
+    border-color: var(--admin-accent-primary, #6366f1);
+    transform: translateY(-2px);
+}
+
+/* Stats Grid */
+.StatsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Bento Cards Structure */
+.DashboardBentoCard {
+    background-color: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 18px;
+    padding: 1.8rem;
+    box-sizing: border-box;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.BentoCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.BentoCardHeader h3 {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.BentoCardHeader h3 i {
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 18px;
+}
+
+.TelemetryTag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+}
+
+/* Dispatch Pipeline Row */
+.PipelineMetricRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+}
+
+.PipelineUnit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.MetricLabel {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.MetricVal {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.warning-text {
+    color: #f59e0b;
+}
+
+.info-text {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.success-text {
+    color: var(--admin-emerald, #10b981);
+}
+
+.PipelineDivider {
+    width: 1px;
+    height: 45px;
+    background-color: var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+/* Charts Grid Row Layout */
+.DashboardChartsRow {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Bottom Grid Section: Recent Orders & Health */
+.DashboardBottomGrid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* Top Products Leaderboard */
+.TopProductsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.TopProductRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background-color: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 12px;
+}
+
+.ProductRank {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--admin-text-dim, #64748b);
+    width: 28px;
+}
+
+.Rank-1 {
+    color: #f59e0b;
+}
+
+.Rank-2 {
+    color: #94a3b8;
+}
+
+.Rank-3 {
+    color: #b45309;
+}
+
+.TopProductImgFrame {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.TopProductImgFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProductInfo {
+    flex: 1;
+}
+
+.ProductInfo h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+    margin: 0 0 2px 0;
+}
+
+.ProductInfo span {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.SellsTag {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.SellsTag strong {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.SellsTag small {
+    font-size: 10.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Recent Orders Table */
+.RecentOrdersTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.RecentOrdersTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.RecentOrdersTable th {
+    padding: 12px 14px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: var(--admin-text-dim, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.RecentOrdersTable td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--admin-text-muted, #94a3b8);
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.05));
+    vertical-align: middle;
+}
+
+.RecentOrderId {
+    font-family: monospace;
+    font-weight: 800;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.RecentCustomerName {
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.RecentAmount {
+    color: var(--admin-text-main, #f8fafc);
+    font-weight: 800;
+}
+
+.PaymentStatusText {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.RecentStatusBadge {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.RecentStatusBadge.Delivered {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.RecentStatusBadge.Cancelled {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+}
+
+.RecentStatusBadge.Transit {
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+}
+
+.RecentStatusBadge.Pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.RelativeTimeText {
+    font-size: 11.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.TextRight {
+    text-align: right !important;
+}
+
+.EmptyText {
+    color: var(--admin-text-dim, #64748b);
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 13px;
+}
+
+/* System Health Widgets */
+.HealthMetricList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.HealthItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--admin-text-muted, #94a3b8);
+    padding: 10px 14px;
+    background-color: var(--admin-bg-primary, #090d16);
+    border-radius: 12px;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.StatusTag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.StatusTag.Operational {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--admin-emerald, #10b981);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1100px) {
+
+    .DashboardChartsRow,
+    .DashboardBottomGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .DashboardHeroBanner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    .QuickActionDeck {
+        width: 100%;
+    }
+
+    .ActionPillBtn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .Dashboard {
+        padding: 1rem;
+    }
+
+    .BannerTextCluster h1 {
+        font-size: 1.5rem;
+    }
+
+    .PipelineMetricRow {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .PipelineDivider {
+        width: 100%;
+        height: 1px;
+    }
+}

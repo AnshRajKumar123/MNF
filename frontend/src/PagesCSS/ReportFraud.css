@@ -1,0 +1,230 @@
+/* ==========================================================================
+   🌟 MIDNIGHT FOOD COMPLIANCE SECURE THREAT MATRIX CONFIGURATION SHEET
+   ========================================================================== */
+
+.ProFraudMainOuterSuite {
+    width: 100%;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+}
+
+.ProFraudSectionLayout {
+    width: 100%;
+    max-width: 1300px;
+    margin: 40px auto 6rem auto;
+    padding: 0 4rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.ProFraudHeaderDeckPanel h1 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.ProFraudGridLayoutCore {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    width: 100%;
+    align-items: start;
+}
+
+/* --- SELECTION MATRICES OPTION SLOTS --- */
+.ProFraudRadioSelectionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.ProFraudRadioSelectionSection h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.ProFraudRadioOptionsGridDeck {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ProRadioSlotLabelItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.ProRadioSlotLabelItem:hover {
+    background-color: rgba(58, 134, 200, 0.04);
+}
+
+.ProRadioSlotLabelItem input[type="radio"] {
+    accent-color: var(--accent-blue-light);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ProRadioSlotLabelItem span {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.radio-item-active {
+    border-color: var(--accent-blue-light);
+    background-color: rgba(58, 134, 200, 0.06);
+}
+
+.radio-item-active span {
+    color: var(--text-core);
+    font-weight: 700;
+}
+
+.ProFormWarningDisclaimerText {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: rgba(255, 77, 77, 0.75);
+    font-weight: 600;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 4px 0 0 0;
+}
+
+.ProFormWarningDisclaimerText i {
+    font-size: 16px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Custom forensic PDF boxes icons styles mapping */
+.ProPdfPreviewBox {
+    text-align: center;
+}
+
+.ForensicPdfIcon {
+    font-size: 40px;
+    color: #ff4d4d;
+    margin-bottom: 2px;
+}
+
+.ProPdfPreviewBox p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.ProFraudSubmitCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    font-weight: 700;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProFraudSubmitCTA:hover:not(:disabled) {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1.5px);
+}
+
+.ProFraudSubmitCTA:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.StandardSupportVectorLink {
+    color: var(--accent-blue-light);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.StandardSupportVectorLink:hover {
+    transform: translateX(3px);
+}
+
+/* ==========================================================================
+   📱 MOBILE & TABLET RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .ProFraudSectionLayout {
+        padding: 0 1.5rem;
+        margin: 20px auto 7rem auto;
+    }
+
+    .ProFraudGridLayoutCore {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .ProFraudSectionLayout {
+        padding: 0 1rem;
+    }
+
+    .ProFraudHeaderDeckPanel h1 {
+        font-size: 1.8rem;
+    }
+
+    .ProHelpTerminalForm {
+        padding: 1.5rem 1.2rem;
+        border-radius: 14px;
+    }
+
+    .ProHelpInputGridFields {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .ProFraudRadioOptionsGridDeck {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .ProRadioSlotLabelItem {
+        padding: 10px 12px;
+    }
+
+    .ProFraudSubmitCTA {
+        padding: 14px;
+        font-size: 14px;
+    }
+}

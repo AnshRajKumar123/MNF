@@ -1,0 +1,102 @@
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD BENTO HORIZONTAL SCROLL SCENERY DECK
+   ========================================================================== */
+
+.ProOceanicScrollWrapper {
+    width: 100%;
+    margin: 2rem 0 1rem 0;
+    padding: 0 3rem;
+    box-sizing: border-box;
+}
+
+.ProScrollHeading {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.ProScrollTrack {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding-bottom: 12px;
+}
+
+.ProScrollTrack::-webkit-scrollbar {
+    display: none;
+}
+
+.ProScrollCardItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProScrollCardItem:hover {
+    transform: translateY(-4px);
+}
+
+.ProScrollImageShield {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px var(--shadow-premium);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ProScrollImageShield img {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    transition: filter 0.3s ease;
+}
+
+.text-badge-shield span {
+    font-size: 14px;
+    font-family: var(--Font3), sans-serif;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: 0.5px;
+}
+
+.ProScrollCardName {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+/* --- ACTIVE OCEANIC STATE STYLES --- */
+.scroll-item-active .ProScrollImageShield {
+    background-color: var(--accent-blue-dark);
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 0 15px rgba(58, 134, 200, 0.3);
+    transform: scale(1.05);
+}
+
+.scroll-item-active .ProScrollImageShield img {
+    filter: hue-rotate(0deg) brightness(2);
+}
+
+.scroll-item-active .text-badge-shield span {
+    color: #ffffff;
+}
+
+.scroll-item-active .ProScrollCardName {
+    color: var(--accent-blue-light);
+    font-weight: 800;
+}

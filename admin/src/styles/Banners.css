@@ -1,0 +1,617 @@
+/* ==========================================================================
+   🌟 EXECUTIVE BANNER MANAGEMENT STYLES
+   ========================================================================== */
+
+.BannerPage {
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Loading State */
+.BannersLoadingState {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.LoadingIcon {
+    font-size: 52px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.BannersLoadingState h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.BannersLoadingState p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+/* Header Section */
+.PageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.HeaderTitleGroup h1 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin: 0 0 4px 0;
+}
+
+.HeaderTitleGroup p {
+    font-size: 13.5px;
+    color: var(--admin-text-dim, #64748b);
+    margin: 0;
+}
+
+/* Primary Create Button */
+.PrimaryBtn {
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 12px;
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    transition: all 0.25s ease;
+}
+
+.PrimaryBtn i {
+    font-size: 18px;
+}
+
+.PrimaryBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+    transform: translateY(-2px);
+}
+
+/* Banner Bento Grid */
+.BannerGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.BannerCard {
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.BannerCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--admin-border-focus, rgba(99, 102, 241, 0.4));
+}
+
+/* Banner Image & Overlay Badges */
+.BannerImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    background: var(--admin-bg-primary, #090d16);
+    overflow: hidden;
+}
+
+.BannerImageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.BannerCard:hover .BannerImageWrapper img {
+    transform: scale(1.03);
+}
+
+.BannerOverlayBadge {
+    position: absolute;
+    z-index: 5;
+}
+
+.PriorityBadge {
+    top: 12px;
+    left: 12px;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.12));
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.StatusBadgeSlot {
+    top: 12px;
+    right: 12px;
+}
+
+.ActiveBadge,
+.InactiveBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+}
+
+.PulseDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.ActiveBadge {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.ActiveBadge .PulseDot {
+    background-color: #10b981;
+    box-shadow: 0 0 6px #10b981;
+}
+
+.InactiveBadge {
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    color: #f43f5e;
+}
+
+.InactiveBadge .PulseDot {
+    background-color: #f43f5e;
+}
+
+/* Banner Content */
+.BannerContent {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.BannerContent h3 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.BannerContent p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.BannerMetaDeck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.CtaTag,
+.DateTag {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.CtaTag i,
+.DateTag i {
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+/* Banner Actions */
+.BannerActions {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px 18px 20px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.EditBtn,
+.DeleteBtn {
+    flex: 1;
+    height: 38px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.EditBtn {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.EditBtn:hover {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+}
+
+.DeleteBtn {
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: #f43f5e;
+}
+
+.DeleteBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+}
+
+/* Empty Banner Placeholder */
+.EmptyBanner {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    border-radius: 20px;
+    border: 2px dashed var(--admin-border-light, rgba(255, 255, 255, 0.1));
+    background: var(--admin-bg-surface, #111726);
+    text-align: center;
+}
+
+.EmptyBanner .bigIcons {
+    font-size: 64px;
+    color: var(--admin-accent-primary, #6366f1);
+    margin-bottom: 1rem;
+}
+
+.EmptyBanner h2 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+}
+
+.EmptyBanner p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 13.5px;
+    max-width: 420px;
+    margin: 0;
+}
+
+/* Modal Window Styles */
+.ModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 13, 22, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.BannerModal {
+    width: 100%;
+    max-width: 680px;
+    max-height: 88vh;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    animation: ModalOpen 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ModalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    background: var(--admin-bg-primary, #090d16);
+}
+
+.HeaderTitleBlock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.HeaderIcon {
+    font-size: 26px;
+    color: var(--admin-accent-primary, #6366f1);
+}
+
+.ModalHeader h2 {
+    color: var(--admin-text-main, #f8fafc);
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 2px 0;
+}
+
+.ModalHeader p {
+    color: var(--admin-text-dim, #64748b);
+    font-size: 12px;
+    margin: 0;
+}
+
+.CloseBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--admin-bg-surface, #111726);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.CloseBtn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+
+.ModalFormBody {
+    padding: 24px 26px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ModalFormGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.FormFieldSlot {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.FullColumn {
+    grid-column: 1 / -1;
+}
+
+.FormFieldSlot label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--admin-text-dim, #64748b);
+}
+
+.FormFieldSlot input,
+.FormFieldSlot textarea {
+    width: 100%;
+    background: var(--admin-bg-primary, #090d16);
+    color: var(--admin-text-main, #f8fafc);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.FormFieldSlot input:focus {
+    border-color: var(--admin-accent-primary, #6366f1);
+    outline: none;
+}
+
+/* Status Toggle Box */
+.StatusToggleBox {
+    height: 44px;
+    padding: 0 14px;
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--admin-text-main, #f8fafc);
+}
+
+.CustomSwitchTrack {
+    width: 40px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.1));
+    border-radius: 30px;
+    padding: 2px;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.SwitchThumb {
+    width: 16px;
+    height: 16px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.CustomSwitchTrack.switch-active {
+    background-color: var(--admin-accent-primary, #6366f1);
+}
+
+.CustomSwitchTrack.switch-active .SwitchThumb {
+    transform: translateX(18px);
+}
+
+/* Upload Dropzone */
+.BannerUploadDropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.UploadBoxLabel {
+    width: 100%;
+    height: 70px;
+    border: 2px dashed rgba(99, 102, 241, 0.4);
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    color: var(--admin-accent-primary, #6366f1);
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.UploadBoxLabel:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--admin-accent-primary, #6366f1);
+}
+
+.UploadIcon {
+    font-size: 24px;
+}
+
+.BannerPreviewFrame {
+    width: 100%;
+    height: 160px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.1));
+}
+
+.BannerPreviewFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ModalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+}
+
+.PrimaryModalBtn,
+.SecondaryModalBtn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.PrimaryModalBtn {
+    background: var(--admin-accent-primary, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.PrimaryModalBtn:hover {
+    background: var(--admin-accent-hover, #4f46e5);
+}
+
+.SecondaryModalBtn {
+    background: var(--admin-bg-primary, #090d16);
+    border: 1px solid var(--admin-border-light, rgba(255, 255, 255, 0.07));
+    color: var(--admin-text-muted, #94a3b8);
+}
+
+@media (max-width: 600px) {
+    .BannerPage {
+        padding: 1rem;
+    }
+
+    .ModalFormGrid {
+        grid-template-columns: 1fr;
+    }
+}

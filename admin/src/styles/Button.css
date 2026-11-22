@@ -1,0 +1,22 @@
+.AdminButton {
+    width: 100%;
+    height: 52px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 12px;
+    background: #2563EB;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.AdminButton:hover {
+    background: #1D4ED8;
+}
+
+.AdminButton:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}

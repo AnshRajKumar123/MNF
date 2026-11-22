@@ -1,0 +1,53 @@
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
+import Users from "./pages/Users";
+import Coupons from "./pages/Coupons";
+import NotFound from "./pages/NotFound";
+import Settings from './pages/Settings'
+import Banners from "./pages/Banners";
+import 'boxicons/css/boxicons.min.css';
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminLayout from "./components/layout/AdminLayout";
+import Profile from "./pages/Profile";
+
+import ForgotPassword from "./pages/ForgotPassword";
+
+function App() {
+    return (
+        <Routes>
+
+            <Route path="/" element={<Login />} />
+
+            {/* Public Routes */}
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+
+            <Route element={<ProtectedRoute />}>
+
+                <Route element={<AdminLayout />}>
+
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path="/users" element={<Users />} />
+                    <Route path="/coupons" element={<Coupons />} />
+                    <Route path="/banners" element={<Banners />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/profile" element={<Profile />} />
+
+                </Route>
+
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+
+        </Routes>
+    );
+
+}
+
+export default App;

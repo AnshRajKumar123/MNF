@@ -1,0 +1,550 @@
+.ProProfilePageWrapper {
+    min-height: calc(100vh - 80px);
+    background-color: var(--bg-primary);
+    padding: 30px 20px 80px;
+    box-sizing: border-box;
+}
+
+.ProUserProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1180px;
+    margin: 0 auto;
+    gap: 32px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   LEFT ASIDE: USER IDENTITY CARD
+   ========================================================================== */
+
+.ProUserAvatarCard {
+    width: 340px;
+    flex-shrink: 0;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 2.5rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 16px 40px var(--shadow-premium);
+    box-sizing: border-box;
+    position: sticky;
+    top: 100px;
+}
+
+.AvatarImageWrap {
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+.ProUserLogoBadge {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(58, 134, 200, 0.2), rgba(0, 78, 152, 0.3));
+    border: 3px solid var(--accent-blue-light);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.ProUserLogoBadge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProUserLogoBadge span {
+    font-size: 3.5rem;
+    color: var(--accent-blue-light);
+    font-family: var(--Font3), sans-serif;
+    font-weight: 800;
+}
+
+.FloatingUploadBadge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--bg-surface);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.FloatingUploadBadge:hover {
+    transform: scale(1.1);
+    background-color: var(--accent-blue-dark);
+}
+
+.ProUserNameTitle {
+    font-family: var(--Font3), sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.3px;
+    margin: 0 0 4px;
+    text-align: center;
+}
+
+.UserEmailSubtitle {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    word-break: break-all;
+}
+
+.AvatarActionsCluster {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ProUploadImageCTA {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--Font1), sans-serif;
+    background-color: rgba(58, 134, 200, 0.12);
+    color: var(--accent-blue-light);
+    border: 1px solid var(--border-morphic);
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.ProUploadImageCTA:hover {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+.ProPurgeImageBtn {
+    width: 100%;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid rgba(255, 77, 77, 0.25);
+    color: #ff5252;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.ProPurgeImageBtn:hover {
+    background: #ff5252;
+    color: #ffffff;
+}
+
+.CardSeparator {
+    width: 100%;
+    height: 1px;
+    background: var(--border-morphic);
+    margin: 1.5rem 0;
+}
+
+.ProLogoutBtn {
+    width: 100%;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(229, 57, 53, 0.1);
+    color: #ef5350;
+    border: 1px solid rgba(229, 57, 53, 0.2);
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.ProLogoutBtn:hover {
+    background: #e53935;
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(229, 57, 53, 0.3);
+}
+
+/* ==========================================================================
+   RIGHT SIDE: FORM LEDGER
+   ========================================================================== */
+
+.ProUserDetailsFormBlock {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-morphic);
+    border-radius: 20px;
+    padding: 2.5rem 2.8rem;
+    box-shadow: 0 16px 40px var(--shadow-premium);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-sizing: border-box;
+}
+
+.FormSectionTitleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-morphic);
+    padding-bottom: 1.2rem;
+}
+
+.FormSectionTitleBar h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0 0 4px;
+}
+
+.FormSectionTitleBar p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.VerifiedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(76, 175, 80, 0.12);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.FormSubsection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.SubsectionLabel {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent-blue-light);
+}
+
+.ProLabelInputGridRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.ProLabelInputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ProInputFormLabel {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+}
+
+/* Integrated Input Container */
+.InputWithIcon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-glyph {
+    position: absolute;
+    left: 12px;
+    color: var(--text-muted);
+    font-size: 17px;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.InputWithIcon input {
+    width: 100%;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    border-radius: 10px;
+    padding: 11px 14px 11px 38px;
+    font-size: 13.5px;
+    font-family: var(--Font1), sans-serif;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+[data-theme="light-ocean"] .InputWithIcon input {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.InputWithIcon:focus-within .input-glyph {
+    color: var(--accent-blue-light);
+}
+
+.InputWithIcon input:focus {
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 0 0 3px rgba(58, 134, 200, 0.15);
+}
+
+.ProReadOnlyWrapper {
+    opacity: 0.75;
+}
+
+.ProReadOnlyField {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-style: dashed !important;
+    cursor: not-allowed;
+}
+
+[data-theme="light-ocean"] .ProReadOnlyField {
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Phone Layout Row */
+.ProPhoneFlexRow {
+    display: flex;
+    gap: 10px;
+}
+
+.ProCountrySelectBox {
+    width: 130px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    border-radius: 10px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+[data-theme="light-ocean"] .ProCountrySelectBox {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.PhoneInputFlex {
+    flex: 1;
+}
+
+.ProFormattedPhoneLabelText {
+    font-size: 12px;
+    color: var(--accent-blue-light);
+    font-weight: 600;
+    margin: 2px 0 0;
+}
+
+/* Textarea Layout */
+.ProLabelInputGroup textarea {
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+    outline: none;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-family: var(--Font1), sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+[data-theme="light-ocean"] .ProLabelInputGroup textarea {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.ProLabelInputGroup textarea:focus {
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 0 0 3px rgba(58, 134, 200, 0.15);
+}
+
+/* Gender Selection Grid */
+.ProGenderSelectTrackContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.ProGenderOptionItemCard {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--border-morphic);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-core);
+    transition: all 0.2s ease;
+}
+
+[data-theme="light-ocean"] .ProGenderOptionItemCard {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.ProGenderOptionItemCard:hover {
+    border-color: var(--accent-blue-light);
+    transform: translateY(-1.5px);
+}
+
+.ProGenderEmojiSpan {
+    font-size: 16px;
+}
+
+.ProGenderTextSpan {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.GenderNodeActive {
+    background: rgba(58, 134, 200, 0.15);
+    border-color: var(--accent-blue-light);
+    box-shadow: 0 0 14px rgba(58, 134, 200, 0.2);
+}
+
+/* Save Trigger Button */
+.FormActionsFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-morphic);
+}
+
+.ProSaveProfileCTA {
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--Font1), sans-serif;
+    background: linear-gradient(135deg, var(--accent-blue-light) 0%, var(--accent-blue-dark) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(58, 134, 200, 0.3);
+    transition: all 0.25s ease;
+}
+
+.ProSaveProfileCTA:hover:not(.ProBtnStateDisabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58, 134, 200, 0.45);
+}
+
+.ProBtnStateDisabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Animations */
+.ProFieldShakeAnimation {
+    animation: proShake 0.35s ease;
+    border-color: #ff5252 !important;
+}
+
+@keyframes proShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.ProSuccessGlowPulse {
+    box-shadow: 0 0 30px rgba(58, 134, 200, 0.45) !important;
+    border-color: var(--accent-blue-light) !important;
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    .ProUserProfileContainer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ProUserAvatarCard {
+        width: 100%;
+        position: static;
+    }
+
+    .ProUserDetailsFormBlock {
+        padding: 2rem 1.6rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProLabelInputGridRow {
+        grid-template-columns: 1fr;
+    }
+
+    .ProPhoneFlexRow {
+        flex-direction: column;
+    }
+
+    .ProCountrySelectBox {
+        width: 100%;
+    }
+
+    .ProGenderSelectTrackContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .ProSaveProfileCTA {
+        width: 100%;
+        justify-content: center;
+    }
+}

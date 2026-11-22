@@ -1,0 +1,330 @@
+/* ==========================================================================
+   🌊 MIDNIGHT FOOD ENTERPRISE MENU CATALOG & DRAWER SHEETS
+   ========================================================================== */
+
+.ProMenuSection {
+    width: calc(100vw - 100px);
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+}
+
+.ProMenuCatalogContainer {
+    width: 100%;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.SectPanelShrink .ProMenuCatalogContainer {
+    width: 70%;
+}
+
+/* --- ADAPTIVE PRODUCT CATALOG GRID ENGINE --- */
+.ProMenuGridBlueprint {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 2rem 3rem;
+    margin-top: 0.5rem;
+    transition: all 0.35s ease;
+}
+
+.SectPanelShrink .ProMenuGridBlueprint {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 1.5rem;
+}
+
+@keyframes drawerSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.DrawerHeaderHub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-morphic);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.DrawerHeaderHub h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+
+.DrawerDismissCTA {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+.DrawerDismissCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
+}
+
+.DrawerConsoleBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.DrawerImageFrame {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-morphic);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.DrawerImageFrame img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+.DrawerConsoleBody h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.ProProductBadge {
+    align-self: flex-start;
+    padding: 4px 10px;
+    background-color: rgba(58, 134, 200, 0.08);
+    border: 1px solid var(--border-morphic);
+    color: var(--accent-blue-light);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ProProductDescText {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Morphic Data Box Matrix Elements */
+.ProPriceMatrixBox {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-morphic);
+    padding: 14px 18px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+[data-theme="light-ocean"] .ProPriceMatrixBox {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.PriceLabelText {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.PriceValueText {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+}
+
+/* --- ACCURATE OPERATIONAL STEPPERS CONTAINER --- */
+.ProQuantityStepperGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ProQuantityStepperGroup label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+.StepperActionController {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    border-radius: 8px;
+    width: 140px;
+    justify-content: space-between;
+    padding: 3px;
+}
+
+.StepBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--bg-surface);
+    color: var(--text-core);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.StepBtn:hover {
+    background-color: var(--accent-blue-dark);
+    color: #ffffff;
+}
+
+.StepValueText {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-core);
+}
+
+.ProAddToCartCTA {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    font-family: var(--Font3), sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(58, 134, 200, 0.2);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 1rem;
+}
+
+.ProAddToCartCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 78, 152, 0.3);
+}
+
+/* --- PREMIUM MORPHIC SYSTEM NOTIFICATION TOASTS --- */
+.ProMenuCustomToast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue-light);
+    color: var(--text-core);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 100005 !important;
+    /* Elevated above open drawers */
+    box-shadow: 0 15px 35px var(--shadow-premium);
+    animation: toastPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes toastPop {
+    from {
+        top: 0;
+        opacity: 0;
+    }
+
+    to {
+        top: 24px;
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   📱 RESPONSIVE ADJUSTMENT INTERCEPTS
+   ========================================================================== */
+
+@media (max-width: 1200px) {
+    .ProMenuGridBlueprint {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .SectPanelShrink .ProMenuGridBlueprint {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .ProMenuSection {
+        flex-direction: column;
+        width: 100vw !important;
+    }
+
+    .SectPanelShrink .ProMenuCatalogContainer,
+    .ProMenuCatalogContainer {
+        width: 100% !important;
+    }
+
+    .ProMenuGridBlueprint,
+    .SectPanelShrink .ProMenuGridBlueprint {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1.5rem 1rem;
+    }
+
+    .DrawerHeaderHub {
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-surface);
+        padding: 0.5rem 0 1rem 0;
+        z-index: 10001;
+    }
+
+    .DrawerDismissCTA {
+        font-size: 24px;
+        color: var(--accent-blue-light);
+    }
+}
+
+@media (max-width: 650px) {
+
+    /* 1 Product per row on mobile screens */
+    .ProMenuGridBlueprint,
+    .SectPanelShrink .ProMenuGridBlueprint {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,503 @@
+/* ==========================================================================
+   🌟 MNF CORE ENTERPRISE LANDING TERMINAL PORTAL CSS STYLES
+   ========================================================================== */
+
+.ProHeroSuiteOverflowControl {
+    width: 100vw;
+    overflow-x: hidden;
+    background-color: var(--bg-primary);
+}
+
+/* --- MODULE 1: FULL SCREEN VIDEO COVER MATRIX STAGE --- */
+.ProCinematicHeroStage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProHeroFullVideoBg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.ProHeroMorphicGlassOverlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(10, 20, 45, 0.4) 0%, rgba(10, 15, 30, 0.85) 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 2;
+}
+
+.ProHeroCentralTypographyHub {
+    position: absolute;
+    z-index: 5;
+    text-align: center;
+    color: #ffffff;
+    max-width: 850px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProBrandMegaTitle {
+    font-family: var(--Font2), sans-serif;
+    font-size: 20rem;
+    line-height: 0.95;
+    background: linear-gradient(180deg, #ffffff 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.ProBrandSubTag {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 10px 0 14px 0;
+}
+
+.ProBrandCoreDesc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 0 2rem 0;
+}
+
+.ProHeroMarketCTAsRow {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.MarketBadgeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.MarketBadgeBtn:hover {
+    transform: scale(1.05);
+}
+
+.MarketBadgeBtn img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+}
+
+.ProHeroAnimationButton {
+    padding: 16px 36px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease;
+}
+
+.ProHeroAnimationButton:hover {
+    background-color: var(--accent-blue-dark);
+}
+
+/* --- MODULE 2: FLOATING PARALLAX INFRASTRUCTURE DECK --- */
+.ProParallaxRopeScenery {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-morphic);
+}
+
+.ParallaxRopeTrack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.FloatingAssetItem {
+    position: absolute;
+    z-index: 3;
+}
+
+.FloatingAssetItem img {
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.3));
+}
+
+.AssetBurger {
+    top: 10%;
+    left: 10%;
+}
+
+.AssetBurger img {
+    width: 180px;
+}
+
+.AssetPizza {
+    bottom: 15%;
+    left: 15%;
+    transform: rotate(15deg);
+}
+
+.AssetPizza img {
+    width: 190px;
+}
+
+.AssetLeave {
+    top: 15%;
+    left: 45%;
+}
+
+.AssetLeave img {
+    width: 45px;
+}
+
+.AssetTomatoOne {
+    bottom: 20%;
+    left: 5%;
+}
+
+.AssetTomatoOne img {
+    width: 50px;
+}
+
+.AssetTomatoTwo {
+    bottom: 10%;
+    right: 10%;
+    transform: rotate(45deg);
+}
+
+.AssetTomatoTwo img {
+    width: 60px;
+}
+
+.ProLogisticsAboutCard {
+    position: absolute;
+    top: 35%;
+    right: 12%;
+    max-width: 520px;
+}
+
+.ProLogisticsAboutCard h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--text-core);
+    letter-spacing: -1.5px;
+    margin: 0 0 1.5rem 0;
+}
+
+.ProLogisticsAboutCard p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* --- MODULE 3: THE APPLICATION HIGH-FI BENTO GRID MESH --- */
+.ProAppBentoSectionGrid {
+    width: 100%;
+    padding: 6rem 4rem;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-morphic);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.BentoSectionTypographyHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.BentoSectionTypographyHeader h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.BentoSectionTypographyHeader p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.ProAppBentoMatrixCluster {
+    display: grid;
+    grid-template-columns: 320px 1fr 320px;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+}
+
+.BentoCardColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.BentoMiniMetricSlotCard {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-morphic);
+    border-radius: 16px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px var(--shadow-premium);
+    box-sizing: border-box;
+}
+
+.BentoMiniMetricSlotCard img {
+    height: 75px;
+    object-fit: contain;
+}
+
+.BentoMiniMetricSlotCard span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-core);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.SpanFullRowBlock {
+    padding: 2rem 1.5rem;
+}
+
+.ProMainMobileMock {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.ProMainMobileMock img {
+    width: 310px;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+}
+
+.BentoEmbeddedCalendarCard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue-light);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    width: 140px;
+}
+
+.BentoEmbeddedCalendarCard img {
+    width: 50px !important;
+    filter: none !important;
+}
+
+.BentoEmbeddedCalendarCard span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-core);
+    text-transform: uppercase;
+}
+
+.ProAppInfoBoxForMobile {
+    display: none;
+}
+
+/* --- MODULE 4: SECURITY FILE SCAN STATION CONSOLE --- */
+.ProDownloadConsoleStation {
+    width: 100%;
+    padding: 6rem 4rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.ProDownloadConsoleBentoCard {
+    width: 100%;
+    max-width: 1100px;
+    background: linear-gradient(135deg, var(--accent-blue-dark) 0%, #102A6B 100%);
+    border: 1px solid var(--border-morphic);
+    border-radius: 24px;
+    padding: 4rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+    box-shadow: 0 30px 65px var(--shadow-premium);
+}
+
+.DownloadConsoleLeftTypography h2 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin: 0 0 10px 0;
+}
+
+.DownloadConsoleLeftTypography p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0 0 2.5rem 0;
+}
+
+.DownloadMarketBadgesRowDeck {
+    display: flex;
+    gap: 14px;
+}
+
+.DownloadConsoleRightGraphics {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ConsoleMobileCaseWrapper img {
+    width: 320px;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+.ConsoleQrMatrixFrameBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(15px);
+    background-color: #ffffff;
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 170px;
+}
+
+.ConsoleQrMatrixFrameBox span {
+    font-size: 9px;
+    font-weight: 800;
+    color: #101524;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.QrImageShellWrapper img {
+    width: 140px;
+    height: 140px;
+    display: block;
+}
+
+/* --- RESPONSIVE MEDIA BREAKPOINT INTERCEPTS --- */
+@media (max-width: 1200px) {
+    .ProBrandMegaTitle {
+        font-size: 7.5rem;
+    }
+
+    .ProLogisticsAboutCard h2 {
+        font-size: 2.8rem;
+    }
+
+    .ProAppBentoMatrixCluster {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        justify-items: center;
+    }
+
+    .BentoCardColumn.SideColumnLayout {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .ProDownloadConsoleBentoCard {
+        grid-template-columns: 1fr;
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    .DownloadMarketBadgesRowDeck {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .ProAppBentoMatrixCluster,
+    .MobileRopeHideWrapper {
+        display: none;
+    }
+
+    .ProAppInfoBoxForMobile {
+        display: block;
+        width: 100%;
+    }
+
+    .MobileFeaturesGridBox {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .ProParallaxRopeScenery {
+        height: auto;
+        padding: 4rem 2rem;
+    }
+
+    .ProLogisticsAboutCard {
+        position: static;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .ProAppBentoSectionGrid,
+    .ProDownloadConsoleStation {
+        padding: 4rem 1.5rem;
+    }
+
+    .AssetBurger,
+    .AssetPizza {
+        display: none;
+    }
+
+    /* Removes heavy absolute graphical files on contraction display screens */
+}

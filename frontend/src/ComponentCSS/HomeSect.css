@@ -1,0 +1,761 @@
+/* ==========================================================================
+   🌟 PARKLY/MNF ENTERPRISE HIGH-FI ACCENT INTEGRATED CENTRAL HUB SHEETS
+   ========================================================================== */
+
+.ProHomeLayoutWrapper {
+    width: 100%;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease;
+    overflow-x: clip;
+    /* Prevents breaking sticky positioning */
+}
+
+.ProMainOpenWeb {
+    margin-top: 0;
+    display: flex;
+    width: calc(100vw - 100px);
+    align-items: flex-start;
+    position: relative;
+}
+
+.ProMainBoxSev {
+    width: 100%;
+    padding: 2rem 3rem;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+.PanelActiveSplit {
+    width: 70%;
+}
+
+/* ==========================================================================
+   🌟 HEROIC BILLBOARD BANNER STYLES
+   ========================================================================== */
+
+.ProHeroicBanner {
+    min-height: 360px;
+    width: 100%;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+/* Backdrop Lighting Effects */
+.BannerGlowOrb {
+    position: absolute;
+    top: -50px;
+    right: 10%;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.BannerPatternBg {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Left Content Area */
+.ProAboutInfoBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 50%;
+    z-index: 5;
+    position: relative;
+}
+
+.PromoTagPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e0f2fe;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+}
+
+.PromoTagPill i {
+    font-size: 14px;
+    color: #38bdf8;
+}
+
+.BannerHeroTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin: 0;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.PromoHighlightText {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #38bdf8;
+    margin: 0;
+    line-height: 1;
+}
+
+.PromoActionInlineRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.PromoClaimBtn {
+    padding: 12px 26px;
+    border-radius: 12px;
+    font-weight: 800;
+    background: #ffffff;
+    color: #0f172a;
+    border: none;
+    font-size: 13.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+}
+
+.PromoClaimBtn i {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.PromoClaimBtn:hover {
+    transform: translateY(-2px);
+    background: #f8fafc;
+}
+
+.PromoClaimBtn:hover i {
+    transform: translateX(4px);
+}
+
+.PromoDisclaimerText {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+/* Right Media Showcase Area */
+.ProBurgerBannerSect {
+    z-index: 5;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+}
+
+.BannerImageFrame {
+    width: 100%;
+    max-height: 320px;
+}
+
+.BannerImageFrame img {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.ProHeroicBanner:hover .BannerImageFrame {
+    transform: scale(1.02);
+}
+
+/* --- CATALOG GRID --- */
+.ProAllProductSection {
+    margin-top: 2.5rem;
+}
+
+.ProSectionTitle {
+    font-family: var(--Font3), sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-core);
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+}
+
+.ProProductsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.PanelActiveSplit .ProProductsGrid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* --- PRODUCT DETAIL & ORDER DRAWER --- */
+.ProProductDetailDrawer {
+    width: 30%;
+    position: sticky !important;
+    top: 80px;
+    height: calc(100vh - 80px);
+    background-color: var(--bg-surface);
+    padding: 2rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    z-index: 999;
+}
+
+@keyframes drawerSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.border-left-morphic {
+    border-left: 1px solid var(--border-morphic);
+}
+
+.DrawerHeaderHub {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-morphic);
+}
+
+.DrawerHeaderHub h3 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 18px;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.DrawerDismissCTA {
+    background: transparent;
+    border: none;
+    color: var(--text-core);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.HeaderInlineTitleGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.AvatarTitleIcon {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+}
+
+/* Tab Selector */
+.ProOrderSectionButtonChanger {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-morphic);
+    margin: 0 0 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 3px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+[data-theme="light-ocean"] .ProOrderSectionButtonChanger {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.ProOrderSectionButtonChanger button {
+    border: none;
+    background-color: transparent;
+    color: var(--text-muted);
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ProOrderSectionButtonChanger button.activeSeccBtn {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+}
+
+/* --- TRACKING CARD ARCHITECTURE NODES --- */
+.ProOnProcessSect,
+.ProCancelledSect,
+.ProCompletedSect {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.EmptyStateLabel {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.ProOrderShowDetailCard {
+    width: 100%;
+}
+
+.ProBoxOfOrderPro {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-morphic);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px var(--shadow-premium);
+}
+
+.ProOrderHeaderCluster {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.OrderImageCapFrame {
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--border-morphic);
+    flex-shrink: 0;
+}
+
+.OrderImageCapFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProOrderShowDetContent {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+}
+
+.ProOrderShowDetContent h4 {
+    font-family: var(--Font3), sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-core);
+    margin: 0;
+}
+
+.MetaTimelineTagRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.MetaTimelineTagRow span:first-child {
+    color: var(--text-muted);
+}
+
+.ProcessStatusPulseText {
+    color: var(--accent-blue-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ProProcessOrderPrice {
+    font-family: var(--Font3), sans-serif;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+    font-size: 15.5px;
+}
+
+/* ==========================================================================
+   ORDER ACTIONS BUTTONS DOCK
+   ========================================================================== */
+
+.ProOrderActionsCluster {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-morphic);
+}
+
+.ProOrderTrackingCTA,
+.ProCancelOrderCTA,
+.ProRemoveOrderCTA,
+.ProViewOrderDetailCTA {
+    flex: 1;
+    height: 38px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-family: var(--Font3), sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+/* Track Button */
+.ProOrderTrackingCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(58, 134, 200, 0.2);
+}
+
+.ProOrderTrackingCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1px);
+}
+
+/* Cancel Button */
+.ProCancelOrderCTA {
+    background-color: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.25);
+    color: #ff4d4d;
+}
+
+.ProCancelOrderCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Remove Button */
+.ProRemoveOrderCTA {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-morphic);
+    color: var(--text-core);
+}
+
+.ProRemoveOrderCTA:hover {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
+    transform: translateY(-1px);
+}
+
+/* View Details Button */
+.ProViewOrderDetailCTA {
+    background-color: var(--accent-blue-light);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(58, 134, 200, 0.2);
+}
+
+.ProViewOrderDetailCTA:hover {
+    background-color: var(--accent-blue-dark);
+    transform: translateY(-1px);
+}
+
+/* Status Badges */
+.CancelledStatusText {
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(255, 77, 77, 0.12);
+    color: #ff4d4d;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.CompletedStatusText {
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(46, 204, 113, 0.12);
+    color: #2ecc71;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- TOAST FRAME OVERRIDES --- */
+.ProHomeCustomToast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--accent-blue-light);
+    color: var(--text-core);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 100005 !important;
+    box-shadow: 0 15px 35px var(--shadow-premium);
+}
+
+/* ==========================================================================
+   ORDER DETAILS POPUP MODAL
+   ========================================================================== */
+
+.ProOrderDetailOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    backdrop-filter: blur(6px);
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.ProOrderDetailPopup {
+    width: 100%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--bg-surface);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-morphic);
+    box-sizing: border-box;
+}
+
+.ProCloseOrderPopup {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-core);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.ProOrderPopupItems {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.ProPopupOrderItem {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.ProPopupOrderItem img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.ProPopupInfoRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    font-size: 14px;
+    color: var(--text-core);
+}
+
+.ProPopupAddressBox {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.ProCloseOrderDetailsBtn {
+    width: 100%;
+    margin-top: 20px;
+    height: 46px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-blue-dark);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   📱 RESPONSIVE BREAKPOINT ADAPTATIONS
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ProMainBoxSev {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .ProHeroicBanner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1.8rem;
+    }
+
+    .ProAboutInfoBanner,
+    .ProBurgerBannerSect {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .BannerImageFrame {
+        max-width: 100%;
+        height: 180px;
+    }
+}
+
+@media (max-width: 992px) {
+    .ProMainOpenWeb {
+        flex-direction: column;
+        width: 100vw !important;
+    }
+
+    .ProMainBoxSev,
+    .PanelActiveSplit {
+        width: 100% !important;
+        padding: 1.5rem 1rem;
+    }
+
+    .ProProductDetailDrawer {
+        width: 100% !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        height: 80vh;
+        max-height: 85vh;
+        z-index: 10000 !important;
+        border-radius: 24px 24px 0 0;
+        box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+        border-top: 1px solid var(--border-morphic);
+        border-left: none;
+        padding: 1.5rem 1.2rem 5rem 1.2rem;
+    }
+
+    .DrawerHeaderHub {
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-surface);
+        padding: 0.5rem 0 1rem 0;
+        z-index: 10001;
+    }
+
+    .DrawerDismissCTA {
+        font-size: 28px;
+        color: var(--accent-blue-light);
+        padding: 4px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+
+    .ProHeroicBanner {
+        min-height: auto;
+        border-radius: 16px;
+    }
+
+    .PromoActionInlineRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .ProOrderActionsCluster {
+        flex-direction: row;
+    }
+
+    .ProOrderTrackingCTA,
+    .ProCancelOrderCTA,
+    .ProRemoveOrderCTA,
+    .ProViewOrderDetailCTA {
+        width: 100%;
+        height: 42px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .ProProductsGrid,
+    .PanelActiveSplit .ProProductsGrid {
+        grid-template-columns: 1fr;
+    }
+}
